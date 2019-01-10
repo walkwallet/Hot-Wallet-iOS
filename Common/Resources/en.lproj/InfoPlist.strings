@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Wallet
+
+  All rights reserved.
+*/
+NSCameraUsageDescription = "Use the camera";
+NSPhotoLibraryAddUsageDescription = "Store pictures";
+NSPhotoLibraryUsageDescription = "Access pictures";
+NSFaceIDUsageDescription = "Protect your application";

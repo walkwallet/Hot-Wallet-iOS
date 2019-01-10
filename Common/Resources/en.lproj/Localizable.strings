@@ -1,0 +1,349 @@
+/*
+  Localizable.strings
+  Wallet
+
+  All rights reserved.
+*/
+
+// general
+"cancel" = "Cancel";
+"confirm" = "Confirm";
+"next" = "Next";
+"continue" = "Continue";
+"ok" = "Ok";
+"done" = "Done";
+"clear" = "Clear";
+"delete" = "Delete";
+"send" = "Send";
+"add" = "Add";
+"logout" = "Logout";
+"back" = "Back";
+"isee" = "I got it";
+
+// view text by module vi: "settings.title" "xx.xx.xx.xx.title"
+
+// ---- vc's title ----
+"nav.title.device.lock" = "Device lock";
+"nav.title.settings" = "Settings";
+"nav.title.addresses" = "Address Management";
+"nav.title.address.detail" = "Address Detail";
+"nav.title.wallet" = "Wallet";
+"nav.title.monitor" = "Cold Wallet";
+"nav.title.about" = "About us";
+"nav.title.network.choose" = "Choose Network";
+"nav.title.mnemonic.import" = "Mnemonic words";
+"nav.title.password.create" = "Create a wallet";
+"nav.title.mnemonic.backup" = "Back up mnemonics";
+"nav.title.mnemonic.backup.check" = "Back up mnemonics";
+"nav.title.monitor.add.title" = "Address & Public key";
+"nav.title.setup.password" = "Setup Password";
+"nav.title.transaction.send" = "Send";
+"nav.title.transaction.receive" = "Receive";
+"nav.title.transaction.lease" = "Minting";
+"nav.title.transaction.records" = "Transaction Records";
+"nav.title.transaction.detail" = "Transaction Detail";
+"nav.title.date.filter" = "Filter by date";
+"nav.title.set.amount" = "Set Amount";
+
+// ---- tabbar page title ----
+"tabbar.title.0" = "Wallet";
+"tabbar.title.1" = "Settings";
+
+// ---- account list ----
+"account.list.add.title" = "Add Address";
+"account.list.add.desc" = "You can only add one address at a time";
+"account.list.monitor.add.title" = "Scan QR to Monitor Cold Wallet";
+"account.list.monitor.add.desc" = "You can Create the Cold Wallet with a Offline Mobile";
+"account.list.total.balance" = "Total Balance";
+
+// ---- account detail ----
+"account.detail.available.balance" = "Available Balance";
+"account.detail.total.balance" = "Total Balance";
+"account.detail.leased.out" = "Leased Out";
+"account.detail.leased.in" = "Leased In";
+"account.detail.send" = "Send";
+"account.detail.receive" = "Receive";
+"account.detail.lease" = "Minting";
+"account.detail.records" = "Records";
+"account.detail.transaction.records" = "Transaction Records";
+
+// ---- account transaction operate ----
+"account.transaction.send.amount" = "AMOUNT";
+"account.transaction.send.to" = "TO";
+"account.transaction.lease.amount" = "Lease Amount";
+"account.transaction.lease.to" = "TO";
+"account.transaction.desc" = "DESCRIPTION";
+"account.transaction.available.balance" = "Available Balance";
+"account.transaction.max" = "MAX";
+"account.transaction.paste" = "PASTE";
+"account.transaction.scan.qr" = "SCAN QR";
+"account.transaction.amount.placeholder" = "0.00";
+"account.transaction.to.placeholder" = "Receive address";
+"account.transaction.to.node.address" = "Node Address";
+"account.transaction.desc.placeholder" = "Input or not";
+"account.transaction.fee" = "Transaction Fee";
+"account.transaction.question" = "What is the lease?";
+"account.transaction.nodelist" = "Supernode Ranklist";
+"account.transaction.lease.detail" = "Tip：Entrust to the supernode can get minting income commission, please check the supernode list website vsysrate.com";
+
+// ---- transaction records ----
+"transaction.list.type.0" = "All";
+"transaction.list.type.1" = "Send";
+"transaction.list.type.2" = "Receive";
+"transaction.list.type.3" = "Minting";
+
+// ---- date range filter ----
+"date.range.type.0" = "No Filter";
+"date.range.type.1" = "Past 1 month";
+"date.range.type.2" = "Past 3 months";
+"date.range.type.3" = "Past 1 year";
+"date.range.section.title" = "CHOOSE A DATE RANGE";
+"data.range.before.xx" = "Before %@";
+
+// ---- transaction detail ----
+"transaction.detail.mine" = "My Address";
+"transaction.detail.sender" = "From";
+"transaction.detail.receive" = "To";
+"transaction.detail.lease.in.sender" = "From";
+"transaction.detail.lease.out.receive" = "To";
+"transaction.detail.from" = "From";
+"transaction.detail.to" = "To";
+"transaction.detail.tx.id" = "TxId";
+"transaction.detail.type" = "Type";
+"transaction.detail.amount" = "Amount";
+"transaction.detail.fee" = "Fee";
+"transaction.detail.time" = "Time";
+"transaction.detail.desc" = "Description";
+"transaction.detail.cancel.out.leasing" = "Cancel Out Leasing";
+"transaction.detail.chinese.standard.time" = "Chinese Standard Time";
+
+// ---- account receive ----
+"account.receive.amount" = "AMOUNT";
+"account.receive.qr.copy.tip" = "Click on the QR code to save the image";
+"account.receive.address" = "Receive Address";
+"account.receive.specific.amount" = "Set amount";
+"account.receive.save.image" = "Copy address";
+"account.receive.scan.qr.desc" = "Scan QR code for transfer";
+
+// ---- settings -----
+"settings.section1.title" = "SECURITY";
+"settings.section2.title" = "WALLET";
+"settings.section3.title" = "OTHER";
+
+"settings.section1.cell1.title" = "Device lock";
+"settings.section2.cell1.title" = "Backup Mnemonic";
+"settings.section2.cell2.title" = "Address Management";
+"settings.section3.cell1.title" = "Language";
+"settings.section3.cell2.title" = "About us";
+"settings.section3.cell3.title" = "Sign out";
+"settings.section3.cell4.title" = "Network";
+"settings.section2.cell1.detail" = "Backup Now";
+
+// ---- device lock ----
+"device.lock.cell1.title" = "TouchID";
+"device.lock.cell2.title" = "Auto-lock";
+"device.lock.cell3.title" = "Delete lock";
+
+// ---- addresses ----
+"addresses.section1.title" = "WALLET ADDRESS";
+"addresses.section2.title" = "COLD WALLET ADDRESS";
+
+// ---- address normal detail ----
+"address.detail.section1.title" = "ADDRESS & AVAILABLE BALANCE";
+"address.detail.section2.title" = "PUBLIC KEY";
+"address.detail.section3.title" = "PRIVATE KEY";
+"address.detail.section4.title" = "MNEMONIC PHRASE";
+"address.detail.cell.hide.title" = "Please input your password to show";
+
+// ---- about ----
+"about.cell1.title" = "Official website";
+"about.cell2.title" = "Version";
+
+// ---- welcome ----
+"welcome.title" = "Welcome WALK WALLET";
+"welcome.detail" = "Please create or import wallet";
+"welcome.btn1.title" = "Create wallet";
+"welcome.btn2.title" = "Import wallet";
+"welcome.import.btn1.title" = "Import with mnemonic words";
+"welcome.import.btn2.title" = "Import local backup";
+
+// ---- Choose Network ----
+"network.choose.detail" = "After the wallet is successfully created, the network cannot be changed";
+"network.choose.cell1.title" = "Mainnet";
+"network.choose.cell1.detail" = "Under the formal network environment, users can safely store the real assets of VSYS. This environment is suitable for ordinary users' daily use.";
+"network.choose.cell2.title" = "Testnet";
+"network.choose.cell2.detail" = "Under the test network environment, users are not allowed to store the real assets of VSYS safely. This environment is suitable for developers to do simulation test. If you are not a professional developer, you are recommended to use the formal environment";
+
+// ---- Import Mnemonic ----
+"mnemonic.import.detail" = "Mnemonic words consist of 15 words, please pay attention to the input space separated";
+"mnemonic.import.placeholder" = "Please input";
+
+// ---- Create Password ----
+"password.create.detail" = "Walk Wallet does not store your password.It cannot be recovered if forgotten.Please keep it properly";
+"password.create.item1.title" = "WALLET PASSWORD";
+"password.create.item1.detail" = "Please input at least 8 characters";
+"password.create.item2.title" = "CONFIRM PASSWORD";
+"password.create.item2.detail" = "Please input";
+"password.create.btn.title" = "Create";
+"password.create.length.title" = "Please input at least 8 characters";
+"password.create.consistency.error.title" = "Passwords do not match";
+
+// ---- Password Weak ----
+"password.weak.title" = "Password strength is too weak";
+"password.weak.detail" = "For your wallet security, password strength should be at least \"good\"";
+"password.weak.btn1.title" = "Reset Password";
+"password.weak.btn2.title" = "Complete creation";
+
+// ---- Create Success ----
+"wallet.create.success.title" = "Successful created";
+"wallet.create.success.detail" = "We strongly recommend backing up your wallet now.";
+"wallet.create.success.btn1.title" = "Back up wallet";
+"wallet.create.success.btn2.title" = "Back up later";
+
+// ---- Mnemonic Backup ----
+"menmonic.backup.title" = "Screenshots are not safe and your images may be used by other applications. Please use pen and paper to copy the following mnemonic words and save them properly. We will confirm on the next screen";
+"menmonic.backup.btn1.title" = "I have saved them orderly";
+
+// ---- Mnemonic Backup Check ----
+"mnemonic.backup.check.title" = "Click on the mnemonic words orderly to confirm.";
+
+// ---- Mnemonic Backup Success ----
+"mnemonic.backup.success.title" = "Successfully backed up";
+"mnemonic.backup.success.detail" = "Please keep your mnemonic words carefully";
+
+// ---- transaction review ----
+"transaction.review.cell1.title" = "From";
+"transaction.review.cell2.title" = "To";
+"transaction.review.cell3.title" = "Type";
+"transaction.review.cell4.title" = "Amount";
+"transaction.review.cell5.title" = "Fee";
+"transaction.review.cell6.title" = "Description";
+
+// ---- transaction operate success ----
+"transaction.sent.success.title" = "You Sent %@ VSYS to\n%@";
+"transaction.lease.success.title" = "You Started Leasing %@ VSYS to\n%@";
+"transaction.success.detail" = "You can check in your transaction records";
+"transaction.cancel.lease.success.title" = "You Canceled Out Leasing %@ VSYS to\n%@";
+
+// ---- password auth ----
+"password.auth.title" = "Welcome WALK WALLET";
+"password.auth.detail" = "Please enter your wallet password";
+"password.auth.textfield.placeholder" = "Enter the password";
+
+// ---- Monitor Address Add ----
+"monitor.address.add.title" = "You must input both Address and Public key of the cold wallet in order to add it.";
+"monitor.address.add.title1" = "COLD WALLET ADDRESS";
+"monitor.address.add.title2" = "COLD WALLET PUBLIC KEY";
+"monitor.address.add.textview1.placeholder" = "Please input cold wallet address";
+"monitor.address.add.textview2.placeholder" = "Please input cold wallet public key";
+
+// ---- QRCode scan ----
+"scan.qrcode.title" = "Scan QR code";
+
+// ----- Transaction QRCode ----
+"transaction.qrcode.title" = "1. Please use your Cold Wallet client to scan this QR code.\n\n2. And click \"continue\" button below after your cold wallet client generates a QR code.";
+
+// ---- action option ----
+"action.address.detail" = "Address Detail";
+"action.address.copy" = "Copy the Address";
+
+// tip prefix with "tip.xx.xx"
+// ---- logout ----
+"tip.logout.title" = "Write out the wallet";
+"tip.logout.detail" = "Have you recorded your wallet Recovery phrase? Without this you will not be able to sign back in to your account.";
+
+// ---- Network change ----
+"tip.networh.change.to.test" = "The test environment is only available for developers to test. Are you sure you want to use it?";
+
+// ---- mnemonic ----
+"tip.mnemonic.unofficial.title" = "Unofficial mnemonic detected";
+"tip.mnemonic.unofficial.detail" = "Mnemonic words from unknown sources can completely lose your assets. Still using the mnemonic?";
+"tip.mnemonic.validate.error.title" = "Validate fail, please check the spelling of the words";
+
+// ---- account ----
+"tip.account.add.title" = "Add a new address";
+"tip.account.add.detail" = "You will add a new account that cannot be deleted. Are you sure to add?";
+"tip.account.add.positive.btn.title" = "Add";
+"tip.account.address.copy.success" = "Copy address successfully";
+
+// ---- scan qrcode ----
+"tip.qrcode.unsupported.types" = "Unsupported QR code types";
+"tip.qrcode.unsupported.version" = "Unsupported types, please upgrade the current Wallet";
+
+// ---- camera/album ----
+"tip.no.available.camera" = "No camera available";
+"tip.unable.open.camera" = "Unable to turn on camera, please check permissions";
+"system.settings.go.to" = "Go to settings";
+"tip.unable.open.album" = "Unable to open album, please check permissions";
+"tip.save.image.success" = "Picture saved successfully";
+
+// ---- transaction operate ----
+"tip.transaction.insufficient.balance" = "Insufficient balance";
+"tip.transaction.error.address" = "You can only send tokens to an VSYS address.";
+"tip.transaction.amount.invalid" = "The amount entered is invalid";
+"tip.transaction.address.is.self" = "The receiving address cannot be the current address";
+
+// ---- Transaction QRCode ----
+"tip.transaction.qrcode.title" = "Scan QR code";
+
+// ---- Transaction Review ----
+"tip.transaction.review.title" = "Review Transaction";
+"tip.transaction.review.btn.title" = "Generate QR Code";
+
+// ---- password auth ----
+"tip.password.auth.title" = "Wallet Password";
+"tip.password.auth.textfield.placeholder" = "Please Input";
+"tip.password.auth.err.title" = "Incorrect Wallet Password";
+"tip.password.auth.err.btn1.title" = "Logout Wallet";
+"tip.password.auth.err.btn2.title" = "ReInput";
+
+// ---- monitor address add ----
+"tip.monitor.address.add.title1" = "Scan QR code";
+"tip.monitor.address.add.title2" = "Address&Public key";
+"tip.monitor.address.add.err1" = "Please check address and public key is valid";
+"tip.monitor.address.add.exist.err2" = "Address already exist";
+"tip.monitor.address.add.network.err" = "Address's network is different";
+
+// ---- address detail delete ----
+"tip.address.detail.delete.title" = "Are you sure you want to remove this address from the cold wallet monitoring list?";
+"tip.copy.success" = "Copy Success";
+"tip.address.detail.private.key.title" = "Show Private Key";
+"tip.address.detail.mnemonic.title" = "Show Mnemonic Phrase";
+
+// ---- choose network ----
+"tip.network.choose.btn1.title" = "Click to switch back to the formal environment";
+"tip.network.choose.btn2.title" = "Click to switch to the developer test environment";
+"tip.network.change.title" = "The test environment is only available for developers to test. Are you sure you want to use it?";
+
+// ---- welcome ----
+"tip.welcome.title" = "Officials Hint";
+"tip.welcome.detail" = "To ensure the security of your personal property, please make sure that your wallet APP is downloaded from v.systems, the official website of VSYS";
+"tip.welcome.btn.title" = "I got it";
+
+// ---- monitor ----
+"tip.monitor.title" = "Officials Hint";
+"tip.monitor.detail" = "You can download a cold wallet from the v.stems website with a phone that you barely use and can completely disconnect from the Internet";
+
+// ---- touch auth ----
+"tip.secure.auth.detail" = "Unlock Walk Wallet";
+
+// others
+// ---- const ----
+
+"secure.level.1" = "Weak";
+"secure.level.2" = "Fair";
+"secure.level.3" = "Good";
+"secure.level.4" = "Strong";
+"secure.level.5" = "Perfect";
+
+// ---- Transaction Type ----
+"const.transaction.type.send" = "Sent";
+"const.transaction.type.receive" = "Received";
+"const.transaction.type.lease.in" = "Leased in";
+"const.transaction.type.lease.out" = "Leased out";
+"const.transaction.type.lease.in.cancel" = "Canceled Leased in";
+"const.transaction.type.lease.out.cancel" = "Canceled Leased out";
+
+// ---- network ----
+"const.network.mainnet" = "Mainnet";
+"const.network.testnet" = "Testnet";

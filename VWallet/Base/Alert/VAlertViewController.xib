@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VAlertViewController">
+            <connections>
+                <outlet property="cancelBtn" destination="G3N-2H-apS" id="q0r-lG-fcz"/>
+                <outlet property="confirmBtn" destination="5gG-ye-Cnr" id="Mkc-ua-cdI"/>
+                <outlet property="contentView" destination="tmn-hJ-R06" id="rUZ-5V-1OV"/>
+                <outlet property="contentViewCenterYConstraint" destination="K5z-NT-KTt" id="DWg-c8-Klm"/>
+                <outlet property="iconImageView" destination="Rlm-Ri-549" id="AIe-x3-l8N"/>
+                <outlet property="secondTitleLabel" destination="j1z-Bz-05c" id="j6I-ri-HgY"/>
+                <outlet property="titleLabel" destination="mK9-xo-97c" id="TL1-c3-r92"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OeN-2J-Lrp">
+                    <rect key="frame" x="20" y="146" width="335" height="375"/>
+                    <subviews>
+                        <stackView contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="YGw-WQ-xb5">
+                            <rect key="frame" x="24" y="24" width="287" height="327"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_note_tip" translatesAutoresizingMaskIntoConstraints="NO" id="Rlm-Ri-549">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="48"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="97O-Sq-Y4F"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是一个非官方来源的助记词" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mK9-xo-97c">
+                                    <rect key="frame" x="0.0" y="62" width="287" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                    <color key="textColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1z-Bz-05c">
+                                    <rect key="frame" x="0.0" y="100" width="287" height="55"/>
+                                    <attributedString key="attributedText">
+                                        <fragment content="这是一个非官方来源的助记词，未知来源的助记词可能使您的资产完全丢失。仍然使用该助记词？">
+                                            <attributes>
+                                                <color key="NSColor" red="0.50588235294117645" green="0.50588235294117645" blue="0.54117647058823526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tmn-hJ-R06">
+                                    <rect key="frame" x="0.0" y="169" width="287" height="100"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" placeholder="YES" id="mkl-mb-5g3"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="6"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.27058823529411763" green="0.27058823529411763" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Z5o-e0-FB3">
+                                    <rect key="frame" x="0.0" y="283" width="287" height="44"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3N-2H-apS">
+                                            <rect key="frame" x="0.0" y="0.0" width="136" height="44"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <state key="normal" title="取消">
+                                                <color key="titleColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="0.90980392156862744" green="0.90980392156862744" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="cancelBtnClick:" destination="-1" eventType="touchUpInside" id="LQ9-nG-3qE"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gG-ye-Cnr">
+                                            <rect key="frame" x="151" y="0.0" width="136" height="44"/>
+                                            <color key="backgroundColor" red="1" green="0.52941176470588236" blue="0.21568627450980393" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <state key="normal" title="继续">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="confirmBtnClick:" destination="-1" eventType="touchUpInside" id="LGQ-9J-t8Y"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="nfK-Vl-f8x"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="YGw-WQ-xb5" firstAttribute="leading" secondItem="OeN-2J-Lrp" secondAttribute="leading" constant="24" id="27Q-TR-h8O"/>
+                        <constraint firstAttribute="trailing" secondItem="YGw-WQ-xb5" secondAttribute="trailing" constant="24" id="KKW-04-yoz"/>
+                        <constraint firstAttribute="bottom" secondItem="YGw-WQ-xb5" secondAttribute="bottom" constant="24" id="i3c-mU-tkk"/>
+                        <constraint firstItem="YGw-WQ-xb5" firstAttribute="top" secondItem="OeN-2J-Lrp" secondAttribute="top" constant="24" id="x9U-KU-v9c"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.53897997359154926" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="OeN-2J-Lrp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9lm-bd-T2U"/>
+                <constraint firstItem="OeN-2J-Lrp" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="K5z-NT-KTt"/>
+                <constraint firstItem="OeN-2J-Lrp" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="xtw-dp-5Cn"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="231" y="-15"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ico_note_tip" width="48" height="48"/>
+    </resources>
+</document>

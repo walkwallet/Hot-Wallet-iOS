@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="duR-5G-6Rc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="NFA-LC-pee">
+            <objects>
+                <navigationController id="duR-5G-6Rc" customClass="VNavigationController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fmx-zy-5Os">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="colorStyle">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="COq-kh-3BG" kind="relationship" relationship="rootViewController" id="QeT-xP-mzf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g4J-KS-Tlr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-833" y="154"/>
+        </scene>
+        <!--Init View Controller-->
+        <scene sceneID="Jz7-Hj-l9s">
+            <objects>
+                <viewController id="COq-kh-3BG" customClass="InitViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Oo4-Ip-rzi" customClass="VThemeRootView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGc-iy-rxu">
+                                <rect key="frame" x="20" y="116" width="560" height="71"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQw-se-CSM" customClass="VThemeLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="hpr-L6-UzQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="autoAdjFont" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请先创建或导入钱包" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7s-Fg-fIL" customClass="VThemeLabel">
+                                        <rect key="frame" x="0.0" y="52" width="560" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="19" id="RQu-kP-Hax"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="autoAdjFont" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="colorLevel">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="x7s-Fg-fIL" secondAttribute="trailing" id="2qs-h6-9eT"/>
+                                    <constraint firstItem="WQw-se-CSM" firstAttribute="leading" secondItem="cGc-iy-rxu" secondAttribute="leading" id="9ul-IX-fqk"/>
+                                    <constraint firstAttribute="trailing" secondItem="WQw-se-CSM" secondAttribute="trailing" id="Nqj-03-1uK"/>
+                                    <constraint firstItem="WQw-se-CSM" firstAttribute="top" secondItem="cGc-iy-rxu" secondAttribute="top" id="axP-cO-Yw9"/>
+                                    <constraint firstAttribute="bottom" secondItem="x7s-Fg-fIL" secondAttribute="bottom" id="d7b-pf-RP9"/>
+                                    <constraint firstItem="x7s-Fg-fIL" firstAttribute="leading" secondItem="cGc-iy-rxu" secondAttribute="leading" id="dao-XN-54Y"/>
+                                    <constraint firstItem="x7s-Fg-fIL" firstAttribute="top" secondItem="WQw-se-CSM" secondAttribute="bottom" constant="4" id="jbD-x0-fve"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9h-fN-M6Q">
+                                <rect key="frame" x="0.0" y="187" width="600" height="277"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_launch_img" translatesAutoresizingMaskIntoConstraints="NO" id="Evz-Dr-J5w">
+                                        <rect key="frame" x="60" y="10.5" width="480" height="256"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Evz-Dr-J5w" firstAttribute="leading" secondItem="G9h-fN-M6Q" secondAttribute="leading" constant="60" id="4rN-9I-JON"/>
+                                    <constraint firstItem="Evz-Dr-J5w" firstAttribute="centerY" secondItem="G9h-fN-M6Q" secondAttribute="centerY" id="n6h-Rv-Zyt"/>
+                                    <constraint firstItem="Evz-Dr-J5w" firstAttribute="centerX" secondItem="G9h-fN-M6Q" secondAttribute="centerX" id="xaN-1w-8Kr"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUn-ao-V2Z" customClass="VThemeButton">
+                                <rect key="frame" x="20" y="464" width="560" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="o6f-8h-PQ1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="创建钱包"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="submit" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="createBtnClick" destination="COq-kh-3BG" eventType="touchUpInside" id="iVe-wm-WhX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JW4-xT-agp" customClass="VThemeButton">
+                                <rect key="frame" x="20" y="532" width="560" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="8eK-Co-4mb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="导入钱包"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hollow" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="submit" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="importBtnClick" destination="COq-kh-3BG" eventType="touchUpInside" id="iMq-MH-tFr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zz4-6l-Nq8" firstAttribute="trailing" secondItem="zUn-ao-V2Z" secondAttribute="trailing" constant="20" id="4YH-r7-qzc"/>
+                            <constraint firstItem="cGc-iy-rxu" firstAttribute="leading" secondItem="zz4-6l-Nq8" secondAttribute="leading" constant="20" id="DIY-Cj-jo8"/>
+                            <constraint firstItem="cGc-iy-rxu" firstAttribute="top" secondItem="zz4-6l-Nq8" secondAttribute="top" constant="52" id="Lir-5F-hYw"/>
+                            <constraint firstItem="JW4-xT-agp" firstAttribute="leading" secondItem="zz4-6l-Nq8" secondAttribute="leading" constant="20" id="Orh-rn-7hj"/>
+                            <constraint firstItem="zUn-ao-V2Z" firstAttribute="top" secondItem="G9h-fN-M6Q" secondAttribute="bottom" id="WZJ-Pr-PgU"/>
+                            <constraint firstItem="zz4-6l-Nq8" firstAttribute="trailing" secondItem="cGc-iy-rxu" secondAttribute="trailing" constant="20" id="br9-k7-yVQ"/>
+                            <constraint firstItem="zz4-6l-Nq8" firstAttribute="trailing" secondItem="G9h-fN-M6Q" secondAttribute="trailing" id="hbt-c1-MFk"/>
+                            <constraint firstItem="JW4-xT-agp" firstAttribute="top" secondItem="zUn-ao-V2Z" secondAttribute="bottom" constant="20" id="kEU-yL-jhh"/>
+                            <constraint firstItem="zz4-6l-Nq8" firstAttribute="bottom" secondItem="JW4-xT-agp" secondAttribute="bottom" constant="20" id="m1C-96-iuC"/>
+                            <constraint firstItem="G9h-fN-M6Q" firstAttribute="leading" secondItem="zz4-6l-Nq8" secondAttribute="leading" id="nHU-9z-983"/>
+                            <constraint firstItem="zz4-6l-Nq8" firstAttribute="trailing" secondItem="JW4-xT-agp" secondAttribute="trailing" constant="20" id="oEF-ZW-Cx7"/>
+                            <constraint firstItem="G9h-fN-M6Q" firstAttribute="top" secondItem="cGc-iy-rxu" secondAttribute="bottom" id="pXe-cM-Hmd"/>
+                            <constraint firstItem="zUn-ao-V2Z" firstAttribute="leading" secondItem="zz4-6l-Nq8" secondAttribute="leading" constant="20" id="wTg-Up-VYa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zz4-6l-Nq8"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="I9E-8v-Fdh"/>
+                    <connections>
+                        <outlet property="createBtn" destination="zUn-ao-V2Z" id="CrD-1f-SPD"/>
+                        <outlet property="importBtn" destination="JW4-xT-agp" id="OBY-HV-SaK"/>
+                        <outlet property="pageSubtitleLabel" destination="x7s-Fg-fIL" id="lOW-Km-Pyx"/>
+                        <outlet property="pageTitleLabel" destination="WQw-se-CSM" id="LpK-Cd-sEy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ptT-We-4Ze" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-47.200000000000003" y="155.17241379310346"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ico_launch_img" width="256" height="256"/>
+    </resources>
+</document>

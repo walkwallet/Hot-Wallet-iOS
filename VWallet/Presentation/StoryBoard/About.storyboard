@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FOI-bs-R4w">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--About Us-->
+        <scene sceneID="3ng-iX-N2p">
+            <objects>
+                <tableViewController title="About Us" id="FOI-bs-R4w" customClass="AboutTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="EOg-o5-ri0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="cWU-0r-6f4">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="214"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-dK-vn1">
+                                    <rect key="frame" x="252" y="32" width="96" height="96"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="96" id="3Q0-hJ-6Xe"/>
+                                        <constraint firstAttribute="height" constant="96" id="Bir-xU-VWQ"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VSYS_Wallet" translatesAutoresizingMaskIntoConstraints="NO" id="N2e-g0-NdT">
+                                    <rect key="frame" x="212.5" y="148" width="175" height="18"/>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="5tw-dK-vn1" firstAttribute="centerX" secondItem="cWU-0r-6f4" secondAttribute="centerX" id="31g-zV-ZpZ"/>
+                                <constraint firstItem="N2e-g0-NdT" firstAttribute="centerX" secondItem="cWU-0r-6f4" secondAttribute="centerX" id="HJf-oR-pJD"/>
+                                <constraint firstItem="5tw-dK-vn1" firstAttribute="top" secondItem="cWU-0r-6f4" secondAttribute="top" constant="32" id="M8d-oQ-IMm"/>
+                                <constraint firstItem="N2e-g0-NdT" firstAttribute="top" secondItem="5tw-dK-vn1" secondAttribute="bottom" constant="20" id="n7o-Ss-V4Q"/>
+                            </constraints>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="MSX-eZ-aOT">
+                            <rect key="frame" x="0.0" y="214" width="600" height="292"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </view>
+                        <connections>
+                            <outlet property="dataSource" destination="FOI-bs-R4w" id="IF4-K5-kdM"/>
+                            <outlet property="delegate" destination="FOI-bs-R4w" id="W6A-TQ-DaW"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="logoImageView" destination="5tw-dK-vn1" id="aev-R2-tdx"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AvK-am-qgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="29.600000000000001" y="-456.52173913043481"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="VSYS_Wallet" width="175" height="18"/>
+        <image name="logo" width="96" height="96"/>
+    </resources>
+</document>
