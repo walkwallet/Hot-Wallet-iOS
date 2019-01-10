@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MnemonicWordBackupViewController">
+            <connections>
+                <outlet property="mnemonicWordsLabel" destination="K90-n0-rEJ" id="sXb-5N-tNA"/>
+                <outlet property="nextBtn" destination="RcW-z9-HoT" id="Plq-56-CFM"/>
+                <outlet property="titleLabel" destination="yXe-fc-zsa" id="KkY-ty-Mek"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="VThemeRootView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D1c-sm-C98">
+                    <rect key="frame" x="0.0" y="20" width="375" height="559"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K30-jq-Abm">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="223.5"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N8a-vx-Oxh">
+                                    <rect key="frame" x="0.0" y="-400" width="375" height="512"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_backup_big" translatesAutoresizingMaskIntoConstraints="NO" id="CVi-87-Ggh">
+                                            <rect key="frame" x="20" y="424" width="64" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="64" id="2aK-6V-hL8"/>
+                                                <constraint firstAttribute="width" secondItem="CVi-87-Ggh" secondAttribute="height" id="IsY-qH-CyN"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="截图是不安全的，你的图片可能被别的应用使用。请抄写如下助记词，并妥善保存，我们会在下个屏幕上确认" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXe-fc-zsa" customClass="VThemeLabel">
+                                            <rect key="frame" x="100" y="424" width="255" height="64"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="lineSpecing">
+                                                    <real key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="yXe-fc-zsa" firstAttribute="top" secondItem="N8a-vx-Oxh" secondAttribute="top" constant="424" id="Gif-a5-OoH"/>
+                                        <constraint firstAttribute="bottom" secondItem="yXe-fc-zsa" secondAttribute="bottom" constant="24" id="L9g-Kp-tJJ"/>
+                                        <constraint firstItem="CVi-87-Ggh" firstAttribute="leading" secondItem="N8a-vx-Oxh" secondAttribute="leading" constant="20" id="OZq-8D-8f3"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="CVi-87-Ggh" secondAttribute="bottom" constant="24" id="Rit-u6-9wM"/>
+                                        <constraint firstAttribute="trailing" secondItem="yXe-fc-zsa" secondAttribute="trailing" constant="20" id="gSt-J7-P0b"/>
+                                        <constraint firstItem="yXe-fc-zsa" firstAttribute="leading" secondItem="CVi-87-Ggh" secondAttribute="trailing" constant="16" id="haE-Zx-b2M"/>
+                                        <constraint firstItem="CVi-87-Ggh" firstAttribute="top" secondItem="N8a-vx-Oxh" secondAttribute="top" constant="424" id="nNE-Zc-w4n"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WDv-Ec-udQ">
+                                    <rect key="frame" x="20" y="136" width="335" height="67.5"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K90-n0-rEJ" customClass="VThemeLabel">
+                                            <rect key="frame" x="16" y="24" width="303" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="K90-n0-rEJ" secondAttribute="bottom" constant="24" id="GeU-fx-HbF"/>
+                                        <constraint firstItem="K90-n0-rEJ" firstAttribute="top" secondItem="WDv-Ec-udQ" secondAttribute="top" constant="24" id="W2w-5W-pZo"/>
+                                        <constraint firstItem="K90-n0-rEJ" firstAttribute="leading" secondItem="WDv-Ec-udQ" secondAttribute="leading" constant="16" id="mPc-t7-pBk"/>
+                                        <constraint firstAttribute="trailing" secondItem="K90-n0-rEJ" secondAttribute="trailing" constant="16" id="qcf-mq-b7x"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.90980392156862744" green="0.90980392156862744" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="6"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="WDv-Ec-udQ" secondAttribute="trailing" constant="20" id="1Y4-fe-xdR"/>
+                                <constraint firstAttribute="bottom" secondItem="WDv-Ec-udQ" secondAttribute="bottom" constant="20" id="Txx-YQ-vGa"/>
+                                <constraint firstItem="WDv-Ec-udQ" firstAttribute="top" secondItem="N8a-vx-Oxh" secondAttribute="bottom" constant="24" id="VxV-1W-kop"/>
+                                <constraint firstAttribute="trailing" secondItem="N8a-vx-Oxh" secondAttribute="trailing" id="Xmj-V0-iSf"/>
+                                <constraint firstItem="N8a-vx-Oxh" firstAttribute="top" secondItem="K30-jq-Abm" secondAttribute="top" constant="-400" id="ht5-3U-FF7"/>
+                                <constraint firstItem="N8a-vx-Oxh" firstAttribute="leading" secondItem="K30-jq-Abm" secondAttribute="leading" id="lJG-QI-kXx"/>
+                                <constraint firstItem="WDv-Ec-udQ" firstAttribute="leading" secondItem="K30-jq-Abm" secondAttribute="leading" constant="20" id="y0g-ue-OwP"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="K30-jq-Abm" firstAttribute="leading" secondItem="D1c-sm-C98" secondAttribute="leading" id="12C-pB-c31"/>
+                        <constraint firstItem="K30-jq-Abm" firstAttribute="top" secondItem="D1c-sm-C98" secondAttribute="top" id="Ayj-5q-5NA"/>
+                        <constraint firstAttribute="bottom" secondItem="K30-jq-Abm" secondAttribute="bottom" id="beO-S5-B9Q"/>
+                        <constraint firstAttribute="trailing" secondItem="K30-jq-Abm" secondAttribute="trailing" id="rav-K7-Do2"/>
+                        <constraint firstItem="K30-jq-Abm" firstAttribute="centerX" secondItem="D1c-sm-C98" secondAttribute="centerX" id="ygR-G8-OQN"/>
+                    </constraints>
+                </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RcW-z9-HoT" customClass="VThemeButton">
+                    <rect key="frame" x="20" y="599" width="335" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="JI9-zy-Kny"/>
+                    </constraints>
+                    <state key="normal" title="已按顺序记下助记词"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="submit" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="nextBtnClick" destination="-1" eventType="touchUpInside" id="QNt-Rj-oE8"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="RcW-z9-HoT" firstAttribute="top" secondItem="D1c-sm-C98" secondAttribute="bottom" constant="20" id="DvH-CB-LaP"/>
+                <constraint firstItem="RcW-z9-HoT" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="YLJ-IC-0KN"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="D1c-sm-C98" secondAttribute="trailing" id="f2E-X3-9z9"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="RcW-z9-HoT" secondAttribute="bottom" constant="20" id="k5k-Rh-yYs"/>
+                <constraint firstItem="D1c-sm-C98" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="mHJ-Hp-NeD"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="RcW-z9-HoT" secondAttribute="trailing" constant="20" id="oBL-ZC-CSB"/>
+                <constraint firstItem="D1c-sm-C98" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="rNL-1s-dMk"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ico_backup_big" width="64" height="64"/>
+    </resources>
+</document>

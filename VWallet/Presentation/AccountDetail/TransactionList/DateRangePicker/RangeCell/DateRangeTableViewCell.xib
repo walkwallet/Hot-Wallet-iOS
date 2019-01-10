@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="DateRangeTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NRb-I0-EsT">
+                        <rect key="frame" x="20" y="0.0" width="280" height="43.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XbS-Rs-Je2">
+                                <rect key="frame" x="0.0" y="0.0" width="130" height="43.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBY-KF-3me">
+                                        <rect key="frame" x="0.0" y="0.0" width="130" height="43.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="DD/MM/YY"/>
+                                        <connections>
+                                            <action selector="dateBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="tx7-PT-wS6"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s4D-2J-J8Z" customClass="VSeparatorLine">
+                                        <rect key="frame" x="0.0" y="42.5" width="130" height="1"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="NUP-Ci-sFq"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="OBY-KF-3me" firstAttribute="leading" secondItem="XbS-Rs-Je2" secondAttribute="leading" id="H5y-nM-uyg"/>
+                                    <constraint firstAttribute="bottom" secondItem="s4D-2J-J8Z" secondAttribute="bottom" id="SL3-PG-AvJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="OBY-KF-3me" secondAttribute="bottom" id="aGq-Ei-7c5"/>
+                                    <constraint firstItem="s4D-2J-J8Z" firstAttribute="leading" secondItem="XbS-Rs-Je2" secondAttribute="leading" id="if5-my-TYc"/>
+                                    <constraint firstAttribute="trailing" secondItem="OBY-KF-3me" secondAttribute="trailing" id="pXm-3n-YFt"/>
+                                    <constraint firstItem="OBY-KF-3me" firstAttribute="top" secondItem="XbS-Rs-Je2" secondAttribute="top" id="sNh-Hp-z4S"/>
+                                    <constraint firstAttribute="trailing" secondItem="s4D-2J-J8Z" secondAttribute="trailing" id="wch-nb-NcE"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9QY-3M-KUU">
+                                <rect key="frame" x="150" y="0.0" width="130" height="43.5"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sah-JL-Gud">
+                                        <rect key="frame" x="0.0" y="0.0" width="130" height="43.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="DD/MM/YY"/>
+                                        <connections>
+                                            <action selector="dateBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="DB4-H0-uZS"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b0U-te-knG" customClass="VSeparatorLine">
+                                        <rect key="frame" x="0.0" y="42.5" width="130" height="1"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="lKx-3g-w4D"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Sah-JL-Gud" secondAttribute="bottom" id="7ho-5G-Aq6"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sah-JL-Gud" secondAttribute="trailing" id="f8x-4U-iOI"/>
+                                    <constraint firstAttribute="trailing" secondItem="b0U-te-knG" secondAttribute="trailing" id="gjW-MS-AfD"/>
+                                    <constraint firstItem="b0U-te-knG" firstAttribute="leading" secondItem="9QY-3M-KUU" secondAttribute="leading" id="pRZ-ox-CpW"/>
+                                    <constraint firstAttribute="bottom" secondItem="b0U-te-knG" secondAttribute="bottom" id="smo-73-k3J"/>
+                                    <constraint firstItem="Sah-JL-Gud" firstAttribute="leading" secondItem="9QY-3M-KUU" secondAttribute="leading" id="vcc-E0-Gx9"/>
+                                    <constraint firstItem="Sah-JL-Gud" firstAttribute="top" secondItem="9QY-3M-KUU" secondAttribute="top" id="wTd-vr-yEW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="NRb-I0-EsT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="3JK-ox-xnS"/>
+                    <constraint firstAttribute="bottom" secondItem="NRb-I0-EsT" secondAttribute="bottom" id="DCT-r4-1vQ"/>
+                    <constraint firstAttribute="trailing" secondItem="NRb-I0-EsT" secondAttribute="trailing" constant="20" id="Ul9-C9-ih0"/>
+                    <constraint firstItem="NRb-I0-EsT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="lKY-Df-WcZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="endDateBtn" destination="Sah-JL-Gud" id="EPn-jk-RXg"/>
+                <outlet property="startDateBtn" destination="OBY-KF-3me" id="yuv-bF-czt"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchTableViewCell" rowHeight="62" id="33G-w4-0uM" customClass="SwitchTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="33G-w4-0uM" id="USs-ix-WBW">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="61.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFe-dL-6RJ">
+                        <rect key="frame" x="20" y="0.0" width="272" height="50"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PUg-FK-PgO">
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="AxS-JF-caa"/>
+                                    <constraint firstAttribute="height" constant="20" id="YpZ-dt-4Ze"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="rFg-zj-TFo">
+                                <rect key="frame" x="20" y="0.0" width="252" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXt-X4-SdC">
+                                        <rect key="frame" x="0.0" y="0.0" width="252" height="33.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="252" id="4dM-ZI-fyS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNl-09-3eJ">
+                                        <rect key="frame" x="0.0" y="35.5" width="252" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.50588235294117645" green="0.50588235294117645" blue="0.54117647058823526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="edc-wA-WrO">
+                        <rect key="frame" x="306" y="10" width="51" height="31"/>
+                        <color key="onTintColor" red="0.13725490196078433" green="0.63529411764705879" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="switchClick:" destination="33G-w4-0uM" eventType="valueChanged" id="syM-tv-E9x"/>
+                        </connections>
+                    </switch>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcX-3r-NUn" customClass="VSeparatorLine">
+                        <rect key="frame" x="20" y="50" width="335" height="0.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="pA4-fI-KYg"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="edc-wA-WrO" firstAttribute="centerY" secondItem="USs-ix-WBW" secondAttribute="centerY" id="4VW-pr-xYd"/>
+                    <constraint firstAttribute="trailing" secondItem="tcX-3r-NUn" secondAttribute="trailing" constant="20" id="5WK-Nk-GiF"/>
+                    <constraint firstItem="tcX-3r-NUn" firstAttribute="top" secondItem="DFe-dL-6RJ" secondAttribute="bottom" id="6Yc-EN-kSN"/>
+                    <constraint firstItem="DFe-dL-6RJ" firstAttribute="top" secondItem="USs-ix-WBW" secondAttribute="top" id="Cjx-Xy-c8N"/>
+                    <constraint firstItem="DFe-dL-6RJ" firstAttribute="leading" secondItem="USs-ix-WBW" secondAttribute="leading" constant="20" id="Jtx-Xb-H5r"/>
+                    <constraint firstItem="tcX-3r-NUn" firstAttribute="leading" secondItem="USs-ix-WBW" secondAttribute="leading" constant="20" id="KMn-ut-Yab"/>
+                    <constraint firstAttribute="bottom" secondItem="tcX-3r-NUn" secondAttribute="bottom" id="k7r-tz-tMY"/>
+                    <constraint firstAttribute="trailing" secondItem="edc-wA-WrO" secondAttribute="trailing" constant="20" id="s0d-1m-hIV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+            <connections>
+                <outlet property="descLabel" destination="PNl-09-3eJ" id="6cm-Ih-WgL"/>
+                <outlet property="iconImageView" destination="PUg-FK-PgO" id="H8U-8W-xex"/>
+                <outlet property="switcher" destination="edc-wA-WrO" id="mau-zv-uXB"/>
+                <outlet property="titleLabel" destination="DXt-X4-SdC" id="9bk-zp-Pug"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

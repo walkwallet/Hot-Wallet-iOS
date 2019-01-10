@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="h8S-88-BCH">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="qlH-V0-MLq">
+            <objects>
+                <viewController id="h8S-88-BCH" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZWg-i8-bRz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ce4-yS-6Bb">
+                                <rect key="frame" x="139.5" y="102" width="96" height="96"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="gg4-M1-ikQ"/>
+                                    <constraint firstAttribute="width" constant="96" id="h1L-d6-85M"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018 V SYSTEMS ALL rights reserved" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGd-o4-fl2">
+                                <rect key="frame" x="66" y="634" width="243" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.54117647059999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VSYS_Wallet" translatesAutoresizingMaskIntoConstraints="NO" id="9S4-of-08i">
+                                <rect key="frame" x="79.5" y="230" width="216" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="LSc-R8-gyL"/>
+                                    <constraint firstAttribute="width" constant="216" id="ggl-fe-0ck"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ce4-yS-6Bb" firstAttribute="centerY" secondItem="ZWg-i8-bRz" secondAttribute="centerY" multiplier="0.45" id="K4t-EI-hrn"/>
+                            <constraint firstItem="pbX-5d-aYi" firstAttribute="bottom" secondItem="eGd-o4-fl2" secondAttribute="bottom" constant="16" id="Qoy-kc-isF"/>
+                            <constraint firstItem="Ce4-yS-6Bb" firstAttribute="centerX" secondItem="ZWg-i8-bRz" secondAttribute="centerX" id="UV5-7y-4h2"/>
+                            <constraint firstItem="eGd-o4-fl2" firstAttribute="centerX" secondItem="ZWg-i8-bRz" secondAttribute="centerX" id="XQE-B3-3MP"/>
+                            <constraint firstItem="9S4-of-08i" firstAttribute="top" secondItem="Ce4-yS-6Bb" secondAttribute="bottom" constant="32" id="h8E-uU-lmR"/>
+                            <constraint firstItem="9S4-of-08i" firstAttribute="centerX" secondItem="ZWg-i8-bRz" secondAttribute="centerX" id="vDI-po-Lrl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pbX-5d-aYi"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C9u-e6-K9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="VSYS_Wallet" width="175" height="18"/>
+        <image name="logo" width="96" height="96"/>
+    </resources>
+</document>

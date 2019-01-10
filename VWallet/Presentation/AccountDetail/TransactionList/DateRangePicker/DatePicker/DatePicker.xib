@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DatePicker">
+            <connections>
+                <outlet property="containerView" destination="RCa-mQ-4Py" id="j4Y-Yk-Rk6"/>
+                <outlet property="dataPicker" destination="hBU-hz-XiY" id="aq8-Z5-Mi5"/>
+                <outlet property="negativeBtn" destination="lrP-LV-SVA" id="Gb5-L9-B5K"/>
+                <outlet property="positiveBtn" destination="VhC-i3-PAz" id="h6P-3n-4aA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCa-mQ-4Py">
+                    <rect key="frame" x="0.0" y="412" width="375" height="255"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4q-2d-fDf">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="255"/>
+                            <subviews>
+                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="hBU-hz-XiY">
+                                    <rect key="frame" x="0.0" y="10" width="375" height="180"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="180" id="Mkf-Ty-ySC"/>
+                                    </constraints>
+                                    <date key="date" timeIntervalSinceReferenceDate="565347952.381809">
+                                        <!--2018-12-01 09:05:52 +0000-->
+                                    </date>
+                                </datePicker>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="wf5-8C-Unw">
+                                    <rect key="frame" x="20" y="200" width="335" height="45"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrP-LV-SVA" customClass="VThemeButton">
+                                            <rect key="frame" x="0.0" y="0.0" width="157.5" height="45"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <state key="normal" title="Button"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="hollow" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="submit" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="close" destination="-1" eventType="touchUpInside" id="9vQ-dr-tH4"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VhC-i3-PAz" customClass="VThemeButton">
+                                            <rect key="frame" x="177.5" y="0.0" width="157.5" height="45"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <state key="normal" title="Button"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="submit" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="done" destination="-1" eventType="touchUpInside" id="gUx-RA-XiE"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="i8s-OT-6Dg"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="hBU-hz-XiY" firstAttribute="leading" secondItem="c4q-2d-fDf" secondAttribute="leading" id="8Xb-xa-87D"/>
+                                <constraint firstAttribute="bottom" secondItem="wf5-8C-Unw" secondAttribute="bottom" constant="10" id="H95-i7-WSx"/>
+                                <constraint firstItem="wf5-8C-Unw" firstAttribute="top" secondItem="hBU-hz-XiY" secondAttribute="bottom" constant="10" id="NTA-Mi-u1O"/>
+                                <constraint firstItem="wf5-8C-Unw" firstAttribute="leading" secondItem="c4q-2d-fDf" secondAttribute="leading" constant="20" id="WJm-2L-U33"/>
+                                <constraint firstItem="hBU-hz-XiY" firstAttribute="top" secondItem="c4q-2d-fDf" secondAttribute="top" constant="10" id="bDe-8p-5KU"/>
+                                <constraint firstAttribute="trailing" secondItem="hBU-hz-XiY" secondAttribute="trailing" id="h8S-x6-NsD"/>
+                                <constraint firstAttribute="trailing" secondItem="wf5-8C-Unw" secondAttribute="trailing" constant="20" id="rSb-ZW-yfQ"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="c4q-2d-fDf" secondAttribute="trailing" id="ZuC-ud-DBz"/>
+                        <constraint firstItem="c4q-2d-fDf" firstAttribute="leading" secondItem="RCa-mQ-4Py" secondAttribute="leading" id="aFG-XB-APD"/>
+                        <constraint firstItem="c4q-2d-fDf" firstAttribute="top" secondItem="RCa-mQ-4Py" secondAttribute="top" id="uBY-AC-g0L"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                            <real key="value" value="0.20000000000000001"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                            <real key="value" value="16"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                            <size key="value" width="0.0" height="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                            <color key="value" red="0.21176470589999999" green="0.21176470589999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="RCa-mQ-4Py" secondAttribute="trailing" id="S2g-jF-ZkG"/>
+                <constraint firstItem="c4q-2d-fDf" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="STq-rD-9fI"/>
+                <constraint firstItem="RCa-mQ-4Py" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="pKt-BE-iRY"/>
+                <constraint firstAttribute="bottom" secondItem="RCa-mQ-4Py" secondAttribute="bottom" id="ucD-dm-e5p"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="138.40000000000001" y="154.27286356821591"/>
+        </view>
+    </objects>
+</document>

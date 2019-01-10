@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AddAccountTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="149"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="148.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A7s-8f-e5Y">
+                        <rect key="frame" x="20" y="8" width="374" height="132.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_add_card" translatesAutoresizingMaskIntoConstraints="NO" id="bjC-yp-41s">
+                                <rect key="frame" x="171" y="24" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="286-Dp-beG"/>
+                                    <constraint firstAttribute="width" secondItem="bjC-yp-41s" secondAttribute="height" id="fyA-vh-bpO"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6U-k8-gJg" customClass="VThemeLabel">
+                                <rect key="frame" x="16" y="68" width="342" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="BkN-Rr-Ich"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autoAdjFont" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can add 1-10 addresses at a time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wti-Ka-q1y" customClass="VThemeLabel">
+                                <rect key="frame" x="16" y="91" width="342" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="T2q-MO-WNr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autoAdjFont" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="colorLevel">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="S6U-k8-gJg" firstAttribute="leading" secondItem="A7s-8f-e5Y" secondAttribute="leading" constant="16" id="2nf-Nq-7B3"/>
+                            <constraint firstItem="bjC-yp-41s" firstAttribute="centerX" secondItem="A7s-8f-e5Y" secondAttribute="centerX" id="7x8-IC-9EU"/>
+                            <constraint firstItem="wti-Ka-q1y" firstAttribute="top" secondItem="S6U-k8-gJg" secondAttribute="bottom" constant="4" id="TJX-mB-oNQ"/>
+                            <constraint firstItem="S6U-k8-gJg" firstAttribute="top" secondItem="bjC-yp-41s" secondAttribute="bottom" constant="12" id="fSG-u1-EYG"/>
+                            <constraint firstAttribute="trailing" secondItem="S6U-k8-gJg" secondAttribute="trailing" constant="16" id="lhY-l7-ZUE"/>
+                            <constraint firstAttribute="trailing" secondItem="wti-Ka-q1y" secondAttribute="trailing" constant="16" id="oQb-mf-3Bd"/>
+                            <constraint firstItem="bjC-yp-41s" firstAttribute="top" secondItem="A7s-8f-e5Y" secondAttribute="top" constant="24" id="uF3-ON-Av0"/>
+                            <constraint firstItem="wti-Ka-q1y" firstAttribute="leading" secondItem="A7s-8f-e5Y" secondAttribute="leading" constant="16" id="vN4-9L-eV9"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="A7s-8f-e5Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Ofx-1U-nWW"/>
+                    <constraint firstAttribute="trailing" secondItem="A7s-8f-e5Y" secondAttribute="trailing" constant="20" id="Plo-w2-7gb"/>
+                    <constraint firstItem="A7s-8f-e5Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Y3L-tX-aKB"/>
+                    <constraint firstAttribute="bottom" secondItem="A7s-8f-e5Y" secondAttribute="bottom" constant="8" id="ftn-hH-nQ3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="descLabel" destination="wti-Ka-q1y" id="HmZ-zx-AKj"/>
+                <outlet property="iconImgView" destination="bjC-yp-41s" id="6nf-CU-XXQ"/>
+                <outlet property="titleLabel" destination="S6U-k8-gJg" id="wNe-9i-Pxv"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ico_add_card" width="32" height="24"/>
+    </resources>
+</document>
