@@ -67,7 +67,6 @@
     }
     self.amountLabel.text = [NSString stringWithDecimal:(amount * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
     self.amountLabelHeightLC.constant = 46;
-//    NSString *qrCodeStr = [NSString stringWithFormat:@"https://wallettestnet.vee.tech//#send/VEE?recipient=%@&amount=%@", self.account.originAccount.address, self.amountLabel.text];
     NSDictionary *dict = @{@"protocol": VsysProtocol,
                            @"api": @(VsysApi),
                            @"opc": VsysOpcTypeAccount,

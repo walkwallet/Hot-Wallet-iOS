@@ -4,7 +4,8 @@
 
   All rights reserved.
 */
-NSCameraUsageDescription = "使用相机";
-NSPhotoLibraryAddUsageDescription = "存储图片";
-NSPhotoLibraryUsageDescription = "存取图片";
+NSCameraUsageDescription = "使用相机扫描二维码";
+NSPhotoLibraryAddUsageDescription = "保存图片到相册";
+NSPhotoLibraryUsageDescription = "选取图片";
 NSFaceIDUsageDescription = "保护您的应用";
+NSBluetoothPeripheralUsageDescription = "检测蓝牙是否关闭";

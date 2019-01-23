@@ -4,7 +4,8 @@
 
   All rights reserved.
 */
-NSCameraUsageDescription = "Use the camera";
+NSCameraUsageDescription = "Use the camera to scan QR Code";
 NSPhotoLibraryAddUsageDescription = "Store pictures";
-NSPhotoLibraryUsageDescription = "Access pictures";
+NSPhotoLibraryUsageDescription = "Select the pictures";
 NSFaceIDUsageDescription = "Protect your application";
+NSBluetoothPeripheralUsageDescription = "Use the bluetooth";

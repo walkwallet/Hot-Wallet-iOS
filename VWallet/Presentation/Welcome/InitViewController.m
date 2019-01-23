@@ -116,12 +116,7 @@
         [weakResultVC presentViewController:backupVC.naviVC animated:YES completion:nil];
     }];
     [parameter setSecondOperateBlock:^{
-        AppDelegate *appDelegate = (AppDelegate *)UIApplication.sharedApplication.delegate;
-        UIWindow *window = [[UIWindow alloc] initWithFrame:appDelegate.window.bounds];
-        window.rootViewController = VStoryboard.Main.instantiateInitialViewController;
-        appDelegate.window = window;
-        [window makeKeyAndVisible];
-//        [WindowManager changeToRootViewController:VStoryboard.Main.instantiateInitialViewController];
+        [WindowManager changeToRootViewController:VStoryboard.Main.instantiateInitialViewController];
     }];
     [WindowManager changeToRootViewController:resultVC];
 }

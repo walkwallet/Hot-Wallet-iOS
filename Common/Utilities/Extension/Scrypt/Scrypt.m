@@ -2,7 +2,7 @@
 //  Scrypt.m
 //  VWallet
 //
-//  Copyright © 2018 veetech. All rights reserved.
+//  All rights reserved.
 //
 
 #import "Scrypt.h"

@@ -175,7 +175,7 @@
 "network.choose.cell2.detail" = "在测试网络环境下，用户不可进行VSYS真实资产的安全存储，此环境适用于开发者做模拟测试使用，若非专业开发者，建议您使用正式环境";
 
 // ---- Import Mnemonic ----
-"mnemonic.import.detail" = "助记词由15个英文单词组成，注意输入时用空格分开";
+"mnemonic.import.detail" = "助记词由15个英文单词组成，注意输入时用空格分开，末尾不能有空格或换行";
 "mnemonic.import.placeholder" = "请输入";
 
 // ---- Create Password ----

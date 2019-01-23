@@ -2,7 +2,7 @@
 //  Scrypt.h
 //  VWallet
 //
-//  Copyright © 2018 veetech. All rights reserved.
+//  All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
