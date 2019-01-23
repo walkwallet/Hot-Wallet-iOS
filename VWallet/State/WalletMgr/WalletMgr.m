@@ -128,6 +128,8 @@ static WalletMgr *VWalletMgr = nil;
     [self loadSalt:&error];
     if (error || !self.salt || [self.salt isEqualToString:@""]) {
         self.salt = [self generateUUID];
+        // recovery status
+        error = nil;
     }
     if (!self.salt || [self.salt isEqualToString:@""]) {
         error = [NSError errorWithDomain:VKeyChainService code:-1 userInfo:nil];

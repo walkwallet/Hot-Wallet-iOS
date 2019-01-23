@@ -173,7 +173,8 @@
 }
 
 - (BOOL)checkAddress {
-    BOOL addressValid = [Regex matchRegexStr:@"^[\\dA-Za-z]+$" string:self.receiveAddressTextView.text];
+    BOOL addressValid = VsysValidateAddress(self.receiveAddressTextView.text);
+//    BOOL addressValid = [Regex matchRegexStr:@"^[\\dA-Za-z]+$" string:self.receiveAddressTextView.text];
     if (!addressValid && self.errorAddressLabelHeightLC.constant == 0) {
         self.errorAddressLabelHeightLC.constant = 15;
     } else if (addressValid && self.errorAddressLabelHeightLC.constant > 0) {
