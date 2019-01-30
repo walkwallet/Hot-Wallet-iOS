@@ -71,7 +71,7 @@
                            @"api": @(VsysApi),
                            @"opc": VsysOpcTypeAccount,
                            @"address": self.account.originAccount.address,
-                           @"amount": @((int)([self.amountLabel.text doubleValue] * VsysVSYS)),
+                           @"amount": @((long)([self.amountLabel.text doubleValue] * VsysVSYS)),
                            };
     NSString *qrcodeStr = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
     self.qrCodeImgView.image = [UIImage imageWithQrCodeStr:qrcodeStr];
