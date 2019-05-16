@@ -41,7 +41,7 @@
     self.sendBtnTitleLabel.text = VLocalize(@"account.detail.send");
     self.receiveBtnTitleLabel.text = VLocalize(@"account.detail.receive");
     self.leaseBtnTitleLabel.text = VLocalize(@"account.detail.lease");
-    self.recordsBtnTitleLabel.text = VLocalize(@"account.detail.records");
+    self.recordsBtnTitleLabel.text = VLocalize(@"account.detail.token");
 }
 
 - (void)setAccount:(Account *)account {

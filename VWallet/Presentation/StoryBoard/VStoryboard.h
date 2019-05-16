@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIStoryboard *)Address;
 
 + (UIStoryboard *)Password;
+
 @end
 
 NS_ASSUME_NONNULL_END

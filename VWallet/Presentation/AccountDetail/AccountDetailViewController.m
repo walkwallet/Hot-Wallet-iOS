@@ -21,7 +21,7 @@
 
 #import "TransactionOperateViewController.h"
 #import "ReceiveViewController.h"
-#import "TransactionRecordsPageViewController.h"
+#import "TokenViewController.h"
 #import "TransactionDetailViewController.h"
 #import "UIViewController+Alert.h"
 #import "AddressDetailViewController.h"
@@ -165,15 +165,15 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
     [self.navigationController pushViewController:leaseVC animated:YES];
 }
 
-#pragma mark - Records
-- (IBAction)recordsBtnClick {
-    TransactionRecordsPageViewController *transactionRecordsPageVC = [[TransactionRecordsPageViewController alloc] initWithAccount:self.account transationArray:self.transactionArray];
-    [self.navigationController pushViewController:transactionRecordsPageVC animated:YES];
+#pragma mark - Token
+- (IBAction)tokenBtnClick {
+    TokenViewController *tokenVC = [[TokenViewController alloc] initWithAccount:self.account];
+    [self.navigationController pushViewController:tokenVC animated:YES];
 }
 
 - (IBAction)moreOperateBtnClick {
     __weak typeof(self) weakSelf = self;
-    [self actionAheetWithSelectedIndex:-1 withActionDatas:@[VLocalize(@"action.address.detail"), VLocalize(@"action.address.copy")] handler:^(NSInteger index) {
+    [self actionSheetWithSelectedIndex:-1 withActionDatas:@[VLocalize(@"action.address.detail"), VLocalize(@"action.address.copy")] handler:^(NSInteger index) {
         if (index == 0) {
             AddressDetailViewController *addressDetailsVC = [VStoryboard.Address instantiateViewControllerWithIdentifier:@"AddressDetailViewController"];
             [addressDetailsVC updateAccout:self.account];

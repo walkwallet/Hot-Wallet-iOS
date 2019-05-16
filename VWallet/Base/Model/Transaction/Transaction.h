@@ -35,6 +35,8 @@ static int64_t const VTimestampMultiple = 1000000000;
  * 4.canceled out leasing
  * 5.incoming leasing
  * 6.canceled incoming leasing
+ * 8.register contract
+ * 9.contract transaction
  */
 @property (nonatomic, assign) int transactionType;
 

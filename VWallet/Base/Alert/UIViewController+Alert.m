@@ -107,22 +107,21 @@
 
 
 
-- (void)actionAheetWithActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler {
-    return [self actionAheetWithTitle:nil message:nil selectedIndex:-1 withActionDatas:data handler:handler];
+- (void)actionSheetWithActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler {
+    return [self actionSheetWithTitle:nil message:nil selectedIndex:-1 withActionDatas:data handler:handler];
 }
 
-- (void)actionAheetWithSelectedIndex:(NSInteger)index withActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler {
-    return [self actionAheetWithTitle:nil message:nil selectedIndex:index withActionDatas:data handler:handler];
+- (void)actionSheetWithSelectedIndex:(NSInteger)index withActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler {
+    return [self actionSheetWithTitle:nil message:nil selectedIndex:index withActionDatas:data handler:handler];
 }
 
-- (void)actionAheetWithTitle:(nullable NSString *)title message:(nullable NSString *)msg withActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler {
-    return [self actionAheetWithTitle:title message:msg selectedIndex:-1 withActionDatas:data handler:handler];
+- (void)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)msg withActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler {
+    return [self actionSheetWithTitle:title message:msg selectedIndex:-1 withActionDatas:data handler:handler];
 }
 
-- (void)actionAheetWithTitle:(nullable NSString *)title message:(nullable NSString *)msg selectedIndex:(NSInteger)index withActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler {
+- (void)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)msg selectedIndex:(NSInteger)index withActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler {
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:[self isPad] ? UIAlertControllerStyleAlert : UIAlertControllerStyleActionSheet];
-    
     for (int i = 0; i < data.count; i++) {
         UIAlertAction *action = [UIAlertAction actionWithTitle:data[i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             handler(i);

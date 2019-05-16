@@ -139,7 +139,7 @@
 
     
     if ([item.identifier isEqualToString:@"lock_method"]) {
-        [self actionAheetWithSelectedIndex:AppState.shareInstance.lockMethod-1 withActionDatas:@[@"SecureID", @"Password"] handler:^(NSInteger index) {
+        [self actionSheetWithSelectedIndex:AppState.shareInstance.lockMethod-1 withActionDatas:@[@"SecureID", @"Password"] handler:^(NSInteger index) {
             if (index == 0) {
                 [TouchIDTool authSecureID:^(BOOL support, BOOL result) {
                     if (support && result) {
@@ -165,7 +165,7 @@
     
     if ([item.identifier isEqualToString:@"auto_lock"]) {
         NSInteger index = AppState.shareInstance.autoLockTime == 5 ? 0 : 1;
-        [self actionAheetWithSelectedIndex:index withActionDatas:@[@"5 min", @"10 min"] handler:^(NSInteger index) {
+        [self actionSheetWithSelectedIndex:index withActionDatas:@[@"5 min", @"10 min"] handler:^(NSInteger index) {
             AppState.shareInstance.autoLockTime = index == 0 ? 5 : 10;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self initContentData];

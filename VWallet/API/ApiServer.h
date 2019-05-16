@@ -9,6 +9,9 @@
 #import "SlotInfo.h"
 #import "Account.h"
 #import "Transaction.h"
+@class Token;
+@class Contract;
+
 @import Vsys;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -26,6 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)broadcastLease:(Transaction *)tx callback: (void(^)(BOOL isSuc))callback;
 
 + (void)broadcastCancelLease:(Transaction *)tx callback: (void(^)(BOOL isSuc))callback;
+
++ (void)getContractById:(NSString *)contractId callback:(void(^)(BOOL isSuc, Contract *contract))callback;
+
++ (void)getTokenById:(NSString *)tokenId callback:(void(^)(BOOL isSuc, Token *token))callback;
+
++ (void)getAccountTokenBalance:(NSString *)tokenId address:(NSString *)address callback:(void(^)(BOOL isSuc, Contract *contract))callback;;
+
 
 @end
 

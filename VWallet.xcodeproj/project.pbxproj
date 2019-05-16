@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3B6CB39FC990E6C5A5EC3C42 /* libPods-VWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B27CE84EDC02E8737460067B /* libPods-VWallet.a */; };
-		40045B3C21E63B8E0057045B /* Vsys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40045B3B21E63B8E0057045B /* Vsys.framework */; };
 		402BBAEB21E5D2F4005F2794 /* AppDelegate+DismissKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 402BBAE921E5D2F4005F2794 /* AppDelegate+DismissKeyboard.m */; };
 		402BBB1821E5D326005F2794 /* AccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402BBAED21E5D326005F2794 /* AccountDetailViewController.m */; };
 		402BBB1921E5D326005F2794 /* AccountDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 402BBAF021E5D326005F2794 /* AccountDetailHeadView.m */; };
@@ -172,11 +171,27 @@
 		40477A3221E5D34B00EFF6E1 /* AddAccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40477A2D21E5D34B00EFF6E1 /* AddAccountTableViewCell.xib */; };
 		40477A3321E5D34B00EFF6E1 /* AddAccountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40477A2E21E5D34B00EFF6E1 /* AddAccountTableViewCell.m */; };
 		40477A3521E5D36200EFF6E1 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40477A3421E5D36200EFF6E1 /* Wallet.storyboard */; };
+		A805EEF0228AB927003FFAFD /* TokenInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A805EEEE228AB927003FFAFD /* TokenInfoViewController.m */; };
+		A805EEF1228AB927003FFAFD /* TokenInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A805EEEF228AB927003FFAFD /* TokenInfoViewController.xib */; };
+		A805EEFA228C151D003FFAFD /* Vsys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A805EEF9228C151D003FFAFD /* Vsys.framework */; };
+		A805EF00228C418B003FFAFD /* Contract.m in Sources */ = {isa = PBXBuildFile; fileRef = A805EEFF228C418B003FFAFD /* Contract.m */; };
+		A805EF04228D1365003FFAFD /* TokenMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = A805EF03228D1365003FFAFD /* TokenMgr.m */; };
+		A8163B032289206B004A919A /* TokenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8163B022289206B004A919A /* TokenViewController.xib */; };
+		A8163B0722894882004A919A /* TokenOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8163B0522894882004A919A /* TokenOperateViewController.m */; };
+		A8163B0822894882004A919A /* TokenOperateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8163B0622894882004A919A /* TokenOperateViewController.xib */; };
+		A88B0FF72275C59F008C1CE8 /* TokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B0FF62275C59F008C1CE8 /* TokenViewController.m */; };
+		A88B0FFD2276A760008C1CE8 /* TokenHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B0FFC2276A760008C1CE8 /* TokenHeaderView.m */; };
+		A88B10022276C89E008C1CE8 /* TokenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B10002276C89E008C1CE8 /* TokenTableViewCell.m */; };
+		A88B10032276C89E008C1CE8 /* TokenTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88B10012276C89E008C1CE8 /* TokenTableViewCell.xib */; };
+		A88B10072276CAC9008C1CE8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B10062276CAC9008C1CE8 /* Token.m */; };
+		A8C32BE6228985AD00E1CBB1 /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C32BE4228985AD00E1CBB1 /* SuccessViewController.m */; };
+		A8C32BE7228985AD00E1CBB1 /* SuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */; };
+		A8C32BEB228AA89300E1CBB1 /* AddTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C32BE9228AA89300E1CBB1 /* AddTokenViewController.m */; };
+		A8C32BEC228AA89300E1CBB1 /* AddTokenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C32BEA228AA89300E1CBB1 /* AddTokenViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		20398EE6FDC06B493FA9EE1F /* Pods-VWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-VWallet/Pods-VWallet.release.xcconfig"; sourceTree = "<group>"; };
-		40045B3B21E63B8E0057045B /* Vsys.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vsys.framework; sourceTree = "<group>"; };
 		4023E12421AE1FAF00E18D5D /* VWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		402BBAE921E5D2F4005F2794 /* AppDelegate+DismissKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+DismissKeyboard.m"; sourceTree = "<group>"; };
 		402BBAEA21E5D2F4005F2794 /* AppDelegate+DismissKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+DismissKeyboard.h"; sourceTree = "<group>"; };
@@ -465,6 +480,33 @@
 		4098EA6C21BFAC9100FE4426 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63D3364D3ABE04C293E5203E /* Pods-VeeWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeeWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VeeWallet/Pods-VeeWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		66B1D53DCE14F99F8006CF45 /* libPods-VeeWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VeeWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A805EEED228AB927003FFAFD /* TokenInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenInfoViewController.h; sourceTree = "<group>"; };
+		A805EEEE228AB927003FFAFD /* TokenInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenInfoViewController.m; sourceTree = "<group>"; };
+		A805EEEF228AB927003FFAFD /* TokenInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenInfoViewController.xib; sourceTree = "<group>"; };
+		A805EEF9228C151D003FFAFD /* Vsys.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vsys.framework; sourceTree = "<group>"; };
+		A805EEFE228C418B003FFAFD /* Contract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Contract.h; sourceTree = "<group>"; };
+		A805EEFF228C418B003FFAFD /* Contract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Contract.m; sourceTree = "<group>"; };
+		A805EF02228D1365003FFAFD /* TokenMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenMgr.h; sourceTree = "<group>"; };
+		A805EF03228D1365003FFAFD /* TokenMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenMgr.m; sourceTree = "<group>"; };
+		A8163B022289206B004A919A /* TokenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenViewController.xib; sourceTree = "<group>"; };
+		A8163B0422894882004A919A /* TokenOperateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenOperateViewController.h; sourceTree = "<group>"; };
+		A8163B0522894882004A919A /* TokenOperateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenOperateViewController.m; sourceTree = "<group>"; };
+		A8163B0622894882004A919A /* TokenOperateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenOperateViewController.xib; sourceTree = "<group>"; };
+		A88B0FF52275C59F008C1CE8 /* TokenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenViewController.h; sourceTree = "<group>"; };
+		A88B0FF62275C59F008C1CE8 /* TokenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenViewController.m; sourceTree = "<group>"; };
+		A88B0FFB2276A760008C1CE8 /* TokenHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenHeaderView.h; sourceTree = "<group>"; };
+		A88B0FFC2276A760008C1CE8 /* TokenHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenHeaderView.m; sourceTree = "<group>"; };
+		A88B0FFF2276C89E008C1CE8 /* TokenTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenTableViewCell.h; sourceTree = "<group>"; };
+		A88B10002276C89E008C1CE8 /* TokenTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenTableViewCell.m; sourceTree = "<group>"; };
+		A88B10012276C89E008C1CE8 /* TokenTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenTableViewCell.xib; sourceTree = "<group>"; };
+		A88B10052276CAC9008C1CE8 /* Token.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
+		A88B10062276CAC9008C1CE8 /* Token.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
+		A8C32BE3228985AD00E1CBB1 /* SuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
+		A8C32BE4228985AD00E1CBB1 /* SuccessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuccessViewController.m; sourceTree = "<group>"; };
+		A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessViewController.xib; sourceTree = "<group>"; };
+		A8C32BE8228AA89300E1CBB1 /* AddTokenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddTokenViewController.h; sourceTree = "<group>"; };
+		A8C32BE9228AA89300E1CBB1 /* AddTokenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddTokenViewController.m; sourceTree = "<group>"; };
+		A8C32BEA228AA89300E1CBB1 /* AddTokenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTokenViewController.xib; sourceTree = "<group>"; };
 		B27CE84EDC02E8737460067B /* libPods-VWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B99A01A40F53D8E0B803D481 /* Pods-VWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VWallet/Pods-VWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		C9E160475A58216B5DC517DD /* Pods-VeeWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeeWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-VeeWallet/Pods-VeeWallet.release.xcconfig"; sourceTree = "<group>"; };
@@ -475,8 +517,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40045B3C21E63B8E0057045B /* Vsys.framework in Frameworks */,
 				3B6CB39FC990E6C5A5EC3C42 /* libPods-VWallet.a in Frameworks */,
+				A805EEFA228C151D003FFAFD /* Vsys.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,9 +558,9 @@
 		402BBAEC21E5D326005F2794 /* AccountDetail */ = {
 			isa = PBXGroup;
 			children = (
+				402BBAF121E5D326005F2794 /* AccountDetailViewController.h */,
 				402BBAED21E5D326005F2794 /* AccountDetailViewController.m */,
 				402BBAEE21E5D326005F2794 /* HeadView */,
-				402BBAF121E5D326005F2794 /* AccountDetailViewController.h */,
 				402BBAF221E5D326005F2794 /* TransactionList */,
 			);
 			path = AccountDetail;
@@ -590,11 +632,11 @@
 		402BBB0421E5D326005F2794 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				402BBB0E21E5D326005F2794 /* TransactionListType.h */,
 				402BBB0521E5D326005F2794 /* TransactionTableViewController.h */,
+				402BBB0D21E5D326005F2794 /* TransactionTableViewController.m */,
 				402BBB0621E5D326005F2794 /* HeadView */,
 				402BBB0921E5D326005F2794 /* Cell */,
-				402BBB0D21E5D326005F2794 /* TransactionTableViewController.m */,
-				402BBB0E21E5D326005F2794 /* TransactionListType.h */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -622,8 +664,8 @@
 			isa = PBXGroup;
 			children = (
 				402BBB1021E5D326005F2794 /* DataRangeView */,
-				402BBB1321E5D326005F2794 /* TransactionRecordsPageViewController.h */,
 				402BBB1421E5D326005F2794 /* HeadSegmentedView */,
+				402BBB1321E5D326005F2794 /* TransactionRecordsPageViewController.h */,
 				402BBB1721E5D326005F2794 /* TransactionRecordsPageViewController.m */,
 			);
 			path = PageVC;
@@ -684,7 +726,7 @@
 		4041BFF021CB711000B2AE05 /* VWallet */ = {
 			isa = PBXGroup;
 			children = (
-				40045B3B21E63B8E0057045B /* Vsys.framework */,
+				A805EEF9228C151D003FFAFD /* Vsys.framework */,
 				4041BFF121CB711000B2AE05 /* State */,
 				4041BFF821CB711000B2AE05 /* Components */,
 				4041C01421CB711000B2AE05 /* main.m */,
@@ -699,6 +741,7 @@
 		4041BFF121CB711000B2AE05 /* State */ = {
 			isa = PBXGroup;
 			children = (
+				A805EF01228D1340003FFAFD /* Token */,
 				4041BFF221CB711000B2AE05 /* WalletMgr */,
 				4041BFF521CB711000B2AE05 /* AppState */,
 			);
@@ -708,8 +751,8 @@
 		4041BFF221CB711000B2AE05 /* WalletMgr */ = {
 			isa = PBXGroup;
 			children = (
-				4041BFF321CB711000B2AE05 /* WalletMgr.m */,
 				4041BFF421CB711000B2AE05 /* WalletMgr.h */,
+				4041BFF321CB711000B2AE05 /* WalletMgr.m */,
 			);
 			path = WalletMgr;
 			sourceTree = "<group>";
@@ -735,13 +778,13 @@
 		4041BFF921CB711000B2AE05 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
-				4041BFFA21CB711000B2AE05 /* AlertNavController.h */,
 				4041BFFB21CB711000B2AE05 /* AlertViewController.xib */,
+				4041BFFA21CB711000B2AE05 /* AlertNavController.h */,
+				4041C00421CB711000B2AE05 /* AlertNavController.m */,
+				4041C00C21CB711000B2AE05 /* AlertViewController.h */,
 				4041BFFC21CB711000B2AE05 /* AlertViewController.m */,
 				4041BFFD21CB711000B2AE05 /* AnimatorHorizontal */,
-				4041C00421CB711000B2AE05 /* AlertNavController.m */,
 				4041C00521CB711000B2AE05 /* AnimatorVertical */,
-				4041C00C21CB711000B2AE05 /* AlertViewController.h */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -793,8 +836,8 @@
 		4041C01121CB711000B2AE05 /* SendTx */ = {
 			isa = PBXGroup;
 			children = (
-				4041C01221CB711000B2AE05 /* UIViewController+Transaction.m */,
 				4041C01321CB711000B2AE05 /* UIViewController+Transaction.h */,
+				4041C01221CB711000B2AE05 /* UIViewController+Transaction.m */,
 			);
 			path = SendTx;
 			sourceTree = "<group>";
@@ -803,9 +846,9 @@
 			isa = PBXGroup;
 			children = (
 				4041C01621CB711000B2AE05 /* ServiceAPI.h */,
+				4041C01921CB711000B2AE05 /* ApiServer.h */,
 				4041C01721CB711000B2AE05 /* ApiServer.m */,
 				4041C01821CB711000B2AE05 /* ServerConfig.h */,
-				4041C01921CB711000B2AE05 /* ApiServer.h */,
 				4041C01A21CB711000B2AE05 /* ServerConfig.m */,
 			);
 			path = API;
@@ -823,6 +866,7 @@
 		4041C02121CB711000B2AE05 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				A88B0FF42275C534008C1CE8 /* VToken */,
 				40477A2421E5D34B00EFF6E1 /* AccountList */,
 				402BBAEC21E5D326005F2794 /* AccountDetail */,
 				4041C02221CB711000B2AE05 /* Settings */,
@@ -982,8 +1026,8 @@
 			children = (
 				4041C04D21CB711000B2AE05 /* TransactionDetailViewController.xib */,
 				4041C04E21CB711000B2AE05 /* TransactionDetailViewController.h */,
-				4041C04F21CB711000B2AE05 /* Cell */,
 				4041C05321CB711000B2AE05 /* TransactionDetailViewController.m */,
+				4041C04F21CB711000B2AE05 /* Cell */,
 			);
 			path = TransactionDetail;
 			sourceTree = "<group>";
@@ -1003,11 +1047,11 @@
 			children = (
 				40477A3421E5D36200EFF6E1 /* Wallet.storyboard */,
 				4041C05521CB711000B2AE05 /* LaunchScreen.strings */,
+				4041C05D21CB711000B2AE05 /* VStoryboard.h */,
 				4041C05721CB711000B2AE05 /* VStoryboard.m */,
 				4041C05821CB711000B2AE05 /* Address.storyboard */,
 				4041C05921CB711000B2AE05 /* LaunchScreen.storyboard */,
 				4041C05B21CB711000B2AE05 /* Main.storyboard */,
-				4041C05D21CB711000B2AE05 /* VStoryboard.h */,
 				4041C05E21CB711000B2AE05 /* Settings.storyboard */,
 				4041C05F21CB711000B2AE05 /* About.storyboard */,
 			);
@@ -1152,10 +1196,10 @@
 		4041C0C821CB711000B2AE05 /* PageVC */ = {
 			isa = PBXGroup;
 			children = (
-				4041C0C921CB711000B2AE05 /* WalletPageViewController.m */,
-				4041C0CA21CB711000B2AE05 /* HeadSegmentedView */,
 				4041C0CE21CB711000B2AE05 /* AccountType.h */,
 				4041C0CF21CB711000B2AE05 /* WalletPageViewController.h */,
+				4041C0C921CB711000B2AE05 /* WalletPageViewController.m */,
+				4041C0CA21CB711000B2AE05 /* HeadSegmentedView */,
 			);
 			path = PageVC;
 			sourceTree = "<group>";
@@ -1163,9 +1207,9 @@
 		4041C0CA21CB711000B2AE05 /* HeadSegmentedView */ = {
 			isa = PBXGroup;
 			children = (
-				4041C0CB21CB711000B2AE05 /* WalletHeadSegmentedView.m */,
 				4041C0CC21CB711000B2AE05 /* WalletHeadSegmentedView.xib */,
 				4041C0CD21CB711000B2AE05 /* WalletHeadSegmentedView.h */,
+				4041C0CB21CB711000B2AE05 /* WalletHeadSegmentedView.m */,
 			);
 			path = HeadSegmentedView;
 			sourceTree = "<group>";
@@ -1428,6 +1472,8 @@
 		4041C11B21CB711000B2AE05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A805EEFD228C4174003FFAFD /* Contract */,
+				A88B10042276CAA7008C1CE8 /* Token */,
 				4041C11C21CB711000B2AE05 /* Transaction */,
 				4041C11F21CB711000B2AE05 /* CellItem */,
 				4041C12221CB711000B2AE05 /* SectionItem */,
@@ -1785,6 +1831,76 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A805EEFD228C4174003FFAFD /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				A805EEFE228C418B003FFAFD /* Contract.h */,
+				A805EEFF228C418B003FFAFD /* Contract.m */,
+			);
+			path = Contract;
+			sourceTree = "<group>";
+		};
+		A805EF01228D1340003FFAFD /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				A805EF02228D1365003FFAFD /* TokenMgr.h */,
+				A805EF03228D1365003FFAFD /* TokenMgr.m */,
+			);
+			path = Token;
+			sourceTree = "<group>";
+		};
+		A88B0FF42275C534008C1CE8 /* VToken */ = {
+			isa = PBXGroup;
+			children = (
+				A88B0FFE2276C876008C1CE8 /* Cell */,
+				A88B0FFA2276A6B7008C1CE8 /* TokenHeaderView */,
+				A88B0FF52275C59F008C1CE8 /* TokenViewController.h */,
+				A88B0FF62275C59F008C1CE8 /* TokenViewController.m */,
+				A8163B022289206B004A919A /* TokenViewController.xib */,
+				A8163B0422894882004A919A /* TokenOperateViewController.h */,
+				A8163B0522894882004A919A /* TokenOperateViewController.m */,
+				A8163B0622894882004A919A /* TokenOperateViewController.xib */,
+				A8C32BE8228AA89300E1CBB1 /* AddTokenViewController.h */,
+				A8C32BE9228AA89300E1CBB1 /* AddTokenViewController.m */,
+				A8C32BEA228AA89300E1CBB1 /* AddTokenViewController.xib */,
+				A8C32BE3228985AD00E1CBB1 /* SuccessViewController.h */,
+				A8C32BE4228985AD00E1CBB1 /* SuccessViewController.m */,
+				A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */,
+				A805EEED228AB927003FFAFD /* TokenInfoViewController.h */,
+				A805EEEE228AB927003FFAFD /* TokenInfoViewController.m */,
+				A805EEEF228AB927003FFAFD /* TokenInfoViewController.xib */,
+			);
+			path = VToken;
+			sourceTree = "<group>";
+		};
+		A88B0FFA2276A6B7008C1CE8 /* TokenHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				A88B0FFB2276A760008C1CE8 /* TokenHeaderView.h */,
+				A88B0FFC2276A760008C1CE8 /* TokenHeaderView.m */,
+			);
+			path = TokenHeaderView;
+			sourceTree = "<group>";
+		};
+		A88B0FFE2276C876008C1CE8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A88B0FFF2276C89E008C1CE8 /* TokenTableViewCell.h */,
+				A88B10002276C89E008C1CE8 /* TokenTableViewCell.m */,
+				A88B10012276C89E008C1CE8 /* TokenTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A88B10042276CAA7008C1CE8 /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				A88B10052276CAC9008C1CE8 /* Token.h */,
+				A88B10062276CAC9008C1CE8 /* Token.m */,
+			);
+			path = Token;
+			sourceTree = "<group>";
+		};
 		B59B167F6AD5924805FB5B36 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1857,9 +1973,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8C32BEC228AA89300E1CBB1 /* AddTokenViewController.xib in Resources */,
 				402BBB2421E5D326005F2794 /* TransactionTableViewCell.xib in Resources */,
 				4041C19C21CB711000B2AE05 /* PasswordAuthAlertViewController.xib in Resources */,
 				4041C1B521CB711100B2AE05 /* About.storyboard in Resources */,
+				A805EEF1228AB927003FFAFD /* TokenInfoViewController.xib in Resources */,
 				4041C1EA21CB711100B2AE05 /* VAlertViewController.xib in Resources */,
 				4041C1E521CB711100B2AE05 /* Phrase.storyboard in Resources */,
 				402BBB1F21E5D326005F2794 /* DateRangeOptionTableViewCell.xib in Resources */,
@@ -1891,13 +2009,17 @@
 				402BBB1E21E5D326005F2794 /* DateRangePickerViewController.xib in Resources */,
 				4041C1B221CB711100B2AE05 /* LaunchScreen.storyboard in Resources */,
 				4041C1E321CB711100B2AE05 /* WalletHeadSegmentedView.xib in Resources */,
+				A8163B0822894882004A919A /* TokenOperateViewController.xib in Resources */,
 				4041C18921CB711000B2AE05 /* AlertViewController.xib in Resources */,
+				A8C32BE7228985AD00E1CBB1 /* SuccessViewController.xib in Resources */,
 				4041C1B121CB711100B2AE05 /* Address.storyboard in Resources */,
 				4041C19D21CB711000B2AE05 /* ToastPasswordViewController.xib in Resources */,
 				4041C20821CB711100B2AE05 /* Assets.xcassets in Resources */,
 				4041C1F421CB711100B2AE05 /* NormalTableViewCell.xib in Resources */,
 				4041C1AF21CB711000B2AE05 /* LaunchScreen.strings in Resources */,
 				4041C1BF21CB711100B2AE05 /* ReceiveQRSaveView.xib in Resources */,
+				A8163B032289206B004A919A /* TokenViewController.xib in Resources */,
+				A88B10032276C89E008C1CE8 /* TokenTableViewCell.xib in Resources */,
 				4041C1B421CB711100B2AE05 /* Settings.storyboard in Resources */,
 				4041C1A121CB711000B2AE05 /* ResultViewController.xib in Resources */,
 				4041C1A721CB711000B2AE05 /* MnemonicWordCheckViewController.xib in Resources */,
@@ -2008,6 +2130,7 @@
 				4041C19E21CB711000B2AE05 /* ToastPasswordViewController.m in Sources */,
 				402BBB2521E5D326005F2794 /* TransactionTableViewController.m in Sources */,
 				4041C1F621CB711100B2AE05 /* SectionHeaderView.m in Sources */,
+				A88B10022276C89E008C1CE8 /* TokenTableViewCell.m in Sources */,
 				4041C19121CB711000B2AE05 /* VerticalAnimatorDelegate.m in Sources */,
 				4041C1A921CB711000B2AE05 /* PasswordSettingsViewController.m in Sources */,
 				4041C1F021CB711100B2AE05 /* ArrowTableViewCell.m in Sources */,
@@ -2025,7 +2148,9 @@
 				4041C20A21CB711100B2AE05 /* UIImage+QRCode.m in Sources */,
 				4041C1A421CB711000B2AE05 /* MnemonicWordBackupViewController.m in Sources */,
 				4041C20421CB711100B2AE05 /* Account.m in Sources */,
+				A88B0FF72275C59F008C1CE8 /* TokenViewController.m in Sources */,
 				4041C21121CB711100B2AE05 /* UITextView+Placeholder.m in Sources */,
+				A8163B0722894882004A919A /* TokenOperateViewController.m in Sources */,
 				4041C1B921CB711100B2AE05 /* ChooseNetworkViewController.m in Sources */,
 				402BBB2021E5D326005F2794 /* DateRangeOptionTableViewCell.m in Sources */,
 				4041C19B21CB711000B2AE05 /* PasswordAuthAlertViewController.m in Sources */,
@@ -2035,8 +2160,11 @@
 				4041C21021CB711100B2AE05 /* UIView+IB.m in Sources */,
 				40477A2F21E5D34B00EFF6E1 /* AccountTableViewController.m in Sources */,
 				4041C1C821CB711100B2AE05 /* AddMonitorAddressViewController.m in Sources */,
+				A805EF00228C418B003FFAFD /* Contract.m in Sources */,
 				4041C1FA21CB711100B2AE05 /* VColor.m in Sources */,
+				A8C32BE6228985AD00E1CBB1 /* SuccessViewController.m in Sources */,
 				4041C1BE21CB711100B2AE05 /* ReceiveQRSaveView.m in Sources */,
+				A88B0FFD2276A760008C1CE8 /* TokenHeaderView.m in Sources */,
 				402BBB1A21E5D326005F2794 /* DateRangeTableViewCell.m in Sources */,
 				4041C1E821CB711100B2AE05 /* Transaction+Extension.m in Sources */,
 				4041C20E21CB711100B2AE05 /* LoadingView.m in Sources */,
@@ -2051,6 +2179,7 @@
 				4041C1BD21CB711100B2AE05 /* ReceiveViewController.m in Sources */,
 				4041C1B021CB711100B2AE05 /* VStoryboard.m in Sources */,
 				4041C17A21CB711000B2AE05 /* crypto_scrypt-hash.c in Sources */,
+				A805EF04228D1365003FFAFD /* TokenMgr.m in Sources */,
 				402BBB2121E5D326005F2794 /* DateRangePickerViewController.m in Sources */,
 				4041C19421CB711000B2AE05 /* main.m in Sources */,
 				4041C19021CB711000B2AE05 /* VerticalPushAnimator.m in Sources */,
@@ -2067,6 +2196,7 @@
 				4041C1C121CB711100B2AE05 /* ReceiveSetAmountAlertController.m in Sources */,
 				4041C18321CB711000B2AE05 /* crypto_scrypt-check.c in Sources */,
 				402BBB1C21E5D326005F2794 /* DatePicker.m in Sources */,
+				A8C32BEB228AA89300E1CBB1 /* AddTokenViewController.m in Sources */,
 				4041C20B21CB711100B2AE05 /* UIScrollView+EmptyData.m in Sources */,
 				4041C1E721CB711100B2AE05 /* QRScannerViewController.m in Sources */,
 				4041C1A221CB711000B2AE05 /* ResultParameter.m in Sources */,
@@ -2075,6 +2205,7 @@
 				4041C1E121CB711100B2AE05 /* WalletPageViewController.m in Sources */,
 				4041C20021CB711100B2AE05 /* CellItem.m in Sources */,
 				4041C1A521CB711000B2AE05 /* MnemonicWordCheckViewController.m in Sources */,
+				A88B10072276CAC9008C1CE8 /* Token.m in Sources */,
 				4041C20F21CB711100B2AE05 /* UIView+Loading.m in Sources */,
 				40477A3321E5D34B00EFF6E1 /* AddAccountTableViewCell.m in Sources */,
 				4041C21321CB711100B2AE05 /* NSString+Asterisk.m in Sources */,
@@ -2094,6 +2225,7 @@
 				4041C19321CB711000B2AE05 /* UIViewController+Transaction.m in Sources */,
 				4041C19221CB711000B2AE05 /* UIViewController+ColdWalletTransaction.m in Sources */,
 				4041C1FB21CB711100B2AE05 /* VThemeRootView.m in Sources */,
+				A805EEF0228AB927003FFAFD /* TokenInfoViewController.m in Sources */,
 				4041C1AE21CB711000B2AE05 /* TransactionDetailViewController.m in Sources */,
 				4041C18A21CB711000B2AE05 /* AlertViewController.m in Sources */,
 				4041C20921CB711100B2AE05 /* UIImage+Color.m in Sources */,
@@ -2288,12 +2420,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = WXK7UF23NY;
+				DEVELOPMENT_TEAM = HF225C89SZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/VWallet",
+					"$(PROJECT_DIR)/tglFramework",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
@@ -2302,7 +2435,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = systems.v.app;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.v.app.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2317,12 +2450,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WXK7UF23NY;
+				DEVELOPMENT_TEAM = HF225C89SZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/VWallet",
+					"$(PROJECT_DIR)/tglFramework",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
@@ -2330,7 +2464,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = systems.v.app;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.v.app.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;

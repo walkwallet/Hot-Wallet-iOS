@@ -59,7 +59,6 @@
                 weakself.confirmBtnContainerView.hidden = YES;
             }
         };
-
     }
     return self;
 }

@@ -31,7 +31,6 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelBtnBottomLC;
 
 @property (nonatomic, strong) NSArray *showData;
-
 @end
 
 @implementation TransactionDetailViewController
@@ -91,7 +90,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
         } else {
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.receive"), @"value" : oriTx.recipient?:@""}];
         }
-    }
+    } 
     
     if (self.transaction.originTransaction.txId && ![self.transaction.originTransaction.txId isEqualToString:@""] && self.isDetailPage) {
         [showData addObject:@{@"title" : VLocalize(@"transaction.detail.tx.id"), @"value" : self.transaction.originTransaction.txId?:@""}];

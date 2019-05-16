@@ -65,6 +65,8 @@
 "account.detail.receive" = "Receive";
 "account.detail.lease" = "Minting";
 "account.detail.records" = "Records";
+"account.detail.token" = "Token";
+"account.detail.token.watchList" = "Token Watch List";
 "account.detail.transaction.records" = "Transaction Records";
 
 // ---- account transaction operate ----
@@ -347,3 +349,29 @@
 // ---- network ----
 "const.network.mainnet" = "Mainnet";
 "const.network.testnet" = "Testnet";
+
+// ---- token ----
+"token.add_token" = "AddToken";
+"token.token_id_note" = "TOKEN ID";
+"token.input_token_id" = "Input the token ID";
+"token.info" = "Token Info";
+"token.info.token_id" = "Token ID";
+"token.info.issuer" = "issuer";
+"token.info.register_time" = "Register Time";
+"token.info.total_token" = "Total Tokens";
+"token.info.issued_token" = "Issued Tokens";
+"token.info.description" = "Description";
+"token.send_token" = "Send Token";
+"token.create_token" = "Create Token";
+"token.issue_token" = "Issue Token";
+"token.burn_token" = "Burn Token";
+"token.remove_token" = "Remove Token";
+"token.operate.note.total" = "TOTAL TOKEN";
+"token.operate.note.burn" = "BURN AMOUNT";
+"token.operate.note.issue" = "ISSUE AMOUNT";
+"token.operate.review_token" = "Review Token";
+"token.operate.review_issue" = "Review Issue";
+"token.operate.review_burn" = "Review Burn";
+
+"token.operate.error.id_format" = "Invalid format";
+"token.operate.error.id_not_exist" = "Token not exist";

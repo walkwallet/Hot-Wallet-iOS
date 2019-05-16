@@ -145,7 +145,7 @@
     if ([item.identifier isEqualToString:@"language"]) {
         NSArray *lans = [Language supportLanguages];
         NSInteger now = [lans indexOfObject: [Language.shareInstance getDescByType:Language.shareInstance.languageType]];
-        [self actionAheetWithSelectedIndex:now withActionDatas:lans handler:^(NSInteger index) {
+        [self actionSheetWithSelectedIndex:now withActionDatas:lans handler:^(NSInteger index) {
             Language.shareInstance.languageType = [Language.shareInstance getLanguaegTypeByDesc:lans[index]];
             UITabBarController *tabBarVC = VStoryboard.Main.instantiateInitialViewController;
             [tabBarVC setSelectedIndex:1];

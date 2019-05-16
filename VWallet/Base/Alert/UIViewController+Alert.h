@@ -41,7 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
            confirmText:(NSString *_Nullable)confirmText
                handler:(void (^ _Nullable)(void))handler;
 
-- (void)actionAheetWithSelectedIndex:(NSInteger)index withActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler;
+- (void)actionSheetWithSelectedIndex:(NSInteger)index withActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler;
+
+- (void)actionSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)msg withActionDatas:(NSArray<NSString *> *_Nonnull)data handler:(void (^ __nullable)(NSInteger index))handler;
 
 - (void)passwordAlertWithCallback:(void(^)(BOOL result))callback;
 

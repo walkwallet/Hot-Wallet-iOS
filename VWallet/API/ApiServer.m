@@ -10,6 +10,8 @@
 #import "ServiceAPI.h"
 #import "ServerConfig.h"
 #import "WalletMgr.h"
+#import "Token.h"
+#import "Contract.h"
 
 #define VApi(path) [ServerConfig.ApiHost stringByAppendingString: path]
 
@@ -132,7 +134,7 @@
         @"attachment": [[NSString alloc] initWithData:VsysBase58Encode(tx.originTransaction.attachment) encoding:NSUTF8StringEncoding],
         @"signature": tx.signature ? : @""
     };
-    [AppServer Post:VApi([WalletMgr.shareInstance.network isEqualToString:VsysNetworkTestnet] ? ApiPayment : [ApiPayment stringByReplacingOccurrencesOfString:@"vee" withString:@"vsys"]) params:dict success:^(NSDictionary * _Nonnull response) {
+    [AppServer Post:VApi(ApiPayment) params:dict success:^(NSDictionary * _Nonnull response) {
 #if DEBUG
         NSLog(@" - response = %@", response);
 #endif
@@ -175,6 +177,50 @@
         callback(YES);
     } fail:^(id  _Nonnull info) {
         callback(NO);
+    }];
+}
+
++ (void)getTokenById:(NSString *)tokenId callback:(void (^)(BOOL isSec, Token *token))callback {
+    [AppServer Get:VApi(([NSString stringWithFormat:ApiGetTokenInfo, tokenId])) params:@{} success:^(NSDictionary * _Nonnull response) {
+        if ([response isKindOfClass:NSDictionary.class]) {
+            Token *token = [Token new];
+            NSLog(@"---> jooyyy: %@", VsysBase58Decode(response[@"description"]));
+            token.tokenId = response[@"tokenId"];
+            token.contractId = response[@"contractId"];
+            token.max = [response[@"max"] doubleValue];
+            token.issuer = response[@"total"];
+            token.unity = [response[@"unity"] integerValue];
+            callback(YES, token);
+        }else {
+            callback(NO, nil);
+        }
+    } fail:^(id  _Nonnull info) {
+        callback(NO, nil);
+    }];
+}
+
++ (void)getContractById:(NSString *)contractId callback:(void (^)(BOOL isSus, Contract *contract))callback {
+    [AppServer Get:VApi(([NSString stringWithFormat:ApiGetContractInfo, contractId])) params:@{} success:^(NSDictionary *response) {
+        if ([response isKindOfClass:NSDictionary.class]) {
+            NSLog(@"--> jooyyy %@", response);
+            Contract *contract = [Contract new];
+            contract.contractId = [response[@"contractId"] stringValue];
+            contract.transactionId = [response[@"transactionId"] stringValue];
+            contract.height = [response[@"height"] integerValue];
+            callback(YES, contract);
+        }else {
+            callback(NO, nil);
+        }
+    } fail:^(id  _Nonnull info) {
+        callback(NO, nil);
+    }];
+}
+
++ (void)getAccountTokenBalance:(NSString *)tokenId address:(NSString *)address callback:(void (^)(BOOL isSus, VsysContract * contract))callback {
+    [AppServer Get:VApi(([NSString stringWithFormat:ApiGetAddressTokenBalance, address, tokenId])) params:@{} success:^(NSDictionary *response) {
+        callback(YES, nil);
+    } fail:^(id  _Nonnull info) {
+        callback(NO, nil);
     }];
 }
 @end

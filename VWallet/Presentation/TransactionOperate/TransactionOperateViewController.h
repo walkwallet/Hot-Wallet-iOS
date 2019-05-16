@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, TransactionOperateType) {
     TransactionOperateTypeSend = 0,
-    TransactionOperateTypeLease
+    TransactionOperateTypeLease,
+    TransactionOperateTypeSendToken,
 };
 
 @interface TransactionOperateViewController : UIViewController

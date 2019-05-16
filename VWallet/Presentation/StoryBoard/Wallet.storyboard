@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vks-bC-DbF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vks-bC-DbF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -92,7 +92,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Records" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQE-Un-QQZ" customClass="VThemeLabel">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQE-Un-QQZ" customClass="VThemeLabel">
                                                             <rect key="frame" x="281.5" y="0.0" width="93.5" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
@@ -138,9 +138,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jr4-bk-pgD">
                                                             <rect key="frame" x="281.5" y="0.0" width="93.5" height="72"/>
                                                             <inset key="contentEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
-                                                            <state key="normal" image="ico_records"/>
+                                                            <state key="normal" image="ico_token"/>
                                                             <connections>
-                                                                <action selector="recordsBtnClick" destination="3XR-Bq-m70" eventType="touchUpInside" id="Rvw-Z1-LUI"/>
+                                                                <action selector="tokenBtnClick" destination="3XR-Bq-m70" eventType="touchUpInside" id="Zhj-e3-vcn"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -419,16 +419,16 @@
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Aqz-d1-2uH" firstAttribute="trailing" secondItem="eX4-Ry-3rh" secondAttribute="trailing" id="3yE-V3-cr7"/>
-                            <constraint firstItem="ztK-Qm-2yA" firstAttribute="leading" secondItem="Aqz-d1-2uH" secondAttribute="leading" id="66s-Nn-hqu"/>
+                            <constraint firstItem="jO5-xS-RPM" firstAttribute="trailing" secondItem="eX4-Ry-3rh" secondAttribute="trailing" id="3yE-V3-cr7"/>
+                            <constraint firstItem="ztK-Qm-2yA" firstAttribute="leading" secondItem="jO5-xS-RPM" secondAttribute="leading" id="66s-Nn-hqu"/>
                             <constraint firstAttribute="bottom" secondItem="ztK-Qm-2yA" secondAttribute="bottom" id="8SE-nG-E3n"/>
                             <constraint firstItem="ztK-Qm-2yA" firstAttribute="top" secondItem="eX4-Ry-3rh" secondAttribute="bottom" id="95s-D7-yX5"/>
-                            <constraint firstItem="Aqz-d1-2uH" firstAttribute="top" secondItem="Oxx-4z-6T3" secondAttribute="top" constant="1" id="Be9-pE-pGN"/>
-                            <constraint firstItem="eX4-Ry-3rh" firstAttribute="leading" secondItem="Aqz-d1-2uH" secondAttribute="leading" id="Mak-3c-ay2"/>
+                            <constraint firstItem="jO5-xS-RPM" firstAttribute="top" secondItem="Oxx-4z-6T3" secondAttribute="top" constant="1" id="Be9-pE-pGN"/>
+                            <constraint firstItem="eX4-Ry-3rh" firstAttribute="leading" secondItem="jO5-xS-RPM" secondAttribute="leading" id="Mak-3c-ay2"/>
                             <constraint firstItem="eX4-Ry-3rh" firstAttribute="top" secondItem="UW4-pg-lKI" secondAttribute="top" id="Wzw-E1-U7A"/>
-                            <constraint firstItem="ztK-Qm-2yA" firstAttribute="trailing" secondItem="Aqz-d1-2uH" secondAttribute="trailing" id="v6v-vt-vkt"/>
+                            <constraint firstItem="ztK-Qm-2yA" firstAttribute="trailing" secondItem="jO5-xS-RPM" secondAttribute="trailing" id="v6v-vt-vkt"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Aqz-d1-2uH"/>
+                        <viewLayoutGuide key="safeArea" id="jO5-xS-RPM"/>
                     </view>
                     <connections>
                         <outlet property="backBtn" destination="TJ6-84-6rb" id="nTt-yv-EEd"/>
@@ -624,14 +624,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Vuu-HN-Zsl" firstAttribute="leading" secondItem="O4Z-bH-Lj2" secondAttribute="leading" id="4Eo-HC-yFJ"/>
-                            <constraint firstItem="O4Z-bH-Lj2" firstAttribute="trailing" secondItem="Vuu-HN-Zsl" secondAttribute="trailing" id="5GB-sg-yQF"/>
-                            <constraint firstItem="O4Z-bH-Lj2" firstAttribute="trailing" secondItem="MSA-Sq-fX8" secondAttribute="trailing" id="5LO-Cp-PNt"/>
-                            <constraint firstItem="MSA-Sq-fX8" firstAttribute="top" secondItem="O4Z-bH-Lj2" secondAttribute="top" id="XGv-D6-HOJ"/>
-                            <constraint firstItem="MSA-Sq-fX8" firstAttribute="leading" secondItem="O4Z-bH-Lj2" secondAttribute="leading" id="myG-Za-k3c"/>
+                            <constraint firstItem="Vuu-HN-Zsl" firstAttribute="leading" secondItem="sKX-Qi-GXt" secondAttribute="leading" id="4Eo-HC-yFJ"/>
+                            <constraint firstItem="sKX-Qi-GXt" firstAttribute="trailing" secondItem="Vuu-HN-Zsl" secondAttribute="trailing" id="5GB-sg-yQF"/>
+                            <constraint firstItem="sKX-Qi-GXt" firstAttribute="trailing" secondItem="MSA-Sq-fX8" secondAttribute="trailing" id="5LO-Cp-PNt"/>
+                            <constraint firstItem="MSA-Sq-fX8" firstAttribute="top" secondItem="sKX-Qi-GXt" secondAttribute="top" id="XGv-D6-HOJ"/>
+                            <constraint firstItem="MSA-Sq-fX8" firstAttribute="leading" secondItem="sKX-Qi-GXt" secondAttribute="leading" id="myG-Za-k3c"/>
                             <constraint firstItem="Vuu-HN-Zsl" firstAttribute="top" secondItem="MSA-Sq-fX8" secondAttribute="bottom" id="yRa-9v-WKd"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="O4Z-bH-Lj2"/>
+                        <viewLayoutGuide key="safeArea" id="sKX-Qi-GXt"/>
                     </view>
                     <connections>
                         <outlet property="dateRangeView" destination="Vuu-HN-Zsl" id="kB7-3I-Nnd"/>
@@ -650,8 +650,8 @@
         <image name="ico_more" width="18" height="4"/>
         <image name="ico_navi_back" width="22" height="21"/>
         <image name="ico_receive" width="20" height="22"/>
-        <image name="ico_records" width="20" height="20"/>
         <image name="ico_send" width="20" height="22"/>
         <image name="ico_tabbar_wallet" width="24" height="23"/>
+        <image name="ico_token" width="22" height="24"/>
     </resources>
 </document>

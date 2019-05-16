@@ -114,22 +114,12 @@
         }
         break;
     }
-    
     NSString *feeStr = [NSString stringWithDecimal:(VsysDefaultTxFee * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
     NSMutableAttributedString *feeMas = [[NSMutableAttributedString alloc] initWithString:[VLocalize(@"account.transaction.fee") stringByAppendingString:@" "]];
     [feeMas appendAttributedString:[[NSAttributedString alloc] initWithString:[feeStr stringByAppendingString:@" VSYS"] attributes:@{NSForegroundColorAttributeName : VColor.textSecondDeepenColor}]];
     self.transactionFeeLabel.attributedText = feeMas;
     [self.continueBtn setTitle:VLocalize(@"continue") forState:UIControlStateNormal];
-    
-    if (![self checkAmount]) {
-//        self.amountTextField.enabled = NO;
-//        self.receiveAddressTextView.editable = NO;
-//        self.descTextView.editable = NO;
-//        self.maxBtn.enabled = NO;
-//        self.pasteBtn.enabled = NO;
-//        self.scanQRBtn.enabled = NO;
-//        self.continueBtn.enabled = NO;
-    }
+    if (![self checkAmount]) {}
 }
 
 - (BOOL)checkAmount {

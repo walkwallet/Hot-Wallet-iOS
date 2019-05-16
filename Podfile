@@ -10,6 +10,7 @@ target 'VWallet' do
   pod 'AFNetwork'
   pod 'SAMKeychain'
   pod 'DZNEmptyDataSet'
+  pod 'FlyImage', '~>1.0'
   pod 'Reveal-SDK', :configurations => ['Debug']
 end
 
