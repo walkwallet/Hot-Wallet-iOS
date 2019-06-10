@@ -11,7 +11,7 @@ target 'VWallet' do
   pod 'SAMKeychain'
   pod 'DZNEmptyDataSet'
   pod 'FlyImage', '~>1.0'
-  pod 'Reveal-SDK', :configurations => ['Debug']
+  pod 'SDWebImage'
 end
 
 post_install do |installer|

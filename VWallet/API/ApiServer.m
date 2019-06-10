@@ -10,8 +10,6 @@
 #import "ServiceAPI.h"
 #import "ServerConfig.h"
 #import "WalletMgr.h"
-#import "Token.h"
-#import "Contract.h"
 
 #define VApi(path) [ServerConfig.ApiHost stringByAppendingString: path]
 
@@ -34,7 +32,6 @@
         }
     } fail:^(NSDictionary * _Nonnull info) {
         callback(NO, nil);
-
     }];
 }
 
@@ -64,7 +61,8 @@
                 Transaction *t = [Transaction new];
                 t.ownerAddress = address;
                 VsysTransaction *tx;
-                NSInteger txType = [dict[@"type"] integerValue];
+                int txType = [dict[@"type"] intValue];
+                t.transactionType = txType;
                 if (txType == VsysTxTypePayment) {
                     tx = VsysNewPaymentTransaction(dict[@"recipient"], [dict[@"amount"] integerValue]);
                     tx.timestamp = [dict[@"timestamp"] integerValue];
@@ -98,6 +96,15 @@
                     tx.recipient = dict[@"recipient"];
                     tx.timestamp = [dict[@"timestamp"] integerValue];
                     tx.txId = dict[@"id"];
+                } else if (txType == VsysTxTypeContractRegister) {
+                    tx = VsysNewRegisterTransaction(@"", dict[@"initData"], dict[@"description"]);
+                    tx.txId = dict[@"id"];
+                    tx.timestamp = [dict[@"timestamp"] integerValue];
+                    tx.description = dict[@"description"];
+                } else if (txType == VsysTxTypeContractExecute) {
+                    tx = VsysNewExecuteTransaction(dict[@"contractId"], dict[@"functionData"], [dict[@"functionIndex"] intValue], dict[@"attachment"]);
+                    tx.txId = dict[@"id"];
+                    tx.timestamp = [dict[@"timestamp"] integerValue];
                 }
                 if (!tx) {
                     continue;
@@ -111,8 +118,10 @@
                     t.senderAddress = address;
                 }
                 t.originTransaction = tx;
+                if ([dict[@"status"] isKindOfClass:NSString.class]) {
+                    t.status = dict[@"status"];
+                }
                 [retArr addObject:t];
-             
             }
             callback(YES, retArr);
         } else {
@@ -180,47 +189,154 @@
     }];
 }
 
-+ (void)getTokenById:(NSString *)tokenId callback:(void (^)(BOOL isSec, Token *token))callback {
++ (void)getTokenInfo:(NSString *)tokenId callback:(void (^)(BOOL isSuc, Token *token))callback {
     [AppServer Get:VApi(([NSString stringWithFormat:ApiGetTokenInfo, tokenId])) params:@{} success:^(NSDictionary * _Nonnull response) {
-        if ([response isKindOfClass:NSDictionary.class]) {
-            Token *token = [Token new];
-            NSLog(@"---> jooyyy: %@", VsysBase58Decode(response[@"description"]));
-            token.tokenId = response[@"tokenId"];
-            token.contractId = response[@"contractId"];
-            token.max = [response[@"max"] doubleValue];
-            token.issuer = response[@"total"];
-            token.unity = [response[@"unity"] integerValue];
-            callback(YES, token);
-        }else {
-            callback(NO, nil);
-        }
+        Token *token = [Token new];
+        token.tokenId = response[@"tokenId"];
+        token.contractId = response[@"contractId"];
+        token.max = [response[@"max"] longLongValue];
+        token.total = [response[@"total"] longLongValue];
+        token.unity = [response[@"unity"] longLongValue];
+        token.desc = VsysDecodeDescription(response[@"description"]);
+        callback(YES, token);
     } fail:^(id  _Nonnull info) {
         callback(NO, nil);
     }];
 }
 
-+ (void)getContractById:(NSString *)contractId callback:(void (^)(BOOL isSus, Contract *contract))callback {
-    [AppServer Get:VApi(([NSString stringWithFormat:ApiGetContractInfo, contractId])) params:@{} success:^(NSDictionary *response) {
-        if ([response isKindOfClass:NSDictionary.class]) {
-            NSLog(@"--> jooyyy %@", response);
-            Contract *contract = [Contract new];
-            contract.contractId = [response[@"contractId"] stringValue];
-            contract.transactionId = [response[@"transactionId"] stringValue];
-            contract.height = [response[@"height"] integerValue];
-            callback(YES, contract);
-        }else {
-            callback(NO, nil);
++ (void)getContractInfo:(NSString *)contractId callback:(void (^)(BOOL isSuc, Contract *contract))callback {
+    [AppServer Get:VApi(([NSString stringWithFormat: ApiGetContractInfo, contractId])) params:@{} success:^(NSDictionary * _Nonnull response) {
+        Contract *contract = [Contract new];
+        contract.contractId = response[@"contractId"];
+        contract.transactionId = response[@"transactionId"];
+        contract.height = [response[@"height"] longLongValue];
+        if ([response[@"info"] isKindOfClass:NSArray.class]) {
+            NSMutableArray *list = @[].mutableCopy;
+            for (NSDictionary *dict in response[@"info"]) {
+                ContractInfoItem *one = [[ContractInfoItem alloc] init];
+                one.data = dict[@"data"];
+                one.name = dict[@"name"];
+                one.type = dict[@"type"];
+                [list addObject:one];
+            }
+            contract.info = list.copy;
         }
+        callback(YES, contract);
     } fail:^(id  _Nonnull info) {
         callback(NO, nil);
     }];
 }
 
-+ (void)getAccountTokenBalance:(NSString *)tokenId address:(NSString *)address callback:(void (^)(BOOL isSus, VsysContract * contract))callback {
-    [AppServer Get:VApi(([NSString stringWithFormat:ApiGetAddressTokenBalance, address, tokenId])) params:@{} success:^(NSDictionary *response) {
-        callback(YES, nil);
++ (void)getContractContent:(NSString *)contractId callback:(void (^)(BOOL isSus, ContractContent *contractContent))callback {
+    [AppServer Get:VApi(([NSString stringWithFormat:ApiGetContractContent, contractId])) params:@{} success:^(NSDictionary * _Nonnull response) {
+        ContractContent *content = [ContractContent new];
+        content.transactionId = response[@"transactionId"];
+        content.languageCode = response[@"languageCode"];
+        content.languageVersion = [response[@"languageVersion"] intValue];
+        content.height = [response[@"height"] longLongValue];
+        if ([response[@"textual"] isKindOfClass:NSDictionary.class]) {
+            NSDictionary *textual = response[@"textual"];
+            content.textual = [ContractContentTextual new];
+            content.textual.descriptors = textual[@"descriptors"];
+            content.textual.triggers = textual[@"triggers"];
+            content.textual.stateVariables = textual[@"stateVariables"];
+        }else {
+            callback(NO, nil);
+            return;
+        }
+        callback(YES, content);
     } fail:^(id  _Nonnull info) {
         callback(NO, nil);
     }];
 }
+
++ (void)getAddressTokenBalance:(NSString *)address tokenId:(NSString *)tokenId callback:(void (^)(BOOL isSuc, Token *token))callback {
+    [AppServer Get:VApi(([NSString stringWithFormat: ApiGetAddressTokenBalance, address, tokenId])) params:@{} success:^(NSDictionary * _Nonnull response) {
+        Token *token = [Token new];
+        token.tokenId = response[@"tokenId"];
+        token.balance = [response[@"balance"] longLongValue];
+        token.unity = [response[@"unity"] intValue];
+        callback(YES, token);
+    } fail:^(id  _Nonnull info) {
+        callback(NO, nil);
+    }];
+}
+
++ (void)broadcastContractRegister:(Transaction *)tx  callback:(void (^)(BOOL isSuc, Token *token))callback {
+    NSDictionary *dict = @{
+                           @"senderPublicKey": tx.ownerPublicKey ? : @"",
+                           @"contract": VsysBase58EncodeToString(tx.originTransaction.contract),
+                           @"initData": VsysBase58EncodeToString(tx.originTransaction.data),
+                           @"description": tx.originTransaction.description,
+                           @"fee": @(tx.originTransaction.fee),
+                           @"feeScale": @(tx.originTransaction.feeScale),
+                           @"timestamp": @(tx.originTransaction.timestamp),
+                           @"signature": tx.signature ? : @""
+                           };
+    [AppServer Post:VApi(ApiPostContractRegister) params:dict success:^(NSDictionary * _Nonnull response) {
+        Token *token = [Token new];
+        token.contractId = response[@"contractId"] ? : @"";
+        token.tokenId = VsysContractId2TokenId(token.contractId, 0);
+        VsysContract *c = [VsysContract new];
+        [c decodeRegister:tx.originTransaction.data];
+        token.max = c.max;
+        token.unity = c.unity;
+        token.desc = c.tokenDescription;
+        token.descContract = response[@"description"];
+        token.maker = tx.senderAddress;
+        token.issuer = tx.senderAddress;
+        if ([response[@"contract"] isKindOfClass:NSDictionary.class]) {
+            NSDictionary *cDic = response[@"contract"];
+            if ([cDic[@"textual"] isKindOfClass:NSDictionary.class]) {
+                NSDictionary *tDic = cDic[@"textual"];
+                token.textualDescriptor = tDic[@"descriptors"] ? : @"";
+            }
+        }
+        callback(YES, token);
+    } fail:^(id  _Nonnull info) {
+        callback(NO, nil);
+    }];
+}
+
++ (void)broadcastContractExecute:(Transaction *)tx callback:(void (^)(BOOL))callback {
+    NSDictionary *dict = @{
+                           @"senderPublicKey": tx.ownerPublicKey ? : @"",
+                           @"contractId": tx.originTransaction.contractId,
+                           @"functionIndex": @(tx.originTransaction.funcIdx),
+                           @"functionData": VsysBase58EncodeToString(tx.originTransaction.data),
+                           @"attachment": VsysBase58EncodeToString(tx.originTransaction.attachment),
+                           @"fee": @(tx.originTransaction.fee),
+                           @"feeScale": @(tx.originTransaction.feeScale),
+                           @"timestamp": @(tx.originTransaction.timestamp),
+                           @"signature": tx.signature ? : @""
+                           };
+    [AppServer Post:VApi(ApiPostContractExecute) params:dict success:^(NSDictionary * _Nonnull response) {
+        callback(YES);
+    } fail:^(id  _Nonnull info) {
+        callback(NO);
+    }];
+}
+
++ (void)getTokenDetailFromExplorer:(NSString *)tokenId callback:(void (^)(BOOL, Token *))callback {
+    [AppServer Post:[NSString stringWithFormat:@"%@%@", ServerConfig.ExplorerHost, ApiPostExplorerTokenDetail]
+             params:@{
+                      @"TokenId": tokenId,
+                      }
+            success:^(NSDictionary * _Nonnull response) {
+                if ([response[@"data"] isKindOfClass:NSDictionary.class]) {
+                    NSDictionary *dict = response[@"data"];
+                    Token *token = [Token new];
+                    token.tokenId = dict[@"Id"];
+                    token.icon = dict[@"IconUrl"];
+                    token.name = dict[@"Name"];
+                    callback(YES, token);
+                }else {
+                    callback(NO, nil);
+                }
+            } fail:^(id  _Nonnull info) {
+                NSLog(@"--->%@", info);
+                callback(NO, nil);
+            }];
+}
+
 @end

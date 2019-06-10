@@ -7,27 +7,22 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface TokenFunc : NSObject
-@property (nonatomic, strong) NSString *name;
-@end
-
 @interface Token : NSObject
 
-@property (nonatomic, strong) NSString *tokenId;
-@property (nonatomic, strong) NSString *contractId;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *icon;
-@property (nonatomic, assign) double balance;
-@property (nonatomic, assign) NSInteger unity;
-@property (nonatomic, assign) double max;
-@property (nonatomic, assign) NSArray<TokenFunc *> *funcList;
-@property (nonatomic, strong) NSString *issuer;
-@property (nonatomic, strong) NSString *registerTime;
-@property (nonatomic, assign) double *issuedAmount;
-@property (nonatomic, strong) NSString *description;
+@property (nonatomic, copy) NSString *tokenId;
+@property (nonatomic, copy) NSString *contractId;
+@property (nonatomic) int64_t balance;
+@property (nonatomic) int64_t max;
+@property (nonatomic) int64_t total;
+@property (nonatomic) int64_t unity;
+// desc for token
+@property (nonatomic) NSString *desc;
+// descToken for contract
+@property (nonatomic) NSString *descContract;
+@property (nonatomic) NSString *icon;
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSString *issuer;
+@property (nonatomic) NSString *maker;
+@property (nonatomic) NSString *textualDescriptor;
 
 @end
-
-NS_ASSUME_NONNULL_END

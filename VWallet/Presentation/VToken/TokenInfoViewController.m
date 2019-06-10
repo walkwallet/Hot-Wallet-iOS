@@ -9,15 +9,31 @@
 #import "TransactionDetailTableViewCell.h"
 #import "UIViewController+Alert.h"
 #import "Language.h"
+#import "TokenMgr.h"
+#import "Token.h"
+#import "Account.h"
+#import "Contract.h"
+#import "ApiServer.h"
+#import "NSString+Decimal.h"
 
 static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 @interface TokenInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *showData;
+@property (nonatomic, strong) Token *token;
+@property (nonatomic, strong) Account *account;
 @end
 
 @implementation TokenInfoViewController
+
+- (instancetype)initWithAccount:(Account *)account token:(Token *)token {
+    if (self = [super init]) {
+        self.account = account;
+        self.token = token;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,13 +46,33 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
     [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    NSMutableArray *showData = @[
-                                 @{@"title":VLocalize(@"token.info.token_id"), @"value":@"ATxEgdoX5GhkzqLnJjbPps6WdGkViSMLbQV"},
-                                 @{@"title":VLocalize(@"token.info.issuer"), @"value":@"ATxEgdoX5GhkzqLnJjbPps6WdGkViSMLbQV"},
-                                 @{@"title":VLocalize(@"token.info.register_time"), @"value":@"18/04/2019 15:00:00"},
-                                 @{@"title":VLocalize(@"token.info.total_token"), @"value":@"200,000,000"},
-                                 @{@"title":VLocalize(@"token.info.issued_token"), @"value":@"10,000"},
-                                 @{@"title":VLocalize(@"token.info.description"), @"value":@"Never optimize an image mobile again.Get started today!"},
+    [self refereshTable];
+    __weak typeof (self) weakSelf = self;
+    [ApiServer getContractInfo:self.token.contractId callback:^(BOOL isSuc, Contract * _Nonnull contract) {
+        if (isSuc) {
+            for (ContractInfoItem *one in contract.info) {
+                if ([one.name isEqualToString:@"issuer"]) {
+                    weakSelf.token.issuer = one.data;
+                }
+                if ([one.name isEqualToString:@"maker"]) {
+                    weakSelf.token.maker = one.data;
+                }
+                [weakSelf refereshTable];
+            }
+        }
+    }];
+}
+
+- (void)refereshTable {
+    NSArray *showData = @[
+                                 @{@"title":VLocalize(@"token.info.id.token"), @"value":[self handleStringValue:self.token.tokenId]},
+                                 @{@"title":VLocalize(@"token.info.id.contract"), @"value":[self handleStringValue:self.token.contractId]},
+                                 @{@"title":VLocalize(@"token.info.issuer"), @"value":[self handleStringValue:self.token.issuer]},
+                                 @{@"title":VLocalize(@"token.info.maker"), @"value":[self handleStringValue:self.token.maker]},
+                                 @{@"title":VLocalize(@"token.info.supply.max"), @"value":[NSString stringWithDecimal:[NSString getAccurateDouble:self.token.max unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity] minFractionDigits:2 trimTrailing:YES]},
+                                 @{@"title":VLocalize(@"token.info.supply.current"), @"value":[NSString stringWithDecimal:[NSString getAccurateDouble:self.token.total unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity] minFractionDigits:2 trimTrailing:YES]},
+                                 @{@"title":VLocalize(@"token.info.unity"), @"value":[NSString stringWithFormat:@"%lld", self.token.unity]},
+                                 @{@"title":VLocalize(@"token.info.description"), @"value":[self handleStringValue:self.token.desc]},
                                  ];
     self.showData = showData.copy;
     [self.tableView reloadData];
@@ -59,6 +95,13 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
         UIPasteboard.generalPasteboard.string = self.showData[indexPath.row][@"value"];
         [self remindWithMessage:VLocalize(@"tip.copy.success")];
     }
+}
+
+- (NSString *)handleStringValue:(NSString *)v {
+    if (v == nil) {
+        return @"";
+    }
+    return v;
 }
 
 @end

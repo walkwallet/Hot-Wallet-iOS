@@ -17,7 +17,9 @@
 @class VsysDataEntry;
 @class VsysFunc;
 @class VsysKeys;
-@class VsysTextural;
+@class VsysQRCodeContentItem;
+@class VsysQRCodePagination;
+@class VsysTextual;
 @class VsysTransaction;
 @class VsysWallet;
 
@@ -47,6 +49,7 @@
  * The output is base58 encoded data
  */
 - (NSString* _Nonnull)signData:(NSData* _Nullable)data;
+- (NSString* _Nonnull)signDataBase58:(NSString* _Nullable)data;
 /**
  * 验证签名
  */
@@ -66,17 +69,17 @@
 @property (nonatomic) NSString* _Nonnull tokenDescription;
 @property (nonatomic) int64_t amount;
 @property (nonatomic) int32_t tokenIdx;
-@property (nonatomic) NSData* _Nullable recipient;
-@property (nonatomic) NSData* _Nullable senderPublicKey;
-// skipped field Contract.Textural with unsupported type: Vsyslib.Textural
+@property (nonatomic) NSString* _Nonnull recipient;
+@property (nonatomic) NSString* _Nonnull senderPublicKey;
+// skipped field Contract.Textual with unsupported type: Vsyslib.Textual
 
 // skipped field Contract.Functions with unsupported type: []Vsyslib.Func
 
-- (NSData* _Nullable)buildBurnData;
+- (NSData* _Nullable)buildDestroyData;
 - (NSData* _Nullable)buildIssueData;
 - (NSData* _Nullable)buildRegisterData;
 - (NSData* _Nullable)buildSendData;
-- (void)decodeBurn:(NSData* _Nullable)data;
+- (void)decodeDestroy:(NSData* _Nullable)data;
 - (void)decodeIssue:(NSData* _Nullable)data;
 - (void)decodeRegister:(NSData* _Nullable)data;
 - (void)decodeSend:(NSData* _Nullable)data;
@@ -131,7 +134,31 @@
 @property (nonatomic) NSData* _Nullable privateKey;
 @end
 
-@interface VsysTextural : NSObject <goSeqRefInterface> {
+@interface VsysQRCodeContentItem : NSObject <goSeqRefInterface> {
+}
+@property(strong, readonly) _Nonnull id _ref;
+
+- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
+- (nonnull instancetype)init;
+@property (nonatomic) long current;
+@property (nonatomic) long total;
+@property (nonatomic) NSString* _Nonnull checkSum;
+@property (nonatomic) NSString* _Nonnull content;
+@end
+
+@interface VsysQRCodePagination : NSObject <goSeqRefInterface> {
+}
+@property(strong, readonly) _Nonnull id _ref;
+
+- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
+- (nonnull instancetype)init;
+@property (nonatomic) NSString* _Nonnull fullContent;
+@property (nonatomic) long current;
+@property (nonatomic) long total;
+@property (nonatomic) NSString* _Nonnull currentContent;
+@end
+
+@interface VsysTextual : NSObject <goSeqRefInterface> {
 }
 @property(strong, readonly) _Nonnull id _ref;
 
@@ -189,18 +216,44 @@
 /**
  * contract funcIdx variable
  */
-FOUNDATION_EXPORT const int16_t VsysActionBurn;
+FOUNDATION_EXPORT NSString* _Nonnull const VsysActionDeposit;
 /**
  * contract funcIdx variable
  */
-FOUNDATION_EXPORT const int16_t VsysActionIssue;
+FOUNDATION_EXPORT NSString* _Nonnull const VsysActionDestroy;
 /**
  * contract funcIdx variable
  */
-FOUNDATION_EXPORT const int16_t VsysActionSend;
+FOUNDATION_EXPORT NSString* _Nonnull const VsysActionInit;
+/**
+ * contract funcIdx variable
+ */
+FOUNDATION_EXPORT NSString* _Nonnull const VsysActionIssue;
+/**
+ * contract funcIdx variable
+ */
+FOUNDATION_EXPORT NSString* _Nonnull const VsysActionSend;
+/**
+ * contract funcIdx variable
+ */
+FOUNDATION_EXPORT NSString* _Nonnull const VsysActionSplit;
+/**
+ * contract funcIdx variable
+ */
+FOUNDATION_EXPORT NSString* _Nonnull const VsysActionSupersede;
+/**
+ * contract funcIdx variable
+ */
+FOUNDATION_EXPORT NSString* _Nonnull const VsysActionTransfer;
+/**
+ * contract funcIdx variable
+ */
+FOUNDATION_EXPORT NSString* _Nonnull const VsysActionWithdraw;
 FOUNDATION_EXPORT const int64_t VsysApi;
+FOUNDATION_EXPORT const int64_t VsysColdSignApi;
 FOUNDATION_EXPORT NSString* _Nonnull const VsysConstContractDefault;
 FOUNDATION_EXPORT NSString* _Nonnull const VsysConstContractSplit;
+FOUNDATION_EXPORT const int64_t VsysContractApi;
 FOUNDATION_EXPORT const int64_t VsysDETypeAccount;
 FOUNDATION_EXPORT const int64_t VsysDeTypeAddress;
 FOUNDATION_EXPORT const int64_t VsysDeTypeAmount;
@@ -211,11 +264,20 @@ FOUNDATION_EXPORT const int64_t VsysDeTypeShortText;
 /**
  * Fee
  */
+FOUNDATION_EXPORT const int64_t VsysDefaultContractExecuteFee;
+/**
+ * Fee
+ */
+FOUNDATION_EXPORT const int64_t VsysDefaultContractRegisterFee;
+/**
+ * Fee
+ */
 FOUNDATION_EXPORT const int16_t VsysDefaultFeeScale;
 /**
  * Fee
  */
 FOUNDATION_EXPORT const int64_t VsysDefaultTxFee;
+FOUNDATION_EXPORT NSString* _Nonnull const VsysErrDecodeContract;
 /**
  * Network
  */
@@ -231,6 +293,8 @@ FOUNDATION_EXPORT NSString* _Nonnull const VsysOpcTypeSeed;
 FOUNDATION_EXPORT NSString* _Nonnull const VsysOpcTypeSignature;
 FOUNDATION_EXPORT NSString* _Nonnull const VsysOpcTypeTransction;
 FOUNDATION_EXPORT NSString* _Nonnull const VsysProtocol;
+FOUNDATION_EXPORT const int64_t VsysTransactionNewApi;
+FOUNDATION_EXPORT const int64_t VsysTransactionOldApi;
 /**
  * TX_TYPE
  */
@@ -301,6 +365,10 @@ FOUNDATION_EXPORT NSString* _Nonnull VsysBase58DecodeString(NSString* _Nullable 
 
 FOUNDATION_EXPORT NSData* _Nullable VsysBase58Encode(NSData* _Nullable data);
 
+FOUNDATION_EXPORT NSString* _Nonnull VsysBase58EncodeString(NSString* _Nullable in_);
+
+FOUNDATION_EXPORT NSString* _Nonnull VsysBase58EncodeToString(NSData* _Nullable data);
+
 /**
  * tokenIndex fixed = 0
 TODO tokenIndex variable
@@ -312,10 +380,12 @@ FOUNDATION_EXPORT NSString* _Nonnull VsysContractId2TokenId(NSString* _Nullable 
  */
 FOUNDATION_EXPORT NSString* _Nonnull VsysDecodeContractTextrue(NSString* _Nullable data);
 
+FOUNDATION_EXPORT NSString* _Nonnull VsysDecodeDescription(NSString* _Nullable in_);
+
 /**
  * 生成密钥对
  */
-FOUNDATION_EXPORT VsysAccount* _Nullable VsysGenerateKeyPair(NSData* _Nullable seed);
+FOUNDATION_EXPORT VsysAccount* _Nullable VsysGenerateKeyPair(NSData* _Nullable seedHash);
 
 // skipped function GenerateKeyPair1 with unsupported parameter or return types
 
@@ -325,9 +395,30 @@ FOUNDATION_EXPORT VsysAccount* _Nullable VsysGenerateKeyPair(NSData* _Nullable s
  */
 FOUNDATION_EXPORT NSString* _Nonnull VsysGenerateSeed(void);
 
+FOUNDATION_EXPORT VsysAccount* _Nullable VsysGetAccountFromPrivateKey(NSString* _Nullable privateKey, NSString* _Nullable network);
+
+FOUNDATION_EXPORT long VsysGetAttachmentLength(NSString* _Nullable in_);
+
+FOUNDATION_EXPORT VsysQRCodeContentItem* _Nullable VsysGetContentItem(NSString* _Nullable in_);
+
+/**
+ * funcName 小写, eg: issue
+ */
+FOUNDATION_EXPORT int16_t VsysGetFuncIndexFromDescriptor(NSString* _Nullable textualDescriptor, NSString* _Nullable funcName);
+
+FOUNDATION_EXPORT NSString* _Nonnull VsysGetFuncNameFromDescriptor(NSString* _Nullable textualDescriptor, long funcIndex);
+
 FOUNDATION_EXPORT NSString* _Nonnull VsysGetNetworkFromAddress(NSString* _Nullable address);
 
+/**
+ * QRCode pagination protocol
+ */
+FOUNDATION_EXPORT VsysQRCodePagination* _Nullable VsysGetPaginationContent(NSString* _Nullable fullContent, long pagination);
+
 FOUNDATION_EXPORT NSData* _Nullable VsysHashChain(NSData* _Nullable nonceSecret);
+
+// skipped function Keccak256 with unsupported parameter or return types
+
 
 // skipped function M with unsupported parameter or return types
 
@@ -342,7 +433,7 @@ FOUNDATION_EXPORT VsysTransaction* _Nullable VsysNewCancelLeaseTransaction(NSStr
 /**
  * funcIdx may change
  */
-FOUNDATION_EXPORT VsysTransaction* _Nullable VsysNewExecuteTransaction(VsysContract* _Nullable c, int16_t funcIdx, int16_t actionCode);
+FOUNDATION_EXPORT VsysTransaction* _Nullable VsysNewExecuteTransaction(NSString* _Nullable contractId, NSString* _Nullable data, int16_t funcIdx, NSString* _Nullable attachment);
 
 FOUNDATION_EXPORT VsysTransaction* _Nullable VsysNewLeaseTransaction(NSString* _Nullable recipient, int64_t amount);
 
@@ -350,7 +441,7 @@ FOUNDATION_EXPORT VsysTransaction* _Nullable VsysNewMiningTransaction(void);
 
 FOUNDATION_EXPORT VsysTransaction* _Nullable VsysNewPaymentTransaction(NSString* _Nullable recipient, int64_t amount);
 
-FOUNDATION_EXPORT VsysTransaction* _Nullable VsysNewRegisterTransaction(VsysContract* _Nullable c);
+FOUNDATION_EXPORT VsysTransaction* _Nullable VsysNewRegisterTransaction(NSString* _Nullable contract, NSString* _Nullable data, NSString* _Nullable contractDescription);
 
 /**
  * 创建钱包

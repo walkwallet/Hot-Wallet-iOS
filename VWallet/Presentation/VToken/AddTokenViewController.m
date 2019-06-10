@@ -11,8 +11,13 @@
 #import "Language.h"
 #import "Account.h"
 #import "ApiServer.h"
+#import "Token.h"
+#import "Contract.h"
+#import "UIView+Loading.h"
+#import "UIViewController+Alert.h"
 
 #import "UITextView+Placeholder.h"
+#import "TokenMgr.h"
 
 @interface AddTokenViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *tokenIdNoteLabel;
@@ -21,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *errorLabelHeight;
 @property (nonatomic, strong) Account *account;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
-
+@property (nonatomic, strong) Token *token;
 @end
 
 @implementation AddTokenViewController
@@ -40,6 +45,7 @@
 
 - (void)initView {
     self.title = VLocalize(@"token.add_token");
+    self.doneButton.alpha = 0.5;
     [self.doneButton setTitle:VLocalize(@"done") forState:UIControlStateNormal];
     self.tokenIdNoteLabel.text = VLocalize(@"token.token_id_note");
     self.tokenIdTextFiled.placeholder = VLocalize(@"token.input_token_id");
@@ -64,14 +70,55 @@
 }
 
 - (IBAction)ClickDone:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    NSString *tokenId = self.tokenIdTextFiled.text;
+    __weak typeof (self) weakSelf = self;
+    [ApiServer getAddressTokenBalance:self.account.originAccount.address tokenId:tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
+        if (isSuc) {
+            if ([weakSelf.token.tokenId isEqualToString:token.tokenId]) {
+                NSArray<Token*> *oldList = [TokenMgr.shareInstance loadAddressWatchToken:weakSelf.account.originAccount.address];
+                for (Token *one in oldList) {
+                    if ([one.tokenId isEqualToString:weakSelf.token.tokenId]) {
+                        [weakSelf alertWithTitle:VLocalize(@"error.token.exist")  confirmText:VLocalize(@"close")];
+                        return;
+                    }
+                }
+                [ApiServer getContractContent:weakSelf.token.contractId callback:^(BOOL isSuc, ContractContent * _Nonnull contractContent) {
+                    if (contractContent.textual && contractContent.textual.descriptors) {
+                        weakSelf.token.textualDescriptor = contractContent.textual.descriptors;
+                        NSMutableArray *newList = [[NSMutableArray alloc] init];
+                        [newList addObjectsFromArray:oldList];
+                        weakSelf.token.balance = token.balance;
+                        [newList addObject:weakSelf.token];
+                        NSError *error = [TokenMgr.shareInstance saveToStorage:self.account.originAccount.address list:newList];
+                        if (error != nil) {
+                            [weakSelf alertWithTitle:[error localizedDescription] confirmText:VLocalize(@"close")];
+                        }else {
+                            [weakSelf.navigationController popViewControllerAnimated:YES];
+                        }
+                    }else {
+                        [weakSelf alertWithTitle:@"" confirmText:VLocalize(@"")];
+                    }
+                }];
+            }else {
+                [weakSelf alertWithTitle:VLocalize(@"") confirmText:VLocalize(@"close")];
+            }
+        }else {
+            [weakSelf alertWithTitle:VLocalize(@"fail.add.token") confirmText:VLocalize(@"close")];
+        }
+    }];
+}
+
+- (void)loadContractTextualDescriptor:(NSString *)contractId {
+    __weak typeof (self) weakSelf = self;
+    [ApiServer getContractContent:contractId callback:^(BOOL isSuc, ContractContent * _Nonnull contractContent) {
+        if (contractContent.textual && contractContent.textual.descriptors) {
+            weakSelf.token.textualDescriptor = contractContent.textual.descriptors;
+        }
+    }];
 }
 
 - (void)scanQRcodeResult:(NSString *)qrCode {
-    NSError *error;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[qrCode dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
-    NSString *tokenId = dict[@"id"] ? : @"";
-    self.tokenIdTextFiled.text = tokenId;
+    self.tokenIdTextFiled.text = qrCode;
     [self.tokenIdTextFiled updatePlaceholderState];
     [self checkTokenId];
 }
@@ -84,32 +131,41 @@
     }
 }
 
-- (BOOL)checkTokenId {
+- (void)checkTokenId {
     BOOL tokenValid = NO;
     NSString *tokenId = self.tokenIdTextFiled.text;
     if(tokenId.length == 41) {
         tokenValid = YES;
-        __weak typeof(self) weakSelf = self;
-        [ApiServer getTokenById:tokenId callback:^(BOOL isSuc, Token *token) {
+        __weak typeof (self) weakSelf = self;
+        [ApiServer getTokenInfo:tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
             if (isSuc) {
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.errorLabelHeight.constant = 0;
-                }];
-                NSLog(@"--->%@", token);
+                weakSelf.token = token;
+                [weakSelf showError:@""];
             }else {
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.errorLabelHeight.constant = 15;
-                }];
-                weakSelf.errorLabel.text = VLocalize(@"token.operate.error.id_not_exist");
+                [weakSelf showError:VLocalize(@"token.operate.error.id.not.exist")];
             }
         }];
     }else {
-        self.errorLabel.text = VLocalize(@"token.operate.error.id_format");
+        [self showError:VLocalize(@"token.operate.error.id.format")];
+    }
+}
+
+- (void)showError:(NSString*)error {
+    if ([error isEqualToString:@""]) {
+        self.errorLabel.text = @"";
+        [UIView animateWithDuration:0.2 animations:^{
+            self.errorLabelHeight.constant = 0;
+            [self.doneButton setEnabled:YES];
+            self.doneButton.alpha = 1;
+        }];
+    }else {
+        self.errorLabel.text = error;
         [UIView animateWithDuration:0.2 animations:^{
             self.errorLabelHeight.constant = 15;
+            [self.doneButton setEnabled:NO];
+            self.doneButton.alpha = 0.5;
         }];
     }
-    return tokenValid;
 }
 
 @end

@@ -20,6 +20,8 @@
      * 4.canceled out leasing
      * 5.incoming leasing
      * 6.canceled incoming leasing
+     * 8.register contract
+     * 9.execute contract
      */
     switch (self.transactionType) {
         case 1:
@@ -34,6 +36,10 @@
             return VLocalize(@"const.transaction.type.lease.in");
         case 6:
             return VLocalize(@"const.transaction.type.lease.in.cancel");
+        case 8:
+            return VLocalize(@"const.transaction.type.contract.register");
+        case 9:
+            return VLocalize(@"const.transaction.type.contract.execute");
         default:
             return @"";
     }

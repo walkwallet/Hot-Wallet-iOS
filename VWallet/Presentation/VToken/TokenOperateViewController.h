@@ -7,8 +7,7 @@
 
 #import <UIKit/UIKit.h>
 @class Account;
-
-NS_ASSUME_NONNULL_BEGIN
+@class Token;
 
 typedef NS_ENUM(NSInteger, TokenOperatePageType) {
     TokenOperatePageTypeCreate = 0,
@@ -19,9 +18,7 @@ typedef NS_ENUM(NSInteger, TokenOperatePageType) {
 @interface TokenOperateViewController : UIViewController
 
 - (instancetype)initWithAccount:(Account *)account;
-
 - (instancetype)initWithAccount:(Account *)account type:(NSInteger)type;
+- (instancetype)initWithAccount:(Account *)account type:(NSInteger)type token:(Token *)token;
 
 @end
-
-NS_ASSUME_NONNULL_END

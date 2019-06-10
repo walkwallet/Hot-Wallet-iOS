@@ -13,6 +13,7 @@
 "ok" = "好的";
 "done" = "完成";
 "clear" = "清空";
+"close" = "关闭";
 "delete" = "删除";
 "send" = "发送";
 "add" = "添加";
@@ -38,6 +39,7 @@
 "nav.title.monitor.add.title" = "地址 & 公钥";
 "nav.title.setup.password" = "设置密码";
 "nav.title.transaction.send" = "发送";
+"nav.title.transaction.send_token" = "发送Token";
 "nav.title.transaction.receive" = "接收";
 "nav.title.transaction.lease" = "铸币";
 "nav.title.transaction.records" = "交易记录";
@@ -93,6 +95,8 @@
 "transaction.list.type.1" = "发送";
 "transaction.list.type.2" = "接收";
 "transaction.list.type.3" = "铸币";
+"transaction.list.type.8" = "创建合约";
+"transaction.list.type.9" = "执行合约";
 
 // ---- date range filter ----
 "date.range.type.0" = "不筛选";
@@ -108,7 +112,8 @@
 "transaction.detail.receive" = "接收地址";
 "transaction.detail.lease.in.sender" = "租入地址";
 "transaction.detail.lease.out.receive" = "租出地址";
-"transaction.detail.from" = "我的地址";
+"transaction.detail.status" = "状态";
+"transaction.detail.from" = "发起地址";
 "transaction.detail.to" = "接收地址";
 "transaction.detail.tx.id" = "交易Id";
 "transaction.detail.type" = "类型";
@@ -226,6 +231,8 @@
 "transaction.lease.success.title" = "您已租出 %@ VSYS 到\n%@";
 "transaction.success.detail" = "您可以在交易记录里面查看此笔交易详情";
 "transaction.cancel.lease.success.title" = "您已停止租出 %@ VSYS 到\n%@";
+"transaction.create.contract" = "您成功创建一个新Token，Token ID 是：\n%@";
+"transaction.contract.execute" = "您已发送 %@ %@ 到：\n%@";
 
 // ---- password auth ----
 "password.auth.title" = "欢迎使用WALK WALLET";
@@ -241,6 +248,12 @@
 
 // ---- QRCode scan ----
 "scan.qrcode.title" = "将二维码放入矩形框内，即可自动扫描";
+"scan.qrcode.page.bottom.note" = "第%d页 / 总共%d页";
+"scan.qrcode.explain" = "创建新 Token %@ , 最大发行量 %lld";
+"scan.qrcode.support.split" = "(支持拆分)";
+"scan.qrcode.function.explain.send" = "发送 %@ %@ 到 %@";
+"scan.qrcode.function.explain.issue" = "增发 %@ %@";
+"scan.qrcode.function.explain.burn" = "销毁 %@ %@";
 
 // ----- Transaction QRCode ----
 "transaction.qrcode.title" = "请使用您的冷钱包客户端扫描此二维码。并在您的冷钱包客户端生成二维码后单击下方“继续”按钮。";
@@ -280,10 +293,14 @@
 "tip.save.image.success" = "图片保存成功";
 
 // ---- transaction operate ----
-"tip.transaction.insufficient.balance" = "余额不足";
+"tip.transaction.insufficient.balance" = "VSYS 余额不足";
+"tip.transaction.insufficient.token.balance" = "Token 余额不足";
 "tip.transaction.error.address" = "您只能转账给一个VSYS地址";
 "tip.transaction.amount.invalid" = "输入的数额无效";
 "tip.transaction.address.is.self" = "接收地址不能是当前地址";
+"tip.transaction.attachment.too.long" = "备注内容不能超过140个字符";
+"tip.transaction.contract.desc.too.long" = "合约描述不能超过140个字符";
+"tip.transaction.token.desc.too.long" = "Token 描述不能超过140个字符";
 
 // ---- Transaction QRCode ----
 "tip.transaction.qrcode.title" = "扫描二维码";
@@ -345,6 +362,8 @@
 "const.transaction.type.lease.out" = "租出";
 "const.transaction.type.lease.in.cancel" = "取消租入";
 "const.transaction.type.lease.out.cancel" = "取消租出";
+"const.transaction.type.contract.register" = "注册合约";
+"const.transaction.type.contract.execute" = "执行合约";
 
 // ---- network ----
 "const.network.mainnet" = "正式网络";
@@ -355,23 +374,50 @@
 "token.token_id_note" = "TOKEN ID";
 "token.input_token_id" = "请输入 Token ID";
 "token.info" = "Token 信息";
-"token.info.token_id" = "Token ID";
-"token.info.issuer" = "发布者";
+"token.info.id.token" = "Token ID";
+"token.info.id.contract" = "Contract ID";
+"token.info.issuer" = "发行者";
+"token.info.maker" = "创建者";
 "token.info.register_time" = "发布时间";
-"token.info.total_token" = "总发行量";
-"token.info.issued_token" = "增发量";
+"token.info.supply.max" = "最大发行量";
+"token.info.supply.current" = "当前发行量";
 "token.info.description" = "描述";
-"token.send_token" = "发送 Token";
-"token.create_token" = "创建 Token";
-"token.issue_token" = "增发 Token";
-"token.burn_token" = "销毁 Token";
-"token.remove_token" = "Remove Token";
+"token.info.unity" = "单位：";
+"token.info.description.note" = "Token 描述此后将不能被修改";
+"token.info.contract.description.note" = "合约描述此后将不能被修改";
+"token.info.support.split.note" = "支持拆分/合并 Token";
+"token.info.support.note" = "(注意：该选项此后将无法修改)";
+"token.info.contract.desc" = "合约备注";
+"token.info.token.desc" = "Token 备注";
+"token.send.token" = "发送 Token";
+"token.create.token" = "创建 Token";
+"token.issue.token" = "增发 Token";
+"token.burn.token" = "销毁 Token";
+"token.remove.token" = "删除 Token";
 "token.operate.note.total" = "发行总量";
 "token.operate.note.burn" = "销毁量";
 "token.operate.note.issue" = "增发量";
-"token.operate.review_token" = "确认 Token 信息";
-"token.operate.review_issue" = "确认增发信息";
-"token.operate.review_burn" = "确认销毁信息";
+"token.operate.review.token" = "确认 Token 信息";
+"token.operate.review.issue" = "确认增发信息";
+"token.operate.review.burn" = "确认销毁信息";
+"token.register.success.check.watch.list" = "你可以在 Token 列表中查询相关信息";
 
-"token.operate.error.id_format" = "Token ID 格式错误";
-"token.operate.error.id_not_exist" = "Token 不存在";
+"token.operate.error.id.format" = "Token ID 格式错误";
+"token.operate.error.id.not.exist" = "Token 不存在";
+"token.operate.issue.amount" = "成功增发";
+"token.operate.burn.amount" = "成功销毁";
+"token.transaction.register.success" = "创建 Token 成功";
+"token.transaction.send.success" = "执行合约成功";
+
+"error.permission.not.issuer" = "该帐号没有该合约增发权限";
+"error.broadcast.contract.execute" = "合约执行广播失败";
+"error.broadcast.contract.register" = "创建 Token 广播失败";
+"error.contract.operate.permission.not.issuer" = "无法操作，非 Token 发行者";
+"error.contract.issue.over.max" = "发行量不能超过最大发行总量";
+"error.contract.burn.over.available" = "销毁量不能超过持有量";
+"error.contract.create.out.of.range" = "最大发行量超出范围，请减少输入或者减少代币单位";
+"error.contract.send.failed" = "发送失败";
+"error.broadcast.cancel.lease" = "取消租出失败";
+"error.broadcast.lease" = "租出失败";
+"error.broadcast.send" = "发送失败";
+

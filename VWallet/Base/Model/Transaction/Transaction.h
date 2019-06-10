@@ -40,6 +40,10 @@ static int64_t const VTimestampMultiple = 1000000000;
  */
 @property (nonatomic, assign) int transactionType;
 
+@property (nonatomic, copy) NSString *status;
+
+@property (nonatomic, copy) NSString *contractFuncName;
+
 @end
 
 NS_ASSUME_NONNULL_END

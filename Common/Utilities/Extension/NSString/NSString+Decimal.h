@@ -19,7 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
  @param trimTrailing whether remove zero in tail
  @return string
  */
-+ (instancetype)stringWithDecimal:(double)decimal maxFractionDigits:(int)maxFractionDigits minFractionDigits:(int)minFractionDigits trimTrailing:(BOOL)trimTrailing;
++ (instancetype)stringWithDecimal:(NSDecimalNumber *)decimal maxFractionDigits:(int)maxFractionDigits minFractionDigits:(int)minFractionDigits trimTrailing:(BOOL)trimTrailing;
+
++ (BOOL)isNilOrEmpty:(NSString *)string;
+
++ (int)getDecimal:(int64_t)unity;
+
++ (NSDecimalNumber *)getAccurateDouble:(long long)value unity:(long long)unity;
 
 @end
 

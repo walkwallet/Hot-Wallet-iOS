@@ -6,11 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-NS_ASSUME_NONNULL_BEGIN
+@class Account;
+@class Token;
 
 @interface TokenInfoViewController : UIViewController
 
-@end
+- (instancetype)initWithAccount:(Account *)account token:(Token *)token;
 
-NS_ASSUME_NONNULL_END
+@end

@@ -53,7 +53,6 @@
     self.childVCArray = @[[[AccountTableViewController alloc] initWithAccountType:AccountTypeWallet],
                           [[AccountTableViewController alloc] initWithAccountType:AccountTypeMonitor]];
     [self setViewControllers:@[self.childVCArray.firstObject] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

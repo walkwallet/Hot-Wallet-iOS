@@ -1,0 +1,422 @@
+/*
+ Localizable.strings
+ Wallet
+ 
+ All rights reserved.
+ */
+
+// general
+"cancel"  = "취소";
+"confirm"  = "확인";
+"next"  = "다음";
+"continue"  = "계속";
+"ok"  = "확인";
+"done"  = "완료";
+"clear"  = "완료";
+"close" = "Close";
+"delete"  = "삭제";
+"send"  = "전송";
+"add"  = "추가";
+"logout"  = "로그아웃";
+"back"  = "뒤로";
+"isee"  = "내용을 이해했습니다.";
+
+// view text by module vi: "settings.title" "xx.xx.xx.xx.title"
+
+// ---- vc's title ----
+"nav.title.device.lock"  = "장치 잠금";
+"nav.title.settings"  = "설정";
+"nav.title.addresses"  = "주소 관리";
+"nav.title.address.detail"  = "주소 세부 정보";
+"nav.title.wallet"  = "지갑";
+"nav.title.monitor"  = "콜드 월렛";
+"nav.title.about"  = "회사 소개";
+"nav.title.network.choose"  = "네트워크 선택";
+"nav.title.mnemonic.import"  = "니모닉 단어";
+"nav.title.password.create"  = "지갑 생성";
+"nav.title.mnemonic.backup"  = "백업 니모닉";
+"nav.title.mnemonic.backup.check"  = "백업 니모닉";
+"nav.title.monitor.add.title"  = "주소 &#038; 퍼블릭 키";
+"nav.title.setup.password"  = "비밀번호 설정";
+"nav.title.transaction.send"  = "전송";
+"nav.title.transaction.send_token" = "Send Token";
+"nav.title.transaction.receive"  = "수신";
+"nav.title.transaction.lease"  = "주조";
+"nav.title.transaction.records"  = "트랜잭션 기록";
+"nav.title.transaction.detail"  = "트랜잭션 세부사항";
+"nav.title.date.filter"  = "날짜 필터";
+"nav.title.set.amount"  = "수량 설정";
+
+// ---- tabbar page title ----
+"tabbar.title.0"  = "지갑";
+"tabbar.title.1"  = "설정";
+
+// ---- account list ----
+"account.list.add.title"  = "주소 추가";
+"account.list.add.desc"  = "한 번에 하나의 주소만 추가 가능합니다.";
+"account.list.monitor.add.title"  = "모니터 콜드 월렛에 QR 코드 인식";
+"account.list.monitor.add.desc"  = "오프라인의 모바일에서도 콜드 월렛을 생성하실 수 있습니다.";
+"account.list.total.balance"  = "총 잔고";
+
+// ---- account detail ----
+"account.detail.available.balance"  = "이용가능한 잔고";
+"account.detail.total.balance"  = "총 잔고";
+"account.detail.leased.out"  = "리스 아웃";
+"account.detail.leased.in"  = "리스 인";
+"account.detail.send"  = "전송";
+"account.detail.receive"  = "수신";
+"account.detail.lease"  = "주조";
+"account.detail.records"  = "기록";
+"account.detail.token" = "Token";
+"account.detail.token.watchList" = "Token Watch List";
+"account.detail.transaction.records"  = "트랜잭션 기록";
+
+// ---- account transaction operate ----
+"account.transaction.send.amount"  = "총액";
+"account.transaction.send.to"  = "로";
+"account.transaction.lease.amount"  = "리스 수량";
+"account.transaction.lease.to"  = "로";
+"account.transaction.desc"  = "설명";
+"account.transaction.available.balance"  = "이용가능한 잔고";
+"account.transaction.max"  = "최대";
+"account.transaction.paste"  = "붙여넣기";
+"account.transaction.scan.qr"  = "QR 코드 인식";
+"account.transaction.amount.placeholder"  = "0.00";
+"account.transaction.to.placeholder"  = "수신 주소";
+"account.transaction.to.node.address"  = "노드 주소";
+"account.transaction.desc.placeholder"  = "입력 여부";
+"account.transaction.fee"  = "전송 수수료";
+"account.transaction.question"  = "리스란?";
+"account.transaction.nodelist"  = "수퍼노드 순위리스트";
+"account.transaction.lease.detail" = "Tip：Entrust to the supernode can get minting income commission, please check the supernode list website vsysrate.com";
+
+// ---- transaction records ----
+"transaction.list.type.0"  = "전부";
+"transaction.list.type.1"  = "전송";
+"transaction.list.type.2"  = "수신";
+"transaction.list.type.3"  = "주조";
+"transaction.list.type.8" = "Register Contract";
+"transaction.list.type.9" = "Execute Contract";
+
+// ---- date range filter ----
+"date.range.type.0"  = "필터 없음";
+"date.range.type.1"  = "1개월 전";
+"date.range.type.2"  = "지난 3 개월";
+"date.range.type.3"  = "작년";
+"date.range.section.title"  = "날짜 범위를 선택해주세요";
+"data.range.before.xx"  = "%@ 이전";
+
+// ---- transaction detail ----
+"transaction.detail.mine"  = "내 주소";
+"transaction.detail.sender"  = "에서";
+"transaction.detail.receive"  = "로";
+"transaction.detail.lease.in.sender"  = "에서";
+"transaction.detail.lease.out.receive"  = "로";
+"transaction.detail.status" = "Status";
+"transaction.detail.from"  = "에서";
+"transaction.detail.to"  = "로";
+"transaction.detail.tx.id"  = "TxId";
+"transaction.detail.type"  = "유형";
+"transaction.detail.amount"  = "총액";
+"transaction.detail.fee"  = "수수료";
+"transaction.detail.time"  = "시간";
+"transaction.detail.desc"  = "설명";
+"transaction.detail.cancel.out.leasing"  = "리스 취소";
+"transaction.detail.chinese.standard.time"  = "표준시";
+
+// ---- account receive ----
+"account.receive.amount"  = "총액";
+"account.receive.qr.copy.tip"  = "QR 코드를 클릭해 사진을 저장하십시오.";
+"account.receive.address"  = "수신 주소";
+"account.receive.specific.amount"  = "수량 설정";
+"account.receive.save.image"  = "주소 복사";
+"account.receive.scan.qr.desc"  = "전송을 위한 QR 코드 스캔";
+
+// ---- settings -----
+"settings.section1.title"  = "보안";
+"settings.section2.title"  = "지갑";
+"settings.section3.title"  = "기타";
+
+"settings.section1.cell1.title"  = "장치 잠금";
+"settings.section2.cell1.title"  = "니모닉 백업";
+"settings.section2.cell2.title"  = "주소 관리";
+"settings.section3.cell1.title"  = "언어";
+"settings.section3.cell2.title"  = "회사 소개";
+"settings.section3.cell3.title"  = "로그아웃";
+"settings.section3.cell4.title"  = "네트워크";
+"settings.section2.cell1.detail"  = "지금 백업";
+
+// ---- device lock ----
+"device.lock.cell1.title"  = "TouchID";
+"device.lock.cell2.title"  = "자동 잠금";
+"device.lock.cell3.title"  = "잠금 삭제";
+
+// ---- addresses ----
+"addresses.section1.title"  = "지갑 주소";
+"addresses.section2.title"  = "콜드 월렛 주소";
+
+// ---- address normal detail ----
+"address.detail.section1.title"  = "주소 &amp; 사용가능한 잔고";
+"address.detail.section2.title"  = "퍼블릭 키";
+"address.detail.section3.title"  = "프라이빗 키";
+"address.detail.section4.title"  = "니모닉 문장";
+"address.detail.cell.hide.title"  = "표시할 비밀번호를 입력하십시오.";
+
+// ---- about ----
+"about.cell1.title"  = "공식 웹사이트";
+"about.cell2.title"  = "버전";
+
+// ---- welcome ----
+"welcome.title"  = "Welcome WALK WALLET";
+"welcome.detail"  = "지갑을 생성하거나 불러오십시오.";
+"welcome.btn1.title"  = "지갑 생성";
+"welcome.btn2.title"  = "출금 지갑";
+"welcome.import.btn1.title"  = "니모닉 가져 오기";
+"welcome.import.btn2.title"  = "로컬 백업 가져 오기";
+
+// ---- Choose Network ----
+"network.choose.detail"  = "지갑을 성공적으로 생성 한 후에는 네트워크를 변경할 수 없습니다.";
+"network.choose.cell1.title"  = "메인넷";
+"network.choose.cell1.detail"  = "정식 네트워크 환경에서 사용자는 VSYS 자산을 안전하게 보관할 수 있습니다. 이 환경은 일반 사용자들의 일상에 더 적합합니다.";
+"network.choose.cell2.title"  = "테스트넷";
+"network.choose.cell2.detail"  = "테스트 네트워크 환경에서 사용자는 VSYS 자산을 안전하게 보관하실 수 없습니다. 이 환경은 개발자가 시뮬레이션 테스트를 하기에 적합합니다. 만약 전문 개발자가 아니라면 정식 서비스 사용을 권장합니다.";
+
+// ---- Import Mnemonic ----
+"mnemonic.import.detail"  = "니모닉 단어는 15개의 단어로 구성 되어 있습니다. 분리된 입력 공간에 주의하십시오. 마지막에 띄어쓰기나 줄바꿈을 추가하지 마시기 바랍니다.";
+"mnemonic.import.placeholder"  = "입력하십시오.";
+
+// ---- Create Password ----
+"password.create.detail"  = "워크 월렛은 비밀번호를 저장하지 않습니다. 비밀번호를 잊어버린 경우 복구가 불가능 합니다. 적절하게 관리하시기 바랍니다.";
+"password.create.item1.title"  = "지갑 비밀번호";
+"password.create.item1.detail"  = "적어도 8자리";
+"password.create.item2.title"  = "비밀번호 확인";
+"password.create.item2.detail"  = "입력하십시오.";
+"password.create.btn.title"  = "몹시 떠들어 대다";
+"password.create.length.title"  = "적어도 8자리";
+"password.create.consistency.error.title"  = "비밀번호가 일치하지 않습니다.";
+
+// ---- Password Weak ----
+"password.weak.title"  = "비밀번호  ";
+"password.weak.detail"  = "지갑 보안을 위해, 비밀번호의 강도를 \"좋음\"이상으로 설정하십시오.";
+"password.weak.btn1.title"  = "비밀번호 재설정";
+"password.weak.btn2.title"  = "생성 완료";
+
+// ---- Create Success ----
+"wallet.create.success.title"  = "성공적으로 생성됨";
+"wallet.create.success.detail"  = "지금 바로 지갑을 백업하시기를 강력히 권장합니다.";
+"wallet.create.success.btn1.title"  = "백업 지갑";
+"wallet.create.success.btn2.title"  = "나중에 백업";
+
+// ---- Mnemonic Backup ----
+"menmonic.backup.title"  = "스크린샷은 안전하지 않으며 당신의 사진이 다른 어플리케이션에 의해 사용될 수 있습니다. 펜과 종이를 사용해 다음의 니모닉 단어를 기록하시고 적절하게 보관하시기 바랍니다. 다음 화면에서 확인할 수 있습니다.";
+"menmonic.backup.btn1.title"  = "나는 니모닉 단어를 위 지시에 따라 올바르게 저장했습니다.";
+
+// ---- Mnemonic Backup Check ----
+"mnemonic.backup.check.title"  = "순서대로 니모닉 단어를 입력하십시오.";
+
+// ---- Mnemonic Backup Success ----
+"mnemonic.backup.success.title"  = "성공적으로 백업되었습니다.";
+"mnemonic.backup.success.detail"  = "니모닉 단어 관리에 유의하십시오.";
+
+// ---- transaction review ----
+"transaction.review.cell1.title"  = "에서";
+"transaction.review.cell2.title"  = "로";
+"transaction.review.cell3.title"  = "유형";
+"transaction.review.cell4.title"  = "총액";
+"transaction.review.cell5.title"  = "수수료";
+"transaction.review.cell6.title"  = "설명";
+
+// ---- transaction operate success ----
+"transaction.sent.success.title"  = "%@ VSYS 보내기\n%@";
+"transaction.lease.success.title"  = "%@ VSYS 리스 시작\n%@";
+"transaction.success.detail"  = "거래 기록을 확인할 수 있습니다.";
+"transaction.cancel.lease.success.title"  = "%@ VSYS 리스를 취소하라\n%@";
+"transaction.create.contract" = "You have create a new token，token ID is:\n%@";
+"transaction.contract.execute" = "You have sent %@ %@ to:\n%@";
+
+// ---- password auth ----
+"password.auth.title"  = "워크 월렛에 오신 것을 환영합니다.";
+"password.auth.detail"  = "지갑 비밀번호를 입력하십시오.";
+"password.auth.textfield.placeholder"  = "비밀번호 입력";
+
+// ---- Monitor Address Add ----
+"monitor.address.add.title"  = "추가를 위해서는 반드시 콜드 월렛의 퍼블릭 키와 주소가 동시에 입력돼야 합니다.";
+"monitor.address.add.title1"  = "콜드 월렛 주소";
+"monitor.address.add.title2"  = "콜드 월렛 퍼블릭 키";
+"monitor.address.add.textview1.placeholder"  = "콜드 월렛 주소를 입력해주세요.";
+"monitor.address.add.textview2.placeholder"  = "콜드 월렛 퍼블릭 키";
+
+// ---- QRCode scan ----
+"scan.qrcode.title"  = "QR 코드 인식";
+"scan.qrcode.page.bottom.note" = "Current Page %d / Total Page %d";
+"scan.qrcode.explain" = "Create token %@ that max supply is %lld";
+"scan.qrcode.support.split" = "(support split)";
+"scan.qrcode.function.explain.send" = "send %@ %@ to %@";
+"scan.qrcode.function.explain.issue" = "issue %@ %@";
+"scan.qrcode.function.explain.burn" = "destroy %@ %@";
+
+// ----- Transaction QRCode ----
+"transaction.qrcode.title"  = "1. QR 코드 스캔을 위해 콜드 월렛 클라이언트를 사용하십시오.\n\n2. 콜드 월렛 클라이언트가 QR 코드를 생성하고 나서 계속을 클릭하십시오.";
+
+// ---- action option ----
+"action.address.detail"  = "세부 주소";
+"action.address.copy"  = "주소 복사";
+
+// tip prefix with "tip.xx.xx"
+// ---- logout ----
+"tip.logout.title"  = "지갑 작성";
+"tip.logout.detail"  = "지갑을 취소하기 전 니모닉 단어를 기록했는지 확인하십시오. 일단 지갑이 취소되면, 메모닉 단어 없이는 찾을 수 없습니다.";
+
+// ---- Network change ----
+"tip.networh.change.to.test"  = "테스트 환경은 오직 개발자의 테스트를 위해서만 이용가능합니다. 그래도 사용하시겠습니까?";
+
+// ---- mnemonic ----
+"tip.mnemonic.unofficial.title"  = "비정상적인 니모닉이 감지됐습니다.";
+"tip.mnemonic.unofficial.detail"  = "출처를 알 수 없는 니모닉 단어의 사용으로 당신의 자산이 완전히 분실될 수도 있습니다. 그래도 니모닉을 사용하시겠습니까?";
+"tip.mnemonic.validate.error.title"  = "유효성 검사에 실패했습니다. 단어의 철자를 확인하십시오.";
+
+// ---- account ----
+"tip.account.add.title"  = "새로운 주소 추가";
+"tip.account.add.detail"  = "새 계정을 추가하시면 다시 삭제가 불가능 합니다. 그래도 추가 하시겠습니까?";
+"tip.account.add.positive.btn.title"  = "추가";
+"tip.account.address.copy.success"  = "복사 성공";
+
+// ---- scan qrcode ----
+"tip.qrcode.unsupported.types"  = "지원되지 않는 QR 코드 형식";
+"tip.qrcode.unsupported.version"  = "지원되지 않는 QR 코드 형식";
+
+// ---- camera/album ----
+"tip.no.available.camera"  = "카메라가 없습니다.";
+"tip.unable.open.camera"  = "카메라를 켤 수 없습니다. 권한을 확인하십시오.";
+"system.settings.go.to"  = "설정으로 바로 가기";
+"tip.unable.open.album"  = "앨범을 열 수 없습니다. 권한을 확인하십시오.";
+"tip.save.image.success"  = "그림이 성공적으로 저장되었습니다.";
+
+// ---- transaction operate ----
+"tip.transaction.insufficient.balance"  = "잔고 부족";
+"tip.transaction.insufficient.token.balance" = "Insufficient token balance";
+"tip.transaction.error.address"  = "오직 VSYS 주소로만 토큰이 전송 됩니다.";
+"tip.transaction.amount.invalid"  = "입력 한 금액이 잘못되었습니다.";
+"tip.transaction.address.is.self"  = "수신 주소는 현재 주소로 설정할 수 없습니다.";
+"tip.transaction.attachment.too.long" = "Description attachment content too long";
+"tip.transaction.contract.desc.too.long" = "Contract description too long";
+"tip.transaction.token.desc.too.long" = "Token description too long";
+
+// ---- Transaction QRCode ----
+"tip.transaction.qrcode.title"  = "QR 코드 인식";
+
+// ---- Transaction Review ----
+"tip.transaction.review.title"  = "거래 검토";
+"tip.transaction.review.btn.title"  = "QR 코드 생성";
+
+// ---- password auth ----
+"tip.password.auth.title"  = "지갑 비밀번호";
+"tip.password.auth.textfield.placeholder"  = "입력하십시오.";
+"tip.password.auth.err.title"  = "잘못된 월렛 비밀번호";
+"tip.password.auth.err.btn1.title"  = "로그아웃";
+"tip.password.auth.err.btn2.title"  = "다시 입력";
+
+// ---- monitor address add ----
+"tip.monitor.address.add.title1"  = "QR 코드 인식";
+"tip.monitor.address.add.title2"  = "주소 &#038; 퍼블릭 키";
+"tip.monitor.address.add.err1"  = "주소와 공개 키가 유효한지 확인하십시오.";
+"tip.monitor.address.add.exist.err2"  = "이미 존재하는 주소입니다.";
+"tip.monitor.address.add.network.err"  = "주소의 네트워크가 다릅니다.";
+
+// ---- address detail delete ----
+"tip.address.detail.delete.title"  = "정말 콜드월렛 보기 리스트에서 이 주소를 삭제하시겠습니까?";
+"tip.copy.success"  = "복사 성공";
+"tip.address.detail.private.key.title"  = "프라이빗 키 보임";
+"tip.address.detail.mnemonic.title"  = "니모닉 문장 보기";
+
+// ---- choose network ----
+"tip.network.choose.btn1.title"  = "정식 서비스 환경으로 전환";
+"tip.network.choose.btn2.title"  = "개발자 테스트 환경으로 전환";
+"tip.network.change.title"  = "테스트 환경은 오직 개발자의 테스트를 위해서만 이용가능합니다. 그래도 사용하시겠습니까?";
+
+// ---- welcome ----
+"tip.welcome.title"  = "공식 힌트";
+"tip.welcome.detail"  = "개인 자산의 보안을 보장하기 위해 월렛 어플이 VSYS의 홈페이지인 v.systems를 통해 다운로드 되었는지 확인하기 바랍니다.";
+"tip.welcome.btn.title"  = "내용을 이해했습니다.";
+
+// ---- monitor ----
+"tip.monitor.title"  = "공식 힌트";
+"tip.monitor.detail"  = "거의 사용하지 않고 인터넷 연결이 완전히 분리 가능한 핸드폰에 v.systems 웹사이트의 콜드 월렛을 다운 받을 수 있습니다.";
+
+// ---- touch auth ----
+"tip.secure.auth.detail"  = "워크 월렛 잠금 해제";
+
+// others
+// ---- const ----
+
+"secure.level.1"  = "약함";
+"secure.level.2"  = "보통";
+"secure.level.3"  = "좋음";
+"secure.level.4"  = "강함";
+"secure.level.5"  = "완벽";
+
+// ---- Transaction Type ----
+"const.transaction.type.send"  = "전송됨";
+"const.transaction.type.receive"  = "수신됨";
+"const.transaction.type.lease.in"  = "리스 인";
+"const.transaction.type.lease.out"  = "리스 아웃";
+"const.transaction.type.lease.in.cancel"  = "인커밍 리스  취소";
+"const.transaction.type.lease.out.cancel"  = "리스 취소";
+"const.transaction.type.contract.register" = "Register Contract";
+"const.transaction.type.contract.execute" = "Execute Contract";
+
+// ---- network ----
+"const.network.mainnet"  = "메인넷";
+"const.network.testnet"  = "테스트넷";
+
+// ---- token ----
+"token.add_token" = "AddToken";
+"token.token_id_note" = "TOKEN ID";
+"token.input_token_id" = "Input the token ID";
+"token.info" = "Token Info";
+"token.info.id.token" = "Token ID";
+"token.info.id.contract" = "Contract ID";
+"token.info.issuer" = "Issuer";
+"token.info.maker" = "Maker";
+"token.info.register_time" = "Register Time";
+"token.info.supply.max" = "Max Supply";
+"token.info.supply.current" = "Current Supply";
+"token.info.description" = "Description";
+"token.info.unity" = "UNITY:";
+"token.info.contract.desc" = "CONTRACT DESCRIPTION";
+"token.info.token.desc" = "TOKEN DESCRIPTION";
+"token.info.description.note" = "You cannot change the description later";
+"token.info.contract.description.note" = "You cannot change the description later";
+"token.info.support.split.note" = "Support split/reverse-split token";
+"token.info.support.note" = "(Attention:cannot chagne after create)";
+"token.send.token" = "Send Token";
+"token.create.token" = "Create Token";
+"token.issue.token" = "Issue Token";
+"token.burn.token" = "Destroy Token";
+"token.remove.token" = "Remove Token";
+"token.operate.note.total" = "MAX SUPPLY";
+"token.operate.note.burn" = "DESTROY AMOUNT";
+"token.operate.note.issue" = "ISSUE AMOUNT";
+"token.operate.review.token" = "Review Token";
+"token.operate.review.issue" = "Review Issue";
+"token.operate.review.burn" = "Review Destroy";
+
+"token.operate.error.id.format" = "Invalid format";
+"token.operate.error.id.not.exist" = "Token not exist";
+"token.operate.issue.amount" = "Issue amount";
+"token.operate.burn.amount" = "Destroy amount";
+"token.register.success.check.watch.list" = "You can check in your token watch list";
+"token.transaction.register.success" = "Create Token Success";
+"token.transaction.send.success" = "Execute Contract Success";
+
+"error.permission.not.issuer" = "This account is not the issuer of contract";
+"error.broadcast.contract.execute" = "Fail to broad cast contract execute";
+"error.broadcast.contract.register" = "Fail to broad cast create new token";
+"error.contract.operate.permission.not.issuer" = "Permission denied, require issuer of the token";
+"error.contract.issue.over.max" = "Issuer input cannot bigger than max supply";
+"error.contract.burn.over.available" = "Burn input cannot bigger than available";
+"error.contract.create.out.of.range" = "Token max supply out of range, please reduce unity";
+"error.contract.send.failed" = "Fail to send token";
+"error.broadcast.cancel.lease" = "Fail to cancel lease";
+"error.broadcast.lease" = "Fail to lease";
+"error.broadcast.send" = "Fail to cancel lease";

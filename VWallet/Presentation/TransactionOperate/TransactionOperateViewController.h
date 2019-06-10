@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 @class Account;
+@class Token;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +20,8 @@ typedef NS_ENUM(NSInteger, TransactionOperateType) {
 @interface TransactionOperateViewController : UIViewController
 
 - (instancetype)initWithAccount:(Account *)account operateType:(TransactionOperateType)operateType;
+
+- (instancetype)initWithAccount:(Account *)account token:(Token *)token operateType:(TransactionOperateType)operateType;
 
 @end
 

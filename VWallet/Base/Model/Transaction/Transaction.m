@@ -32,6 +32,12 @@
             case 5: {   // mining → received
                 _transactionType = 2;
             }
+            case 8: {
+                _transactionType = 8;
+            }
+            case 9: {
+                _transactionType = 9;
+            }
         }
     }
     return _transactionType;

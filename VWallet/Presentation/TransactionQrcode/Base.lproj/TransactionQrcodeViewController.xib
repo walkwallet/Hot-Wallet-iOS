@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TransactionQrcodeViewController">
             <connections>
+                <outlet property="bottomNoteLabel" destination="xFg-iR-hMC" id="Brs-2S-dnZ"/>
                 <outlet property="detailLabel" destination="JYD-B4-Ynr" id="dYa-mC-ZrY"/>
                 <outlet property="imageView" destination="j9u-XS-O6v" id="pJk-Cx-I7u"/>
+                <outlet property="leftWrapView" destination="UNE-Of-Oue" id="QKG-BD-HNH"/>
+                <outlet property="rightWrapView" destination="61o-zJ-GID" id="RTY-Kd-yd8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,7 +29,7 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yn2-RK-wfQ">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="436"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="442"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYD-B4-Ynr">
                                     <rect key="frame" x="20" y="20" width="335" height="87"/>
@@ -49,16 +52,86 @@ And click continue after your cold wallet client generates a QR code.</string>
                                         <constraint firstAttribute="width" secondItem="j9u-XS-O6v" secondAttribute="height" id="0nd-qk-x4x"/>
                                     </constraints>
                                 </imageView>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFg-iR-hMC">
+                                    <rect key="frame" x="20" y="407" width="335" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNE-Of-Oue">
+                                    <rect key="frame" x="0.0" y="137" width="60" height="255"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_arrow_left" translatesAutoresizingMaskIntoConstraints="NO" id="ffI-P0-HjA">
+                                            <rect key="frame" x="24" y="120.5" width="12" height="14"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="12" id="Epi-b8-54E"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="12" id="gCe-Am-Tos"/>
+                                            </constraints>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSh-je-74q">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="255"/>
+                                            <connections>
+                                                <action selector="clickPre:" destination="-1" eventType="touchUpInside" id="qH8-vq-6TW"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="uSh-je-74q" secondAttribute="trailing" id="9BV-HQ-PLM"/>
+                                        <constraint firstItem="ffI-P0-HjA" firstAttribute="centerY" secondItem="UNE-Of-Oue" secondAttribute="centerY" id="BoU-tp-OkL"/>
+                                        <constraint firstItem="uSh-je-74q" firstAttribute="leading" secondItem="UNE-Of-Oue" secondAttribute="leading" id="Fdd-qY-Wq4"/>
+                                        <constraint firstAttribute="bottom" secondItem="uSh-je-74q" secondAttribute="bottom" id="Gxc-oQ-Sd5"/>
+                                        <constraint firstItem="ffI-P0-HjA" firstAttribute="centerX" secondItem="UNE-Of-Oue" secondAttribute="centerX" id="NQB-wY-HRY"/>
+                                        <constraint firstItem="uSh-je-74q" firstAttribute="top" secondItem="UNE-Of-Oue" secondAttribute="top" id="zKb-N7-s46"/>
+                                    </constraints>
+                                </view>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61o-zJ-GID">
+                                    <rect key="frame" x="315" y="137" width="60" height="255"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="7AK-4X-xjK">
+                                            <rect key="frame" x="24" y="120.5" width="12" height="14"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="12" id="oqv-dO-KJg"/>
+                                            </constraints>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgt-XQ-FWq">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="255"/>
+                                            <connections>
+                                                <action selector="clickNext:" destination="-1" eventType="touchUpInside" id="x1E-g5-83r"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="Cgt-XQ-FWq" firstAttribute="leading" secondItem="61o-zJ-GID" secondAttribute="leading" id="E9e-aJ-OVt"/>
+                                        <constraint firstAttribute="trailing" secondItem="Cgt-XQ-FWq" secondAttribute="trailing" id="GcO-sq-ibb"/>
+                                        <constraint firstItem="7AK-4X-xjK" firstAttribute="centerX" secondItem="61o-zJ-GID" secondAttribute="centerX" id="LPt-hQ-yhE"/>
+                                        <constraint firstAttribute="bottom" secondItem="Cgt-XQ-FWq" secondAttribute="bottom" id="eHb-pr-QSt"/>
+                                        <constraint firstItem="7AK-4X-xjK" firstAttribute="centerY" secondItem="61o-zJ-GID" secondAttribute="centerY" id="kSw-wd-M0N"/>
+                                        <constraint firstItem="Cgt-XQ-FWq" firstAttribute="top" secondItem="61o-zJ-GID" secondAttribute="top" id="rU6-2K-517"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="xFg-iR-hMC" secondAttribute="trailing" constant="20" id="3QF-dc-NpX"/>
+                                <constraint firstItem="xFg-iR-hMC" firstAttribute="leading" secondItem="yn2-RK-wfQ" secondAttribute="leading" constant="20" id="4b6-sE-PHx"/>
                                 <constraint firstItem="j9u-XS-O6v" firstAttribute="leading" secondItem="yn2-RK-wfQ" secondAttribute="leading" constant="60" id="6Qx-Uq-JPW"/>
+                                <constraint firstItem="UNE-Of-Oue" firstAttribute="bottom" secondItem="j9u-XS-O6v" secondAttribute="bottom" id="6dw-ZY-cYB"/>
+                                <constraint firstItem="61o-zJ-GID" firstAttribute="top" secondItem="j9u-XS-O6v" secondAttribute="top" id="7lV-p6-hp4"/>
                                 <constraint firstItem="j9u-XS-O6v" firstAttribute="top" secondItem="JYD-B4-Ynr" secondAttribute="bottom" constant="30" id="AY8-Pq-LcS"/>
                                 <constraint firstAttribute="trailing" secondItem="JYD-B4-Ynr" secondAttribute="trailing" constant="20" id="Ad8-A8-5BK"/>
+                                <constraint firstItem="j9u-XS-O6v" firstAttribute="leading" secondItem="UNE-Of-Oue" secondAttribute="trailing" id="ApL-NZ-EdC"/>
                                 <constraint firstItem="j9u-XS-O6v" firstAttribute="centerX" secondItem="yn2-RK-wfQ" secondAttribute="centerX" id="F8M-LN-aeg"/>
+                                <constraint firstItem="UNE-Of-Oue" firstAttribute="leading" secondItem="yn2-RK-wfQ" secondAttribute="leading" id="G4r-pA-4qk"/>
+                                <constraint firstAttribute="trailing" secondItem="61o-zJ-GID" secondAttribute="trailing" id="JV7-or-AUW"/>
+                                <constraint firstItem="xFg-iR-hMC" firstAttribute="top" secondItem="j9u-XS-O6v" secondAttribute="bottom" constant="15" id="Ml3-jQ-MKE"/>
                                 <constraint firstItem="JYD-B4-Ynr" firstAttribute="top" secondItem="yn2-RK-wfQ" secondAttribute="top" constant="20" id="X3T-IS-H7r"/>
                                 <constraint firstItem="JYD-B4-Ynr" firstAttribute="leading" secondItem="yn2-RK-wfQ" secondAttribute="leading" constant="20" id="ZOb-6l-YpC"/>
-                                <constraint firstAttribute="bottom" secondItem="j9u-XS-O6v" secondAttribute="bottom" constant="44" id="mL4-2o-TPZ"/>
+                                <constraint firstItem="61o-zJ-GID" firstAttribute="bottom" secondItem="j9u-XS-O6v" secondAttribute="bottom" id="e2T-6m-XFq"/>
+                                <constraint firstItem="61o-zJ-GID" firstAttribute="leading" secondItem="j9u-XS-O6v" secondAttribute="trailing" id="kkI-Ee-Ad6"/>
+                                <constraint firstItem="UNE-Of-Oue" firstAttribute="top" secondItem="j9u-XS-O6v" secondAttribute="top" id="nwK-Od-KGb"/>
+                                <constraint firstAttribute="bottom" secondItem="xFg-iR-hMC" secondAttribute="bottom" constant="15" id="z8B-hL-7nf"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -81,5 +154,15 @@ And click continue after your cold wallet client generates a QR code.</string>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="140" y="154.27286356821591"/>
         </view>
+        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5VP-SV-OH4">
+            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <state key="normal" title="Button"/>
+            <point key="canvasLocation" x="-190" y="56"/>
+        </button>
     </objects>
+    <resources>
+        <image name="ico_arrow_left" width="8" height="14"/>
+        <image name="ico_arrow_right" width="8" height="14"/>
+    </resources>
 </document>

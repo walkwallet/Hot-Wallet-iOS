@@ -20,6 +20,8 @@
 #import "NSString+Decimal.h"
 #import "UIView+Loading.h"
 #import "VColor.h"
+#import "TokenMgr.h"
+#import "UIViewController+Alert.h"
 
 @implementation UIViewController (Transaction)
 
@@ -45,21 +47,46 @@
                     [ApiServer broadcastPayment:transaction callback:^(BOOL isSuc) {
                         [alertVC.mainView stopLoading];
                         if (isSuc) {
-                            [weakSelf showSuccessTx:transaction.originTransaction];
+                            [weakSelf showSuccessTx:transaction];
                         }
                     }];
                 } else if (transaction.originTransaction.txType == VsysTxTypeLease) {
                     [ApiServer broadcastLease:transaction callback:^(BOOL isSuc) {
                         [alertVC.mainView stopLoading];
                         if (isSuc) {
-                            [weakSelf showSuccessTx:transaction.originTransaction];
+                            [weakSelf showSuccessTx:transaction];
                         }
                     }];
                 } else if (transaction.originTransaction.txType == VsysTxTypeCancelLease) {
                     [ApiServer broadcastCancelLease:transaction callback:^(BOOL isSuc) {
                         [alertVC.mainView stopLoading];
                         if (isSuc) {
-                            [weakSelf showSuccessTx:transaction.originTransaction];
+                            [weakSelf showSuccessTx:transaction];
+                        }
+                    }];
+                } else if (transaction.originTransaction.txType == VsysTxTypeContractRegister) {
+                    [ApiServer broadcastContractRegister:transaction callback:^(BOOL isSuc, Token * _Nonnull token) {
+                        [alertVC.mainView stopLoading];
+                        if (isSuc) {
+                            NSMutableArray *newList = [NSMutableArray new];
+                            [newList addObjectsFromArray:[TokenMgr.shareInstance loadAddressWatchToken:account.originAccount.address]];
+                            [newList addObject:token];
+                            NSError *error = [TokenMgr.shareInstance saveToStorage:account.originAccount.address list:newList];
+                            if (error != nil) {
+                                NSLog(@"add new token to storage error: %@", error.localizedDescription);
+                            }else {
+                                transaction.originTransaction.contractId = token.contractId;
+                                [weakSelf showSuccessTx:transaction];
+                            }
+                        }
+                    }];
+                } else if (transaction.originTransaction.txType == VsysTxTypeContractExecute) {
+                    [ApiServer broadcastContractExecute:transaction callback:^(BOOL isSuc) {
+                        [alertVC.mainView stopLoading];
+                        if (isSuc) {
+                            [weakSelf showSuccessTx:transaction];
+                        }else {
+                            [weakSelf remindWithMessage:VLocalize(@"error.contract.send.failed")];
                         }
                     }];
                 } else {
@@ -72,26 +99,84 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-- (void)showSuccessTx: (VsysTransaction *)tx {
+- (void)showSuccessTx: (Transaction *)transaction {
     __weak typeof(self) weakSelf = self;
-    
-    NSString *amountStr = [NSString stringWithDecimal:(tx.amount * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+    VsysTransaction *tx = transaction.originTransaction;
+    NSDecimalNumber *amountDecimal = [[NSDecimalNumber alloc] initWithLongLong:tx.amount];
     NSString *title;
+    NSString *iconName = @"ico_success_tip";
     if (tx.txType == VsysTxTypePayment) {
+        NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLong:VsysVSYS];
+        NSString *amountStr = [NSString stringWithDecimal:[amountDecimal decimalNumberByDividingBy:unityDecimal] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
         title = [NSString stringWithFormat:VLocalize(@"transaction.sent.success.title"), amountStr, tx.recipient];
     } else if (tx.txType == VsysTxTypeLease) {
+        NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLong:VsysVSYS];
+        NSString *amountStr = [NSString stringWithDecimal:[amountDecimal decimalNumberByDividingBy:unityDecimal] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
         title = [NSString stringWithFormat:VLocalize(@"transaction.lease.success.title"), amountStr, tx.recipient];
     } else if (tx.txType == VsysTxTypeCancelLease) {
+        NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLong:VsysVSYS];
+        NSString *amountStr = [NSString stringWithDecimal:[amountDecimal decimalNumberByDividingBy:unityDecimal] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
         title = [NSString stringWithFormat:VLocalize(@"transaction.cancel.lease.success.title"), amountStr, tx.recipient];
+    } else if (tx.txType == VsysTxTypeContractRegister) {
+        title = [NSString stringWithFormat:VLocalize(@"transaction.create.contract"), VsysContractId2TokenId(tx.contractId, 0)];
+    } else if (tx.txType == VsysTxTypeContractExecute) {
+        Token *token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
+        VsysContract *c = [VsysContract new];
+        NSString *funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
+        if ([funcName isEqualToString:@"send"]) {
+            [c decodeSend: tx.data];
+            tx.recipient = c.recipient;
+            tx.amount = c.amount;
+            NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:c.amount];
+            NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLongLong:token.unity];
+            NSString *amountStr = [NSString stringWithDecimal:[tokenAmount decimalNumberByDividingBy:unityDecimal] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
+            title = [NSString stringWithFormat:VLocalize(@"transaction.contract.execute"), amountStr, [NSString isNilOrEmpty:token.name] ? @"tokens" : token.name, c.recipient];
+        }else if([funcName isEqualToString:@"issue"]) {
+            [c decodeIssue: tx.data];
+            tx.recipient = c.recipient;
+            tx.amount = c.amount;
+            NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:c.amount];
+            NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLongLong:token.unity];
+            NSString *amountStr = [NSString stringWithDecimal:[tokenAmount decimalNumberByDividingBy:unityDecimal] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
+            title = [NSString stringWithFormat:@"%@\n%@", amountStr, VLocalize(@"token.operate.issue.amount")];
+        }else if([funcName isEqualToString:@"destroy"]) {
+            [c decodeDestroy: tx.data];
+            tx.recipient = c.recipient;
+            tx.amount = c.amount;
+            NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:c.amount];
+            NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLongLong:token.unity];
+            NSString *amountStr = [NSString stringWithDecimal:[tokenAmount decimalNumberByDividingBy:unityDecimal] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
+            title = [NSString stringWithFormat:@"%@\n%@", amountStr, VLocalize(@"token.operate.burn.amount")];
+            iconName = @"ico_burn_big";
+        }else {
+            title = VLocalize(@"success");
+        }
     } else {
         return;
     }
-    
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:title attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]}];
-    [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[title rangeOfString:tx.recipient]];
-    
     NSAttributedString *attrMessage = [[NSAttributedString alloc] initWithString:VLocalize(@"transaction.success.detail") attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13 weight:UIFontWeightLight]}];
-    ResultParameter *parameter = [ResultParameter paramterWithImgResourceName:@"ico_success_tip" attrTitle:attrTitle attrMessage:attrMessage titleMessageSpecing:16];
+    if (tx.txType == VsysTxTypeContractRegister) {
+        [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[title rangeOfString:VsysContractId2TokenId(tx.contractId, 0)]];
+        attrMessage = [[NSAttributedString alloc] initWithString:VLocalize(@"token.register.success.check.watch.list") attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13 weight:UIFontWeightLight]}];
+    }else if (tx.txType == VsysTxTypeContractExecute) {
+        Token *token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
+        NSString *funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
+        NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:tx.amount];
+        NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLongLong:token.unity];
+        NSString *amountStr = [NSString stringWithDecimal:[tokenAmount decimalNumberByDividingBy:unityDecimal] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
+        if ([funcName isEqualToString:@"issue"]) {
+            [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:32] range:[title rangeOfString:amountStr]];
+        }else if ([funcName isEqualToString:@"destroy"]) {
+            [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:32] range:[title rangeOfString:amountStr]];
+        }else {
+            [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[title rangeOfString:tx.recipient]];
+        }
+        attrMessage = [[NSAttributedString alloc] initWithString:VLocalize(@"token.register.success.check.watch.list") attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13 weight:UIFontWeightLight]}];
+    }else {
+        [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[title rangeOfString:tx.recipient]];
+    }
+    ResultParameter *parameter = [ResultParameter paramterWithImgResourceName:iconName attrTitle:attrTitle attrMessage:attrMessage titleMessageSpecing:16];
     parameter.showNavigationBar = YES;
     [parameter setOperateBtnTitle:VLocalize(@"done")];
     ResultViewController *resultVC = [[ResultViewController alloc] initWithResultParameter:parameter];

@@ -173,17 +173,17 @@
 		40477A3521E5D36200EFF6E1 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40477A3421E5D36200EFF6E1 /* Wallet.storyboard */; };
 		A805EEF0228AB927003FFAFD /* TokenInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A805EEEE228AB927003FFAFD /* TokenInfoViewController.m */; };
 		A805EEF1228AB927003FFAFD /* TokenInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A805EEEF228AB927003FFAFD /* TokenInfoViewController.xib */; };
-		A805EEFA228C151D003FFAFD /* Vsys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A805EEF9228C151D003FFAFD /* Vsys.framework */; };
-		A805EF00228C418B003FFAFD /* Contract.m in Sources */ = {isa = PBXBuildFile; fileRef = A805EEFF228C418B003FFAFD /* Contract.m */; };
-		A805EF04228D1365003FFAFD /* TokenMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = A805EF03228D1365003FFAFD /* TokenMgr.m */; };
 		A8163B032289206B004A919A /* TokenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8163B022289206B004A919A /* TokenViewController.xib */; };
 		A8163B0722894882004A919A /* TokenOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8163B0522894882004A919A /* TokenOperateViewController.m */; };
 		A8163B0822894882004A919A /* TokenOperateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8163B0622894882004A919A /* TokenOperateViewController.xib */; };
+		A8794232228EAB57009D10A8 /* Vsys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8794231228EAB56009D10A8 /* Vsys.framework */; };
+		A8794259228EC317009D10A8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = A8794258228EC317009D10A8 /* Token.m */; };
+		A879425E228EC333009D10A8 /* Contract.m in Sources */ = {isa = PBXBuildFile; fileRef = A879425D228EC333009D10A8 /* Contract.m */; };
+		A8794262228FB348009D10A8 /* TokenMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = A8794261228FB348009D10A8 /* TokenMgr.m */; };
 		A88B0FF72275C59F008C1CE8 /* TokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B0FF62275C59F008C1CE8 /* TokenViewController.m */; };
 		A88B0FFD2276A760008C1CE8 /* TokenHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B0FFC2276A760008C1CE8 /* TokenHeaderView.m */; };
 		A88B10022276C89E008C1CE8 /* TokenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B10002276C89E008C1CE8 /* TokenTableViewCell.m */; };
 		A88B10032276C89E008C1CE8 /* TokenTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88B10012276C89E008C1CE8 /* TokenTableViewCell.xib */; };
-		A88B10072276CAC9008C1CE8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B10062276CAC9008C1CE8 /* Token.m */; };
 		A8C32BE6228985AD00E1CBB1 /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C32BE4228985AD00E1CBB1 /* SuccessViewController.m */; };
 		A8C32BE7228985AD00E1CBB1 /* SuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */; };
 		A8C32BEB228AA89300E1CBB1 /* AddTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C32BE9228AA89300E1CBB1 /* AddTokenViewController.m */; };
@@ -251,7 +251,7 @@
 		4041BFF721CB711000B2AE05 /* AppState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppState.m; sourceTree = "<group>"; };
 		4041BFFA21CB711000B2AE05 /* AlertNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertNavController.h; sourceTree = "<group>"; };
 		4041BFFB21CB711000B2AE05 /* AlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertViewController.xib; sourceTree = "<group>"; };
-		4041BFFC21CB711000B2AE05 /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
+		4041BFFC21CB711000B2AE05 /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; wrapsLines = 0; };
 		4041BFFE21CB711000B2AE05 /* PushAnimatorObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushAnimatorObject.m; sourceTree = "<group>"; };
 		4041BFFF21CB711000B2AE05 /* AlertNavControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertNavControllerDelegate.m; sourceTree = "<group>"; };
 		4041C00021CB711000B2AE05 /* PopAnimatorObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopAnimatorObject.m; sourceTree = "<group>"; };
@@ -480,18 +480,22 @@
 		4098EA6C21BFAC9100FE4426 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63D3364D3ABE04C293E5203E /* Pods-VeeWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeeWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VeeWallet/Pods-VeeWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		66B1D53DCE14F99F8006CF45 /* libPods-VeeWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VeeWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A801A83722AE317100AF4296 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A801A83822AE317200AF4296 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A805EEED228AB927003FFAFD /* TokenInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenInfoViewController.h; sourceTree = "<group>"; };
 		A805EEEE228AB927003FFAFD /* TokenInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenInfoViewController.m; sourceTree = "<group>"; };
 		A805EEEF228AB927003FFAFD /* TokenInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenInfoViewController.xib; sourceTree = "<group>"; };
-		A805EEF9228C151D003FFAFD /* Vsys.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vsys.framework; sourceTree = "<group>"; };
-		A805EEFE228C418B003FFAFD /* Contract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Contract.h; sourceTree = "<group>"; };
-		A805EEFF228C418B003FFAFD /* Contract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Contract.m; sourceTree = "<group>"; };
-		A805EF02228D1365003FFAFD /* TokenMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenMgr.h; sourceTree = "<group>"; };
-		A805EF03228D1365003FFAFD /* TokenMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenMgr.m; sourceTree = "<group>"; };
 		A8163B022289206B004A919A /* TokenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenViewController.xib; sourceTree = "<group>"; };
 		A8163B0422894882004A919A /* TokenOperateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenOperateViewController.h; sourceTree = "<group>"; };
 		A8163B0522894882004A919A /* TokenOperateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenOperateViewController.m; sourceTree = "<group>"; };
 		A8163B0622894882004A919A /* TokenOperateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenOperateViewController.xib; sourceTree = "<group>"; };
+		A8794231228EAB56009D10A8 /* Vsys.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vsys.framework; sourceTree = "<group>"; };
+		A8794257228EC317009D10A8 /* Token.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
+		A8794258228EC317009D10A8 /* Token.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
+		A879425C228EC333009D10A8 /* Contract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Contract.h; sourceTree = "<group>"; };
+		A879425D228EC333009D10A8 /* Contract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Contract.m; sourceTree = "<group>"; };
+		A8794260228FB348009D10A8 /* TokenMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenMgr.h; sourceTree = "<group>"; };
+		A8794261228FB348009D10A8 /* TokenMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenMgr.m; sourceTree = "<group>"; };
 		A88B0FF52275C59F008C1CE8 /* TokenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenViewController.h; sourceTree = "<group>"; };
 		A88B0FF62275C59F008C1CE8 /* TokenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenViewController.m; sourceTree = "<group>"; };
 		A88B0FFB2276A760008C1CE8 /* TokenHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenHeaderView.h; sourceTree = "<group>"; };
@@ -499,8 +503,6 @@
 		A88B0FFF2276C89E008C1CE8 /* TokenTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenTableViewCell.h; sourceTree = "<group>"; };
 		A88B10002276C89E008C1CE8 /* TokenTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenTableViewCell.m; sourceTree = "<group>"; };
 		A88B10012276C89E008C1CE8 /* TokenTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenTableViewCell.xib; sourceTree = "<group>"; };
-		A88B10052276CAC9008C1CE8 /* Token.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
-		A88B10062276CAC9008C1CE8 /* Token.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
 		A8C32BE3228985AD00E1CBB1 /* SuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
 		A8C32BE4228985AD00E1CBB1 /* SuccessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuccessViewController.m; sourceTree = "<group>"; };
 		A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessViewController.xib; sourceTree = "<group>"; };
@@ -518,7 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B6CB39FC990E6C5A5EC3C42 /* libPods-VWallet.a in Frameworks */,
-				A805EEFA228C151D003FFAFD /* Vsys.framework in Frameworks */,
+				A8794232228EAB57009D10A8 /* Vsys.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,7 +728,7 @@
 		4041BFF021CB711000B2AE05 /* VWallet */ = {
 			isa = PBXGroup;
 			children = (
-				A805EEF9228C151D003FFAFD /* Vsys.framework */,
+				A8794231228EAB56009D10A8 /* Vsys.framework */,
 				4041BFF121CB711000B2AE05 /* State */,
 				4041BFF821CB711000B2AE05 /* Components */,
 				4041C01421CB711000B2AE05 /* main.m */,
@@ -741,7 +743,7 @@
 		4041BFF121CB711000B2AE05 /* State */ = {
 			isa = PBXGroup;
 			children = (
-				A805EF01228D1340003FFAFD /* Token */,
+				A879425F228FB337009D10A8 /* TokenMgr */,
 				4041BFF221CB711000B2AE05 /* WalletMgr */,
 				4041BFF521CB711000B2AE05 /* AppState */,
 			);
@@ -1062,8 +1064,8 @@
 			isa = PBXGroup;
 			children = (
 				4041C06121CB711000B2AE05 /* TransactionQrcodeViewController.h */,
-				4041C06221CB711000B2AE05 /* TransactionQrcodeViewController.xib */,
 				4041C06421CB711000B2AE05 /* TransactionQrcodeViewController.m */,
+				4041C06221CB711000B2AE05 /* TransactionQrcodeViewController.xib */,
 			);
 			path = TransactionQrcode;
 			sourceTree = "<group>";
@@ -1090,9 +1092,9 @@
 		4041C06C21CB711000B2AE05 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
-				4041C06D21CB711000B2AE05 /* InitViewController.m */,
 				4041C06E21CB711000B2AE05 /* Generate.storyboard */,
 				4041C07021CB711000B2AE05 /* InitViewController.h */,
+				4041C06D21CB711000B2AE05 /* InitViewController.m */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -1289,10 +1291,10 @@
 			isa = PBXGroup;
 			children = (
 				4041C0E321CB711000B2AE05 /* VAlertViewController.h */,
-				4041C0E421CB711000B2AE05 /* VAlertViewController.xib */,
-				4041C0E521CB711000B2AE05 /* UIViewController+Alert.m */,
 				4041C0E621CB711000B2AE05 /* VAlertViewController.m */,
+				4041C0E421CB711000B2AE05 /* VAlertViewController.xib */,
 				4041C0E721CB711000B2AE05 /* UIViewController+Alert.h */,
+				4041C0E521CB711000B2AE05 /* UIViewController+Alert.m */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1472,8 +1474,8 @@
 		4041C11B21CB711000B2AE05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A805EEFD228C4174003FFAFD /* Contract */,
-				A88B10042276CAA7008C1CE8 /* Token */,
+				A879425B228EC328009D10A8 /* Contract */,
+				A879425A228EC31E009D10A8 /* Token */,
 				4041C11C21CB711000B2AE05 /* Transaction */,
 				4041C11F21CB711000B2AE05 /* CellItem */,
 				4041C12221CB711000B2AE05 /* SectionItem */,
@@ -1487,8 +1489,8 @@
 		4041C11C21CB711000B2AE05 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				4041C11D21CB711000B2AE05 /* Transaction.m */,
 				4041C11E21CB711000B2AE05 /* Transaction.h */,
+				4041C11D21CB711000B2AE05 /* Transaction.m */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -1702,9 +1704,9 @@
 			isa = PBXGroup;
 			children = (
 				4041C15A21CB711000B2AE05 /* NSString+Asterisk.h */,
+				4041C15D21CB711000B2AE05 /* NSString+Asterisk.m */,
 				4041C15B21CB711000B2AE05 /* NSString+Decimal.h */,
 				4041C15C21CB711000B2AE05 /* NSString+Decimal.m */,
-				4041C15D21CB711000B2AE05 /* NSString+Asterisk.m */,
 			);
 			path = NSString;
 			sourceTree = "<group>";
@@ -1831,22 +1833,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A805EEFD228C4174003FFAFD /* Contract */ = {
+		A879425A228EC31E009D10A8 /* Token */ = {
 			isa = PBXGroup;
 			children = (
-				A805EEFE228C418B003FFAFD /* Contract.h */,
-				A805EEFF228C418B003FFAFD /* Contract.m */,
+				A8794257228EC317009D10A8 /* Token.h */,
+				A8794258228EC317009D10A8 /* Token.m */,
+			);
+			path = Token;
+			sourceTree = "<group>";
+		};
+		A879425B228EC328009D10A8 /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				A879425C228EC333009D10A8 /* Contract.h */,
+				A879425D228EC333009D10A8 /* Contract.m */,
 			);
 			path = Contract;
 			sourceTree = "<group>";
 		};
-		A805EF01228D1340003FFAFD /* Token */ = {
+		A879425F228FB337009D10A8 /* TokenMgr */ = {
 			isa = PBXGroup;
 			children = (
-				A805EF02228D1365003FFAFD /* TokenMgr.h */,
-				A805EF03228D1365003FFAFD /* TokenMgr.m */,
+				A8794260228FB348009D10A8 /* TokenMgr.h */,
+				A8794261228FB348009D10A8 /* TokenMgr.m */,
 			);
-			path = Token;
+			path = TokenMgr;
 			sourceTree = "<group>";
 		};
 		A88B0FF42275C534008C1CE8 /* VToken */ = {
@@ -1892,15 +1903,6 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		A88B10042276CAA7008C1CE8 /* Token */ = {
-			isa = PBXGroup;
-			children = (
-				A88B10052276CAC9008C1CE8 /* Token.h */,
-				A88B10062276CAC9008C1CE8 /* Token.m */,
-			);
-			path = Token;
-			sourceTree = "<group>";
-		};
 		B59B167F6AD5924805FB5B36 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1923,7 +1925,6 @@
 				4023E12021AE1FAF00E18D5D /* Sources */,
 				4023E12121AE1FAF00E18D5D /* Frameworks */,
 				4023E12221AE1FAF00E18D5D /* Resources */,
-				DBA253928AC3C241E5989EA7 /* [CP] Embed Pods Frameworks */,
 				6082EF3A38A82FA731FA8F76 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -1957,6 +1958,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				ko,
 			);
 			mainGroup = 4023E11B21AE1FAF00E18D5D;
 			productRefGroup = 4023E12521AE1FAF00E18D5D /* Products */;
@@ -2038,7 +2040,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VWallet/Pods-VWallet-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VWallet/Pods-VWallet-resources.sh",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -2049,7 +2051,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VWallet/Pods-VWallet-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VWallet/Pods-VWallet-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A0B7546AF8C3EDFFCD5FB6C7 /* [CP] Check Pods Manifest.lock */ = {
@@ -2072,28 +2074,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DBA253928AC3C241E5989EA7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VWallet/Pods-VWallet-frameworks.sh",
-				"${PODS_ROOT}/Reveal-SDK/RevealServer-13/iOS/RevealServer.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VWallet/Pods-VWallet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2152,6 +2132,7 @@
 				4041C21121CB711100B2AE05 /* UITextView+Placeholder.m in Sources */,
 				A8163B0722894882004A919A /* TokenOperateViewController.m in Sources */,
 				4041C1B921CB711100B2AE05 /* ChooseNetworkViewController.m in Sources */,
+				A8794262228FB348009D10A8 /* TokenMgr.m in Sources */,
 				402BBB2021E5D326005F2794 /* DateRangeOptionTableViewCell.m in Sources */,
 				4041C19B21CB711000B2AE05 /* PasswordAuthAlertViewController.m in Sources */,
 				4041C1F921CB711100B2AE05 /* VSeparatorLine.m in Sources */,
@@ -2160,12 +2141,12 @@
 				4041C21021CB711100B2AE05 /* UIView+IB.m in Sources */,
 				40477A2F21E5D34B00EFF6E1 /* AccountTableViewController.m in Sources */,
 				4041C1C821CB711100B2AE05 /* AddMonitorAddressViewController.m in Sources */,
-				A805EF00228C418B003FFAFD /* Contract.m in Sources */,
 				4041C1FA21CB711100B2AE05 /* VColor.m in Sources */,
 				A8C32BE6228985AD00E1CBB1 /* SuccessViewController.m in Sources */,
 				4041C1BE21CB711100B2AE05 /* ReceiveQRSaveView.m in Sources */,
 				A88B0FFD2276A760008C1CE8 /* TokenHeaderView.m in Sources */,
 				402BBB1A21E5D326005F2794 /* DateRangeTableViewCell.m in Sources */,
+				A8794259228EC317009D10A8 /* Token.m in Sources */,
 				4041C1E821CB711100B2AE05 /* Transaction+Extension.m in Sources */,
 				4041C20E21CB711100B2AE05 /* LoadingView.m in Sources */,
 				4041C1EC21CB711100B2AE05 /* VAlertViewController.m in Sources */,
@@ -2179,7 +2160,6 @@
 				4041C1BD21CB711100B2AE05 /* ReceiveViewController.m in Sources */,
 				4041C1B021CB711100B2AE05 /* VStoryboard.m in Sources */,
 				4041C17A21CB711000B2AE05 /* crypto_scrypt-hash.c in Sources */,
-				A805EF04228D1365003FFAFD /* TokenMgr.m in Sources */,
 				402BBB2121E5D326005F2794 /* DateRangePickerViewController.m in Sources */,
 				4041C19421CB711000B2AE05 /* main.m in Sources */,
 				4041C19021CB711000B2AE05 /* VerticalPushAnimator.m in Sources */,
@@ -2202,10 +2182,10 @@
 				4041C1A221CB711000B2AE05 /* ResultParameter.m in Sources */,
 				4041C20D21CB711100B2AE05 /* UIColor+Hex.m in Sources */,
 				4041C1ED21CB711100B2AE05 /* VNavigationController.m in Sources */,
+				A879425E228EC333009D10A8 /* Contract.m in Sources */,
 				4041C1E121CB711100B2AE05 /* WalletPageViewController.m in Sources */,
 				4041C20021CB711100B2AE05 /* CellItem.m in Sources */,
 				4041C1A521CB711000B2AE05 /* MnemonicWordCheckViewController.m in Sources */,
-				A88B10072276CAC9008C1CE8 /* Token.m in Sources */,
 				4041C20F21CB711100B2AE05 /* UIView+Loading.m in Sources */,
 				40477A3321E5D34B00EFF6E1 /* AddAccountTableViewCell.m in Sources */,
 				4041C21321CB711100B2AE05 /* NSString+Asterisk.m in Sources */,
@@ -2282,6 +2262,7 @@
 			children = (
 				4041C13421CB711000B2AE05 /* zh-Hans */,
 				4041C13721CB711000B2AE05 /* en */,
+				A801A83722AE317100AF4296 /* ko */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2291,6 +2272,7 @@
 			children = (
 				4041C13621CB711000B2AE05 /* zh-Hans */,
 				4041C13821CB711000B2AE05 /* en */,
+				A801A83822AE317200AF4296 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2417,8 +2399,8 @@
 			baseConfigurationReference = B99A01A40F53D8E0B803D481 /* Pods-VWallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = HF225C89SZ;
 				ENABLE_BITCODE = NO;
@@ -2426,7 +2408,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/VWallet",
-					"$(PROJECT_DIR)/tglFramework",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
@@ -2437,7 +2418,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = systems.v.app.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = hotapp;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
 			};
@@ -2448,15 +2429,14 @@
 			baseConfigurationReference = 20398EE6FDC06B493FA9EE1F /* Pods-VWallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = HF225C89SZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/VWallet",
-					"$(PROJECT_DIR)/tglFramework",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
@@ -2466,7 +2446,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = systems.v.app.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = hotapp;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
 			};

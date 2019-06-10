@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, LanguageType) {
     LanguageTypeCN = 0,
-    LanguageTypeEN
+    LanguageTypeEN,
+    LanguageTypeKO,
 };
 
 @interface Language : NSObject

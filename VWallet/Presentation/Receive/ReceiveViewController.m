@@ -65,10 +65,10 @@
     if (amount < 0) {
         amount = 0;
     }
-    self.amountLabel.text = [NSString stringWithDecimal:(amount * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
+    self.amountLabel.text = [NSString stringWithDecimal:[NSString getAccurateDouble:amount unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
     self.amountLabelHeightLC.constant = 46;
     NSDictionary *dict = @{@"protocol": VsysProtocol,
-                           @"api": @(VsysApi),
+                           @"api": @(VsysTransactionOldApi),
                            @"opc": VsysOpcTypeAccount,
                            @"address": self.account.originAccount.address,
                            @"amount": @((long)([self.amountLabel.text doubleValue] * VsysVSYS)),

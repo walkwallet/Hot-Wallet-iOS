@@ -19,13 +19,18 @@
 #import "TokenInfoViewController.h"
 #import "UIViewController+Alert.h"
 #import "TransactionOperateViewController.h"
+#import "ApiServer.h"
+#import "ServerConfig.h"
 
+#import "WalletMgr.h"
 #import "Token.h"
+#import "TokenMgr.h"
 
 #import "NSString+Decimal.h"
 #import "NSString+Asterisk.h"
 #import "UIScrollView+EmptyData.h"
 #import "UIViewController+NavigationBar.h"
+#import "UIScrollView+EmptyData.h"
 
 static NSString *const CellIdentifier = @"TokenTableViewCell";
 
@@ -65,16 +70,60 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
     self.tableView.backgroundColor = VColor.tableViewBgColor;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
-    
-    NSString *availabelBalanceStr = [NSString stringWithDecimal:self.account.availableBalance * 1.0 / VsysVSYS maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+    NSDecimalNumber *availabelDecimal= [[NSDecimalNumber alloc] initWithLongLong:self.account.availableBalance];
+    NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLong:VsysVSYS];
+    NSString *availabelBalanceStr = [NSString stringWithDecimal:[availabelDecimal decimalNumberByDividingBy:unityDecimal] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
     self.balanceLabel.text = availabelBalanceStr;
-    
-    Token *t1 = [[Token alloc] init];
-    t1.name = @"FToken";
-    t1.contractId = @"t1";
-    t1.balance = 124.234;
-    self.tokenList = @[t1, t1, t1];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSArray<Token*> *list = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
+    self.tokenList = list.copy;
+    if(self.tokenList.count == 0) {
+        [self.tableView ed_setupEmptyDataDisplay];
+    }
     [self.tableView reloadData];
+    [self refreshTokenListInfo];
+    [self getAccountInfo];
+}
+
+- (void)getAccountInfo {
+    __weak typeof(self) weakSelf = self;
+    [ApiServer addressBalanceDetail:self.account callback:^(BOOL isSuc, Account * _Nonnull account) {
+        if (isSuc && account) {
+            NSString *availabelBalanceStr = [NSString stringWithDecimal:[NSString getAccurateDouble:account.availableBalance unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+            weakSelf.balanceLabel.text = availabelBalanceStr;
+        }
+    }];
+}
+
+- (void)refreshTokenListInfo {
+    __weak typeof (self) weakSelf = self;
+    for (Token *one in self.tokenList) {
+        [ApiServer getTokenInfo:one.tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
+            if (isSuc) {
+                Token *weakToken = token;
+                [ApiServer getAddressTokenBalance:weakSelf.account.originAccount.address tokenId:one.tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
+                    NSInteger i = [weakSelf.tokenList indexOfObject:one];
+                    weakSelf.tokenList[i].balance = token.balance;
+                    weakSelf.tokenList[i].total = weakToken.total;
+                    [weakSelf.tableView reloadData];
+                    [TokenMgr.shareInstance saveToStorage:weakSelf.account.originAccount.address list:weakSelf.tokenList];
+                }];
+            }
+        }];
+    }
+    for (Token *one in self.tokenList) {
+        [ApiServer getTokenDetailFromExplorer:one.tokenId callback:^(BOOL isSuc, Token * _Nonnull tokenDetail) {
+            if (isSuc) {
+                NSInteger i = [weakSelf.tokenList indexOfObject:one];
+                weakSelf.tokenList[i].name = tokenDetail.name;
+                weakSelf.tokenList[i].icon = tokenDetail.icon;
+                [weakSelf.tableView reloadData];
+                [TokenMgr.shareInstance saveToStorage:weakSelf.account.originAccount.address list:weakSelf.tokenList];
+            }
+        }];
+    }
 }
 
 - (IBAction)ClickAdd:(id)sender {
@@ -112,21 +161,44 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     __weak typeof(self) weakSelf = self;
-    [self actionSheetWithTitle:self.tokenList[indexPath.row].name message:nil withActionDatas:@[VLocalize(@"token.send_token"), VLocalize(@"token.info"), VLocalize(@"token.issue_token"), VLocalize(@"token.burn_token"), VLocalize(@"token.remove_token")] handler:^(NSInteger index) {
+    [self actionSheetWithTitle:self.tokenList[indexPath.row].name message:nil withActionDatas:@[VLocalize(@"token.send.token"), VLocalize(@"token.info"), VLocalize(@"token.issue.token"), VLocalize(@"token.burn.token"), VLocalize(@"token.remove.token")] handler:^(NSInteger index) {
         if (index == 0) {
-            TransactionOperateViewController *vc = [[TransactionOperateViewController alloc] initWithAccount:self.account operateType:TransactionOperateTypeLease];
+            TransactionOperateViewController *vc = [[TransactionOperateViewController alloc] initWithAccount:weakSelf.account token:self.tokenList[indexPath.row] operateType:TransactionOperateTypeSendToken];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else if (index == 1) {
-            TokenInfoViewController *vc = [[TokenInfoViewController alloc] init];
+            TokenInfoViewController *vc = [[TokenInfoViewController alloc] initWithAccount:self.account token:self.tokenList[indexPath.row]];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else if (index == 2) {
-            TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:self.account type:TokenOperatePageTypeIssue];
+            TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeIssue token:self.tokenList[indexPath.row]];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else if (index == 3) {
-            TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:self.account type:TokenOperatePageTypeBurn];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+            for(Account *one in WalletMgr.shareInstance.accounts) {
+                if ([self.tokenList[indexPath.row].issuer isEqualToString:one.originAccount.address]) {
+                    TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeBurn token:self.tokenList[indexPath.row]];
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                    return;
+                }
+            }
+            [weakSelf remindWithMessage:VLocalize(@"error.contract.operate.permission.not.issuer")];
         }else if (index == 4) {
-            
+            NSArray<Token *> *list = [TokenMgr.shareInstance loadAddressWatchToken:weakSelf.account.originAccount.address];
+            NSMutableArray *newList = [[NSMutableArray alloc] init];
+            for (Token *one in list) {
+                if ([one.tokenId isEqualToString:weakSelf.tokenList[indexPath.row].tokenId]) {
+                    continue;
+                }
+                [newList addObject:one];
+            }
+            NSError *error = [TokenMgr.shareInstance saveToStorage:weakSelf.account.originAccount.address list:newList];
+            if (error != nil) {
+                [weakSelf alertWithTitle:[error localizedDescription] confirmText:VLocalize(@"close")];
+                return;
+            }
+            weakSelf.tokenList = newList.copy;
+            if (weakSelf.tokenList.count == 0) {
+                [weakSelf.tableView ed_setupEmptyDataDisplay];
+            }
+            [weakSelf.tableView reloadData];
         }
     }];
 }

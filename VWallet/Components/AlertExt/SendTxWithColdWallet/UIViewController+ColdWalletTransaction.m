@@ -27,12 +27,13 @@
 #import "Transaction.h"
 #import "ApiServer.h"
 #import "UIView+Loading.h"
+#import "Token.h"
+#import "TokenMgr.h"
 
 @implementation UIViewController (ColdWalletTransaction)
 
 - (void)coldWalletSendTransactionWithTransation:(Transaction *)transaction account:(Account *)account {
     __weak typeof(self) weakSelf = self;
-    
     AlertViewController *vc = [[AlertViewController alloc] initWithTitle:VLocalize(@"tip.transaction.review.title") confirmTitle:VLocalize(@"tip.transaction.review.btn.title") configureContent:^(UIViewController * _Nonnull vc, UIStackView * _Nonnull parentView) {
         TransactionDetailViewController *detailVC = [[TransactionDetailViewController alloc] initWithTransaction:transaction account:account];
         [vc addChildViewController:detailVC];
@@ -52,9 +53,8 @@
 
 - (void)qrCodeConfirmTx:(Transaction *)tx account:(Account *)account {
     __weak typeof(self) weakSelf = self;
-    
     AlertViewController *vc = [[AlertViewController alloc] initWithTitle:VLocalize(@"tip.transaction.qrcode.title") confirmTitle:VLocalize(@"continue") configureContent:^(UIViewController * _Nonnull vc, UIStackView * _Nonnull parentView) {
-        TransactionQrcodeViewController *qrCodeVc = [[TransactionQrcodeViewController alloc] initWithTransaction:tx.originTransaction account:account];
+        TransactionQrcodeViewController *qrCodeVc = [[TransactionQrcodeViewController alloc] initWithTransaction:tx account:account];
         [vc addChildViewController:qrCodeVc];
         [parentView addArrangedSubview:qrCodeVc.view];
         CGFloat maxHeight = CGRectGetHeight(UIScreen.mainScreen.bounds) * 0.8 - 104;
@@ -109,6 +109,8 @@
                 [alertVC.mainView stopLoading];
                 if (isSuc) {
                     [weakSelf showSuccessTxForColdWallet:transaction.originTransaction];
+                }else {
+                    [weakSelf remindWithMessage:VLocalize(@"error.broadcast.send")];
                 }
             }];
         } else if (transaction.originTransaction.txType == VsysTxTypeLease) {
@@ -116,6 +118,8 @@
                 [alertVC.mainView stopLoading];
                 if (isSuc) {
                     [weakSelf showSuccessTxForColdWallet:transaction.originTransaction];
+                }else {
+                    [weakSelf remindWithMessage:VLocalize(@"error.broadcast.lease")];
                 }
             }];
         } else if (transaction.originTransaction.txType == VsysTxTypeCancelLease) {
@@ -123,6 +127,34 @@
                 [alertVC.mainView stopLoading];
                 if (isSuc) {
                     [weakSelf showSuccessTxForColdWallet:transaction.originTransaction];
+                }else {
+                    [weakSelf remindWithMessage:VLocalize(@"error.broadcast.cancel.lease")];
+                }
+            }];
+        } else if (transaction.originTransaction.txType == VsysTxTypeContractRegister) {
+            [ApiServer broadcastContractRegister:transaction callback:^(BOOL isSuc, Token * _Nonnull token) {
+                [alertVC.mainView stopLoading];
+                if (isSuc) {
+                    NSMutableArray *newList = [NSMutableArray new];
+                    [newList addObjectsFromArray:[TokenMgr.shareInstance loadAddressWatchToken:account.originAccount.address]];
+                    [newList addObject:token];
+                    NSError *error = [TokenMgr.shareInstance saveToStorage:account.originAccount.address list:newList];
+                    if (error != nil) {
+                        NSLog(@"add new token to storage error: %@", error.localizedDescription);
+                    }else {
+                        [weakSelf showSuccessTxForColdWallet:transaction.originTransaction];
+                    }
+                }else {
+                    [weakSelf remindWithMessage:VLocalize(@"error.broadcast.contract.register")];
+                }
+            }];
+        } else if (transaction.originTransaction.txType == VsysTxTypeContractExecute) {
+            [ApiServer broadcastContractExecute:transaction callback:^(BOOL isSuc) {
+                [alertVC.mainView stopLoading];
+                if (isSuc) {
+                    [weakSelf showSuccessTxForColdWallet:transaction.originTransaction];
+                }else {
+                    [weakSelf remindWithMessage:@"error.broadcast.contract.execute"];
                 }
             }];
         } else {
@@ -134,8 +166,9 @@
 
 - (void)showSuccessTxForColdWallet:(VsysTransaction *)tx {
     __weak typeof(self) weakSelf = self;
-    
-    NSString *amountStr = [NSString stringWithDecimal:(tx.amount * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+    NSDecimalNumber *amountDecimal = [[NSDecimalNumber alloc] initWithLongLong:tx.amount];
+    NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLong:VsysVSYS];
+    NSString *amountStr = [NSString stringWithDecimal:[amountDecimal decimalNumberByDividingBy:unityDecimal] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
     NSString *title;
     if (tx.txType == VsysTxTypePayment) {
         title = [NSString stringWithFormat:VLocalize(@"transaction.sent.success.title"), amountStr, tx.recipient];
@@ -143,11 +176,14 @@
         title = [NSString stringWithFormat:VLocalize(@"transaction.lease.success.title"), amountStr, tx.recipient];
     } else if (tx.txType == VsysTxTypeCancelLease) {
         title = [NSString stringWithFormat:VLocalize(@"transaction.cancel.lease.success.title"), amountStr, tx.recipient];
+    } else if (tx.txType == VsysTxTypeContractRegister) {
+        title = VLocalize(@"token.transaction.register.success");
+    } else if (tx.txType == VsysTxTypeContractExecute) {
+        title = @"执行合约成功";
     } else {
         return;
     }
-    
-    
+
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:title attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]}];
     [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[title rangeOfString:tx.recipient]];
     

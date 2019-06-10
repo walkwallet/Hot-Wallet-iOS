@@ -188,7 +188,7 @@
 
 - (void)initContentData {
     NSMutableArray *contentData = @[].mutableCopy;
-    NSString *amountStr = [NSString stringWithDecimal:(self.account.availableBalance * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+    NSString *amountStr = [NSString stringWithDecimal:[NSString getAccurateDouble:self.account.availableBalance unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
     NSArray <CellItem *> *cellItems1 = @[
          VCellItem(@"address", ArrowTableViewCellIdentifier, self.account.originAccount.address, @"", @"", @{@"secondTitle": ([NSString stringWithFormat:@"%@ VSYS", amountStr])})
                                          ];

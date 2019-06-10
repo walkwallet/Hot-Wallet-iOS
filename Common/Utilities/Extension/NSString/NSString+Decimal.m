@@ -9,9 +9,8 @@
 
 @implementation NSString (Decimal)
 
-+ (instancetype)stringWithDecimal:(double)decimal maxFractionDigits:(int)maxFractionDigits minFractionDigits:(int)minFractionDigits trimTrailing:(BOOL)trimTrailing {
-    NSString *placeholderStr = [NSString stringWithFormat:@"%%.%df", MAX(maxFractionDigits, minFractionDigits)];
-    NSString *decimalStr = [NSString stringWithFormat:placeholderStr, decimal];
++ (instancetype)stringWithDecimal:(NSDecimalNumber *)decimal maxFractionDigits:(int)maxFractionDigits minFractionDigits:(int)minFractionDigits trimTrailing:(BOOL)trimTrailing {
+    NSString *decimalStr = decimal.stringValue;
     if (!trimTrailing || ![decimalStr containsString:@"."]) {
         return decimalStr;
     }
@@ -23,12 +22,34 @@
         trimFractionStr = [trimFractionStr substringToIndex:trimFractionStr.length - 1];
     }
     if (minFractionDigits > trimFractionStr.length) {
+        if (minFractionDigits > fractionStr.length) {
+            for (int i = 0;i < minFractionDigits - fractionStr.length;i++){
+                fractionStr = [fractionStr stringByAppendingString:@"0"];
+            }
+        }
         return [integerStr stringByAppendingFormat:@".%@", [fractionStr substringToIndex:minFractionDigits]];
     }
-    if (decimal == (NSInteger)decimal) {
+    if (decimal.integerValue == (NSInteger)decimal) {
         return integerStr;
     }
     return [integerStr stringByAppendingFormat:@".%@", trimFractionStr];
+}
+
++ (BOOL)isNilOrEmpty:(NSString *)string {
+    return string == nil || string.length == 0;
+}
+
++ (int)getDecimal:(int64_t)unity {
+    for (int i = 0; i <= 16; i++){
+        if (pow(10, i) == unity) {
+            return i;
+        }
+    }
+    return 0;
+}
+
++ (NSDecimalNumber *)getAccurateDouble:(long long)value unity:(long long)unity {
+    return [[[NSDecimalNumber alloc] initWithLongLong:value] decimalNumberByDividingBy:[[NSDecimalNumber alloc] initWithLongLong:unity]];
 }
 
 @end

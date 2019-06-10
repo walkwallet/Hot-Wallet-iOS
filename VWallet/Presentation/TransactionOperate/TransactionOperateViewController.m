@@ -18,12 +18,14 @@
 #import "Transaction.h"
 #import "UITextView+Placeholder.h"
 #import "VColor.h"
+#import "Token.h"
 
 @import SafariServices;
 
 @interface TransactionOperateViewController () <UITextViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) Account *account;
+@property (nonatomic, strong) Token * token;
 @property (nonatomic, assign) TransactionOperateType operateType;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -61,9 +63,14 @@
 @implementation TransactionOperateViewController
 
 - (instancetype)initWithAccount:(Account *)account operateType:(TransactionOperateType)operateType {
+    return [self initWithAccount:account token:[Token new] operateType:operateType];
+}
+
+- (instancetype)initWithAccount:(Account *)account token:(Token *)token operateType:(TransactionOperateType)operateType {
     if (self = [super init]) {
         self.account = account;
         self.operateType = operateType;
+        self.token = token;
     }
     return self;
 }
@@ -76,7 +83,10 @@
 - (void)initView {
     [self.maxBtn setTitle:VLocalize(@"account.transaction.max") forState:UIControlStateNormal];
     self.amountTextField.placeholder = VLocalize(@"account.transaction.amount.placeholder");
-    NSString *availableBalanceStr = [NSString stringWithDecimal:self.account.availableBalance * 1.0 / VsysVSYS maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+    NSString *availableBalanceStr = [NSString stringWithDecimal:[NSString getAccurateDouble:self.account.availableBalance unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+    if (self.operateType == TransactionOperateTypeSendToken) {
+        availableBalanceStr = [NSString stringWithDecimal:[NSString getAccurateDouble:self.token.balance unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity] minFractionDigits:2 trimTrailing:YES];
+    }
     NSMutableAttributedString *availableBalanceMas = [[NSMutableAttributedString alloc] initWithString:[VLocalize(@"account.transaction.available.balance") stringByAppendingString:@" "]];
     [availableBalanceMas appendAttributedString:[[NSAttributedString alloc] initWithString:availableBalanceStr attributes:@{NSForegroundColorAttributeName : VColor.textSecondDeepenColor}]];
     self.availableBalanceLabel.attributedText = availableBalanceMas;
@@ -88,7 +98,7 @@
     self.errorAddressLabelHeightLC.constant = 0;
     [self.pasteBtn setTitle:VLocalize(@"account.transaction.paste") forState:UIControlStateNormal];
     [self.scanQRBtn setTitle:VLocalize(@"account.transaction.scan.qr") forState:UIControlStateNormal];
-    
+    NSString *feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:VsysDefaultTxFee * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
     switch (self.operateType) {
         case TransactionOperateTypeSend: {
             self.navigationItem.title = VLocalize(@"nav.title.transaction.send");
@@ -112,9 +122,21 @@
             [self.questionBtn setTitle:VLocalize(@"account.transaction.question") forState:UIControlStateNormal];
             [self.nodeListBtn setTitle:VLocalize(@"account.transaction.nodelist") forState:UIControlStateNormal];
         }
+            break;
+        case TransactionOperateTypeSendToken: {
+            self.navigationItem.title = VLocalize(@"nav.title.transaction.send_token");
+            self.descLabel.text = VLocalize(@"account.transaction.send.amount");
+            self.descLabel1.text = VLocalize(@"account.transaction.send.to");
+            self.descViewTopLC.constant = 20;
+            self.descView.hidden = NO;
+            self.descLabel2.text = VLocalize(@"account.transaction.desc");
+            self.descTextView.placeholder = VLocalize(@"account.transaction.desc.placeholder");
+            self.questionBtn.hidden = YES;
+            self.nodeListBtn.hidden = YES;
+            feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:(VsysDefaultContractExecuteFee * 1.0 / VsysVSYS)] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
+        }
         break;
     }
-    NSString *feeStr = [NSString stringWithDecimal:(VsysDefaultTxFee * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
     NSMutableAttributedString *feeMas = [[NSMutableAttributedString alloc] initWithString:[VLocalize(@"account.transaction.fee") stringByAppendingString:@" "]];
     [feeMas appendAttributedString:[[NSAttributedString alloc] initWithString:[feeStr stringByAppendingString:@" VSYS"] attributes:@{NSForegroundColorAttributeName : VColor.textSecondDeepenColor}]];
     self.transactionFeeLabel.attributedText = feeMas;
@@ -123,14 +145,24 @@
 }
 
 - (BOOL)checkAmount {
-    int64_t balance = self.account.availableBalance - VsysDefaultTxFee - self.amountTextField.text.doubleValue * VsysVSYS;
-    BOOL insufficientBalance = balance < 0;
-    if (insufficientBalance && self.insufficientBalanceLabelHeightLC.constant == 0) {
-        self.insufficientBalanceLabelHeightLC.constant = 15;
-    } else if (!insufficientBalance && self.insufficientBalanceLabelHeightLC.constant > 0) {
-        self.insufficientBalanceLabelHeightLC.constant = 0;
+    if (self.operateType == TransactionOperateTypeSendToken) {
+        BOOL insufficientBalance = self.account.availableBalance < VsysDefaultContractExecuteFee;
+        if (insufficientBalance) {
+            self.insufficientBalanceLabelHeightLC.constant = 15;
+        }else {
+            self.insufficientBalanceLabelHeightLC.constant = 0;
+        }
+        return !insufficientBalance;
+    }else {
+        int64_t balance = self.account.availableBalance - VsysDefaultTxFee - self.amountTextField.text.doubleValue * VsysVSYS;
+        BOOL insufficientBalance = balance < 0;
+        if (insufficientBalance && self.insufficientBalanceLabelHeightLC.constant == 0) {
+            self.insufficientBalanceLabelHeightLC.constant = 15;
+        } else if (!insufficientBalance && self.insufficientBalanceLabelHeightLC.constant > 0) {
+            self.insufficientBalanceLabelHeightLC.constant = 0;
+        }
+        return !insufficientBalance;
     }
-    return !insufficientBalance;
 }
 
 - (IBAction)textFieldEditingChanged:(UITextField *)sender {
@@ -174,9 +206,13 @@
 }
 
 - (IBAction)maxBtnClick {
-    int64_t max = self.account.availableBalance - VsysDefaultTxFee;
-    if (max < 0) max = 0;
-    self.amountTextField.text = [NSString stringWithDecimal:(max * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
+    if (self.operateType == TransactionOperateTypeSendToken) {
+        self.amountTextField.text = [NSString stringWithDecimal:[NSString getAccurateDouble:self.token.balance unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity] minFractionDigits:2 trimTrailing:YES];
+    }else {
+        int64_t max = self.account.availableBalance - VsysDefaultTxFee;
+        if (max < 0) max = 0;
+        self.amountTextField.text = [NSString stringWithDecimal:[NSString getAccurateDouble:max unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
+    }
 }
 
 - (IBAction)pasteBtnClick {
@@ -229,10 +265,16 @@
     [self checkAddress];
     NSDecimalNumber *num1 = [[NSDecimalNumber alloc] initWithInteger:amount];
     NSDecimalNumber *num2 = [[NSDecimalNumber alloc] initWithLong:VsysVSYS];
-    self.amountTextField.text = [[num1 decimalNumberByDividingBy:num2] stringValue];
+    if (amount > 0) {
+        self.amountTextField.text = [[num1 decimalNumberByDividingBy:num2] stringValue];
+    }
 }
 
 - (IBAction)continueBtnClick {
+    if (self.operateType == TransactionOperateTypeSendToken && self.amountTextField.text.doubleValue * self.token.unity > self.token.balance) {
+        [self alertWithTitle:VLocalize(@"tip.transaction.insufficient.token.balance") confirmText:nil];
+        return;
+    }
     if (![self checkAmount]) {
         [self alertWithTitle:VLocalize(@"tip.transaction.insufficient.balance") confirmText:nil];
         return;
@@ -249,25 +291,44 @@
         [self alertWithTitle:VLocalize(@"tip.transaction.address.is.self") confirmText:nil];
         return;
     }
+    if (VsysGetAttachmentLength(self.descTextView.text) > 140) {
+        [self alertWithTitle:VLocalize(@"tip.transaction.attachment.too.long") confirmText:nil];
+        return;
+    }
     VsysTransaction *tx;
+    NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithString:self.amountTextField.text];
     switch (self.operateType) {
-        case TransactionOperateTypeSend:
-            tx = VsysNewPaymentTransaction(self.receiveAddressTextView.text, self.amountTextField.text.doubleValue * VsysVSYS);
+        case TransactionOperateTypeSend: {
+            NSDecimalNumber *unity = [[NSDecimalNumber alloc] initWithLong:VsysVSYS];
+            tx = VsysNewPaymentTransaction(self.receiveAddressTextView.text, [[amount decimalNumberByMultiplyingBy:unity] longLongValue]);
             tx.attachment = [self.descTextView.text dataUsingEncoding:NSUTF8StringEncoding];
-            break;
-        case TransactionOperateTypeLease:
-            tx = VsysNewLeaseTransaction(self.receiveAddressTextView.text, self.amountTextField.text.doubleValue * VsysVSYS);
-            break;
+        } break;
+        case TransactionOperateTypeLease: {
+            NSDecimalNumber *unity = [[NSDecimalNumber alloc] initWithLong:VsysVSYS];
+            tx = VsysNewLeaseTransaction(self.receiveAddressTextView.text, [[amount decimalNumberByMultiplyingBy:unity] longLongValue]);
+        } break;
+        case TransactionOperateTypeSendToken: {
+            NSDecimalNumber *unity = [[NSDecimalNumber alloc] initWithLongLong:self.token.unity];
+            VsysContract *c = [VsysContract new];
+            c.recipient = self.receiveAddressTextView.text;
+            c.amount = [[amount decimalNumberByMultiplyingBy:unity] longLongValue];
+            tx = VsysNewExecuteTransaction(self.token.contractId, VsysBase58EncodeToString([c buildSendData]), VsysGetFuncIndexFromDescriptor(self.token.textualDescriptor, @"send"), self.descTextView.text);
+            tx.recipient = self.receiveAddressTextView.text;
+            tx.amount = c.amount;
+            tx.data = [c buildSendData];
+        } break;
     }
     if (!tx) {
         return;
     }
-    
     Transaction *transaction = [[Transaction alloc] init];
     transaction.originTransaction = tx;
     transaction.senderAddress = self.account.originAccount.address;
     transaction.ownerAddress = self.account.originAccount.address;
     transaction.ownerPublicKey = self.account.originAccount.publicKey;
+    if (self.operateType == TransactionOperateTypeSendToken) {
+        transaction.contractFuncName = VsysActionSend;
+    }
     switch (self.account.accountType) {
         case AccountTypeWallet: {
             transaction.signature = [self.account.originAccount signData:tx.buildTxData];

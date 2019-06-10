@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Wallet
+
+  All rights reserved.
+*/
+NSCameraUsageDescription = "카메라를 사용하여 QR 코드 스캔";
+NSPhotoLibraryAddUsageDescription = "사진 저장";
+NSPhotoLibraryUsageDescription = "사진 선택";
+NSFaceIDUsageDescription = "애플리케이션 보호";
+NSBluetoothPeripheralUsageDescription = "블루투스 사용";

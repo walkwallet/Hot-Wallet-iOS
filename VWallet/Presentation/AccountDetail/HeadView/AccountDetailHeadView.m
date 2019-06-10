@@ -47,13 +47,13 @@
 - (void)setAccount:(Account *)account {
     _account = account;
     [self setAccountType:_account.accountType];
-    NSString *availableBalanceStr = [NSString stringWithDecimal:(_account.availableBalance * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+    NSString *availableBalanceStr = [NSString stringWithDecimal:[NSString getAccurateDouble:self.account.availableBalance unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
     self.availableBalanceeLabel.text = [NSString stringWithFormat:@"%@ VSYS", availableBalanceStr];
-    NSString *totalBalanceStr = [NSString stringWithDecimal:(_account.totalBalance * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+    NSString *totalBalanceStr = [NSString stringWithDecimal:[NSString getAccurateDouble:self.account.totalBalance unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
     self.totalBalanceLabel.text = [NSString stringWithFormat:@"%@ VSYS", totalBalanceStr];
-    NSString *leasedOutStr = [NSString stringWithDecimal:(_account.leasedOut * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+    NSString *leasedOutStr = [NSString stringWithDecimal:[NSString getAccurateDouble:self.account.leasedOut unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
     self.leasedOutLabel.text = [NSString stringWithFormat:@"%@ VSYS", leasedOutStr];
-    NSString *leasedInStr = [NSString stringWithDecimal:(_account.leasedIn * 1.0 / VsysVSYS) maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
+    NSString *leasedInStr = [NSString stringWithDecimal:[NSString getAccurateDouble:self.account.leasedIn unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
     self.leasedInLabel.text = [NSString stringWithFormat:@"%@ VSYS", leasedInStr];
 }
 

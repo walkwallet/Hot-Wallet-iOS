@@ -154,6 +154,14 @@ static NSString *const ApiGetTokenInfo = @"/contract/tokenInfo/%@";
 
 static NSString *const ApiGetContractInfo = @"/contract/info/%@";
 
+static NSString *const ApiGetContractContent = @"/contract/content/%@";
+
 static NSString *const ApiGetAddressTokenBalance = @"/contract/balance/%@/%@";
+
+static NSString *const ApiPostContractRegister = @"/contract/broadcast/register";
+
+static NSString *const ApiPostContractExecute = @"/contract/broadcast/execute";
+
+static NSString *const ApiPostExplorerTokenDetail = @"/api/getTokenDetail";
 
 #endif /* ServiceAPI_h */

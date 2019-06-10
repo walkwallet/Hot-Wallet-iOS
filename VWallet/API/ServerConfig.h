@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)ApiHost;
 
++ (NSString *)ExplorerHost;
+
 @end
 
 NS_ASSUME_NONNULL_END

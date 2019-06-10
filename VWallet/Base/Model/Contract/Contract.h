@@ -7,26 +7,31 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-@interface ContractInfo : NSObject
-@property (nonatomic) NSString *data;
-@property (nonatomic) NSString *type;
-@property (nonatomic) NSString *name;
-@end
-
-@interface ContractInfoList : NSObject
-@property (nonatomic) NSArray<ContractInfo *> *list;
+@interface ContractInfoItem : NSObject
+@property (nonatomic, copy) NSString *data;
+@property (nonatomic, copy) NSString *type;
+@property (nonatomic, copy) NSString *name;
 @end
 
 @interface Contract : NSObject
-
-@property (nonatomic) NSString *contractId;
-@property (nonatomic) NSString *transactionId;
-@property (nonatomic) NSInteger *height;
-@property (nonatomic) NSString *issuer;
-@property (nonatomic) double balance;
-@property (nonatomic) ContractInfoList *infoList;
-
+@property (nonatomic, copy) NSString *contractId;
+@property (nonatomic, copy) NSString *transactionId;
+@property (nonatomic) int64_t height;
+@property (nonatomic, copy) NSArray<ContractInfoItem *> *info;
 @end
 
-NS_ASSUME_NONNULL_END
+@interface ContractContentTextual : NSObject
+@property (nonatomic, copy) NSString *triggers;
+@property (nonatomic, copy) NSString *descriptors;
+@property (nonatomic, copy) NSString *stateVariables;
+@end
+
+@interface ContractContent : NSObject
+@property (nonatomic, copy) NSString *transactionId;
+@property (nonatomic, copy) NSString *languageCode;
+@property (nonatomic) int8_t languageVersion;
+@property (nonatomic, strong) ContractContentTextual *textual;
+@property (nonatomic) int64_t height;
+@end
+
+

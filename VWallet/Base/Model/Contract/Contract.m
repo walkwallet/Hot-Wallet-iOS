@@ -8,5 +8,13 @@
 #import "Contract.h"
 
 @implementation Contract
+@end
 
+@implementation ContractContent
+@end
+
+@implementation ContractContentTextual
+@end
+
+@implementation ContractInfoItem
 @end
