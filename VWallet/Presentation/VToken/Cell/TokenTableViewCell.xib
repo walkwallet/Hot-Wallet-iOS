@@ -12,8 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="75" id="KGk-i7-Jjw" customClass="TokenTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="349" height="75"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="KGk-i7-Jjw" customClass="TokenTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="497" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="349" height="74.5"/>
@@ -22,34 +22,35 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dti-U1-OUy">
                         <rect key="frame" x="20" y="8" width="309" height="58.5"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_token_logo" translatesAutoresizingMaskIntoConstraints="NO" id="IUC-Xe-n7u">
+                                <rect key="frame" x="16" y="13" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="uPs-0p-XK4"/>
+                                    <constraint firstAttribute="height" constant="32" id="uhY-An-tkn"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76Z-Ck-9nh">
                                 <rect key="frame" x="64" y="19.5" width="58" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12,140.2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZb-Q6-ptv">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12,140.2" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZb-Q6-ptv">
                                 <rect key="frame" x="233" y="19.5" width="60" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.57647058823529407" green="0.57647058823529407" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_token_logo" translatesAutoresizingMaskIntoConstraints="NO" id="IUC-Xe-n7u">
-                                <rect key="frame" x="16" y="13.5" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="uPs-0p-XK4"/>
-                                    <constraint firstAttribute="height" constant="32" id="uhY-An-tkn"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="IUC-Xe-n7u" firstAttribute="leading" secondItem="dti-U1-OUy" secondAttribute="leading" constant="16" id="61l-30-Xty"/>
+                            <constraint firstItem="76Z-Ck-9nh" firstAttribute="top" secondItem="IUC-Xe-n7u" secondAttribute="top" constant="-3" id="AxR-Ts-Xbg"/>
+                            <constraint firstItem="xZb-Q6-ptv" firstAttribute="leading" secondItem="IUC-Xe-n7u" secondAttribute="trailing" constant="185" id="Ild-3i-Olh"/>
                             <constraint firstItem="IUC-Xe-n7u" firstAttribute="centerY" secondItem="dti-U1-OUy" secondAttribute="centerY" id="Ilh-1W-4VA"/>
                             <constraint firstItem="76Z-Ck-9nh" firstAttribute="leading" secondItem="IUC-Xe-n7u" secondAttribute="trailing" constant="16" id="Jb6-9y-xBd"/>
-                            <constraint firstAttribute="trailing" secondItem="xZb-Q6-ptv" secondAttribute="trailing" constant="16" id="XQF-w7-qNG"/>
-                            <constraint firstItem="xZb-Q6-ptv" firstAttribute="centerY" secondItem="dti-U1-OUy" secondAttribute="centerY" id="dYT-jy-fbm"/>
-                            <constraint firstItem="76Z-Ck-9nh" firstAttribute="centerY" secondItem="dti-U1-OUy" secondAttribute="centerY" id="s43-Xr-b2z"/>
+                            <constraint firstItem="xZb-Q6-ptv" firstAttribute="leading" secondItem="76Z-Ck-9nh" secondAttribute="leading" id="sYN-PU-qNt"/>
+                            <constraint firstItem="xZb-Q6-ptv" firstAttribute="top" secondItem="76Z-Ck-9nh" secondAttribute="bottom" id="vgE-wc-BTw"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value=""/>
@@ -71,7 +72,7 @@
                 <outlet property="TokenName" destination="76Z-Ck-9nh" id="g2Z-HW-vgN"/>
                 <outlet property="wrapView" destination="dti-U1-OUy" id="5SS-m3-pSp"/>
             </connections>
-            <point key="canvasLocation" x="110.86956521739131" y="161.71875"/>
+            <point key="canvasLocation" x="110.14492753623189" y="161.38392857142856"/>
         </tableViewCell>
     </objects>
     <resources>

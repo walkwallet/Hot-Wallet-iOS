@@ -11,6 +11,7 @@
 #import "TransactionDetailViewController.h"
 #import "UIScrollView+EmptyData.h"
 #import "UIViewController+NavigationBar.h"
+#import "ApiServer.h"
 
 static NSString *const CellIdentifier = @"TransactionTableViewCell";
 

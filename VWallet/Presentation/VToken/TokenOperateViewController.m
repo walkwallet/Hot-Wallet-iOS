@@ -18,6 +18,7 @@
 #import "UIViewController+Transaction.h"
 #import "UIViewController+ColdWalletTransaction.h"
 #import "UIViewController+Alert.h"
+#import "VAlertViewController.h"
 
 #import "NSString+Asterisk.h"
 #import "NSString+Decimal.h"
@@ -93,6 +94,13 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (self.operateType == TokenOperatePageTypeCreate) {
+        [self setProgress:self.unitCurrent total:self.unitTotal];
+    }
+}
+
 - (instancetype)initWithAccount:(Account *)account {
     return [self initWithAccount:account type:TokenOperatePageTypeCreate];
 }
@@ -116,7 +124,8 @@
     if (self.operateType == TokenOperatePageTypeCreate) {
         self.amountNoteLabel.text = VLocalize(@"token.operate.note.total");
         [self.navigationItem setTitle:VLocalize(@"token.create.token")];
-        [self setProgress:8 total:16];
+        self.unitCurrent = 8;
+        self.unitTotal = 16;
         self.labelFee.text = [NSString stringWithFormat:@"%@ VSYS", [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:VsysDefaultContractRegisterFee * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES]];
     }else if (self.operateType == TokenOperatePageTypeIssue) {
         self.labelFee.text = [NSString stringWithFormat:@"%@ VSYS", [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:VsysDefaultContractExecuteFee * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES]];
@@ -160,23 +169,22 @@
     }
     self.unitTotal = total;
     self.unitCurrent = current;
-    CGFloat width = (self.unitCurrent * self.progressView.frame.size.width) / self.unitTotal;
+    CGFloat width = self.progressView.frame.size.width * 1.0 / self.unitTotal;
     if (self.progressTopView == nil) {
-        self.progressTopView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        self.progressTopView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, self.progressView.frame.size.height)];
         self.progressTopView.backgroundColor = [UIColor colorWithHexStr:@"FFC969"];
         [self.progressView addSubview:self.progressTopView];
-        self.progressTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        self.progressTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, self.progressView.frame.size.height)];
         self.progressTitle.textColor = [UIColor whiteColor];
         self.progressTitle.textAlignment = NSTextAlignmentCenter;
         self.progressTitle.font = [UIFont systemFontOfSize:12 weight:UIFontWeightLight];
         [self.progressView addSubview:self.progressTitle];
     }
-    CGRect frame = CGRectMake(0, 0, width, self.progressView.frame.size.height);
-    frame.size.width = width;
+    CGRect frame = CGRectMake(0, 0, width * self.unitCurrent, self.progressView.frame.size.height);
     [UIView animateWithDuration:0.2 animations:^{
         self.progressTitle.text = [NSString stringWithFormat:@"%.0f", current];
-        self.progressTopView.frame = frame;
         self.progressTitle.frame = frame;
+        self.progressTopView.frame = frame;
     }];
 }
 
@@ -197,10 +205,21 @@
 - (IBAction)ClickCheck:(id)sender {
     if(self.checked) {
         self.checked = NO;
+        [self.buttonCheck setHighlighted: self.checked];
     }else {
-        self.checked = YES;
+        __weak typeof(self) weakSelf = self;
+        VAlertViewController *vc = [[VAlertViewController alloc] initWithIconName:@"" title:@"" secondTitle:VLocalize(@"decs.token.split.note") contentView:^(UIStackView * _Nonnull parentView) {
+        } cancelTitle: VLocalize(@"notagree") confirmTitle:VLocalize(@"agree") cancel:^{
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+            return;
+        } confirm:^{
+            weakSelf.checked = YES;
+            [weakSelf.buttonCheck setHighlighted: weakSelf.checked];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        }];
+        vc.notDismiss = YES;
+        [self presentViewController:vc animated:YES completion:nil];
     }
-    [self.buttonCheck setHighlighted: self.checked];
 }
 
 - (IBAction)ClickContinue:(id)sender {

@@ -15,6 +15,7 @@
 #import "Contract.h"
 #import "UIView+Loading.h"
 #import "UIViewController+Alert.h"
+#import "VThemeButton.h"
 
 #import "UITextView+Placeholder.h"
 #import "TokenMgr.h"
@@ -27,6 +28,8 @@
 @property (nonatomic, strong) Account *account;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (nonatomic, strong) Token *token;
+@property (weak, nonatomic) IBOutlet VThemeButton *scanButton;
+@property (weak, nonatomic) IBOutlet VThemeButton *pastButton;
 @end
 
 @implementation AddTokenViewController
@@ -44,11 +47,13 @@
 }
 
 - (void)initView {
-    self.title = VLocalize(@"token.add_token");
+    self.title = VLocalize(@"token.add.token");
+    [self.pastButton setTitle:VLocalize(@"account.transaction.paste") forState:UIControlStateNormal];
+    [self.scanButton setTitle:VLocalize(@"account.transaction.scan.qr") forState:UIControlStateNormal];
     self.doneButton.alpha = 0.5;
     [self.doneButton setTitle:VLocalize(@"done") forState:UIControlStateNormal];
-    self.tokenIdNoteLabel.text = VLocalize(@"token.token_id_note");
-    self.tokenIdTextFiled.placeholder = VLocalize(@"token.input_token_id");
+    self.tokenIdNoteLabel.text = VLocalize(@"token.token.id.note");
+    self.tokenIdTextFiled.placeholder = VLocalize(@"token.input.token.id");
     self.tokenIdTextFiled.delegate = self;
     self.errorLabelHeight.constant = 0;
 }

@@ -140,7 +140,7 @@
                                                             <inset key="contentEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" image="ico_token"/>
                                                             <connections>
-                                                                <action selector="tokenBtnClick" destination="3XR-Bq-m70" eventType="touchUpInside" id="Zhj-e3-vcn"/>
+                                                                <action selector="tokenBtnClick" destination="3XR-Bq-m70" eventType="touchUpInside" id="XPd-Dc-14b"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -363,8 +363,8 @@
                                         <outlet property="leasedInLabel" destination="hr9-WT-QTa" id="7Q5-dt-lzK"/>
                                         <outlet property="leasedOutLabel" destination="bee-sv-iGb" id="6gk-UH-BAW"/>
                                         <outlet property="receiveBtnTitleLabel" destination="szI-g5-C5I" id="cnY-oc-Wwo"/>
-                                        <outlet property="recordsBtnTitleLabel" destination="DQE-Un-QQZ" id="tQf-BA-uiM"/>
                                         <outlet property="sendBtnTitleLabel" destination="SxU-Ob-ypP" id="spt-gS-R4g"/>
+                                        <outlet property="tokenBtnTitleLabel" destination="DQE-Un-QQZ" id="tQf-BA-uiM"/>
                                         <outlet property="totalBalanceLabel" destination="XOV-HP-L5F" id="B0l-g3-vxt"/>
                                     </connections>
                                 </view>

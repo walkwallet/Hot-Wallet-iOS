@@ -62,6 +62,9 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
 
 - (void)initView {
     [self.navigationItem setTitle:@"Token"];
+    [self.createToken setTitle:VLocalize(@"token.create.token") forState:UIControlStateNormal];
+    [self.addToken setTitle:VLocalize(@"token.add.token") forState:UIControlStateNormal];
+    self.tokenNoteLabel.text = VLocalize(@"token.available.vsys");
     [self.addToken setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
     [self.createToken setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
     self.tokenHeaderView.account = self.account;
@@ -161,7 +164,7 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     __weak typeof(self) weakSelf = self;
-    [self actionSheetWithTitle:self.tokenList[indexPath.row].name message:nil withActionDatas:@[VLocalize(@"token.send.token"), VLocalize(@"token.info"), VLocalize(@"token.issue.token"), VLocalize(@"token.burn.token"), VLocalize(@"token.remove.token")] handler:^(NSInteger index) {
+    [self actionSheetWithTitle:self.tokenList[indexPath.row].name message:nil withActionDatas:@[VLocalize(@"token.send.token"), VLocalize(@"token.info"), VLocalize(@"token.issue.token"), VLocalize(@"token.burn.token"), VLocalize(@"token.hide.token")] handler:^(NSInteger index) {
         if (index == 0) {
             TransactionOperateViewController *vc = [[TransactionOperateViewController alloc] initWithAccount:weakSelf.account token:self.tokenList[indexPath.row] operateType:TransactionOperateTypeSendToken];
             [weakSelf.navigationController pushViewController:vc animated:YES];
@@ -172,9 +175,12 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
             TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeIssue token:self.tokenList[indexPath.row]];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else if (index == 3) {
+            TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeBurn token:weakSelf.tokenList[indexPath.row]];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+            return;
             for(Account *one in WalletMgr.shareInstance.accounts) {
-                if ([self.tokenList[indexPath.row].issuer isEqualToString:one.originAccount.address]) {
-                    TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeBurn token:self.tokenList[indexPath.row]];
+                if ([weakSelf.tokenList[indexPath.row].issuer isEqualToString:one.originAccount.address]) {
+                    TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeBurn token:weakSelf.tokenList[indexPath.row]];
                     [weakSelf.navigationController pushViewController:vc animated:YES];
                     return;
                 }

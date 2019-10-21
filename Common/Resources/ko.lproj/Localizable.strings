@@ -20,6 +20,8 @@
 "logout"  = "로그아웃";
 "back"  = "뒤로";
 "isee"  = "내용을 이해했습니다.";
+"notagree" = "동의하지 않음";
+"agree" = "동의";
 
 // view text by module vi: "settings.title" "xx.xx.xx.xx.title"
 
@@ -67,8 +69,8 @@
 "account.detail.receive"  = "수신";
 "account.detail.lease"  = "주조";
 "account.detail.records"  = "기록";
-"account.detail.token" = "Token";
-"account.detail.token.watchList" = "Token Watch List";
+"account.detail.token" = "토큰";
+"account.detail.token.watchList" = "토큰 관심 리스트";
 "account.detail.transaction.records"  = "트랜잭션 기록";
 
 // ---- account transaction operate ----
@@ -95,8 +97,8 @@
 "transaction.list.type.1"  = "전송";
 "transaction.list.type.2"  = "수신";
 "transaction.list.type.3"  = "주조";
-"transaction.list.type.8" = "Register Contract";
-"transaction.list.type.9" = "Execute Contract";
+"transaction.list.type.8" = "계약 생성";
+"transaction.list.type.9" = "계약 체결";
 
 // ---- date range filter ----
 "date.range.type.0"  = "필터 없음";
@@ -112,7 +114,7 @@
 "transaction.detail.receive"  = "로";
 "transaction.detail.lease.in.sender"  = "에서";
 "transaction.detail.lease.out.receive"  = "로";
-"transaction.detail.status" = "Status";
+"transaction.detail.status" = "상태";
 "transaction.detail.from"  = "에서";
 "transaction.detail.to"  = "로";
 "transaction.detail.tx.id"  = "TxId";
@@ -122,7 +124,7 @@
 "transaction.detail.time"  = "시간";
 "transaction.detail.desc"  = "설명";
 "transaction.detail.cancel.out.leasing"  = "리스 취소";
-"transaction.detail.chinese.standard.time"  = "표준시";
+"transaction.detail.standard.time"  = "한국 표준시";
 
 // ---- account receive ----
 "account.receive.amount"  = "총액";
@@ -167,7 +169,7 @@
 "about.cell2.title"  = "버전";
 
 // ---- welcome ----
-"welcome.title"  = "Welcome WALK WALLET";
+"welcome.title"  = "워크 월렛에 오신 것을 환영합니다.";
 "welcome.detail"  = "지갑을 생성하거나 불러오십시오.";
 "welcome.btn1.title"  = "지갑 생성";
 "welcome.btn2.title"  = "출금 지갑";
@@ -248,12 +250,12 @@
 
 // ---- QRCode scan ----
 "scan.qrcode.title"  = "QR 코드 인식";
-"scan.qrcode.page.bottom.note" = "Current Page %d / Total Page %d";
-"scan.qrcode.explain" = "Create token %@ that max supply is %lld";
-"scan.qrcode.support.split" = "(support split)";
-"scan.qrcode.function.explain.send" = "send %@ %@ to %@";
-"scan.qrcode.function.explain.issue" = "issue %@ %@";
-"scan.qrcode.function.explain.burn" = "destroy %@ %@";
+"scan.qrcode.page.bottom.note" = "현재 페이지: %d 총페이지: %d";
+"scan.qrcode.explain" = "토큰 생성 %@ ,최대 공급량 %lld";
+"scan.qrcode.support.split" = "(분할 지원/ 병합 지원)";
+"scan.qrcode.function.explain.send" = "보내기 %@ %@ 줄다 %@";
+"scan.qrcode.function.explain.issue" = "발행 %@ %@";
+"scan.qrcode.function.explain.burn" = "파괴하다 %@ %@";
 
 // ----- Transaction QRCode ----
 "transaction.qrcode.title"  = "1. QR 코드 스캔을 위해 콜드 월렛 클라이언트를 사용하십시오.\n\n2. 콜드 월렛 클라이언트가 QR 코드를 생성하고 나서 계속을 클릭하십시오.";
@@ -261,6 +263,7 @@
 // ---- action option ----
 "action.address.detail"  = "세부 주소";
 "action.address.copy"  = "주소 복사";
+"action.address.records" = "기록";
 
 // tip prefix with "tip.xx.xx"
 // ---- logout ----
@@ -294,13 +297,13 @@
 
 // ---- transaction operate ----
 "tip.transaction.insufficient.balance"  = "잔고 부족";
-"tip.transaction.insufficient.token.balance" = "Insufficient token balance";
+"tip.transaction.insufficient.token.balance" = "잔고 부족";
 "tip.transaction.error.address"  = "오직 VSYS 주소로만 토큰이 전송 됩니다.";
 "tip.transaction.amount.invalid"  = "입력 한 금액이 잘못되었습니다.";
 "tip.transaction.address.is.self"  = "수신 주소는 현재 주소로 설정할 수 없습니다.";
-"tip.transaction.attachment.too.long" = "Description attachment content too long";
-"tip.transaction.contract.desc.too.long" = "Contract description too long";
-"tip.transaction.token.desc.too.long" = "Token description too long";
+"tip.transaction.attachment.too.long" = "설명 파일의 내용이 너무 깁니다.";
+"tip.transaction.contract.desc.too.long" = "계약서 설명이 너무 깁니다.";
+"tip.transaction.token.desc.too.long" = "토큰 설명이 너무 깁니다.";
 
 // ---- Transaction QRCode ----
 "tip.transaction.qrcode.title"  = "QR 코드 인식";
@@ -356,67 +359,72 @@
 "secure.level.5"  = "완벽";
 
 // ---- Transaction Type ----
-"const.transaction.type.send"  = "전송됨";
-"const.transaction.type.receive"  = "수신됨";
+"const.transaction.type.send" = "전송됨";
+"const.transaction.type.receive" = "수신됨";
+"const.transaction.type.minting" = "박하";
 "const.transaction.type.lease.in"  = "리스 인";
 "const.transaction.type.lease.out"  = "리스 아웃";
 "const.transaction.type.lease.in.cancel"  = "인커밍 리스  취소";
 "const.transaction.type.lease.out.cancel"  = "리스 취소";
-"const.transaction.type.contract.register" = "Register Contract";
-"const.transaction.type.contract.execute" = "Execute Contract";
+"const.transaction.type.contract.register" = "계약 생성";
+"const.transaction.type.contract.execute" = "계약 체결";
 
 // ---- network ----
 "const.network.mainnet"  = "메인넷";
 "const.network.testnet"  = "테스트넷";
 
 // ---- token ----
-"token.add_token" = "AddToken";
-"token.token_id_note" = "TOKEN ID";
-"token.input_token_id" = "Input the token ID";
-"token.info" = "Token Info";
-"token.info.id.token" = "Token ID";
-"token.info.id.contract" = "Contract ID";
-"token.info.issuer" = "Issuer";
-"token.info.maker" = "Maker";
-"token.info.register_time" = "Register Time";
-"token.info.supply.max" = "Max Supply";
-"token.info.supply.current" = "Current Supply";
-"token.info.description" = "Description";
-"token.info.unity" = "UNITY:";
-"token.info.contract.desc" = "CONTRACT DESCRIPTION";
-"token.info.token.desc" = "TOKEN DESCRIPTION";
-"token.info.description.note" = "You cannot change the description later";
-"token.info.contract.description.note" = "You cannot change the description later";
-"token.info.support.split.note" = "Support split/reverse-split token";
-"token.info.support.note" = "(Attention:cannot chagne after create)";
-"token.send.token" = "Send Token";
-"token.create.token" = "Create Token";
-"token.issue.token" = "Issue Token";
-"token.burn.token" = "Destroy Token";
-"token.remove.token" = "Remove Token";
-"token.operate.note.total" = "MAX SUPPLY";
-"token.operate.note.burn" = "DESTROY AMOUNT";
-"token.operate.note.issue" = "ISSUE AMOUNT";
-"token.operate.review.token" = "Review Token";
-"token.operate.review.issue" = "Review Issue";
-"token.operate.review.burn" = "Review Destroy";
+"token.available.vsys" = "이용가능한 VSYS";
+"token.add.token" = "토큰 추가";
+"token.token.id.note" = "토큰 아이디";
+"token.input.token.id" = "토큰 아이디 입력";
+"token.info" = "토큰 정보";
+"token.info.id.token" = "토큰 아이디";
+"token.info.id.contract" = "컨트랙트 아이디";
+"token.info.issuer" = "발행자";
+"token.info.maker" = "메이커";
+"token.info.register_time" = "등록 시간";
+"token.info.supply.max" = "최대 유통량";
+"token.info.supply.current" = "현재 유통량";
+"token.info.description" = "설명";
+"token.info.unity" = "단위:";
+"token.info.contract.desc" = "컨트랙트 설명";
+"token.info.token.desc" = "토큰 설명";
+"token.info.description.note" = "다시 수정이 불가능합니다.";
+"token.info.contract.description.note" = "다시 수정이 불가능합니다.";
+"token.info.support.split.note" = "분할 지원/ 병합 지원";
+"token.info.support.note" = "(주의: 설정 후 수정이 불가합니다)";
+"token.send.token" = "토큰 전송";
+"token.create.token" = "토큰 생성";
+"token.issue.token" = "발행 토큰";
+"token.burn.token" = "토큰 파괴";
+"token.hide.token" = "토큰숨기기";
+"token.operate.note.total" = "최대 유통량";
+"token.operate.note.burn" = "소각 코인 발행 수량";
+"token.operate.note.issue" = "발행 수량";
+"token.operate.review.token" = "거래 검토";
+"token.operate.review.issue" = "거래 검토";
+"token.operate.review.burn" = "거래 검토";
 
-"token.operate.error.id.format" = "Invalid format";
-"token.operate.error.id.not.exist" = "Token not exist";
-"token.operate.issue.amount" = "Issue amount";
-"token.operate.burn.amount" = "Destroy amount";
-"token.register.success.check.watch.list" = "You can check in your token watch list";
-"token.transaction.register.success" = "Create Token Success";
-"token.transaction.send.success" = "Execute Contract Success";
+"token.operate.error.id.format" = "토큰 아이디 잘못되었습니다.";
+"token.operate.error.id.not.exist" = "토큰이 존재하지 않습니다!";
+"token.operate.issue.amount" = "발행 수량";
+"token.operate.burn.amount" = "소각 코인 발행 수량";
+"token.register.success.check.watch.list" = "거래 기록을 확인할 수 있습니다.";
+"token.transaction.register.success" = "성공적으로 생성됨";
+"token.transaction.send.success" = "계약 성공 실행";
 
-"error.permission.not.issuer" = "This account is not the issuer of contract";
-"error.broadcast.contract.execute" = "Fail to broad cast contract execute";
-"error.broadcast.contract.register" = "Fail to broad cast create new token";
-"error.contract.operate.permission.not.issuer" = "Permission denied, require issuer of the token";
-"error.contract.issue.over.max" = "Issuer input cannot bigger than max supply";
-"error.contract.burn.over.available" = "Burn input cannot bigger than available";
-"error.contract.create.out.of.range" = "Token max supply out of range, please reduce unity";
-"error.contract.send.failed" = "Fail to send token";
-"error.broadcast.cancel.lease" = "Fail to cancel lease";
-"error.broadcast.lease" = "Fail to lease";
-"error.broadcast.send" = "Fail to cancel lease";
+"error.permission.not.issuer" = "이 계좌는 계약서 발행자가 아닙니다.";
+"error.broadcast.contract.execute" = "실행 된 방송 계약 실패";
+"error.broadcast.contract.register" = "브로드 캐스트 실패시 새 토큰 생성";
+"error.contract.operate.permission.not.issuer" = "사용 권한이 거부되었습니다. 토큰 발급자가 필요합니다.";
+"error.contract.issue.over.max" = "이슈 금액은 총 공급액보다 클 수 없다.";
+"error.contract.burn.over.available" = "화상 량은 사용 가능한 것보다 클 수 없다.";
+"error.contract.create.out.of.range" = "최대 공급 범위를 벗어남. 10 진수를 줄이십시오.";
+"error.contract.send.failed" = "토큰을 보내지 못했습니다.";
+"error.broadcast.cancel.lease" = "임대 취소 실패.";
+"error.broadcast.lease" = "임대하지 못함";
+"error.broadcast.send" = "전송 실패";
+"error.token.exist" = "이미 토큰이 추가되었습니다!";
+
+"decs.token.split.note" = "경고: 스플릿/리버스-스플릿은 유틸리티 토큰 스플릿 프로토콜과 호환이 될 수 있도록 거래소의 지원이 필요한 토큰의 실험적인 기능입니다. 스플릿 기능이 들어간 토큰의 정확한 사용을 위해 토큰 발행자와 지원 거래소간의 정밀심사(기업실사)가 요구됩니다. 토큰 발행자는 프로토콜 및 스플릿/리버스-스플릿 기능의 정확한 사용법을 준수해야 합니다. 토큰 발행자는 토큰의 스플릿/리버스-스플릿 기능의 사용과 연관된 피해 및 손해에 대한 변호, 면책 및 배상에 대한 동의를 해야합니다.(위의 내용은  영문원본을 참조하여 번역했으며  , 영문 원본과 차이가 있을 경우 영문원본을 기준으로 한다)";

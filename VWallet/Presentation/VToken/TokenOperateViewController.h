@@ -18,7 +18,9 @@ typedef NS_ENUM(NSInteger, TokenOperatePageType) {
 @interface TokenOperateViewController : UIViewController
 
 - (instancetype)initWithAccount:(Account *)account;
+
 - (instancetype)initWithAccount:(Account *)account type:(NSInteger)type;
+
 - (instancetype)initWithAccount:(Account *)account type:(NSInteger)type token:(Token *)token;
 
 @end

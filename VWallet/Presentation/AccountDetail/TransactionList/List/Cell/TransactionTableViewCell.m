@@ -40,6 +40,10 @@
         self.addressLabel.text = [_transaction.ownerAddress explicitCount:12 maxAsteriskCount:6];
     }else {
         self.typeImgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"ico_transaction_type_%d", _transaction.transactionType]];
+        // Minting - Receive
+        if (_transaction.transactionType == 5) {
+            self.typeImgView.image = [UIImage imageNamed:@"ico_transaction_type_2"];
+        }
         if ([_transaction.originTransaction.recipient isEqualToString: _transaction.ownerAddress]) {
             if ([NSString isNilOrEmpty:_transaction.senderAddress]) {
                 self.addressLabel.text = [_transaction.ownerAddress explicitCount:12 maxAsteriskCount:6];

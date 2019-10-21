@@ -76,6 +76,9 @@
                                                                                                               NSParagraphStyleAttributeName: style
                                                                                                               }];
                 weakself.secondTitleLabel.attributedText = str;
+                if (secondTitle.length > 100) {
+                    weakself.secondTitleLabel.textAlignment = NSTextAlignmentLeft;
+                }
 //                weakself.secondTitleLabel.text = secondTitle;
 //                [weakself.secondTitleLabel sizeToFit];
             }

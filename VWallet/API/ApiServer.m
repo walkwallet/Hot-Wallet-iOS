@@ -52,17 +52,22 @@
     }];
 }
 
-+ (void)transactionList:(NSString *)address callback: (void(^)(BOOL isSuc, NSArray <Transaction *> *txArr))callback {
-    [AppServer Get:VApi(([NSString stringWithFormat:ApiTransactionList, address])) params:@{} success:^(id _Nonnull response) {
-        if ([response isKindOfClass:NSArray.class] && [response count] == 1 && [response[0] isKindOfClass:NSArray.class]) {
++ (void)transactionList:(NSString *)address offset:(NSInteger)offset limit:(NSInteger)limit type:(NSInteger)type callback: (void(^)(BOOL isSuc, NSArray <Transaction *> *txArr))callback {
+    NSString *api = @"";
+    if (type == 0) {
+        api = [NSString stringWithFormat:ApiTransactionList, address, limit, offset];
+    }else {
+        api = [NSString stringWithFormat:@"%@&txType=%ld", [NSString stringWithFormat:ApiTransactionList, address, limit, offset], type];
+    }
+    [AppServer Get:VApi((api)) params:@{} success:^(id _Nonnull response) {
+        if ([response[@"transactions"] isKindOfClass:NSArray.class]) {
             NSMutableArray *retArr = @[].mutableCopy;
             NSMutableDictionary *cancelLeaseDict = @{}.mutableCopy;
-            for (NSDictionary *dict in response[0]) {
+            for (NSDictionary *dict in response[@"transactions"]) {
                 Transaction *t = [Transaction new];
                 t.ownerAddress = address;
                 VsysTransaction *tx;
                 int txType = [dict[@"type"] intValue];
-                t.transactionType = txType;
                 if (txType == VsysTxTypePayment) {
                     tx = VsysNewPaymentTransaction(dict[@"recipient"], [dict[@"amount"] integerValue]);
                     tx.timestamp = [dict[@"timestamp"] integerValue];

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>VWallet.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>187233B8787DF8506F2DA70BBCFFE9D4DC5014F7</string>
+				<key>dateExpires</key>
+				<string>2020/5/23</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>HF225C89SZ.systems.vsys.wallet.hot.test</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>HF225C89SZ</string>
+				<key>get-task-allow</key>
+				<false/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>HF225C89SZ.systems.vsys.wallet.hot.test</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>VWallet.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>421e4c3d-472f-405c-94b5-17ac0161c190</string>
+				<key>name</key>
+				<string>iOS Team Ad Hoc Provisioning Profile: *</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>HF225C89SZ</string>
+				<key>name</key>
+				<string>Chengdu ToGreat Technology Co., Ltd.</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

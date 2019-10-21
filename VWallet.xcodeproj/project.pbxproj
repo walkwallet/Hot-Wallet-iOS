@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3B6CB39FC990E6C5A5EC3C42 /* libPods-VWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B27CE84EDC02E8737460067B /* libPods-VWallet.a */; };
 		402BBAEB21E5D2F4005F2794 /* AppDelegate+DismissKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 402BBAE921E5D2F4005F2794 /* AppDelegate+DismissKeyboard.m */; };
-		402BBB1821E5D326005F2794 /* AccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402BBAED21E5D326005F2794 /* AccountDetailViewController.m */; };
 		402BBB1921E5D326005F2794 /* AccountDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 402BBAF021E5D326005F2794 /* AccountDetailHeadView.m */; };
 		402BBB1A21E5D326005F2794 /* DateRangeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 402BBAF521E5D326005F2794 /* DateRangeTableViewCell.m */; };
 		402BBB1B21E5D326005F2794 /* DateRangeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 402BBAF621E5D326005F2794 /* DateRangeTableViewCell.xib */; };
@@ -184,6 +183,7 @@
 		A88B0FFD2276A760008C1CE8 /* TokenHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B0FFC2276A760008C1CE8 /* TokenHeaderView.m */; };
 		A88B10022276C89E008C1CE8 /* TokenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B10002276C89E008C1CE8 /* TokenTableViewCell.m */; };
 		A88B10032276C89E008C1CE8 /* TokenTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88B10012276C89E008C1CE8 /* TokenTableViewCell.xib */; };
+		A8948FE7232623260003F4B3 /* AccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8948FE6232623250003F4B3 /* AccountDetailViewController.m */; };
 		A8C32BE6228985AD00E1CBB1 /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C32BE4228985AD00E1CBB1 /* SuccessViewController.m */; };
 		A8C32BE7228985AD00E1CBB1 /* SuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */; };
 		A8C32BEB228AA89300E1CBB1 /* AddTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C32BE9228AA89300E1CBB1 /* AddTokenViewController.m */; };
@@ -195,7 +195,6 @@
 		4023E12421AE1FAF00E18D5D /* VWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		402BBAE921E5D2F4005F2794 /* AppDelegate+DismissKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+DismissKeyboard.m"; sourceTree = "<group>"; };
 		402BBAEA21E5D2F4005F2794 /* AppDelegate+DismissKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+DismissKeyboard.h"; sourceTree = "<group>"; };
-		402BBAED21E5D326005F2794 /* AccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDetailViewController.m; sourceTree = "<group>"; };
 		402BBAEF21E5D326005F2794 /* AccountDetailHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountDetailHeadView.h; sourceTree = "<group>"; };
 		402BBAF021E5D326005F2794 /* AccountDetailHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDetailHeadView.m; sourceTree = "<group>"; };
 		402BBAF121E5D326005F2794 /* AccountDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountDetailViewController.h; sourceTree = "<group>"; };
@@ -503,6 +502,7 @@
 		A88B0FFF2276C89E008C1CE8 /* TokenTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenTableViewCell.h; sourceTree = "<group>"; };
 		A88B10002276C89E008C1CE8 /* TokenTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenTableViewCell.m; sourceTree = "<group>"; };
 		A88B10012276C89E008C1CE8 /* TokenTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenTableViewCell.xib; sourceTree = "<group>"; };
+		A8948FE6232623250003F4B3 /* AccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDetailViewController.m; sourceTree = "<group>"; };
 		A8C32BE3228985AD00E1CBB1 /* SuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
 		A8C32BE4228985AD00E1CBB1 /* SuccessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuccessViewController.m; sourceTree = "<group>"; };
 		A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessViewController.xib; sourceTree = "<group>"; };
@@ -561,7 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				402BBAF121E5D326005F2794 /* AccountDetailViewController.h */,
-				402BBAED21E5D326005F2794 /* AccountDetailViewController.m */,
+				A8948FE6232623250003F4B3 /* AccountDetailViewController.m */,
 				402BBAEE21E5D326005F2794 /* HeadView */,
 				402BBAF221E5D326005F2794 /* TransactionList */,
 			);
@@ -2099,7 +2099,6 @@
 				4041C18B21CB711000B2AE05 /* PushAnimatorObject.m in Sources */,
 				4041C19821CB711000B2AE05 /* AppDelegate.m in Sources */,
 				4041C21921CB711100B2AE05 /* TouchIDTool.m in Sources */,
-				402BBB1821E5D326005F2794 /* AccountDetailViewController.m in Sources */,
 				4041C19621CB711000B2AE05 /* ServerConfig.m in Sources */,
 				4041C21521CB711100B2AE05 /* NSDate+FormatString.m in Sources */,
 				4041C18021CB711000B2AE05 /* crypto_scrypt-hexconvert.c in Sources */,
@@ -2107,6 +2106,7 @@
 				4041C18E21CB711000B2AE05 /* AlertNavController.m in Sources */,
 				4041C17D21CB711000B2AE05 /* Makefile in Sources */,
 				4041C1F521CB711100B2AE05 /* NormalTableViewCell.m in Sources */,
+				A8948FE7232623260003F4B3 /* AccountDetailViewController.m in Sources */,
 				4041C19E21CB711000B2AE05 /* ToastPasswordViewController.m in Sources */,
 				402BBB2521E5D326005F2794 /* TransactionTableViewController.m in Sources */,
 				4041C1F621CB711100B2AE05 /* SectionHeaderView.m in Sources */,
@@ -2399,10 +2399,10 @@
 			baseConfigurationReference = B99A01A40F53D8E0B803D481 /* Pods-VWallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = HF225C89SZ;
+				DEVELOPMENT_TEAM = WXK7UF23NY;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2416,9 +2416,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = systems.v.app.test;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.vsys.wallet.hot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = hotapp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
 			};
@@ -2429,9 +2429,9 @@
 			baseConfigurationReference = 20398EE6FDC06B493FA9EE1F /* Pods-VWallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = HF225C89SZ;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WXK7UF23NY;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2444,9 +2444,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = systems.v.app.test;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.vsys.wallet.hot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = hotapp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
 			};

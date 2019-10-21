@@ -16,6 +16,7 @@
 #import "AccountDetailHeadView.h"
 #import "TransactionTableHeadView.h"
 #import "TransactionTableViewCell.h"
+#import "TransactionListType.h"
 #import "UIViewController+NavigationBar.h"
 #import "UIScrollView+EmptyData.h"
 
@@ -26,19 +27,30 @@
 #import "UIViewController+Alert.h"
 #import "AddressDetailViewController.h"
 #import "NSString+Asterisk.h"
+#import "TransactionRecordsPageViewController.h"
 
 static NSString *const CellIdentifier = @"TransactionTableViewCell";
+static NSInteger const TransactionPageSize = 100;
 
 @interface AccountDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) Account *account;
 
 @property (weak, nonatomic) IBOutlet UIView *naviBar;
+
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 
 @property (weak, nonatomic) IBOutlet AccountDetailHeadView *headView;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray<Transaction *> *transactionArray;
+
+@property (nonatomic, strong) NSMutableArray<Transaction *> *transactionArray;
+
+@property (nonatomic, assign) NSInteger page;
+
+@property (nonatomic, assign) BOOL hasMore;
+
+@property (nonatomic, assign) BOOL loading;
 
 @end
 
@@ -53,6 +65,7 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
+    [self initData];
 }
 
 - (void)initView {
@@ -65,12 +78,60 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
     self.tableView.ed_loading_offset = offsetY + 50;
     self.tableView.ed_empty_offset = offsetY + 70;
     self.tableView.ed_loading = YES;
-    
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    [refresh addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    self.tableView.refreshControl = refresh;
+}
+
+- (void)initData {
+    self.page = 1;
+    [self loadTransaction:self.page];
+}
+
+- (void)refreshData {
+    [self loadTransaction:1];
+}
+
+- (void)loadTransaction:(NSInteger)page {
+    if (self.loading) {
+        return;
+    }
+    self.loading = YES;
     __weak typeof(self) weakSelf = self;
-    [ApiServer transactionList:self.account.originAccount.address callback:^(BOOL isSuc, NSArray<Transaction *> * _Nonnull txArr) {
+    [ApiServer transactionList:self.account.originAccount.address offset:(page - 1) * TransactionPageSize limit:TransactionPageSize type:TransactionListTypeAll callback:^(BOOL isSuc, NSArray<Transaction *> * _Nonnull txArr) {
         weakSelf.tableView.ed_loading = NO;
-        weakSelf.transactionArray = txArr;
-        [weakSelf.tableView reloadData];
+        weakSelf.loading = NO;
+        [weakSelf.tableView.refreshControl endRefreshing];
+        self.page = page;
+        if (page == 1) {
+            [weakSelf.transactionArray removeAllObjects];
+            [weakSelf.transactionArray addObjectsFromArray:txArr];
+            [weakSelf.tableView reloadData];
+        }else {
+            NSMutableDictionary *cancelLeaseDict = @{}.mutableCopy;
+            for (Transaction *one in weakSelf.transactionArray) {
+                if (one.transactionType == 4) {
+                    cancelLeaseDict[one.originTransaction.txId] = @(YES);
+                }
+            }
+            for (Transaction *one in txArr) {
+                NSInteger index = [txArr indexOfObject:one];
+                if (one.transactionType == 3 && one.canCancel) {
+                    if (cancelLeaseDict[one.originTransaction.txId] || !one.canCancel) {
+                        txArr[index].canCancel = NO;
+                    }else {
+                        txArr[index].canCancel = YES;
+                    }
+                }
+            }
+            [weakSelf.transactionArray addObjectsFromArray:txArr];
+            [weakSelf.tableView reloadData];
+        }
+        if (txArr.count < TransactionPageSize) {
+            self.hasMore = NO;
+        }else {
+            self.hasMore = YES;
+        }
     }];
 }
 
@@ -147,6 +208,14 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+#pragma mark - UITableView Delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat currentOffsetY = scrollView.contentOffset.y;
+    if (currentOffsetY + scrollView.frame.size.height  > scrollView.contentSize.height &&  self.tableView.refreshControl.isRefreshing == NO && self.hasMore) {
+        [self loadTransaction:self.page + 1];
+    }
+}
+
 #pragma mark - Send
 - (IBAction)sendBtnClick {
     TransactionOperateViewController *sendVC = [[TransactionOperateViewController alloc] initWithAccount:self.account operateType:TransactionOperateTypeSend];
@@ -165,6 +234,12 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
     [self.navigationController pushViewController:leaseVC animated:YES];
 }
 
+#pragma mark - Records
+- (IBAction)recordsBtnClick:(id)sender {
+    TransactionRecordsPageViewController *transactionRecordsPageVC = [[TransactionRecordsPageViewController alloc] initWithAccount:self.account transationArray:self.transactionArray];
+    [self.navigationController pushViewController:transactionRecordsPageVC animated:YES];
+}
+
 #pragma mark - Token
 - (IBAction)tokenBtnClick {
     TokenViewController *tokenVC = [[TokenViewController alloc] initWithAccount:self.account];
@@ -173,7 +248,7 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
 
 - (IBAction)moreOperateBtnClick {
     __weak typeof(self) weakSelf = self;
-    [self actionSheetWithSelectedIndex:-1 withActionDatas:@[VLocalize(@"action.address.detail"), VLocalize(@"action.address.copy")] handler:^(NSInteger index) {
+    [self actionSheetWithSelectedIndex:-1 withActionDatas:@[VLocalize(@"action.address.detail"), VLocalize(@"action.address.copy"), VLocalize(@"action.address.records")] handler:^(NSInteger index) {
         if (index == 0) {
             AddressDetailViewController *addressDetailsVC = [VStoryboard.Address instantiateViewControllerWithIdentifier:@"AddressDetailViewController"];
             [addressDetailsVC updateAccout:self.account];
@@ -182,6 +257,9 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
         } else if (index == 1) {
             UIPasteboard.generalPasteboard.string = weakSelf.account.originAccount.address;
             [weakSelf remindWithMessage:VLocalize(@"tip.account.address.copy.success")];
+        } else if (index == 2) {
+            TransactionRecordsPageViewController *transactionRecordsPageVC = [[TransactionRecordsPageViewController alloc] initWithAccount:self.account transationArray:self.transactionArray];
+            [self.navigationController pushViewController:transactionRecordsPageVC animated:YES];
         }
     }];
 }
@@ -189,6 +267,13 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
 #pragma mark - Back
 - (IBAction)back {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (NSMutableArray<Transaction *> *)transactionArray {
+    if (_transactionArray == nil) {
+        _transactionArray = [NSMutableArray new];
+    }
+    return _transactionArray;
 }
 
 @end

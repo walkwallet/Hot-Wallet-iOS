@@ -112,7 +112,7 @@ static NSString *const ApiAddressBalanceDetail = @"/addresses/balance/details/%@
 //},
 //  ]
 // ]
-static NSString *const ApiTransactionList = @"/transactions/address/%@/limit/999";
+static NSString *const ApiTransactionList = @"/transactions/list?address=%@&limit=%ld&offset=%ld";
 
 
 //{

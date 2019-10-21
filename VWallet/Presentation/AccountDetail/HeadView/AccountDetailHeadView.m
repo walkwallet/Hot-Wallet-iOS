@@ -21,7 +21,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *sendBtnTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *receiveBtnTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *leaseBtnTitleLabel;
-@property (nonatomic, weak) IBOutlet UILabel *recordsBtnTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *tokenBtnTitleLabel;
 
 @property (nonatomic, weak) IBOutlet UILabel *availableBalanceeLabel;
 @property (nonatomic, weak) IBOutlet UILabel *totalBalanceLabel;
@@ -41,7 +41,7 @@
     self.sendBtnTitleLabel.text = VLocalize(@"account.detail.send");
     self.receiveBtnTitleLabel.text = VLocalize(@"account.detail.receive");
     self.leaseBtnTitleLabel.text = VLocalize(@"account.detail.lease");
-    self.recordsBtnTitleLabel.text = VLocalize(@"account.detail.token");
+    self.tokenBtnTitleLabel.text = VLocalize(@"account.detail.token");
 }
 
 - (void)setAccount:(Account *)account {

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)addressBalanceDetail:(Account *)account callback: (void(^)(BOOL isSuc, Account *account))callback;
 
-+ (void)transactionList:(NSString *)address callback: (void(^)(BOOL isSuc, NSArray <Transaction *> *txArr))callback;
++ (void)transactionList:(NSString *)address offset:(NSInteger)offset limit:(NSInteger)limit type:(NSInteger)type callback: (void(^)(BOOL isSuc, NSArray <Transaction *> *txArr))callback;
 
 + (void)broadcastPayment:(Transaction *)tx callback: (void(^)(BOOL isSuc))callback;
 

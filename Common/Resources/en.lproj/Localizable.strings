@@ -20,6 +20,8 @@
 "logout" = "Logout";
 "back" = "Back";
 "isee" = "I got it";
+"notagree" = "I do not agree";
+"agree" = "I agree";
 
 // view text by module vi: "settings.title" "xx.xx.xx.xx.title"
 
@@ -122,7 +124,7 @@
 "transaction.detail.time" = "Time";
 "transaction.detail.desc" = "Description";
 "transaction.detail.cancel.out.leasing" = "Cancel Out Leasing";
-"transaction.detail.chinese.standard.time" = "Chinese Standard Time";
+"transaction.detail.standard.time" = "US Standard Time";
 
 // ---- account receive ----
 "account.receive.amount" = "AMOUNT";
@@ -261,6 +263,7 @@
 // ---- action option ----
 "action.address.detail" = "Address Detail";
 "action.address.copy" = "Copy the Address";
+"action.address.records" = "Records";
 
 // tip prefix with "tip.xx.xx"
 // ---- logout ----
@@ -358,6 +361,7 @@
 // ---- Transaction Type ----
 "const.transaction.type.send" = "Sent";
 "const.transaction.type.receive" = "Received";
+"const.transaction.type.minting" = "Minting";
 "const.transaction.type.lease.in" = "Leased in";
 "const.transaction.type.lease.out" = "Leased out";
 "const.transaction.type.lease.in.cancel" = "Canceled Leased in";
@@ -370,9 +374,10 @@
 "const.network.testnet" = "Testnet";
 
 // ---- token ----
-"token.add_token" = "AddToken";
-"token.token_id_note" = "TOKEN ID";
-"token.input_token_id" = "Input the token ID";
+"token.available.vsys" = "Available VSYS";
+"token.add.token" = "Add Token";
+"token.token.id.note" = "TOKEN ID";
+"token.input.token.id" = "Input the token ID";
 "token.info" = "Token Info";
 "token.info.id.token" = "Token ID";
 "token.info.id.contract" = "Contract ID";
@@ -393,7 +398,7 @@
 "token.create.token" = "Create Token";
 "token.issue.token" = "Issue Token";
 "token.burn.token" = "Destroy Token";
-"token.remove.token" = "Remove Token";
+"token.hide.token" = "Hide Token";
 "token.operate.note.total" = "MAX SUPPLY";
 "token.operate.note.burn" = "DESTROY AMOUNT";
 "token.operate.note.issue" = "ISSUE AMOUNT";
@@ -401,7 +406,7 @@
 "token.operate.review.issue" = "Review Issue";
 "token.operate.review.burn" = "Review Destroy";
 
-"token.operate.error.id.format" = "Invalid format";
+"token.operate.error.id.format" = "Token ID invalid format";
 "token.operate.error.id.not.exist" = "Token not exist";
 "token.operate.issue.amount" = "Issue amount";
 "token.operate.burn.amount" = "Destroy amount";
@@ -413,10 +418,13 @@
 "error.broadcast.contract.execute" = "Fail to broad cast contract execute";
 "error.broadcast.contract.register" = "Fail to broad cast create new token";
 "error.contract.operate.permission.not.issuer" = "Permission denied, require issuer of the token";
-"error.contract.issue.over.max" = "Issuer input cannot bigger than max supply";
+"error.contract.issue.over.max" = "Issue input cannot bigger than max supply";
 "error.contract.burn.over.available" = "Burn input cannot bigger than available";
 "error.contract.create.out.of.range" = "Token max supply out of range, please reduce unity";
 "error.contract.send.failed" = "Fail to send token";
 "error.broadcast.cancel.lease" = "Fail to cancel lease";
 "error.broadcast.lease" = "Fail to lease";
-"error.broadcast.send" = "Fail to cancel lease";
+"error.broadcast.send" = "Fail to send";
+"error.token.exist" = "Token already added!";
+
+"decs.token.split.note" = "WARNING: Split/Reverse-Split is an experimental token feature requiring exchange support compatible with Unity Token Split Protocol. The proper use of token with split functionality requires due diligence of both the token issuer and the supporting exchanges. Token issuer shall agree to abide by the protocol and convention of proper use of the split/reverse-split functionality. Token issuer shall agree to defend, hold harmless, and indemnify V Systems Limited for damage and loss involving the use of split/reverse-split functionality of the token.";

@@ -33,7 +33,7 @@
         case 4:
             return VLocalize(@"const.transaction.type.lease.out.cancel");
         case 5:
-            return VLocalize(@"const.transaction.type.lease.in");
+            return VLocalize(@"const.transaction.type.minting");
         case 6:
             return VLocalize(@"const.transaction.type.lease.in.cancel");
         case 8:

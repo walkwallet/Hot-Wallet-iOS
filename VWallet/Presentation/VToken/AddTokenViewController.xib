@@ -15,6 +15,8 @@
                 <outlet property="doneButton" destination="k0N-wD-h0J" id="HTH-Tf-gAp"/>
                 <outlet property="errorLabel" destination="Qnx-cM-54l" id="fgx-AK-StN"/>
                 <outlet property="errorLabelHeight" destination="UWX-5J-Myk" id="rKv-jC-AzQ"/>
+                <outlet property="pastButton" destination="RnO-3o-CfU" id="eqy-dr-ji5"/>
+                <outlet property="scanButton" destination="16C-qO-OPc" id="YBy-HJ-9qD"/>
                 <outlet property="tokenIdNoteLabel" destination="M7x-8e-Xv2" id="po4-TF-oB7"/>
                 <outlet property="tokenIdTextFiled" destination="JAW-9h-bMU" id="jaH-sZ-USe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
