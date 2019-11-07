@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vks-bC-DbF">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vks-bC-DbF">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +15,7 @@
                     <tabBarItem key="tabBarItem" title="Item" image="ico_tabbar_wallet" selectedImage="ico_tabbar_wallet" id="qno-h4-HHv"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XzF-ER-6aM">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -47,7 +45,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="57" estimatedRowHeight="-1" sectionHeaderHeight="48" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ztK-Qm-2yA">
-                                <rect key="frame" x="0.0" y="63" width="375" height="604"/>
+                                <rect key="frame" x="0.0" y="43" width="375" height="624"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="SkP-U4-iG6" customClass="AccountDetailHeadView">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="284"/>
@@ -374,10 +372,10 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eX4-Ry-3rh">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oxx-4z-6T3">
-                                        <rect key="frame" x="0.0" y="19" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="-1" width="375" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJ6-84-6rb">
                                                 <rect key="frame" x="0.0" y="0.0" width="78" height="44"/>
@@ -450,7 +448,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vuu-HN-Zsl" customClass="DateRangeView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7p7-kM-gRZ">
                                         <rect key="frame" x="152" y="10" width="71.5" height="24"/>
@@ -509,95 +507,21 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSA-Sq-fX8" customClass="TransactionRecordHeadSegmentedView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Mys-yf-9eb">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fWQ-ok-yJE">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUj-Kn-Ndy">
-                                                <rect key="frame" x="0.0" y="0.0" width="94" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="All">
-                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="itemBtnClick:" destination="MSA-Sq-fX8" eventType="touchUpInside" id="A7R-F2-OCo"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMg-Ik-OQ4">
-                                                <rect key="frame" x="94" y="0.0" width="93.5" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Send">
-                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="itemBtnClick:" destination="MSA-Sq-fX8" eventType="touchUpInside" id="zJ0-0V-rqe"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h25-SS-dxF">
-                                                <rect key="frame" x="187.5" y="0.0" width="94" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Receive">
-                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="itemBtnClick:" destination="MSA-Sq-fX8" eventType="touchUpInside" id="F5H-9f-fVp"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9u-Ij-Jn3">
-                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Lease">
-                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="itemBtnClick:" destination="MSA-Sq-fX8" eventType="touchUpInside" id="dSf-e8-Ihy"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z8q-6A-TnS">
-                                        <rect key="frame" x="0.0" y="42" width="94" height="2"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="mFx-Gf-BMp"/>
-                                        </constraints>
-                                    </view>
+                                        <viewLayoutGuide key="contentLayoutGuide" id="f1w-bM-WGT"/>
+                                        <viewLayoutGuide key="frameLayoutGuide" id="Gq7-pz-daF"/>
+                                    </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Mys-yf-9eb" secondAttribute="trailing" id="AKn-DK-64o"/>
-                                    <constraint firstAttribute="bottom" secondItem="Mys-yf-9eb" secondAttribute="bottom" id="E9V-1c-tDr"/>
+                                    <constraint firstItem="fWQ-ok-yJE" firstAttribute="centerX" secondItem="MSA-Sq-fX8" secondAttribute="centerX" id="39D-rH-DdC"/>
+                                    <constraint firstItem="fWQ-ok-yJE" firstAttribute="centerY" secondItem="MSA-Sq-fX8" secondAttribute="centerY" id="3gt-55-A2f"/>
+                                    <constraint firstItem="fWQ-ok-yJE" firstAttribute="width" secondItem="MSA-Sq-fX8" secondAttribute="width" id="K3u-gL-SZl"/>
+                                    <constraint firstItem="fWQ-ok-yJE" firstAttribute="height" secondItem="MSA-Sq-fX8" secondAttribute="height" id="YVN-w8-EaY"/>
                                     <constraint firstAttribute="height" constant="44" id="bML-Po-tzG"/>
-                                    <constraint firstAttribute="bottom" secondItem="Z8q-6A-TnS" secondAttribute="bottom" id="c1p-bh-UMe"/>
-                                    <constraint firstItem="Z8q-6A-TnS" firstAttribute="centerX" secondItem="FUj-Kn-Ndy" secondAttribute="centerX" id="d6Q-Ah-BRJ"/>
-                                    <constraint firstItem="Mys-yf-9eb" firstAttribute="top" secondItem="MSA-Sq-fX8" secondAttribute="top" id="d7e-M8-XCc"/>
-                                    <constraint firstItem="Z8q-6A-TnS" firstAttribute="width" secondItem="FUj-Kn-Ndy" secondAttribute="width" id="iKb-oF-LF8"/>
-                                    <constraint firstItem="Mys-yf-9eb" firstAttribute="leading" secondItem="MSA-Sq-fX8" secondAttribute="leading" id="jpy-OO-aKX"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
@@ -614,11 +538,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="btnBottomLine" destination="Z8q-6A-TnS" id="Ntv-BG-5b0"/>
-                                    <outletCollection property="itemBtnArray" destination="FUj-Kn-Ndy" id="v9u-cB-4Im"/>
-                                    <outletCollection property="itemBtnArray" destination="BMg-Ik-OQ4" id="O7j-lN-Onf"/>
-                                    <outletCollection property="itemBtnArray" destination="h25-SS-dxF" id="4bk-hN-M8V"/>
-                                    <outletCollection property="itemBtnArray" destination="j9u-Ij-Jn3" id="QK8-Tv-tss"/>
+                                    <outlet property="scrollView" destination="fWQ-ok-yJE" id="R9w-SL-Iix"/>
                                 </connections>
                             </view>
                         </subviews>

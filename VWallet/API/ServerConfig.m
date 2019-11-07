@@ -14,9 +14,9 @@ static NSString *const MainnetHost = @"https://wallet.v.systems/api";
 
 static NSString *const TestnetHost = @"http://test.v.systems:9922";
 
-static NSString *const MainnetExplorerHost = @"https://explorer.tonode.com";
+static NSString *const MainnetExplorerHost = @"https://explorer.v.systems";
 
-static NSString *const TestnetExplorerHost = @"http://testexplorer.tonode.com";
+static NSString *const TestnetExplorerHost = @"https://testexplorer.v.systems";
 
 
 @implementation ServerConfig

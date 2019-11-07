@@ -184,6 +184,8 @@
 		A88B10022276C89E008C1CE8 /* TokenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B10002276C89E008C1CE8 /* TokenTableViewCell.m */; };
 		A88B10032276C89E008C1CE8 /* TokenTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88B10012276C89E008C1CE8 /* TokenTableViewCell.xib */; };
 		A8948FE7232623260003F4B3 /* AccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8948FE6232623250003F4B3 /* AccountDetailViewController.m */; };
+		A8C207932366D8C2001FC92A /* CertifiedTokenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C207912366D8C2001FC92A /* CertifiedTokenTableViewCell.m */; };
+		A8C207942366D8C2001FC92A /* CertifiedTokenTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C207922366D8C2001FC92A /* CertifiedTokenTableViewCell.xib */; };
 		A8C32BE6228985AD00E1CBB1 /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C32BE4228985AD00E1CBB1 /* SuccessViewController.m */; };
 		A8C32BE7228985AD00E1CBB1 /* SuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */; };
 		A8C32BEB228AA89300E1CBB1 /* AddTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C32BE9228AA89300E1CBB1 /* AddTokenViewController.m */; };
@@ -503,6 +505,9 @@
 		A88B10002276C89E008C1CE8 /* TokenTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenTableViewCell.m; sourceTree = "<group>"; };
 		A88B10012276C89E008C1CE8 /* TokenTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenTableViewCell.xib; sourceTree = "<group>"; };
 		A8948FE6232623250003F4B3 /* AccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDetailViewController.m; sourceTree = "<group>"; };
+		A8C207902366D8C2001FC92A /* CertifiedTokenTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertifiedTokenTableViewCell.h; sourceTree = "<group>"; };
+		A8C207912366D8C2001FC92A /* CertifiedTokenTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertifiedTokenTableViewCell.m; sourceTree = "<group>"; };
+		A8C207922366D8C2001FC92A /* CertifiedTokenTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertifiedTokenTableViewCell.xib; sourceTree = "<group>"; };
 		A8C32BE3228985AD00E1CBB1 /* SuccessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
 		A8C32BE4228985AD00E1CBB1 /* SuccessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuccessViewController.m; sourceTree = "<group>"; };
 		A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessViewController.xib; sourceTree = "<group>"; };
@@ -676,8 +681,8 @@
 		402BBB1021E5D326005F2794 /* DataRangeView */ = {
 			isa = PBXGroup;
 			children = (
-				402BBB1121E5D326005F2794 /* DateRangeView.m */,
 				402BBB1221E5D326005F2794 /* DateRangeView.h */,
+				402BBB1121E5D326005F2794 /* DateRangeView.m */,
 			);
 			path = DataRangeView;
 			sourceTree = "<group>";
@@ -1237,8 +1242,8 @@
 		4041C0D521CB711000B2AE05 /* MnemonicWord */ = {
 			isa = PBXGroup;
 			children = (
-				4041C0D621CB711000B2AE05 /* MnemonicWordImportViewController.m */,
 				4041C0D721CB711000B2AE05 /* MnemonicWordImportViewController.h */,
+				4041C0D621CB711000B2AE05 /* MnemonicWordImportViewController.m */,
 			);
 			path = MnemonicWord;
 			sourceTree = "<group>";
@@ -1272,8 +1277,8 @@
 		4041C0DC21CB711000B2AE05 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4041C0DD21CB711000B2AE05 /* Transaction+Extension.m */,
 				4041C0DE21CB711000B2AE05 /* Transaction+Extension.h */,
+				4041C0DD21CB711000B2AE05 /* Transaction+Extension.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1899,6 +1904,9 @@
 				A88B0FFF2276C89E008C1CE8 /* TokenTableViewCell.h */,
 				A88B10002276C89E008C1CE8 /* TokenTableViewCell.m */,
 				A88B10012276C89E008C1CE8 /* TokenTableViewCell.xib */,
+				A8C207902366D8C2001FC92A /* CertifiedTokenTableViewCell.h */,
+				A8C207912366D8C2001FC92A /* CertifiedTokenTableViewCell.m */,
+				A8C207922366D8C2001FC92A /* CertifiedTokenTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2022,6 +2030,7 @@
 				4041C1BF21CB711100B2AE05 /* ReceiveQRSaveView.xib in Resources */,
 				A8163B032289206B004A919A /* TokenViewController.xib in Resources */,
 				A88B10032276C89E008C1CE8 /* TokenTableViewCell.xib in Resources */,
+				A8C207942366D8C2001FC92A /* CertifiedTokenTableViewCell.xib in Resources */,
 				4041C1B421CB711100B2AE05 /* Settings.storyboard in Resources */,
 				4041C1A121CB711000B2AE05 /* ResultViewController.xib in Resources */,
 				4041C1A721CB711000B2AE05 /* MnemonicWordCheckViewController.xib in Resources */,
@@ -2194,6 +2203,7 @@
 				4041C1A821CB711000B2AE05 /* VLevelBar.m in Sources */,
 				4041C1FE21CB711100B2AE05 /* VThemeButton.m in Sources */,
 				402BBB2221E5D326005F2794 /* TransactionTableHeadView.m in Sources */,
+				A8C207932366D8C2001FC92A /* CertifiedTokenTableViewCell.m in Sources */,
 				4041C17C21CB711000B2AE05 /* slowequals.c in Sources */,
 				4041C1E921CB711100B2AE05 /* WindowManager.m in Sources */,
 				4041C18521CB711000B2AE05 /* sha256.c in Sources */,
@@ -2399,7 +2409,7 @@
 			baseConfigurationReference = B99A01A40F53D8E0B803D481 /* Pods-VWallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = WXK7UF23NY;
@@ -2416,6 +2426,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = systems.vsys.wallet.hot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2429,7 +2440,7 @@
 			baseConfigurationReference = 20398EE6FDC06B493FA9EE1F /* Pods-VWallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WXK7UF23NY;
 				ENABLE_BITCODE = NO;
@@ -2444,6 +2455,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = systems.vsys.wallet.hot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

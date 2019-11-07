@@ -11,9 +11,9 @@
 
 @interface TransactionRecordHeadSegmentedView ()
 
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *itemBtnArray;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
-@property (nonatomic, weak) IBOutlet UIView *btnBottomLine;
+@property (nonatomic, strong) UIView *btnBottomLine;
 
 @end
 
@@ -21,19 +21,45 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    int index = 0;
-    for (UIButton *btn in self.itemBtnArray) {
-        [btn setTitleColor:VColor.textSecondColor forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:16];
-        NSString *key = [NSString stringWithFormat:@"transaction.list.type.%d", index++];
-        [btn setTitle:VLocalize(key) forState:UIControlStateNormal];
-        [btn setTitleColor:VColor.themeColor forState:UIControlStateSelected];
+    CGFloat padding = 16;
+    
+    CGFloat right = 0;
+    for (NSInteger index = 0; index < 6; index++) {
+        UILabel *label = [[UILabel alloc] init];
+        label.font = [UIFont systemFontOfSize:16];
+        NSString *key = [NSString stringWithFormat:@"transaction.list.type.%ld", (long)index];
+        [label setText:VLocalize(key)];
+        CGFloat buttonWidth = label.intrinsicContentSize.width + 2 * padding;
+        CGFloat buttonHeight = 44;
+        
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(right, 0, buttonWidth , buttonHeight)];
+        [button setTitleColor:VColor.textSecondColor forState:UIControlStateNormal];
+        [button setTitleColor:VColor.themeColor forState:UIControlStateSelected];
+        button.titleLabel.font = [UIFont systemFontOfSize:16];
+        [button setTitle:VLocalize(key) forState:UIControlStateNormal];
+        [self.scrollView addSubview:button];
+        if (index == 0) {
+            [button setSelected:YES];
+            self.btnBottomLine = [[UIView alloc] initWithFrame:CGRectMake(0, button.frame.size.height - 2, buttonWidth, 2)];
+            self.btnBottomLine.backgroundColor = VColor.themeColor;
+            [self.scrollView addSubview:self.btnBottomLine];
+        }
+
+        button.tag = index;
+        [button addTarget:self action:@selector(itemBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        right += buttonWidth;
+        [self.scrollView addSubview:button];
     }
-    ((UIButton *)(self.itemBtnArray.firstObject)).selected = YES;
+
+    self.scrollView.contentSize = CGSizeMake(right, 44);
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.bounces = NO;
+    [self.scrollView bringSubviewToFront:self.btnBottomLine];
     self.btnBottomLine.backgroundColor = VColor.themeColor;
 }
 
-- (IBAction)itemBtnClick:(UIButton *)sender {
+- (void)itemBtnClick:(UIButton *)sender {
     if (sender.tag == self.currentIndex) {
         return;
     }
@@ -44,19 +70,22 @@
 }
 
 - (void)setCurrentIndex:(NSInteger)currentIndex {
-    if (_currentIndex == currentIndex || currentIndex < 0 || currentIndex >= self.itemBtnArray.count) {
+    if (_currentIndex == currentIndex || currentIndex < 0 || currentIndex >= 6) {
         return;
     }
-    UIButton *beforeSelectedBtn = self.itemBtnArray[_currentIndex];
+    
+    UIButton *beforeSelectedBtn = self.scrollView.subviews[_currentIndex];
     beforeSelectedBtn.selected = NO;
     beforeSelectedBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     _currentIndex = currentIndex;
-    UIButton *currentSelectedBtn = self.itemBtnArray[_currentIndex];
+    UIButton *currentSelectedBtn = self.scrollView.subviews[_currentIndex];
     currentSelectedBtn.selected = YES;
     currentSelectedBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
-    UIButton *firstBtn = self.itemBtnArray.firstObject;
     [UIView animateWithDuration:0.3 animations:^{
-        self.btnBottomLine.transform = CGAffineTransformMakeTranslation(currentSelectedBtn.center.x - firstBtn.center.x, 0);
+        CGRect frame = self.btnBottomLine.frame;
+        frame.origin.x = currentSelectedBtn.frame.origin.x;
+        frame.size.width = currentSelectedBtn.frame.size.width;
+        self.btnBottomLine.frame = frame;
     }];
 }
 

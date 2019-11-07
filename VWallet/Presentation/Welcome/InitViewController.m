@@ -106,7 +106,9 @@
     NSAttributedString *attrMessage = [[NSAttributedString alloc] initWithString:VLocalize(@"wallet.create.success.detail") attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16 weight:UIFontWeightLight]}];
     ResultParameter *parameter = [ResultParameter paramterWithImgResourceName:@"ico_success_tip" attrTitle:attrTitle attrMessage:attrMessage titleMessageSpecing:8];
     [parameter setOperateBtnTitle:VLocalize(@"wallet.create.success.btn1.title")];
-    [parameter setSecondOperateBtnTitle:VLocalize(@"wallet.create.success.btn2.title")];
+    if (WalletMgr.shareInstance.network == VsysNetworkTestnet) {
+        [parameter setSecondOperateBtnTitle:VLocalize(@"wallet.create.success.btn2.title")];
+    }
     parameter.explicitDismiss = YES;
     ResultViewController *resultVC = [[ResultViewController alloc] initWithResultParameter:parameter];
     __weak typeof(resultVC) weakResultVC = resultVC;

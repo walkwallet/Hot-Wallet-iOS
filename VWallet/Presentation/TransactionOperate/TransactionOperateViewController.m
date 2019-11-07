@@ -260,6 +260,7 @@
     }
     NSString *address = dict[@"address"] ? : @"";
     NSInteger amount = dict[@"amount"] ? [dict[@"amount"] integerValue] : 0;
+    NSString *invoice = dict[@"invoice"] ? : @"";
     self.receiveAddressTextView.text = address;
     [self.receiveAddressTextView updatePlaceholderState];
     [self checkAddress];
@@ -267,6 +268,10 @@
     NSDecimalNumber *num2 = [[NSDecimalNumber alloc] initWithLong:VsysVSYS];
     if (amount > 0) {
         self.amountTextField.text = [[num1 decimalNumberByDividingBy:num2] stringValue];
+    }
+    if (![NSString isNilOrEmpty:invoice]) {
+        self.descTextView.text = invoice;
+        [self.descTextView updatePlaceholderState];
     }
 }
 
@@ -287,14 +292,20 @@
         [self alertWithTitle:VLocalize(@"tip.transaction.error.address") confirmText:nil];
         return;
     }
-    if ([self.receiveAddressTextView.text isEqualToString:self.account.originAccount.address]) {
-        [self alertWithTitle:VLocalize(@"tip.transaction.address.is.self") confirmText:nil];
-        return;
-    }
     if (VsysGetAttachmentLength(self.descTextView.text) > 140) {
         [self alertWithTitle:VLocalize(@"tip.transaction.attachment.too.long") confirmText:nil];
         return;
     }
+    if ([self.receiveAddressTextView.text isEqualToString:self.account.originAccount.address]) {
+        [self alertWithTitle:VLocalize(@"tip.transaction.address.is.self") confirmText:nil handler:^{
+            [self createTransaction];
+        }];
+        return;
+    }
+    [self createTransaction];
+}
+
+- (void)createTransaction {
     VsysTransaction *tx;
     NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithString:self.amountTextField.text];
     switch (self.operateType) {

@@ -102,7 +102,7 @@
         dict[@"api"] = @(VsysTransactionOldApi);
         dict[@"opc"] = VsysOpcTypeFunction;
         dict[@"address"] = self.transaction.senderAddress;
-        dict[@"attachment"] = self.transaction.originTransaction.description;
+        dict[@"attachment"] = [[NSString alloc] initWithData:self.transaction.originTransaction.attachment encoding:NSUTF8StringEncoding];
         dict[@"contractId"] = self.transaction.originTransaction.contractId;
         dict[@"functionId"] = @(self.transaction.originTransaction.funcIdx);
         dict[@"function"] = VsysBase58EncodeToString(self.transaction.originTransaction.data);
@@ -142,7 +142,7 @@
             dict[@"recipient"] = self.oriTran.recipient;
         }
         
-        dict[@"attachment"] = [[NSString alloc] initWithData:VsysBase58Encode(self.oriTran.attachment) encoding:NSUTF8StringEncoding];
+        dict[@"attachment"] = [[NSString alloc] initWithData:self.oriTran.attachment encoding:NSUTF8StringEncoding];
     }
     
     // common obj

@@ -27,7 +27,6 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 @property (nonatomic, weak) Account *account;
 @property (nonatomic, weak) Transaction *transaction;
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelBtnBottomLC;
@@ -124,10 +123,10 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
         if ([funcName isEqualToString:@"send"]) {
             [c decodeSend:oriTx.data];
             [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0)}];
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.from"), @"value" : self.account.originAccount.address}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.from"), @"value" : self.transaction.senderAddress}];
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.to"), @"value" : c.recipient}];
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.send.token")}];
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : [NSString stringWithDecimal:[NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES]}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : [[NSString stringWithDecimal:[NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES] stringByAppendingString: [NSString stringWithFormat:@" %@", token.name]]}];
         }else if ([funcName isEqualToString:@"issue"]) {
             [c decodeIssue:oriTx.data];
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.issue.token")}];

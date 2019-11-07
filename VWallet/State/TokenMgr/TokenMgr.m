@@ -6,9 +6,10 @@
 //
 
 #import "TokenMgr.h"
-#import <SAMKeychain/SAMKeychain.h>
 
 static NSString *VKeyChainToken = @"WatchToken_%@";
+
+static NSString *VKeyCertifiedTokenList = @"CertifiedTokenList";
 
 static TokenMgr *VTokenMgr = nil;
 
@@ -42,6 +43,18 @@ static TokenMgr *VTokenMgr = nil;
             return one;
         }
     }
+    return nil;
+}
+
+- (NSArray<Token *> *)getCertifiedTokenList {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:VKeyCertifiedTokenList];
+    NSArray<Token *> *certifiedTokenList = [NSKeyedUnarchiver unarchiveObjectWithData: data];
+    return certifiedTokenList;
+}
+
+- (NSError *)saveCertifiedTokenList:(NSArray<Token *> *) list {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:list];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:VKeyCertifiedTokenList];
     return nil;
 }
 

@@ -12,8 +12,12 @@
 #import "UIScrollView+EmptyData.h"
 #import "UIViewController+NavigationBar.h"
 #import "ApiServer.h"
+#import "NSString+Decimal.h"
+#import "TokenMgr.h"
 
 static NSString *const CellIdentifier = @"TransactionTableViewCell";
+
+static NSInteger const TransactionPageSize = 100;
 
 @interface TransactionTableViewController ()
 
@@ -26,6 +30,26 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
 
 @property (nonatomic, strong) NSArray<Transaction *> *showTransactionArray;
 
+@property (nonatomic, strong) NSArray<NSString *> *canceledTxIdArray;
+
+@property (nonatomic, strong) NSArray<Token *> *watchingTokenArray;
+
+@property (nonatomic, strong) NSArray<NSString *> *watchingIdArray;
+
+@property (nonatomic) DateRangeType dateTrangeType;
+
+@property (nonatomic) NSTimeInterval startTimestamp;
+
+@property (nonatomic) NSTimeInterval endTimestamp;
+
+@property (nonatomic, assign) NSInteger page;
+
+@property (nonatomic, assign) BOOL hasMore;
+
+@property (nonatomic, assign) BOOL loading;
+
+@property (nonatomic, strong) UIRefreshControl *refreshController;
+
 @end
 
 @implementation TransactionTableViewController
@@ -35,6 +59,7 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
         self.listType = listType;
         self.transactionArray = transactionArray;
         self.account = account;
+        self.tableView.showsVerticalScrollIndicator = NO;
     }
     return self;
 }
@@ -42,14 +67,7 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-}
-
-- (void)initView {
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.rowHeight = 57;
-    [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
-    [self.tableView ed_setupEmptyDataDisplay];
-    self.tableView.ed_empty_offset = -100;
+    [self initData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -58,80 +76,171 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
     [self changeToThemeNavigationBar];
 }
 
+- (void)initView {
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.rowHeight = 57;
+    [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
+    [self.tableView ed_setupEmptyDataDisplay];
+    self.tableView.ed_empty_offset = -100;
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+}
+
+- (void)initData {
+    [self loadWatchingTokenInfo];
+    self.page = 1;
+    [self loadTransaction:self.page];
+}
+
+- (void)loadWatchingTokenInfo {
+    self.watchingTokenArray = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
+    NSMutableArray<NSString *> *tmpArray = [NSMutableArray new];
+    for (Token *one in self.watchingTokenArray) {
+        [tmpArray addObject:one.contractId];
+        NSInteger index = [self.watchingTokenArray indexOfObject:one];
+        __weak typeof(self) weakSelf = self;
+        [ApiServer getTokenInfo:one.tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
+            [ApiServer getContractContent:VsysTokenId2ContractId(token.tokenId) callback:^(BOOL isSuc, ContractContent * _Nonnull contractContent) {
+                weakSelf.watchingTokenArray[index].unity = token.unity;
+                if (contractContent.textual && contractContent.textual.descriptors) {
+                    token.textualDescriptor = contractContent.textual.descriptors;
+                    NSString *funcJson = VsysDecodeContractTextrue(token.textualDescriptor);
+                    if ([funcJson containsString:@"split"]) {
+                        weakSelf.watchingTokenArray[index].splitable = YES;
+                    }
+                }
+            }];
+        }];
+    }
+    self.watchingIdArray = tmpArray;
+}
+
+- (void)loadTransaction:(NSInteger)page {
+    if (self.loading) {
+        [self.refreshControl endRefreshing];
+        return;
+    }
+    self.loading = YES;
+    __weak typeof (self) weakSelf = self;
+    [ApiServer transactionList:self.account.originAccount.address offset:(page - 1) * TransactionPageSize limit:TransactionPageSize type:[self getListTypeFormat:self.listType] callback:^(BOOL isSuc, NSArray<Transaction *> * _Nonnull txArr) {
+        if (txArr.count < TransactionPageSize) {
+            weakSelf.hasMore = NO;
+        }else {
+            weakSelf.hasMore = YES;
+        }
+        if (weakSelf.listType == TransactionListTypeExecuteContract || weakSelf.listType == TransactionListTypeAll) {
+            for (Transaction *one in txArr) {
+                NSInteger index = [txArr indexOfObject:one];
+                if (one.transactionType == 9) {
+                    if ([weakSelf.watchingIdArray containsObject:one.originTransaction.contractId]) {
+                        Token *t  = [self getWatchingTokenInfo:one.originTransaction.contractId];
+                        txArr[index].contractFuncName = [one getFunctionName:t.splitable];
+                        if ([txArr[index].contractFuncName isEqualToString:VsysActionSend]) {
+                            Token *t = [TokenMgr.shareInstance getTokenByAddress:weakSelf.account.originAccount.address tokenId:VsysContractId2TokenId(one.originTransaction.contractId, 0)];
+                            VsysContract *contract = [VsysContract new];
+                            [contract decodeSend:txArr[index].originTransaction.data];
+                            txArr[index].originTransaction.recipient = contract.recipient;
+                            txArr[index].symbol = t.name;
+                            txArr[index].unity = t.unity;
+                            txArr[index].originTransaction.amount = contract.amount;
+                        }
+                    }
+                }
+            }
+        }else if (weakSelf.listType == TransactionListTypeLease) {
+            NSArray<Transaction *> *leasingTxs = txArr;
+            [ApiServer transactionList:weakSelf.account.originAccount.address offset:(page - 1) * TransactionPageSize limit:TransactionPageSize type:TransactionListTypeCancelLease callback:^(BOOL isSuc, NSArray<Transaction *> * _Nonnull txArr) {
+                weakSelf.loading = NO;
+                NSMutableArray<NSString *> *tmpCancelIdList = [NSMutableArray new];
+                if (page > 1) {
+                    [tmpCancelIdList addObjectsFromArray:self.canceledTxIdArray];
+                }
+                for (Transaction *one in txArr) {
+                    [tmpCancelIdList addObject:one.originTransaction.txId];
+                }
+                self.canceledTxIdArray = tmpCancelIdList;
+                for (Transaction *one in leasingTxs) {
+                    NSInteger index = [leasingTxs indexOfObject:one];
+                    if ([tmpCancelIdList containsObject:one.originTransaction.txId]) {
+                        leasingTxs[index].canCancel = NO;
+                    }else {
+                        leasingTxs[index].canCancel = YES;
+                    }
+                }
+                weakSelf.transactionArray = leasingTxs;
+                weakSelf.showAllTransactionArray = leasingTxs;
+                [weakSelf setDateRangeType:weakSelf.dateTrangeType startTimestamp:weakSelf.startTimestamp endTimestamp:weakSelf.endTimestamp];
+                weakSelf.page = page;
+            }];
+            return;
+        }
+        NSMutableArray<Transaction *> *tmpTxs = [NSMutableArray new];
+        if (page > 1) {
+            [tmpTxs addObjectsFromArray:self.transactionArray];
+        }
+        [tmpTxs addObjectsFromArray:txArr];
+        weakSelf.loading = NO;
+        self.page = page;
+        self.transactionArray = tmpTxs;
+        self.showAllTransactionArray = tmpTxs;
+        [weakSelf setDateRangeType:weakSelf.dateTrangeType startTimestamp:weakSelf.startTimestamp endTimestamp:weakSelf.endTimestamp];
+    }];
+}
+
+- (void)refresh {
+    [self loadTransaction:1];
+}
+
 - (void)setDateRangeType:(DateRangeType)dateRangeType startTimestamp:(NSTimeInterval)startTimestamp endTimestamp:(NSTimeInterval)endTimestamp {
+    [self.refreshControl endRefreshing];
+    self.dateTrangeType = dateRangeType;
+    self.startTimestamp = startTimestamp;
+    self.endTimestamp = endTimestamp;
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_queue_create(nil, DISPATCH_QUEUE_CONCURRENT), ^{
         NSMutableArray<Transaction *> *showTransactionArray = [NSMutableArray array];
-        if (weakSelf.showAllTransactionArray.count) {
-            switch (dateRangeType) {
-                case DateRangeTypeNone:
-                    showTransactionArray = weakSelf.showAllTransactionArray.copy;
-                    break;
-                case DateRangeTypePath1Month: {
-                    NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierChinese];
-                    int64_t minTimestamp = [calendar dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:NSDate.date options:NSCalendarWrapComponents].timeIntervalSince1970 * VTimestampMultiple;
-                    [weakSelf.showAllTransactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (obj.originTransaction.timestamp >= minTimestamp) {
-                            [showTransactionArray addObject:obj];
-                        }
-                    }];
-                } break;
-                case DateRangeTypePath3Months: {
-                    NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierChinese];
-                    int64_t minTimestamp = [calendar dateByAddingUnit:NSCalendarUnitMonth value:-3 toDate:NSDate.date options:NSCalendarWrapComponents].timeIntervalSince1970 * VTimestampMultiple;
-                    [weakSelf.showAllTransactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (obj.originTransaction.timestamp >= minTimestamp) {
-                            [showTransactionArray addObject:obj];
-                        }
-                    }];
-                } break;
-                case DateRangeTypePath1Year: {
-                    NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierChinese];
-                    int64_t minTimestamp = [calendar dateByAddingUnit:NSCalendarUnitYear value:-1 toDate:NSDate.date options:NSCalendarWrapComponents].timeIntervalSince1970 * VTimestampMultiple;
-                    [weakSelf.showAllTransactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (obj.originTransaction.timestamp >= minTimestamp) {
-                            [showTransactionArray addObject:obj];
-                        }
-                    }];
-                } break;
-                case DateRangeTypeCustom: {
-                    int64_t minTimestamp = startTimestamp * VTimestampMultiple;
-                    int64_t maxTimestamp = (endTimestamp + 24 * 60 * 60) * VTimestampMultiple;
-                    [weakSelf.showAllTransactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (obj.originTransaction.timestamp >= minTimestamp && obj.originTransaction.timestamp <= maxTimestamp) {
-                            [showTransactionArray addObject:obj];
-                        }
-                    }];
-                } break;
-            }
-        } else {
-            switch (weakSelf.listType) {
-                case TransactionListTypeAll:
-                    showTransactionArray = weakSelf.transactionArray.mutableCopy;
-                    break;
-                case TransactionListTypeSent: {
-                    [weakSelf.transactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (obj.transactionType == 1) {
-                            [showTransactionArray addObject:obj];
-                        }
-                    }];
-                } break;
-                case TransactionListTypeReceive: {
-                    [weakSelf.transactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (obj.transactionType == 2) {
-                            [showTransactionArray addObject:obj];
-                        }
-                    }];
-                } break;
-                case TransactionListTypeLease: {
-                    [weakSelf.transactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (obj.originTransaction.txType == 3 || obj.originTransaction.txType == 4) {
-                            [showTransactionArray addObject:obj];
-                        }
-                    }];
-                } break;
-            }
-            self.showAllTransactionArray = showTransactionArray.copy;
+        switch (dateRangeType) {
+            case DateRangeTypeNone:
+                showTransactionArray = weakSelf.showAllTransactionArray.copy;
+                break;
+            case DateRangeTypePath1Month: {
+                NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierChinese];
+                int64_t minTimestamp = [calendar dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:NSDate.date options:NSCalendarWrapComponents].timeIntervalSince1970 * VTimestampMultiple;
+                [weakSelf.showAllTransactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (obj.originTransaction.timestamp >= minTimestamp) {
+                        [showTransactionArray addObject:obj];
+                    }
+                }];
+            } break;
+            case DateRangeTypePath3Months: {
+                NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierChinese];
+                int64_t minTimestamp = [calendar dateByAddingUnit:NSCalendarUnitMonth value:-3 toDate:NSDate.date options:NSCalendarWrapComponents].timeIntervalSince1970 * VTimestampMultiple;
+                [weakSelf.showAllTransactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (obj.originTransaction.timestamp >= minTimestamp) {
+                        [showTransactionArray addObject:obj];
+                    }
+                }];
+            } break;
+            case DateRangeTypePath1Year: {
+                NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierChinese];
+                int64_t minTimestamp = [calendar dateByAddingUnit:NSCalendarUnitYear value:-1 toDate:NSDate.date options:NSCalendarWrapComponents].timeIntervalSince1970 * VTimestampMultiple;
+                [weakSelf.showAllTransactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (obj.originTransaction.timestamp >= minTimestamp) {
+                        [showTransactionArray addObject:obj];
+                    }
+                }];
+            } break;
+            case DateRangeTypeCustom: {
+                int64_t minTimestamp = startTimestamp * VTimestampMultiple;
+                int64_t maxTimestamp = (endTimestamp + 24 * 60 * 60) * VTimestampMultiple;
+                [weakSelf.showAllTransactionArray enumerateObjectsUsingBlock:^(Transaction * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (obj.originTransaction.timestamp >= minTimestamp && obj.originTransaction.timestamp <= maxTimestamp) {
+                        [showTransactionArray addObject:obj];
+                    }
+                }];
+            } break;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.showTransactionArray = showTransactionArray.copy;
@@ -157,6 +266,41 @@ static NSString *const CellIdentifier = @"TransactionTableViewCell";
     TransactionDetailViewController *detailVC = [[TransactionDetailViewController alloc] initWithTransaction:self.showTransactionArray[indexPath.row] account:self.account];
     detailVC.isDetailPage = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+#pragma mark - UITableView Delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat currentOffsetY = scrollView.contentOffset.y;
+    if (currentOffsetY + scrollView.frame.size.height  > scrollView.contentSize.height &&  self.loading == NO && self.hasMore) {
+        [self loadTransaction:self.page + 1];
+    }
+}
+
+- (NSInteger)getListTypeFormat:(NSInteger)listType {
+    if (listType == TransactionListTypeAll) {
+        return 0;
+    }else if (listType == TransactionListTypePayment) {
+        return 2;
+    }else if (listType == TransactionListTypeLease) {
+        return 3;
+    }else if (listType == TransactionListTypeCancelLease) {
+        return 4;
+    }else if (listType == TransactionListTypeRegisterContract){
+        return 8;
+    }else if (listType == TransactionListTypeExecuteContract) {
+        return 9;
+    }else {
+        return 0;
+    }
+}
+
+- (Token *) getWatchingTokenInfo:(NSString *)contractId {
+    for (Token *one in self.watchingTokenArray) {
+        if ([one.contractId isEqualToString:contractId]) {
+            return one;
+        }
+    }
+    return nil;
 }
 
 @end

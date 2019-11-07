@@ -28,6 +28,8 @@ static int64_t const VTimestampMultiple = 1000000000;
 
 @property (nonatomic, assign) BOOL canCancel;
 
+@property (nonatomic, copy) NSString *direction;
+
 /**
  * 1.sent
  * 2.received
@@ -43,6 +45,14 @@ static int64_t const VTimestampMultiple = 1000000000;
 @property (nonatomic, copy) NSString *status;
 
 @property (nonatomic, copy) NSString *contractFuncName;
+
+@property (nonatomic, copy) NSString *contractId;
+
+@property (nonatomic, copy) NSString *symbol;
+
+@property (nonatomic, assign) int64_t unity;
+
+- (NSString *)getFunctionName:(BOOL)split;
 
 @end
 

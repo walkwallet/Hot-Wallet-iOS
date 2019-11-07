@@ -15,7 +15,13 @@
 @property (nonatomic, copy) NSArray <Token *> *tokenList;
 
 - (Token *)getTokenByAddress:(NSString *)address tokenId:(NSString *)tokenId;
+
 - (NSArray<Token *> *)loadAddressWatchToken:(NSString *)address;
+
 - (NSError *)saveToStorage:(NSString *)address list:(NSArray<Token *> *)list;
+
+- (NSArray<Token *> *)getCertifiedTokenList;
+
+- (NSError *)saveCertifiedTokenList:(NSArray<Token *> *) list;
 
 @end

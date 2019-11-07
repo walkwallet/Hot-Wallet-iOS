@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet VThemeTextView *inputDesc;
 @property (weak, nonatomic) IBOutlet UILabel *unityNoteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *unitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *unitDescLabel;
 @property (weak, nonatomic) IBOutlet UIButton *buttonCheck;
 @property (weak, nonatomic) IBOutlet UILabel *labelFee;
 @property (weak, nonatomic) IBOutlet UILabel *labelAvailabelBalance;
@@ -157,6 +158,7 @@
     self.unityNoteLabel.text = VLocalize(@"token.info.unity");
     self.checkBoxTopLabel.text = VLocalize(@"token.info.support.split.note");
     self.checkBoxBottomLabel.text = VLocalize(@"token.info.support.note");
+    self.unitDescLabel.text = [NSString stringWithFormat:@"(%@ %@)", VLocalize(@"token.create.unity.desc"), @"0.00000001"];
     if (![self checkAmount]) {}
 }
 
@@ -194,12 +196,14 @@
 
 - (IBAction)ClickMinus:(id)sender {
     [self setProgress:(self.unitCurrent-1) total:self.unitTotal];
-    self.unitLabel.text = [NSString stringWithFormat:@"10^%d", self.unitCurrent];
+    self.unitLabel.text = [NSString stringWithFormat:@"%d", self.unitCurrent];
+    self.unitDescLabel.text = [NSString stringWithFormat:@"(%@ %@)", VLocalize(@"token.create.unity.desc"), [self unityFormat:self.unitCurrent]];
 }
 
 - (IBAction)ClickPlus:(id)sender {
     [self setProgress:(self.unitCurrent+1) total:self.unitTotal];
-    self.unitLabel.text = [NSString stringWithFormat:@"10^%d", self.unitCurrent];
+    self.unitLabel.text = [NSString stringWithFormat:@"%d", self.unitCurrent];
+    self.unitDescLabel.text = [NSString stringWithFormat:@"(%@ %@)", VLocalize(@"token.create.unity.desc"), [self unityFormat:self.unitCurrent]];
 }
 
 - (IBAction)ClickCheck:(id)sender {
@@ -412,6 +416,23 @@
         }
     }
     return 0;
+}
+
+- (NSString *)unityFormat:(int)unity {
+    if (unity <= 0) {
+        return @"1";
+    }
+    NSString *s = @"0.";
+    int i = 0;
+    while (true) {
+        i ++;
+        if (i >= unity) {
+            break;
+        }
+        s = [s stringByAppendingString:@"0"];
+    }
+    s = [s stringByAppendingString:@"1"];
+    return s;
 }
 
 @end

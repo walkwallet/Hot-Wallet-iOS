@@ -46,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)getTokenDetailFromExplorer:(NSString *)tokenId callback:(void(^)(BOOL isSuc, Token *tokenDetail))callback;
 
++ (void)getCertifiedTokenList:(NSInteger)page callback: (void(^)(BOOL isSuc, NSArray<Token *> *tokenArr))callback;
+
 @end
 
 NS_ASSUME_NONNULL_END

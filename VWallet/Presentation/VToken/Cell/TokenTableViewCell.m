@@ -26,7 +26,6 @@
     _token = token;
     self.wrapView.layer.masksToBounds = YES;
     self.wrapView.layer.cornerRadius = 4;
-    self.TokenLogo.layer.cornerRadius = 16;
     if ([NSString isNilOrEmpty:token.name]) {
         if (token.tokenId.length > 12) {
             [self.TokenName setText:[token.tokenId explicitCount:12 maxAsteriskCount:6]];

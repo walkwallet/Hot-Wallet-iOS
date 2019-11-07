@@ -114,13 +114,15 @@
                 if (!tx) {
                     continue;
                 }
-                if ([tx.recipient isEqualToString:address]) {
-                    if ([dict[@"proofs"] count]) {
-                        VsysAccount *sendAcc = VsysNewAccount(WalletMgr.shareInstance.network, dict[@"proofs"][0][@"publicKey"]);
-                        t.senderAddress = sendAcc.address;
-                    }
-                } else {
+                if ([dict[@"proofs"] count]) {
+                    t.senderAddress = dict[@"proofs"][0][@"address"];
+                }else {
                     t.senderAddress = address;
+                }
+                if ([t.senderAddress isEqualToString:address]) {
+                    t.direction = @"out";
+                }else {
+                    t.direction = @"in";
                 }
                 t.originTransaction = tx;
                 if ([dict[@"status"] isKindOfClass:NSString.class]) {
@@ -318,6 +320,7 @@
     [AppServer Post:VApi(ApiPostContractExecute) params:dict success:^(NSDictionary * _Nonnull response) {
         callback(YES);
     } fail:^(id  _Nonnull info) {
+        NSLog(@"---->%@", info);
         callback(NO);
     }];
 }
@@ -325,23 +328,45 @@
 + (void)getTokenDetailFromExplorer:(NSString *)tokenId callback:(void (^)(BOOL, Token *))callback {
     [AppServer Post:[NSString stringWithFormat:@"%@%@", ServerConfig.ExplorerHost, ApiPostExplorerTokenDetail]
              params:@{
-                      @"TokenId": tokenId,
-                      }
+                 @"TokenId": tokenId,
+             }
             success:^(NSDictionary * _Nonnull response) {
-                if ([response[@"data"] isKindOfClass:NSDictionary.class]) {
-                    NSDictionary *dict = response[@"data"];
+        if ([response[@"data"] isKindOfClass:NSDictionary.class]) {
+            NSDictionary *dict = response[@"data"];
+            Token *token = [Token new];
+            token.tokenId = dict[@"Id"];
+            token.icon = dict[@"IconUrl"];
+            token.name = dict[@"Name"];
+            callback(YES, token);
+        }else {
+            callback(NO, nil);
+        }
+    } fail:^(id  _Nonnull info) {
+        NSLog(@"--->%@", info);
+        callback(NO, nil);
+    }];
+}
+
++ (void)getCertifiedTokenList:(NSInteger)page callback:(void (^)(BOOL, NSArray<Token *> *))callback {
+    [AppServer Post:[NSString stringWithFormat:@"%@%@", ServerConfig.ExplorerHost, ApiPostExplorerCertifiedList] params:@{@"current": @(page)} success:^(NSDictionary * _Nonnull response) {
+        NSMutableArray<Token *> *list = [NSMutableArray new];
+        if ([response[@"data"] isKindOfClass:NSDictionary.class]) {
+            NSDictionary *dict = response[@"data"];
+            if ([dict[@"list"] isKindOfClass:NSArray.class]) {
+                for (NSDictionary *one in dict[@"list"]) {
                     Token *token = [Token new];
-                    token.tokenId = dict[@"Id"];
-                    token.icon = dict[@"IconUrl"];
-                    token.name = dict[@"Name"];
-                    callback(YES, token);
-                }else {
-                    callback(NO, nil);
+                    token.name = one[@"Name"];
+                    token.tokenId = one[@"Id"];
+                    token.icon = one[@"IconUrl"];
+                    token.total = [one[@"TotalSupply"] longLongValue];
+                    [list addObject:token];
                 }
-            } fail:^(id  _Nonnull info) {
-                NSLog(@"--->%@", info);
-                callback(NO, nil);
-            }];
+                callback(YES, list);
+            }
+        }
+    } fail:^(id  _Nonnull info) {
+        callback(NO, nil);
+    }];
 }
 
 @end

@@ -27,7 +27,9 @@
 #import "UIViewController+Alert.h"
 #import "AddressDetailViewController.h"
 #import "NSString+Asterisk.h"
+#import "NSString+Decimal.h"
 #import "TransactionRecordsPageViewController.h"
+#import "TokenMgr.h"
 
 static NSString *const CellIdentifier = @"TransactionTableViewCell";
 static NSInteger const TransactionPageSize = 100;
@@ -45,6 +47,10 @@ static NSInteger const TransactionPageSize = 100;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray<Transaction *> *transactionArray;
+
+@property (nonatomic, strong) NSArray<Token *> *watchingTokenArray;
+
+@property (strong, nonatomic) NSMutableDictionary *canceledLeaseTx;
 
 @property (nonatomic, assign) NSInteger page;
 
@@ -84,8 +90,32 @@ static NSInteger const TransactionPageSize = 100;
 }
 
 - (void)initData {
+    [self loadCertifiedTokenInfo];
+    self.canceledLeaseTx = [NSMutableDictionary new];
     self.page = 1;
     [self loadTransaction:self.page];
+}
+
+- (void)loadCertifiedTokenInfo {
+    NSArray<Token *> *watchedList = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
+    for (Token *one in watchedList) {
+        NSInteger index = [watchedList indexOfObject:one];
+        __weak typeof(self) weakSelf = self;
+        [ApiServer getTokenInfo:one.tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
+            [ApiServer getContractContent:VsysTokenId2ContractId(token.tokenId) callback:^(BOOL isSuc, ContractContent * _Nonnull contractContent) {
+                watchedList[index].unity = token.unity;
+                if (contractContent.textual && contractContent.textual.descriptors) {
+                    token.textualDescriptor = contractContent.textual.descriptors;
+                    NSString *funcJson = VsysDecodeContractTextrue(token.textualDescriptor);
+                    if ([funcJson containsString:@"split"]) {
+                        watchedList[index].splitable = YES;
+                    }
+                }
+                weakSelf.watchingTokenArray = watchedList;
+                
+            }];
+        }];
+    }
 }
 
 - (void)refreshData {
@@ -102,36 +132,57 @@ static NSInteger const TransactionPageSize = 100;
         weakSelf.tableView.ed_loading = NO;
         weakSelf.loading = NO;
         [weakSelf.tableView.refreshControl endRefreshing];
+        
+        NSArray<Token *> *watchedList = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
+        NSMutableArray<NSString *> *watchedCertifiedList = [NSMutableArray new];
+        for (Token *one in watchedList) {
+            if ([NSString isNilOrEmpty: one.name]) {
+                continue;
+            }
+            [watchedCertifiedList addObject: VsysTokenId2ContractId(one.tokenId)];
+        }
+        
+        for (Transaction *one in txArr) {
+            if (one.transactionType == 4) {
+                weakSelf.canceledLeaseTx[one.originTransaction.txId] = @(YES);
+            }
+            NSInteger index = [txArr indexOfObject:one];
+            if (one.transactionType == 3 && one.canCancel) {
+                if (weakSelf.canceledLeaseTx[one.originTransaction.txId] || !one.canCancel) {
+                    txArr[index].canCancel = NO;
+                }else {
+                    txArr[index].canCancel = YES;
+                }
+            }
+            if (one.transactionType == 9) {
+                if ([watchedCertifiedList containsObject:one.originTransaction.contractId]) {
+                    Token *t  = [self getWatchingTokenInfo:one.originTransaction.contractId];
+                    txArr[index].contractFuncName = [one getFunctionName:t.splitable];
+                    if ([txArr[index].contractFuncName isEqualToString:VsysActionSend]) {
+                        Token *t = [TokenMgr.shareInstance getTokenByAddress:weakSelf.account.originAccount.address tokenId:VsysContractId2TokenId(one.originTransaction.contractId, 0)];
+                        VsysContract *contract = [VsysContract new];
+                        [contract decodeSend:txArr[index].originTransaction.data];
+                        txArr[index].originTransaction.recipient = contract.recipient;
+                        txArr[index].symbol = t.name;
+                        txArr[index].unity = t.unity;
+                        txArr[index].originTransaction.amount = contract.amount;
+                    }
+                }
+            }
+        }
         self.page = page;
         if (page == 1) {
             [weakSelf.transactionArray removeAllObjects];
             [weakSelf.transactionArray addObjectsFromArray:txArr];
-            [weakSelf.tableView reloadData];
         }else {
-            NSMutableDictionary *cancelLeaseDict = @{}.mutableCopy;
-            for (Transaction *one in weakSelf.transactionArray) {
-                if (one.transactionType == 4) {
-                    cancelLeaseDict[one.originTransaction.txId] = @(YES);
-                }
-            }
-            for (Transaction *one in txArr) {
-                NSInteger index = [txArr indexOfObject:one];
-                if (one.transactionType == 3 && one.canCancel) {
-                    if (cancelLeaseDict[one.originTransaction.txId] || !one.canCancel) {
-                        txArr[index].canCancel = NO;
-                    }else {
-                        txArr[index].canCancel = YES;
-                    }
-                }
-            }
             [weakSelf.transactionArray addObjectsFromArray:txArr];
-            [weakSelf.tableView reloadData];
         }
         if (txArr.count < TransactionPageSize) {
             self.hasMore = NO;
         }else {
             self.hasMore = YES;
         }
+        [weakSelf.tableView reloadData];
     }];
 }
 
@@ -192,7 +243,8 @@ static NSInteger const TransactionPageSize = 100;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TransactionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.transaction = self.transactionArray[indexPath.row];
+    Transaction *tx = self.transactionArray[indexPath.row];
+    cell.transaction = tx;
     return cell;
 }
 
@@ -274,6 +326,15 @@ static NSInteger const TransactionPageSize = 100;
         _transactionArray = [NSMutableArray new];
     }
     return _transactionArray;
+}
+
+- (Token *) getWatchingTokenInfo:(NSString *)contractId {
+    for (Token *one in self.watchingTokenArray) {
+        if ([one.contractId isEqualToString:contractId]) {
+            return one;
+        }
+    }
+    return nil;
 }
 
 @end

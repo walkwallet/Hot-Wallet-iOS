@@ -73,10 +73,14 @@
                                        animated:YES completion:nil];
         }
     }];
-    self.childVCArray = @[[[TransactionTableViewController alloc] initWithListType:TransactionListTypeAll transactionArray:self.transactionArray account:self.account],
-                          [[TransactionTableViewController alloc] initWithListType:TransactionListTypeSent transactionArray:self.transactionArray account:self.account],
-                          [[TransactionTableViewController alloc] initWithListType:TransactionListTypeReceive transactionArray:self.transactionArray account:self.account],
-                          [[TransactionTableViewController alloc] initWithListType:TransactionListTypeLease transactionArray:self.transactionArray account:self.account]];
+    self.childVCArray = @[
+        [[TransactionTableViewController alloc] initWithListType:TransactionListTypeAll transactionArray:self.transactionArray account:self.account],
+        [[TransactionTableViewController alloc] initWithListType:TransactionListTypePayment transactionArray:self.transactionArray account:self.account],
+        [[TransactionTableViewController alloc] initWithListType:TransactionListTypeLease transactionArray:self.transactionArray account:self.account],
+        [[TransactionTableViewController alloc] initWithListType:TransactionListTypeCancelLease transactionArray:self.transactionArray account:self.account],
+        [[TransactionTableViewController alloc] initWithListType:TransactionListTypeRegisterContract transactionArray:self.transactionArray account:self.account],
+        [[TransactionTableViewController alloc] initWithListType:TransactionListTypeExecuteContract transactionArray:self.transactionArray account:self.account],
+    ];
     [self.pageVC setViewControllers:@[self.childVCArray.firstObject] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     
     [self setDateRangeType:DateRangeTypeNone startTimestamp:0 endTimestamp:0 animated:NO];

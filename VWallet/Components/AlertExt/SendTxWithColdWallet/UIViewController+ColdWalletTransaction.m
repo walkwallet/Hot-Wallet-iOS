@@ -104,6 +104,7 @@
         AlertViewController *alertVC = (AlertViewController *)vc;
         [alertVC.mainView startLoadingWithColor:VColor.themeColor];
         transaction.signature = signature;
+        transaction.originTransaction.attachment = VsysBase58Encode(transaction.originTransaction.attachment);
         if (transaction.originTransaction.txType == VsysTxTypePayment) {
             [ApiServer broadcastPayment:transaction callback:^(BOOL isSuc) {
                 [alertVC.mainView stopLoading];
@@ -154,7 +155,7 @@
                 if (isSuc) {
                     [weakSelf showSuccessTxForColdWallet:transaction.originTransaction];
                 }else {
-                    [weakSelf remindWithMessage:@"error.broadcast.contract.execute"];
+                    [weakSelf remindWithMessage:VLocalize(@"error.broadcast.contract.execute")];
                 }
             }];
         } else {

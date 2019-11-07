@@ -47,6 +47,10 @@
     self.textView.superview.layer.borderColor = VColor.borderColor.CGColor;
     self.textView.placeholder = VLocalize(@"mnemonic.import.placeholder");
     self.view.backgroundColor = VColor.rootViewBgColor;
+    
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ico_scan"] style:UIBarButtonItemStylePlain target:self action:@selector(clickScan)];
+//    self.navigationItem.rightBarButtonItem = anotherButton;
+    
     [self.nextBtn setTitle:VLocalize(@"next") forState:UIControlStateNormal];
 }
 
@@ -63,6 +67,10 @@
     BOOL enabled = [Regex matchRegexStr:@"^([A-Za-z]+\\s){14}[A-Za-z]+$" string:textView.text];
     self.nextBtn.alpha = enabled ? 1.f : 0.5f;
     self.nextBtn.tag = enabled;
+}
+
+- (void)clickScan {
+    
 }
 
 - (IBAction)scanBtnClick:(id)sender {
@@ -101,19 +109,17 @@
 }
 
 - (void)showUnofficialAlert {
-    UIGraphicsBeginImageContextWithOptions(self.textView.bounds.size, NO, [UIScreen mainScreen].scale);
-    [self.textView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    UIImageView *imgView = [[UIImageView alloc] init];
-    imgView.image = image;
-    imgView.contentMode = UIViewContentModeTopLeft;
-    imgView.layer.borderColor = VColor.borderColor.CGColor;
-    imgView.layer.cornerRadius = 6.f;
-    imgView.layer.borderWidth = 1.f;
+    UITextView *mnemonicView = [[UITextView alloc] init];
+    mnemonicView.text = self.textView.text;
+    mnemonicView.font = [UIFont systemFontOfSize:16];
+    mnemonicView.editable = NO;
+    mnemonicView.layer.borderColor = VColor.borderColor.CGColor;
+    mnemonicView.layer.cornerRadius = 6.f;
+    mnemonicView.layer.borderWidth = 1.f;
+    
     VAlertViewController *vc = [[VAlertViewController alloc] initWithTitle:VLocalize(@"tip.mnemonic.unofficial.title") secondTitle:VLocalize(@"tip.mnemonic.unofficial.detail") contentView:^(UIStackView * _Nonnull parentView) {
-        [parentView addArrangedSubview:imgView];
-        [imgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [parentView addArrangedSubview:mnemonicView];
+        [mnemonicView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(parentView);
             make.height.equalTo(@(120));
         }];

@@ -397,6 +397,11 @@ FOUNDATION_EXPORT NSString* _Nonnull VsysGenerateSeed(void);
 
 FOUNDATION_EXPORT VsysAccount* _Nullable VsysGetAccountFromPrivateKey(NSString* _Nullable privateKey, NSString* _Nullable network);
 
+/**
+ * format in if it is base58
+ */
+FOUNDATION_EXPORT NSString* _Nonnull VsysGetAttachment(NSString* _Nullable in_);
+
 FOUNDATION_EXPORT long VsysGetAttachmentLength(NSString* _Nullable in_);
 
 FOUNDATION_EXPORT VsysQRCodeContentItem* _Nullable VsysGetContentItem(NSString* _Nullable in_);

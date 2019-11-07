@@ -10,9 +10,11 @@
 
 typedef NS_ENUM(NSInteger, TransactionListType) {
     TransactionListTypeAll = 0,
-    TransactionListTypeSent,
-    TransactionListTypeReceive,
-    TransactionListTypeLease
+    TransactionListTypePayment,
+    TransactionListTypeLease,
+    TransactionListTypeCancelLease,
+    TransactionListTypeRegisterContract,
+    TransactionListTypeExecuteContract,
 };
 
 #endif /* TransactionListType_h */

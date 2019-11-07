@@ -94,10 +94,11 @@
 
 // ---- transaction records ----
 "transaction.list.type.0" = "全部";
-"transaction.list.type.1" = "发送";
-"transaction.list.type.2" = "接收";
-"transaction.list.type.3" = "铸币";
-"transaction.list.type.8" = "创建合约";
+"transaction.list.type.1" = "转账";
+"transaction.list.type.2" = "铸币";
+"transaction.list.type.3" = "取消铸币";
+"transaction.list.type.4" = "创建合约";
+"transaction.list.type.5" = "执行合约";
 "transaction.list.type.9" = "执行合约";
 
 // ---- date range filter ----
@@ -300,7 +301,7 @@
 "tip.transaction.insufficient.token.balance" = "Token 余额不足";
 "tip.transaction.error.address" = "您只能转账给一个VSYS地址";
 "tip.transaction.amount.invalid" = "输入的数额无效";
-"tip.transaction.address.is.self" = "接收地址不能是当前地址";
+"tip.transaction.address.is.self" = "接收地址为当前地址";
 "tip.transaction.attachment.too.long" = "备注内容不能超过140个字符";
 "tip.transaction.contract.desc.too.long" = "合约描述不能超过140个字符";
 "tip.transaction.token.desc.too.long" = "Token 描述不能超过140个字符";
@@ -376,6 +377,7 @@
 // ---- token ----
 "token.available.vsys" = "可用余额 VSYS";
 "token.add.token" = "添加 Token";
+"token.add.added" = "已添加";
 "token.token.id.note" = "TOKEN ID";
 "token.input.token.id" = "请输入 Token ID";
 "token.info" = "Token 信息";
@@ -396,6 +398,7 @@
 "token.info.token.desc" = "Token 备注";
 "token.send.token" = "发送 Token";
 "token.create.token" = "创建 Token";
+"token.create.unity.desc" = "最小单位为";
 "token.issue.token" = "增发 Token";
 "token.burn.token" = "销毁 Token";
 "token.hide.token" = "隐藏 Token";
@@ -413,6 +416,15 @@
 "token.operate.burn.amount" = "成功销毁";
 "token.transaction.register.success" = "创建 Token 成功";
 "token.transaction.send.success" = "执行合约成功";
+
+"supersede" = "取代";
+"issue" = "增发";
+"destroy" = "销毁";
+"split" = "分割";
+"send" = "发送";
+"deposit" = "抵押";
+"withdraw" = "提现";
+"transfer" = "转账";
 
 "error.permission.not.issuer" = "该帐号没有该合约增发权限";
 "error.broadcast.contract.execute" = "合约执行广播失败";

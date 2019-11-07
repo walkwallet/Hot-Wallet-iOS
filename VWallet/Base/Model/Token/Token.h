@@ -25,4 +25,7 @@
 @property (nonatomic) NSString *maker;
 @property (nonatomic) NSString *textualDescriptor;
 
+@property (nonatomic) BOOL splitable;
+@property (nonatomic) BOOL watched;
+
 @end

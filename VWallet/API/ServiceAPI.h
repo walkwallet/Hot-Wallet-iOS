@@ -164,4 +164,6 @@ static NSString *const ApiPostContractExecute = @"/contract/broadcast/execute";
 
 static NSString *const ApiPostExplorerTokenDetail = @"/api/getTokenDetail";
 
+static NSString *const ApiPostExplorerCertifiedList = @"/api/getTokenList";
+
 #endif /* ServiceAPI_h */

@@ -94,10 +94,11 @@
 
 // ---- transaction records ----
 "transaction.list.type.0" = "All";
-"transaction.list.type.1" = "Send";
-"transaction.list.type.2" = "Receive";
-"transaction.list.type.3" = "Minting";
-"transaction.list.type.8" = "Register Contract";
+"transaction.list.type.1" = "Payment";
+"transaction.list.type.2" = "Leasing";
+"transaction.list.type.3" = "Cancel Leasing";
+"transaction.list.type.4" = "Register Contract";
+"transaction.list.type.5" = "Execute Contract";
 "transaction.list.type.9" = "Execute Contract";
 
 // ---- date range filter ----
@@ -300,7 +301,7 @@
 "tip.transaction.insufficient.token.balance" = "Insufficient token balance";
 "tip.transaction.error.address" = "You can only send tokens to an VSYS address.";
 "tip.transaction.amount.invalid" = "The amount entered is invalid";
-"tip.transaction.address.is.self" = "The receiving address cannot be the current address";
+"tip.transaction.address.is.self" = "The receiving address is the current address";
 "tip.transaction.attachment.too.long" = "Description attachment content too long";
 "tip.transaction.contract.desc.too.long" = "Contract description too long";
 "tip.transaction.token.desc.too.long" = "Token description too long";
@@ -376,6 +377,7 @@
 // ---- token ----
 "token.available.vsys" = "Available VSYS";
 "token.add.token" = "Add Token";
+"token.add.added" = "Added";
 "token.token.id.note" = "TOKEN ID";
 "token.input.token.id" = "Input the token ID";
 "token.info" = "Token Info";
@@ -396,6 +398,7 @@
 "token.info.support.note" = "(Attention:cannot chagne after create)";
 "token.send.token" = "Send Token";
 "token.create.token" = "Create Token";
+"token.create.unity.desc" = "The minimum amount will be";
 "token.issue.token" = "Issue Token";
 "token.burn.token" = "Destroy Token";
 "token.hide.token" = "Hide Token";
@@ -413,6 +416,15 @@
 "token.register.success.check.watch.list" = "You can check in your token watch list";
 "token.transaction.register.success" = "Create Token Success";
 "token.transaction.send.success" = "Execute Contract Success";
+
+"supersede" = "Supersede";
+"issue" = "Issue";
+"destroy" = "Destroy";
+"split" = "Split";
+"send" = "Send";
+"deposit" = "Deposit";
+"withdraw" = "Withdraw";
+"transfer" = "Transfer";
 
 "error.permission.not.issuer" = "This account is not the issuer of contract";
 "error.broadcast.contract.execute" = "Fail to broad cast contract execute";

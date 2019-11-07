@@ -94,10 +94,11 @@
 
 // ---- transaction records ----
 "transaction.list.type.0"  = "전부";
-"transaction.list.type.1"  = "전송";
-"transaction.list.type.2"  = "수신";
-"transaction.list.type.3"  = "주조";
-"transaction.list.type.8" = "계약 생성";
+"transaction.list.type.1"  = "양도";
+"transaction.list.type.2"  = "코인";
+"transaction.list.type.3"  = "주화 취소";
+"transaction.list.type.4" = "계약 생성";
+"transaction.list.type.5" = "계약 체결";
 "transaction.list.type.9" = "계약 체결";
 
 // ---- date range filter ----
@@ -300,7 +301,7 @@
 "tip.transaction.insufficient.token.balance" = "잔고 부족";
 "tip.transaction.error.address"  = "오직 VSYS 주소로만 토큰이 전송 됩니다.";
 "tip.transaction.amount.invalid"  = "입력 한 금액이 잘못되었습니다.";
-"tip.transaction.address.is.self"  = "수신 주소는 현재 주소로 설정할 수 없습니다.";
+"tip.transaction.address.is.self"  = "대상 주소는 현재 주소입니다.";
 "tip.transaction.attachment.too.long" = "설명 파일의 내용이 너무 깁니다.";
 "tip.transaction.contract.desc.too.long" = "계약서 설명이 너무 깁니다.";
 "tip.transaction.token.desc.too.long" = "토큰 설명이 너무 깁니다.";
@@ -376,6 +377,7 @@
 // ---- token ----
 "token.available.vsys" = "이용가능한 VSYS";
 "token.add.token" = "토큰 추가";
+"token.add.added" = "추가";
 "token.token.id.note" = "토큰 아이디";
 "token.input.token.id" = "토큰 아이디 입력";
 "token.info" = "토큰 정보";
@@ -396,6 +398,7 @@
 "token.info.support.note" = "(주의: 설정 후 수정이 불가합니다)";
 "token.send.token" = "토큰 전송";
 "token.create.token" = "토큰 생성";
+"token.create.unity.desc" = "최소 금액은";
 "token.issue.token" = "발행 토큰";
 "token.burn.token" = "토큰 파괴";
 "token.hide.token" = "토큰숨기기";
@@ -413,6 +416,15 @@
 "token.register.success.check.watch.list" = "거래 기록을 확인할 수 있습니다.";
 "token.transaction.register.success" = "성공적으로 생성됨";
 "token.transaction.send.success" = "계약 성공 실행";
+
+"supersede" = "대체하다";
+"issue" = "추가 발행";
+"destroy" = "파괴";
+"split" = "세분화";
+"send" = "보내기";
+"deposit" = "모기지";
+"withdraw" = "인출";
+"transfer" = "양도";
 
 "error.permission.not.issuer" = "이 계좌는 계약서 발행자가 아닙니다.";
 "error.broadcast.contract.execute" = "실행 된 방송 계약 실패";
