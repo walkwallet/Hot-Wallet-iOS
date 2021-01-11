@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vks-bC-DbF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vks-bC-DbF">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <deployment version="4352" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -416,6 +416,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="jO5-xS-RPM"/>
                         <constraints>
                             <constraint firstItem="jO5-xS-RPM" firstAttribute="trailing" secondItem="eX4-Ry-3rh" secondAttribute="trailing" id="3yE-V3-cr7"/>
                             <constraint firstItem="ztK-Qm-2yA" firstAttribute="leading" secondItem="jO5-xS-RPM" secondAttribute="leading" id="66s-Nn-hqu"/>
@@ -426,7 +427,6 @@
                             <constraint firstItem="eX4-Ry-3rh" firstAttribute="top" secondItem="UW4-pg-lKI" secondAttribute="top" id="Wzw-E1-U7A"/>
                             <constraint firstItem="ztK-Qm-2yA" firstAttribute="trailing" secondItem="jO5-xS-RPM" secondAttribute="trailing" id="v6v-vt-vkt"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="jO5-xS-RPM"/>
                     </view>
                     <connections>
                         <outlet property="backBtn" destination="TJ6-84-6rb" id="nTt-yv-EEd"/>
@@ -493,7 +493,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7p7-kM-gRZ" secondAttribute="trailing" constant="20" id="Vwd-if-rZl"/>
                                     <constraint firstItem="7p7-kM-gRZ" firstAttribute="centerY" secondItem="Vuu-HN-Zsl" secondAttribute="centerY" id="ccX-2Q-kmZ"/>
@@ -542,6 +542,7 @@
                                 </connections>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="sKX-Qi-GXt"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Vuu-HN-Zsl" firstAttribute="leading" secondItem="sKX-Qi-GXt" secondAttribute="leading" id="4Eo-HC-yFJ"/>
@@ -551,7 +552,6 @@
                             <constraint firstItem="MSA-Sq-fX8" firstAttribute="leading" secondItem="sKX-Qi-GXt" secondAttribute="leading" id="myG-Za-k3c"/>
                             <constraint firstItem="Vuu-HN-Zsl" firstAttribute="top" secondItem="MSA-Sq-fX8" secondAttribute="bottom" id="yRa-9v-WKd"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="sKX-Qi-GXt"/>
                     </view>
                     <connections>
                         <outlet property="dateRangeView" destination="Vuu-HN-Zsl" id="kB7-3I-Nnd"/>
@@ -564,6 +564,20 @@
             <point key="canvasLocation" x="208.80000000000001" y="823.53823088455783"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="DQE-Un-QQZ">
+            <size key="intrinsicContentSize" width="34" height="14.5"/>
+        </designable>
+        <designable name="Gkk-Lg-t6h">
+            <size key="intrinsicContentSize" width="33.5" height="14.5"/>
+        </designable>
+        <designable name="SxU-Ob-ypP">
+            <size key="intrinsicContentSize" width="29" height="14.5"/>
+        </designable>
+        <designable name="szI-g5-C5I">
+            <size key="intrinsicContentSize" width="44.5" height="14.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ico_close_small" width="8" height="8"/>
         <image name="ico_minting" width="24" height="22"/>
@@ -573,5 +587,8 @@
         <image name="ico_send" width="20" height="22"/>
         <image name="ico_tabbar_wallet" width="24" height="23"/>
         <image name="ico_token" width="22" height="24"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

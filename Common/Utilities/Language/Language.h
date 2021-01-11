@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, LanguageType) {
     LanguageTypeCN = 0,
     LanguageTypeEN,
     LanguageTypeKO,
+    LanguageTypeCNHant,
 };
 
 @interface Language : NSObject

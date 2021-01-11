@@ -30,7 +30,7 @@ static Language *VLanguage = nil;
 }
 
 + (NSArray *)supportLanguages {
-    return @[@"English", @"简体中文", @"한국어"];
+    return @[@"English", @"简体中文", @"繁体中文", @"한국어"];
 }
 
 - (void)setLanguageType:(LanguageType)languageType {
@@ -70,6 +70,8 @@ static Language *VLanguage = nil;
         return LanguageTypeCN;
     }else if ([key isEqualToString:@"ko"]) {
         return LanguageTypeKO;
+    }else if ([key isEqualToString:@"zh-hant"]) {
+        return LanguageTypeCNHant;
     }
     return LanguageTypeEN;
 }
@@ -80,6 +82,8 @@ static Language *VLanguage = nil;
             return @"zh-Hans";
         case LanguageTypeKO:
             return @"ko";
+        case LanguageTypeCNHant:
+            return @"zh-Hant";
         default:
             return @"en";
     }
@@ -90,6 +94,8 @@ static Language *VLanguage = nil;
         return LanguageTypeCN;
     }else if ([desc isEqualToString:@"한국어"]){
         return LanguageTypeKO;
+    }else if ([desc isEqualToString:@"繁体中文"]) {
+        return LanguageTypeCNHant;
     }
     return LanguageTypeEN;
 }
@@ -98,6 +104,8 @@ static Language *VLanguage = nil;
     switch (type) {
         case LanguageTypeCN:
             return @"简体中文";
+        case LanguageTypeCNHant:
+            return @"繁体中文";
         case LanguageTypeKO:
             return @"한국어";
         default:

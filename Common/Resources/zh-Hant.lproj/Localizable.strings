@@ -6,441 +6,441 @@
 */
 
 // general
-"cancel" = "Cancel";
-"confirm" = "Confirm";
-"next" = "Next";
-"continue" = "Continue";
-"ok" = "Ok";
-"done" = "Done";
-"clear" = "Clear";
-"close" = "Close";
-"delete" = "Delete";
-"send" = "Send";
-"add" = "Add";
-"logout" = "Logout";
-"back" = "Back";
-"isee" = "I got it";
-"notagree" = "I do not agree";
-"agree" = "I agree";
+"cancel" = "取消";
+"confirm" = "確定";
+"next" = "下壹步";
+"continue" = "繼續";
+"ok" = "好的";
+"done" = "完成";
+"clear" = "清空";
+"close" = "關閉";
+"delete" = "刪除";
+"send" = "發送";
+"add" = "添加";
+"logout" = "註銷";
+"back" = "返回";
+"isee" = "知道了";
+"notagree" = "不同意";
+"agree" = "同意";
 
 // view text by module vi: "settings.title" "xx.xx.xx.xx.title"
 
 // ---- vc's title ----
-"nav.title.device.lock" = "Device lock";
-"nav.title.settings" = "Settings";
-"nav.title.addresses" = "Address Management";
-"nav.title.address.detail" = "Address Detail";
-"nav.title.wallet" = "Wallet";
-"nav.title.monitor" = "Cold Wallet";
-"nav.title.about" = "About us";
-"nav.title.network.choose" = "Choose Network";
-"nav.title.mnemonic.import" = "Mnemonic words";
-"nav.title.password.create" = "Create a wallet";
-"nav.title.mnemonic.backup" = "Back up mnemonics";
-"nav.title.mnemonic.backup.check" = "Back up mnemonics";
-"nav.title.monitor.add.title" = "Address & Public key";
-"nav.title.setup.password" = "Setup Password";
-"nav.title.transaction.send" = "Send";
-"nav.title.transaction.send_token" = "Send Token";
-"nav.title.transaction.receive" = "Receive";
-"nav.title.transaction.lease" = "Minting";
-"nav.title.transaction.records" = "Transaction Records";
-"nav.title.transaction.detail" = "Transaction Detail";
-"nav.title.date.filter" = "Filter by date";
-"nav.title.set.amount" = "Set Amount";
+"nav.title.device.lock" = "設備鎖";
+"nav.title.settings" = "設置";
+"nav.title.addresses" = "地址管理";
+"nav.title.address.detail" = "地址詳情";
+"nav.title.wallet" = "錢包";
+"nav.title.monitor" = "冷錢包";
+"nav.title.about" = "關於我們";
+"nav.title.network.choose" = "選擇網絡";
+"nav.title.mnemonic.import" = "助記詞導入";
+"nav.title.password.create" = "創建錢包";
+"nav.title.mnemonic.backup" = "備份助記詞";
+"nav.title.mnemonic.backup.check" = "備份助記詞";
+"nav.title.monitor.add.title" = "地址 & 公鑰";
+"nav.title.setup.password" = "設置密碼";
+"nav.title.transaction.send" = "發送";
+"nav.title.transaction.send_token" = "發送Token";
+"nav.title.transaction.receive" = "接收";
+"nav.title.transaction.lease" = "鑄幣";
+"nav.title.transaction.records" = "交易記錄";
+"nav.title.transaction.detail" = "交易詳情";
+"nav.title.date.filter" = "日期篩選";
+"nav.title.set.amount" = "設置接收數量";
 
 // ---- tabbar page title ----
-"tabbar.title.0" = "Wallet";
-"tabbar.title.1" = "Settings";
+"tabbar.title.0" = "錢包";
+"tabbar.title.1" = "設置";
 
 // ---- account list ----
-"account.list.add.title" = "Add Address";
-"account.list.add.desc" = "You can only add one address at a time";
-"account.list.monitor.add.title" = "Scan QR to Monitor Cold Wallet";
-"account.list.monitor.add.desc" = "You can Create the Cold Wallet with a Offline Mobile";
-"account.list.total.balance" = "Total Balance";
+"account.list.add.title" = "創建地址";
+"account.list.add.desc" = "您每次只能添加1個地址";
+"account.list.monitor.add.title" = "掃碼添加冷錢包地址進行觀察";
+"account.list.monitor.add.desc" = "您可用壹部不聯網的手機創建硬件冷錢包";
+"account.list.total.balance" = "總余額";
 
 // ---- account detail ----
-"account.detail.available.balance" = "Available Balance";
-"account.detail.total.balance" = "Total Balance";
-"account.detail.leased.out" = "Leased Out";
-"account.detail.leased.in" = "Leased In";
-"account.detail.send" = "Send";
-"account.detail.receive" = "Receive";
-"account.detail.lease" = "Minting";
-"account.detail.records" = "Records";
+"account.detail.available.balance" = "可用余額";
+"account.detail.total.balance" = "總余額";
+"account.detail.leased.out" = "租出";
+"account.detail.leased.in" = "租入";
+"account.detail.send" = "發送";
+"account.detail.receive" = "接收";
+"account.detail.lease" = "鑄幣";
+"account.detail.records" = "記錄";
 "account.detail.token" = "Token";
-"account.detail.token.watchList" = "Token Watch List";
-"account.detail.transaction.records" = "Transaction Records";
+"account.detail.token.watchList" = "Token 列表";
+"account.detail.transaction.records" = "交易記錄";
 
 // ---- account transaction operate ----
-"account.transaction.send.amount" = "AMOUNT";
-"account.transaction.send.to" = "TO";
-"account.transaction.lease.amount" = "Lease Amount";
-"account.transaction.lease.to" = "TO";
-"account.transaction.desc" = "DESCRIPTION";
-"account.transaction.available.balance" = "Available Balance";
-"account.transaction.max" = "MAX";
-"account.transaction.paste" = "PASTE";
-"account.transaction.scan.qr" = "SCAN QR";
+"account.transaction.send.amount" = "發送總量";
+"account.transaction.send.to" = "發送給";
+"account.transaction.lease.amount" = "租賃總量";
+"account.transaction.lease.to" = "租賃到";
+"account.transaction.desc" = "備註";
+"account.transaction.available.balance" = "可用余額";
+"account.transaction.max" = "全部";
+"account.transaction.paste" = "粘貼";
+"account.transaction.scan.qr" = "掃描二維碼";
 "account.transaction.amount.placeholder" = "0.00";
-"account.transaction.to.placeholder" = "Receive address";
-"account.transaction.to.node.address" = "Node Address";
-"account.transaction.desc.placeholder" = "Input or not";
-"account.transaction.fee" = "Transaction Fee";
-"account.transaction.question" = "What is the lease?";
-"account.transaction.nodelist" = "Supernode Ranklist";
-"account.transaction.lease.detail" = "Tip：Entrust to the supernode can get minting income commission, please check the supernode list website vsysrate.com";
+"account.transaction.to.placeholder" = "接收地址";
+"account.transaction.to.node.address" = "節點地址";
+"account.transaction.desc.placeholder" = "選填";
+"account.transaction.fee" = "手續費";
+"account.transaction.question" = "什麽是鑄幣？";
+"account.transaction.nodelist" = "超級節點列表";
+"account.transaction.lease.detail" = "提示：租出給超級節點才可以獲得鑄幣收益分傭，請在超級節點列表網站vsysrate.com淘壹下";
 
 // ---- transaction records ----
-"transaction.list.type.0" = "All";
-"transaction.list.type.1" = "Payment";
-"transaction.list.type.2" = "Leasing";
-"transaction.list.type.3" = "Cancel Leasing";
-"transaction.list.type.4" = "Register Contract";
-"transaction.list.type.5" = "Execute Contract";
-"transaction.list.type.9" = "Execute Contract";
+"transaction.list.type.0" = "全部";
+"transaction.list.type.1" = "轉賬";
+"transaction.list.type.2" = "鑄幣";
+"transaction.list.type.3" = "取消鑄幣";
+"transaction.list.type.4" = "創建合約";
+"transaction.list.type.5" = "執行合約";
+"transaction.list.type.9" = "執行合約";
 
 // ---- date range filter ----
-"date.range.type.0" = "No Filter";
-"date.range.type.1" = "Past 1 month";
-"date.range.type.2" = "Past 3 months";
-"date.range.type.3" = "Past 1 year";
-"date.range.section.title" = "CHOOSE A DATE RANGE";
-"data.range.before.xx" = "Before %@";
+"date.range.type.0" = "不篩選";
+"date.range.type.1" = "過去1月";
+"date.range.type.2" = "過去3月";
+"date.range.type.3" = "過去1年";
+"date.range.section.title" = "自定義日期範圍";
+"data.range.before.xx" = "%@ 之前";
 
 // ---- transaction detail ----
-"transaction.detail.mine" = "My Address";
-"transaction.detail.sender" = "From";
-"transaction.detail.receive" = "To";
-"transaction.detail.lease.in.sender" = "From";
-"transaction.detail.lease.out.receive" = "To";
-"transaction.detail.status" = "Status";
-"transaction.detail.from" = "From";
-"transaction.detail.to" = "To";
-"transaction.detail.tx.id" = "TxId";
-"transaction.detail.type" = "Type";
-"transaction.detail.amount" = "Amount";
-"transaction.detail.fee" = "Fee";
-"transaction.detail.time" = "Time";
-"transaction.detail.desc" = "Description";
-"transaction.detail.cancel.out.leasing" = "Cancel Out Leasing";
-"transaction.detail.standard.time" = "US Standard Time";
+"transaction.detail.mine" = "我的地址";
+"transaction.detail.sender" = "發送地址";
+"transaction.detail.receive" = "接收地址";
+"transaction.detail.lease.in.sender" = "租入地址";
+"transaction.detail.lease.out.receive" = "租出地址";
+"transaction.detail.status" = "狀態";
+"transaction.detail.from" = "發起地址";
+"transaction.detail.to" = "接收地址";
+"transaction.detail.tx.id" = "交易Id";
+"transaction.detail.type" = "類型";
+"transaction.detail.amount" = "數量";
+"transaction.detail.fee" = "手續費";
+"transaction.detail.time" = "時間";
+"transaction.detail.desc" = "備註";
+"transaction.detail.cancel.out.leasing" = "取消租出";
+"transaction.detail.standard.time" = "中國標準時間";
 
 // ---- account receive ----
-"account.receive.amount" = "AMOUNT";
-"account.receive.qr.copy.tip" = "Click on the QR code to save the image";
-"account.receive.address" = "Receive Address";
-"account.receive.specific.amount" = "Set amount";
-"account.receive.save.image" = "Copy address";
-"account.receive.scan.qr.desc" = "Scan QR code for transfer";
+"account.receive.amount" = "接收總量";
+"account.receive.qr.copy.tip" = "點擊二維碼可將其保存至您的相冊";
+"account.receive.address" = "接收地址";
+"account.receive.specific.amount" = "設置接收數量";
+"account.receive.save.image" = "復制地址";
+"account.receive.scan.qr.desc" = "掃描二維碼進行轉賬";
 
 // ---- settings -----
-"settings.section1.title" = "SECURITY";
-"settings.section2.title" = "WALLET";
-"settings.section3.title" = "OTHER";
+"settings.section1.title" = "安全";
+"settings.section2.title" = "錢包";
+"settings.section3.title" = "其他";
 
-"settings.section1.cell1.title" = "Device lock";
-"settings.section2.cell1.title" = "Backup Mnemonic";
-"settings.section2.cell2.title" = "Address Management";
-"settings.section3.cell1.title" = "Language";
-"settings.section3.cell2.title" = "About us";
-"settings.section3.cell3.title" = "Sign out";
-"settings.section3.cell4.title" = "Network";
-"settings.section2.cell1.detail" = "Backup Now";
+"settings.section1.cell1.title" = "設備鎖";
+"settings.section2.cell1.title" = "備份助記詞";
+"settings.section2.cell2.title" = "地址管理";
+"settings.section3.cell1.title" = "語言";
+"settings.section3.cell2.title" = "關於我們";
+"settings.section3.cell3.title" = "註銷錢包";
+"settings.section3.cell4.title" = "網絡環境";
+"settings.section2.cell1.detail" = "立即備份";
 
 // ---- device lock ----
 "device.lock.cell1.title" = "TouchID";
-"device.lock.cell2.title" = "Auto-lock";
+"device.lock.cell2.title" = "自動鎖定";
 "device.lock.cell3.title" = "Delete lock";
 
 // ---- addresses ----
-"addresses.section1.title" = "WALLET ADDRESS";
-"addresses.section2.title" = "COLD WALLET ADDRESS";
+"addresses.section1.title" = "錢包地址";
+"addresses.section2.title" = "冷錢包地址";
 
 // ---- address normal detail ----
-"address.detail.section1.title" = "ADDRESS & AVAILABLE BALANCE";
-"address.detail.section2.title" = "PUBLIC KEY";
-"address.detail.section3.title" = "PRIVATE KEY";
-"address.detail.section4.title" = "MNEMONIC PHRASE";
-"address.detail.cell.hide.title" = "Please input your password to show";
+"address.detail.section1.title" = "地址 & 可用余額";
+"address.detail.section2.title" = "公鑰";
+"address.detail.section3.title" = "私鑰";
+"address.detail.section4.title" = "助記詞";
+"address.detail.cell.hide.title" = "請輸入錢包密碼顯示";
 
 // ---- about ----
-"about.cell1.title" = "Official website";
-"about.cell2.title" = "Version";
+"about.cell1.title" = "官方網站";
+"about.cell2.title" = "版本號";
 
 // ---- welcome ----
-"welcome.title" = "Welcome WALK WALLET";
-"welcome.detail" = "Please create or import wallet";
-"welcome.btn1.title" = "Create wallet";
-"welcome.btn2.title" = "Import wallet";
-"welcome.import.btn1.title" = "Import with mnemonic words";
-"welcome.import.btn2.title" = "Import local backup";
+"welcome.title" = "歡迎使用WALK WALLET";
+"welcome.detail" = "請創建或導入錢包";
+"welcome.btn1.title" = "創建錢包";
+"welcome.btn2.title" = "導入錢包";
+"welcome.import.btn1.title" = "助記詞導入";
+"welcome.import.btn2.title" = "本地備份導入";
 
 // ---- Choose Network ----
-"network.choose.detail" = "After the wallet is successfully created, the network cannot be changed";
-"network.choose.cell1.title" = "Mainnet";
-"network.choose.cell1.detail" = "Under the formal network environment, users can safely store the real assets of VSYS. This environment is suitable for ordinary users' daily use.";
-"network.choose.cell2.title" = "Testnet";
-"network.choose.cell2.detail" = "Under the test network environment, users are not allowed to store the real assets of VSYS safely. This environment is suitable for developers to do simulation test. If you are not a professional developer, you are recommended to use the formal environment";
+"network.choose.detail" = "成功創建錢包後，網絡環境將不能進行修改";
+"network.choose.cell1.title" = "正式環境";
+"network.choose.cell1.detail" = "在正式網絡環境下，用戶可進行VSYS資產的安全存儲，此環境適用於普通用戶日常使用";
+"network.choose.cell2.title" = "測試環境";
+"network.choose.cell2.detail" = "在測試網絡環境下，用戶不可進行VSYS真實資產的安全存儲，此環境適用於開發者做模擬測試使用，若非專業開發者，建議您使用正式環境";
 
 // ---- Import Mnemonic ----
-"mnemonic.import.detail" = "Mnemonic words consist of 15 words, please pay attention to the input space separated";
-"mnemonic.import.placeholder" = "Please input";
+"mnemonic.import.detail" = "助記詞由15個英文單詞組成，註意輸入時用空格分開，末尾不能有空格或換行";
+"mnemonic.import.placeholder" = "請輸入";
 
 // ---- Create Password ----
-"password.create.detail" = "Walk Wallet does not store your password.It cannot be recovered if forgotten.Please keep it properly";
-"password.create.item1.title" = "WALLET PASSWORD";
-"password.create.item1.detail" = "Please input at least 8 characters";
-"password.create.item2.title" = "CONFIRM PASSWORD";
-"password.create.item2.detail" = "Please input";
-"password.create.btn.title" = "Create";
-"password.create.length.title" = "Please input at least 8 characters";
-"password.create.consistency.error.title" = "Passwords do not match";
+"password.create.detail" = "請牢記您的密碼！Walk Wallet不存儲用戶密碼，無法提供找回功能";
+"password.create.item1.title" = "錢包密碼";
+"password.create.item1.detail" = "請輸入至少8位字符";
+"password.create.item2.title" = "確認錢包密碼";
+"password.create.item2.detail" = "請輸入";
+"password.create.btn.title" = "確認創建";
+"password.create.length.title" = "至少8位字符";
+"password.create.consistency.error.title" = "兩次密碼輸入不壹致";
 
 // ---- Password Weak ----
-"password.weak.title" = "Password strength is too weak";
-"password.weak.detail" = "For your wallet security, password strength should be at least \"good\"";
-"password.weak.btn1.title" = "Reset Password";
-"password.weak.btn2.title" = "Complete creation";
+"password.weak.title" = "密碼強度太弱";
+"password.weak.detail" = "為了您的錢包安全，密碼強度至少要在“好”以上";
+"password.weak.btn1.title" = "返回重設密碼";
+"password.weak.btn2.title" = "繼續完成創建";
 
 // ---- Create Success ----
-"wallet.create.success.title" = "Successful created";
-"wallet.create.success.detail" = "We strongly recommend backing up your wallet now.";
-"wallet.create.success.btn1.title" = "Back up wallet";
-"wallet.create.success.btn2.title" = "Back up later";
+"wallet.create.success.title" = "創建成功";
+"wallet.create.success.detail" = "錢包創建成功，請您務必保管好密碼和助記詞";
+"wallet.create.success.btn1.title" = "備份錢包";
+"wallet.create.success.btn2.title" = "稍後備份";
 
 // ---- Mnemonic Backup ----
-"menmonic.backup.title" = "Screenshots are not safe and your images may be used by other applications. Please use pen and paper to copy the following mnemonic words and save them properly. We will confirm on the next screen";
-"menmonic.backup.btn1.title" = "I have saved them orderly";
-"mnemonic.backup.btn.qrcode" = "Export mnemonics QR Code";
+"menmonic.backup.title" = "截圖是不安全的，妳的圖片可能被別的應用使用。請使用筆和紙抄寫如下助記詞，並妥善保存，我們會在下個屏幕上確認";
+"menmonic.backup.btn1.title" = "已按順序記下助記詞";
+"mnemonic.backup.btn.qrcode" = "導出助記詞二維碼";
 
 // ---- Mnemonic Backup Check ----
-"mnemonic.backup.check.title" = "Click on the mnemonic words orderly to confirm.";
+"mnemonic.backup.check.title" = "按順序點擊助記詞，確認妳的助記詞備份正確";
 
 // ---- Mnemonic Backup Success ----
-"mnemonic.backup.success.title" = "Successfully backed up";
-"mnemonic.backup.success.detail" = "Please keep your mnemonic words carefully";
+"mnemonic.backup.success.title" = "備份成功";
+"mnemonic.backup.success.detail" = "請妥善保管妳的助記詞";
 
 // ---- transaction review ----
-"transaction.review.cell1.title" = "From";
-"transaction.review.cell2.title" = "To";
-"transaction.review.cell3.title" = "Type";
-"transaction.review.cell4.title" = "Amount";
-"transaction.review.cell5.title" = "Fee";
-"transaction.review.cell6.title" = "Description";
+"transaction.review.cell1.title" = "我的地址";
+"transaction.review.cell2.title" = "接收地址";
+"transaction.review.cell3.title" = "類型";
+"transaction.review.cell4.title" = "數量";
+"transaction.review.cell5.title" = "手續費";
+"transaction.review.cell6.title" = "備註";
 
 // ---- transaction operate success ----
-"transaction.sent.success.title" = "You Sent %@ VSYS to\n%@";
-"transaction.lease.success.title" = "You Started Leasing %@ VSYS to\n%@";
-"transaction.success.detail" = "You can check in your transaction records";
-"transaction.cancel.lease.success.title" = "You Canceled Out Leasing %@ VSYS to\n%@";
-"transaction.create.contract" = "You have create a new token，token ID is:\n%@";
-"transaction.contract.execute" = "You have sent %@ %@ to:\n%@";
+"transaction.sent.success.title" = "您成功發送 %@ VSYS 到\n%@";
+"transaction.lease.success.title" = "您已租出 %@ VSYS 到\n%@";
+"transaction.success.detail" = "您可以在交易記錄裏面查看此筆交易詳情";
+"transaction.cancel.lease.success.title" = "您已停止租出 %@ VSYS 到\n%@";
+"transaction.create.contract" = "您成功創建壹個新Token，Token ID 是：\n%@";
+"transaction.contract.execute" = "您已發送 %@ %@ 到：\n%@";
 
 // ---- password auth ----
-"password.auth.title" = "Welcome WALK WALLET";
-"password.auth.detail" = "Please enter your wallet password";
-"password.auth.textfield.placeholder" = "Enter the password";
+"password.auth.title" = "歡迎使用WALK WALLET";
+"password.auth.detail" = "請輸入已設置的錢包密碼";
+"password.auth.textfield.placeholder" = "輸入密碼";
 
 // ---- Monitor Address Add ----
-"monitor.address.add.title" = "You must input both Address and Public key of the cold wallet in order to add it.";
-"monitor.address.add.title1" = "COLD WALLET ADDRESS";
-"monitor.address.add.title2" = "COLD WALLET PUBLIC KEY";
-"monitor.address.add.textview1.placeholder" = "Please input cold wallet address";
-"monitor.address.add.textview2.placeholder" = "Please input cold wallet public key";
+"monitor.address.add.title" = "您必須同時填寫冷錢包的地址和公鑰之後，才能成功對其添加監控。";
+"monitor.address.add.title1" = "冷錢包地址";
+"monitor.address.add.title2" = "冷錢包公鑰";
+"monitor.address.add.textview1.placeholder" = "請輸入冷錢包的地址";
+"monitor.address.add.textview2.placeholder" = "請輸入冷錢包的公鑰";
 
 // ---- QRCode scan ----
-"scan.qrcode.title" = "Scan QR code";
-"scan.qrcode.page.bottom.note" = "Current Page %d / Total Page %d";
-"scan.qrcode.explain" = "Create token %@ that max supply is %lld";
-"scan.qrcode.support.split" = "(support split)";
-"scan.qrcode.function.explain.send" = "send %@ %@ to %@";
-"scan.qrcode.function.explain.issue" = "issue %@ %@";
-"scan.qrcode.function.explain.burn" = "destroy %@ %@";
+"scan.qrcode.title" = "將二維碼放入矩形框內，即可自動掃描";
+"scan.qrcode.page.bottom.note" = "第%d頁 / 總共%d頁";
+"scan.qrcode.explain" = "創建新 Token %@ , 最大發行量 %lld";
+"scan.qrcode.support.split" = "(支持拆分)";
+"scan.qrcode.function.explain.send" = "發送 %@ %@ 到 %@";
+"scan.qrcode.function.explain.issue" = "增發 %@ %@";
+"scan.qrcode.function.explain.burn" = "銷毀 %@ %@";
 
 // ----- Transaction QRCode ----
-"transaction.qrcode.title" = "1. Please use your Cold Wallet client to scan this QR code.\n\n2. And click \"continue\" button below after your cold wallet client generates a QR code.";
+"transaction.qrcode.title" = "請使用您的冷錢包客戶端掃描此二維碼。並在您的冷錢包客戶端生成二維碼後單擊下方“繼續”按鈕。";
 
 // ---- action option ----
-"action.address.detail" = "Address Detail";
-"action.address.copy" = "Copy the Address";
-"action.address.records" = "Records";
+"action.address.detail" = "地址管理";
+"action.address.copy" = "拷貝地址";
+"action.address.records" = "交易歷史";
 
 // tip prefix with "tip.xx.xx"
 // ---- logout ----
-"tip.logout.title" = "Write out the wallet";
-"tip.logout.detail" = "Have you recorded your wallet Recovery phrase? Without this you will not be able to sign back in to your account.";
+"tip.logout.title" = "註銷錢包";
+"tip.logout.detail" = "註銷錢包前，請您務必確認是否已記錄好助記詞，錢包壹經註銷，沒有助記詞將無法找回！";
 
 // ---- Network change ----
-"tip.networh.change.to.test" = "The test environment is only available for developers to test. Are you sure you want to use it?";
+"tip.networh.change.to.test" = "測試環境僅提供給開發者做測試，您是否確認使用?";
 
 // ---- mnemonic ----
-"tip.mnemonic.unofficial.title" = "Unofficial mnemonic detected";
-"tip.mnemonic.unofficial.detail" = "Mnemonic words from unknown sources can completely lose your assets. Still using the mnemonic?";
-"tip.mnemonic.validate.error.title" = "Validate fail, please check the spelling of the words";
+"tip.mnemonic.unofficial.title" = "檢測到非官方來源的助記詞";
+"tip.mnemonic.unofficial.detail" = "未知來源的助記詞可能使您的資產完全丟失。仍然使用該助記詞？";
+"tip.mnemonic.validate.error.title" = "助記詞校驗失敗，請檢查單詞拼寫是否正確";
 
 // ---- account ----
-"tip.account.add.title" = "Add a new address";
-"tip.account.add.detail" = "You will add a new account that cannot be deleted. Are you sure to add?";
-"tip.account.add.positive.btn.title" = "Add";
-"tip.account.address.copy.success" = "Copy address successfully";
+"tip.account.add.title" = "添加新地址";
+"tip.account.add.detail" = "您是否確定要添加壹個新的賬戶？";
+"tip.account.add.positive.btn.title" = "添加";
+"tip.account.address.copy.success" = "拷貝地址成功";
 
 // ---- scan qrcode ----
-"tip.qrcode.unsupported.types" = "Unsupported QR code types";
-"tip.qrcode.unsupported.version" = "Unsupported types, please upgrade the current Wallet";
+"tip.qrcode.unsupported.types" = "不支持的二維碼類型";
+"tip.qrcode.unsupported.version" = "不支持的類型，請升級當前錢包";
 
 // ---- camera/album ----
-"tip.no.available.camera" = "No camera available";
-"tip.unable.open.camera" = "Unable to turn on camera, please check permissions";
-"system.settings.go.to" = "Go to settings";
-"tip.unable.open.album" = "Unable to open album, please check permissions";
-"tip.save.image.success" = "Picture saved successfully";
+"tip.no.available.camera" = "沒有可用的相機";
+"tip.unable.open.camera" = "無法開啟相機，請檢查權限";
+"system.settings.go.to" = "前往設置";
+"tip.unable.open.album" = "無法開啟相冊，請檢查權限";
+"tip.save.image.success" = "圖片保存成功";
 
 // ---- transaction operate ----
-"tip.transaction.insufficient.balance" = "Insufficient VSYS balance";
-"tip.transaction.insufficient.token.balance" = "Insufficient token balance";
-"tip.transaction.error.address" = "You can only send tokens to an VSYS address.";
-"tip.transaction.amount.invalid" = "The amount entered is invalid";
-"tip.transaction.address.is.self" = "The receiving address is the current address";
-"tip.transaction.attachment.too.long" = "Description attachment content too long";
-"tip.transaction.contract.desc.too.long" = "Contract description too long";
-"tip.transaction.token.desc.too.long" = "Token description too long";
+"tip.transaction.insufficient.balance" = "VSYS 余額不足";
+"tip.transaction.insufficient.token.balance" = "Token 余額不足";
+"tip.transaction.error.address" = "您只能轉賬給壹個VSYS地址";
+"tip.transaction.amount.invalid" = "輸入的數額無效";
+"tip.transaction.address.is.self" = "接收地址為當前地址";
+"tip.transaction.attachment.too.long" = "備註內容不能超過140個字符";
+"tip.transaction.contract.desc.too.long" = "合約描述不能超過140個字符";
+"tip.transaction.token.desc.too.long" = "Token 描述不能超過140個字符";
 
 // ---- Transaction QRCode ----
-"tip.transaction.qrcode.title" = "Scan QR code";
+"tip.transaction.qrcode.title" = "掃描二維碼";
 
 // ---- Transaction Review ----
-"tip.transaction.review.title" = "Review Transaction";
-"tip.transaction.review.btn.title" = "Generate QR Code";
+"tip.transaction.review.title" = "交易確認";
+"tip.transaction.review.btn.title" = "生成二維碼";
 
 // ---- password auth ----
-"tip.password.auth.title" = "Wallet Password";
-"tip.password.auth.textfield.placeholder" = "Please Input";
-"tip.password.auth.err.title" = "Incorrect Wallet Password";
-"tip.password.auth.err.btn1.title" = "Logout Wallet";
-"tip.password.auth.err.btn2.title" = "ReInput";
+"tip.password.auth.title" = "錢包密碼";
+"tip.password.auth.textfield.placeholder" = "請輸入";
+"tip.password.auth.err.title" = "密碼錯誤";
+"tip.password.auth.err.btn1.title" = "註銷錢包";
+"tip.password.auth.err.btn2.title" = "重新輸入";
 
 // ---- monitor address add ----
-"tip.monitor.address.add.title1" = "Scan QR code";
-"tip.monitor.address.add.title2" = "Address&Public key";
-"tip.monitor.address.add.err1" = "Please check address and public key is valid";
-"tip.monitor.address.add.exist.err2" = "Address already exist";
-"tip.monitor.address.add.network.err" = "Address's network is different";
+"tip.monitor.address.add.title1" = "掃描二維碼";
+"tip.monitor.address.add.title2" = "填寫地址和公鑰";
+"tip.monitor.address.add.err1" = "請檢查地址和公鑰是否正確";
+"tip.monitor.address.add.exist.err2" = "地址已存在";
+"tip.monitor.address.add.network.err" = "地址網絡不壹致";
 
 // ---- address detail delete ----
-"tip.address.detail.delete.title" = "Are you sure you want to remove this address from the cold wallet monitoring list?";
-"tip.copy.success" = "Copy Success";
-"tip.address.detail.private.key.title" = "Show Private Key";
-"tip.address.detail.mnemonic.title" = "Show Mnemonic Phrase";
+"tip.address.detail.delete.title" = "您是否確定將這個地址從冷錢包監控列表中移除？";
+"tip.copy.success" = "拷貝成功";
+"tip.address.detail.private.key.title" = "查看私鑰";
+"tip.address.detail.mnemonic.title" = "查看助記詞";
 
 // ---- choose network ----
-"tip.network.choose.btn1.title" = "Click to switch back to the formal environment";
-"tip.network.choose.btn2.title" = "Click to switch to the developer test environment";
-"tip.network.change.title" = "The test environment is only available for developers to test. Are you sure you want to use it?";
+"tip.network.choose.btn1.title" = "切換至普通用戶正式環境";
+"tip.network.choose.btn2.title" = "切換至開發者測試環境";
+"tip.network.change.title" = "測試環境僅提供給開發者做測試，您是否確認使用？";
 
 // ---- welcome ----
-"tip.welcome.title" = "Officials Hint";
-"tip.welcome.detail" = "To ensure the security of your personal property, please make sure that your wallet APP is downloaded from v.systems, the official website of VSYS";
-"tip.welcome.btn.title" = "I got it";
+"tip.welcome.title" = "官方提示";
+"tip.welcome.detail" = "為保證您的個人財產安全，請務必確保您的錢包APP來自VSYS官方網站v.systems下載";
+"tip.welcome.btn.title" = "知道了";
 
 // ---- monitor ----
-"tip.monitor.title" = "Officials Hint";
-"tip.monitor.detail" = "You can download a cold wallet from the v.stems website with a phone that you barely use and can completely disconnect from the Internet";
+"tip.monitor.title" = "官方提示";
+"tip.monitor.detail" = "您可以準備壹個幾乎不使用和可以完全斷網的手機，從v.systems官網下載冷錢包。";
 
 // ---- touch auth ----
-"tip.secure.auth.detail" = "Unlock Walk Wallet";
+"tip.secure.auth.detail" = "解鎖 Walk Wallet";
 
 // others
 // ---- const ----
 
-"secure.level.1" = "Weak";
-"secure.level.2" = "Fair";
-"secure.level.3" = "Good";
-"secure.level.4" = "Strong";
-"secure.level.5" = "Perfect";
+"secure.level.1" = "弱";
+"secure.level.2" = "壹般";
+"secure.level.3" = "好";
+"secure.level.4" = "很好";
+"secure.level.5" = "完美";
 
 // ---- Transaction Type ----
-"const.transaction.type.send" = "Sent";
-"const.transaction.type.receive" = "Received";
-"const.transaction.type.minting" = "Minting";
-"const.transaction.type.lease.in" = "Leased in";
-"const.transaction.type.lease.out" = "Leased out";
-"const.transaction.type.lease.in.cancel" = "Canceled Leased in";
-"const.transaction.type.lease.out.cancel" = "Canceled Leased out";
-"const.transaction.type.contract.register" = "Register Contract";
-"const.transaction.type.contract.execute" = "Execute Contract";
+"const.transaction.type.send" = "發送";
+"const.transaction.type.receive" = "接收";
+"const.transaction.type.minting" = "鑄幣";
+"const.transaction.type.lease.in" = "租入";
+"const.transaction.type.lease.out" = "租出";
+"const.transaction.type.lease.in.cancel" = "取消租入";
+"const.transaction.type.lease.out.cancel" = "取消租出";
+"const.transaction.type.contract.register" = "註冊合約";
+"const.transaction.type.contract.execute" = "執行合約";
 
 // ---- network ----
-"const.network.mainnet" = "Mainnet";
-"const.network.testnet" = "Testnet";
+"const.network.mainnet" = "正式網絡";
+"const.network.testnet" = "測試網絡";
 
 // ---- token ----
-"token.available.vsys" = "Available VSYS";
-"token.add.token" = "Add Token";
-"token.add.added" = "Added";
-"token.token.name.or.id.note" = "TOKEN NAME or ID";
-"token.input.token.name.or.id" = "Please input Token Name or ID";
+"token.available.vsys" = "可用余額 VSYS";
+"token.add.token" = "添加 Token";
+"token.add.added" = "已添加";
+"token.token.name.or.id.note" = "TOKEN名稱或ID";
+"token.input.token.name.or.id" = "請輸入Token名稱或ID";
 "token.token.id.note" = "TOKEN ID";
-"token.input.token.id" = "Input the token ID";
-"token.info" = "Token Info";
+"token.input.token.id" = "請輸入 Token ID";
+"token.info" = "Token 信息";
 "token.info.id.token" = "Token ID";
 "token.info.id.contract" = "Contract ID";
-"token.info.issuer" = "Issuer";
-"token.info.maker" = "Maker";
-"token.info.register_time" = "Register Time";
-"token.info.supply.max" = "Max Supply";
-"token.info.supply.current" = "Current Supply";
-"token.info.description" = "Description";
-"token.info.unity" = "UNITY:";
-"token.info.contract.desc" = "CONTRACT DESCRIPTION";
-"token.info.token.desc" = "TOKEN DESCRIPTION";
-"token.info.description.note" = "You cannot change the description later";
-"token.info.contract.description.note" = "You cannot change the description later";
-"token.info.support.split.note" = "Support split/reverse-split token";
-"token.info.support.note" = "(Attention:cannot chagne after create)";
-"token.send.token" = "Send Token";
-"token.receive.token" = "Receive Token";
-"token.create.token" = "Create Token";
-"token.create.unity.desc" = "The minimum amount will be";
-"token.issue.token" = "Issue Token";
-"token.burn.token" = "Destroy Token";
-"token.hide.token" = "Hide Token";
-"token.operate.note.total" = "MAX SUPPLY";
-"token.operate.note.burn" = "DESTROY AMOUNT";
-"token.operate.note.issue" = "ISSUE AMOUNT";
-"token.operate.review.token" = "Review Token";
-"token.operate.review.issue" = "Review Issue";
-"token.operate.review.burn" = "Review Destroy";
+"token.info.issuer" = "發行者";
+"token.info.maker" = "創建者";
+"token.info.register_time" = "發布時間";
+"token.info.supply.max" = "最大發行量";
+"token.info.supply.current" = "當前發行量";
+"token.info.description" = "描述";
+"token.info.unity" = "單位：";
+"token.info.description.note" = "Token 描述此後將不能被修改";
+"token.info.contract.description.note" = "合約描述此後將不能被修改";
+"token.info.support.split.note" = "支持拆分/合並 Token";
+"token.info.support.note" = "(註意：該選項此後將無法修改)";
+"token.info.contract.desc" = "合約備註";
+"token.info.token.desc" = "Token 備註";
+"token.send.token" = "發送 Token";
+"token.receive.token" = "接收 Token";
+"token.create.token" = "創建 Token";
+"token.create.unity.desc" = "最小單位為";
+"token.issue.token" = "增發 Token";
+"token.burn.token" = "銷毀 Token";
+"token.hide.token" = "隱藏 Token";
+"token.operate.note.total" = "發行總量";
+"token.operate.note.burn" = "銷毀量";
+"token.operate.note.issue" = "增發量";
+"token.operate.review.token" = "確認 Token 信息";
+"token.operate.review.issue" = "確認增發信息";
+"token.operate.review.burn" = "確認銷毀信息";
+"token.register.success.check.watch.list" = "妳可以在 Token 列表中查詢相關信息";
 
-"token.operate.error.id.format" = "Token ID invalid format";
-"token.operate.error.id.not.exist" = "Token not exist";
-"token.operate.issue.amount" = "Issue amount";
-"token.operate.burn.amount" = "Destroy amount";
-"token.register.success.check.watch.list" = "You can check in your token watch list";
-"token.transaction.register.success" = "Create Token Success";
-"token.transaction.send.success" = "Execute Contract Success";
+"token.operate.error.id.format" = "Token ID 格式錯誤";
+"token.operate.error.id.not.exist" = "Token 不存在";
+"token.operate.issue.amount" = "成功增發";
+"token.operate.burn.amount" = "成功銷毀";
+"token.transaction.register.success" = "創建 Token 成功";
+"token.transaction.send.success" = "執行合約成功";
 
-"supersede" = "Supersede";
-"issue" = "Issue";
-"destroy" = "Destroy";
-"split" = "Split";
-"send" = "Send";
-"deposit" = "Deposit";
-"withdraw" = "Withdraw";
-"transfer" = "Transfer";
+"supersede" = "取代";
+"issue" = "增發";
+"destroy" = "銷毀";
+"split" = "分割";
+"send" = "發送";
+"deposit" = "抵押";
+"withdraw" = "提現";
+"transfer" = "轉賬";
 
-"error.permission.not.issuer" = "This account is not the issuer of contract";
-"error.broadcast.contract.execute" = "Fail to broad cast contract execute";
-"error.broadcast.contract.register" = "Fail to broad cast create new token";
-"error.contract.operate.permission.not.issuer" = "Permission denied, require issuer of the token";
-"error.contract.issue.over.max" = "Issue input cannot bigger than max supply";
-"error.contract.burn.over.available" = "Burn input cannot bigger than available";
-"error.contract.create.out.of.range" = "Token max supply out of range, please reduce unity";
-"error.contract.send.failed" = "Fail to send token";
-"error.broadcast.cancel.lease" = "Fail to cancel lease";
-"error.broadcast.lease" = "Fail to lease";
-"error.broadcast.send" = "Fail to send";
-"error.token.exist" = "Token already added!";
+"error.permission.not.issuer" = "該帳號沒有該合約增發權限";
+"error.broadcast.contract.execute" = "合約執行廣播失敗";
+"error.broadcast.contract.register" = "創建 Token 廣播失敗";
+"error.contract.operate.permission.not.issuer" = "無法操作，非 Token 發行者";
+"error.contract.issue.over.max" = "發行量不能超過最大發行總量";
+"error.contract.burn.over.available" = "銷毀量不能超過持有量";
+"error.contract.create.out.of.range" = "最大發行量超出範圍，請減少輸入或者減少代幣單位";
+"error.contract.send.failed" = "發送失敗";
+"error.broadcast.cancel.lease" = "取消租出失敗";
+"error.broadcast.lease" = "租出失敗";
+"error.broadcast.send" = "發送失敗";
+"error.token.exist" = "已添加的 Token";
 
-"decs.token.split.note" = "WARNING: Split/Reverse-Split is an experimental token feature requiring exchange support compatible with Unity Token Split Protocol. The proper use of token with split functionality requires due diligence of both the token issuer and the supporting exchanges. Token issuer shall agree to abide by the protocol and convention of proper use of the split/reverse-split functionality. Token issuer shall agree to defend, hold harmless, and indemnify V Systems Limited for damage and loss involving the use of split/reverse-split functionality of the token.";
+"decs.token.split.note" = "警告：拆股/合股代幣是測試中的代幣功能，此功能需要交易所支持UNITY拆股協議。正確使用具有此功能的代幣需要代幣發行方和交易所提供相應服務及技術支持。代幣發行方應同意遵守及正確使用拆股/合股代幣功能的協議和市場規範。如果因不正確使用拆股/合股代幣功能涉及到損害和損失，代幣發行方同意對V Systems Limited進行辯護，免責及承擔涉及的損失賠償。（此文由英文翻譯，如與英文翻譯有出入，以英文為準）";
