@@ -6,22 +6,24 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Token.h"
+@class VsysToken;
 
 @interface TokenMgr : NSObject
 
 + (instancetype)shareInstance;
-@property (nonatomic, copy) Token *token;
-@property (nonatomic, copy) NSArray <Token *> *tokenList;
 
-- (Token *)getTokenByAddress:(NSString *)address tokenId:(NSString *)tokenId;
+@property (nonatomic, copy) VsysToken *token;
 
-- (NSArray<Token *> *)loadAddressWatchToken:(NSString *)address;
+@property (nonatomic, strong) NSArray <VsysToken *> *tokenList;
 
-- (NSError *)saveToStorage:(NSString *)address list:(NSArray<Token *> *)list;
+- (VsysToken *)getTokenByAddress:(NSString *)address tokenId:(NSString *)tokenId;
 
-- (NSArray<Token *> *)getCertifiedTokenList;
+- (NSArray<VsysToken *> *)loadAddressWatchToken:(NSString *)address;
 
-- (NSError *)saveCertifiedTokenList:(NSArray<Token *> *) list;
+- (NSError *)saveToStorage:(NSString *)address list:(NSArray<VsysToken *> *)list;
+
+- (NSArray<VsysToken *> *)getCertifiedTokenList;
+
+- (NSError *)saveCertifiedTokenList:(NSArray<VsysToken *> *) list;
 
 @end

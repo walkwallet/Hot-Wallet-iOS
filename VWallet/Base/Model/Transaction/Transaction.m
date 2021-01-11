@@ -6,8 +6,27 @@
 //
 
 #import "Transaction.h"
+#import "NSString+Decimal.h"
 
 @implementation Transaction
+
+- (id)mutableCopyWithZone:(NSZone *)zone {
+    Transaction *trx = [[[self class] allocWithZone:zone] init];
+    trx.originTransaction = self.originTransaction;
+    trx.ownerAddress = self.ownerAddress;
+    trx.ownerPublicKey = self.ownerPublicKey;
+    trx.senderAddress = self.senderAddress;
+    trx.signature = self.signature;
+    trx.comingOutCancelTransaction = self.comingOutCancelTransaction;
+    trx.canCancel = self.canCancel;
+    trx.transactionType = self.transactionType;
+    trx.contractFuncName = self.contractFuncName;
+    trx.status = self.status;
+    trx.contractId = self.contractId;
+    trx.symbol = self.symbol;
+    trx.unity = self.unity;
+    return trx;
+}
 
 /**
  * 1.sent
@@ -30,7 +49,7 @@
                 _transactionType = [self.ownerAddress isEqualToString:self.originTransaction.recipient] ? 6 : 4;
             } break;
             case 5: {
-                _transactionType = 5;
+                _transactionType = 7;
             } break;
             case 8: {
                 _transactionType = 8;

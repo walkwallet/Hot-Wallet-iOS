@@ -378,7 +378,7 @@ FOUNDATION_EXPORT NSString* _Nonnull VsysContractId2TokenId(NSString* _Nullable 
 /**
  * output decode result json
  */
-FOUNDATION_EXPORT NSString* _Nonnull VsysDecodeContractTextrue(NSString* _Nullable data);
+FOUNDATION_EXPORT NSString* _Nonnull VsysDecodeContractTexture(NSString* _Nullable data);
 
 FOUNDATION_EXPORT NSString* _Nonnull VsysDecodeDescription(NSString* _Nullable in_);
 
@@ -396,11 +396,6 @@ FOUNDATION_EXPORT VsysAccount* _Nullable VsysGenerateKeyPair(NSData* _Nullable s
 FOUNDATION_EXPORT NSString* _Nonnull VsysGenerateSeed(void);
 
 FOUNDATION_EXPORT VsysAccount* _Nullable VsysGetAccountFromPrivateKey(NSString* _Nullable privateKey, NSString* _Nullable network);
-
-/**
- * format in if it is base58
- */
-FOUNDATION_EXPORT NSString* _Nonnull VsysGetAttachment(NSString* _Nullable in_);
 
 FOUNDATION_EXPORT long VsysGetAttachmentLength(NSString* _Nullable in_);
 

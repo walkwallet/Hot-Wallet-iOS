@@ -9,8 +9,8 @@
 #import "SlotInfo.h"
 #import "Account.h"
 #import "Transaction.h"
-#import "Token.h"
 #import "Contract.h"
+#import "VsysToken.h"
 
 @import Vsys;
 
@@ -30,23 +30,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)broadcastCancelLease:(Transaction *)tx callback: (void(^)(BOOL isSuc))callback;
 
-+ (void)getTokenInfo:(NSString *)tokenId callback: (void(^)(BOOL isSuc, Token *token))callback;
++ (void)getTokenInfo:(NSString *)tokenId callback: (void(^)(BOOL isSuc, VsysToken *token))callback;
 
 + (void)getContractInfo:(NSString *)contractId callback: (void(^)(BOOL isSuc, Contract *contract))callback;
 
 + (void)getContractContent:(NSString *)contractId callback: (void(^)(BOOL isSuc, ContractContent *contractContent))callback;
 
-+ (void)getAddressTokenBalance:(NSString *)address tokenId:(NSString *)tokenId callback:(void(^)(BOOL isSuc, Token *token))callback;
++ (void)getAddressTokenBalance:(NSString *)address tokenId:(NSString *)tokenId callback:(void(^)(BOOL isSuc, VsysToken *token))callback;
 
-+ (void)getCertifiedTokenInfo:(NSString *)tokenId callback:(void(^)(BOOL isSuc, Token *token))callback;
++ (void)getCertifiedTokenInfo:(NSString *)tokenId callback:(void(^)(BOOL isSuc, VsysToken *token))callback;
 
-+ (void)broadcastContractRegister:(Transaction *)tx callback:(void(^)(BOOL isSuc, Token *token))callback;
++ (void)broadcastContractRegister:(Transaction *)tx callback:(void(^)(BOOL isSuc, VsysToken *token))callback;
 
 + (void)broadcastContractExecute:(Transaction *)tx callback:(void(^)(BOOL isSuc))callback;
 
-+ (void)getTokenDetailFromExplorer:(NSString *)tokenId callback:(void(^)(BOOL isSuc, Token *tokenDetail))callback;
++ (void)getTokenDetailFromExplorer:(NSString *)tokenId callback:(void(^)(BOOL isSuc, VsysToken *tokenDetail))callback;
 
-+ (void)getCertifiedTokenList:(NSInteger)page callback: (void(^)(BOOL isSuc, NSArray<Token *> *tokenArr))callback;
++ (void)getCertifiedTokenList:(NSInteger)page callback: (void(^)(BOOL isSuc, NSArray<VsysToken *> *tokenArr))callback;
 
 @end
 

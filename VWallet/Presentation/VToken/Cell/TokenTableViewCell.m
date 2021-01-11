@@ -6,11 +6,11 @@
 //
 
 #import "TokenTableViewCell.h"
-#import "Token.h"
 #import "NSString+Decimal.h"
 #import "NSString+Asterisk.h"
 #import <SDWebImage/SDWebImage.h>
 #import "ServerConfig.h"
+#import "VsysToken.h"
 @import Vsys;
 
 @interface TokenTableViewCell()
@@ -22,7 +22,7 @@
 
 @implementation TokenTableViewCell
 
-- (void)setToken:(Token *)token {
+- (void)setToken:(VsysToken *)token {
     _token = token;
     self.wrapView.layer.masksToBounds = YES;
     self.wrapView.layer.cornerRadius = 4;

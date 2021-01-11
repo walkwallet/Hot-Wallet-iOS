@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIColor (Hex)
 
 + (UIColor *)colorWithHex:(UInt32)hex;
++ (UIColor *)colorWithHex:(UInt32)hex andAlpha:(CGFloat)alpha;
 + (UIColor *)colorWithHexStr:(NSString *)hexStr;
 - (NSString *)hexString;
 

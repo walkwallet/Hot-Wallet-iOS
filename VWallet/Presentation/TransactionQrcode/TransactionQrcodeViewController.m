@@ -10,9 +10,9 @@
 #import "UIImage+QRCode.h"
 #import "Language.h"
 #import "VColor.h"
-#import "Token.h"
 #import "TokenMgr.h"
 #import "Transaction.h"
+#import "VsysToken.h"
 
 @interface TransactionQrcodeViewController ()
 
@@ -48,7 +48,6 @@
     }
     return self;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -102,11 +101,11 @@
         dict[@"api"] = @(VsysTransactionOldApi);
         dict[@"opc"] = VsysOpcTypeFunction;
         dict[@"address"] = self.transaction.senderAddress;
-        dict[@"attachment"] = [[NSString alloc] initWithData:self.transaction.originTransaction.attachment encoding:NSUTF8StringEncoding];
+        dict[@"attachment"] = VsysBase58EncodeToString(self.transaction.originTransaction.attachment);
         dict[@"contractId"] = self.transaction.originTransaction.contractId;
         dict[@"functionId"] = @(self.transaction.originTransaction.funcIdx);
         dict[@"function"] = VsysBase58EncodeToString(self.transaction.originTransaction.data);
-        Token *token = [TokenMgr.shareInstance getTokenByAddress:self.transaction.senderAddress tokenId:VsysContractId2TokenId(self.transaction.originTransaction.contractId, 0)];
+        VsysToken *token = [TokenMgr.shareInstance getTokenByAddress:self.transaction.senderAddress tokenId:VsysContractId2TokenId(self.transaction.originTransaction.contractId, 0)];
         if ([self.transaction.contractFuncName isEqualToString:VsysActionSend]) {
             dict[@"functionExplain"] = [NSString stringWithFormat:VLocalize(@"scan.qrcode.function.explain.send"), [NSString stringWithDecimal:[NSString getAccurateDouble:self.transaction.originTransaction.amount unity:token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES], [NSString isNilOrEmpty:token.name] ? @"tokens" : token.name, self.transaction.originTransaction.recipient];
         }else if ([self.transaction.contractFuncName isEqualToString:VsysActionIssue]) {
@@ -117,6 +116,8 @@
     }else {
         // normal transaction
         if (self.oriTran.amount > (pow(2, 53) - 1) && self.oriTran.amount % 100 > 0) {
+            dict[@"api"] = @(VsysTransactionNewApi);
+        }else if (![NSString isNilOrEmpty:[[NSString alloc] initWithData:self.transaction.originTransaction.attachment encoding:NSUTF8StringEncoding]]) {
             dict[@"api"] = @(VsysTransactionNewApi);
         }else {
             dict[@"api"] = @(VsysTransactionOldApi);
@@ -142,7 +143,7 @@
             dict[@"recipient"] = self.oriTran.recipient;
         }
         
-        dict[@"attachment"] = [[NSString alloc] initWithData:self.oriTran.attachment encoding:NSUTF8StringEncoding];
+        dict[@"attachment"] = VsysBase58EncodeToString(self.oriTran.attachment);
     }
     
     // common obj
@@ -168,7 +169,7 @@
     [self render:self.current];
 }
 
--(void)render:(NSInteger)pagination {
+- (void)render:(NSInteger)pagination {
     if (self.transaction.originTransaction.txType == 8) {
         VsysQRCodePagination *pageContent = VsysGetPaginationContent(self.fullContent, self.current);
         self.current = pageContent.current;
@@ -199,7 +200,7 @@
     }
 }
 
--(NSString*) convertToJsonData:(NSDictionary *)dict {
+- (NSString*) convertToJsonData:(NSDictionary *)dict {
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
     NSString *jsonString;

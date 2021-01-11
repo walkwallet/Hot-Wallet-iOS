@@ -6,10 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Token;
+@class VsysToken;
 
 @interface TokenTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) Token *token;
+@property (nonatomic, strong) VsysToken *token;
 
 @end

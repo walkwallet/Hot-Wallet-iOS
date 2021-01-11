@@ -213,6 +213,7 @@
 // ---- Mnemonic Backup ----
 "menmonic.backup.title" = "截图是不安全的，你的图片可能被别的应用使用。请使用笔和纸抄写如下助记词，并妥善保存，我们会在下个屏幕上确认";
 "menmonic.backup.btn1.title" = "已按顺序记下助记词";
+"mnemonic.backup.btn.qrcode" = "导出助记词二维码";
 
 // ---- Mnemonic Backup Check ----
 "mnemonic.backup.check.title" = "按顺序点击助记词，确认你的助记词备份正确";
@@ -378,6 +379,8 @@
 "token.available.vsys" = "可用余额 VSYS";
 "token.add.token" = "添加 Token";
 "token.add.added" = "已添加";
+"token.token.name.or.id.note" = "TOKEN名称或ID";
+"token.input.token.name.or.id" = "请输入Token名称或ID";
 "token.token.id.note" = "TOKEN ID";
 "token.input.token.id" = "请输入 Token ID";
 "token.info" = "Token 信息";
@@ -397,6 +400,7 @@
 "token.info.contract.desc" = "合约备注";
 "token.info.token.desc" = "Token 备注";
 "token.send.token" = "发送 Token";
+"token.receive.token" = "接收 Token";
 "token.create.token" = "创建 Token";
 "token.create.unity.desc" = "最小单位为";
 "token.issue.token" = "增发 Token";

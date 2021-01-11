@@ -7,10 +7,10 @@
 
 #import <UIKit/UIKit.h>
 @class Account;
-@class Token;
+@class VsysToken;
 
 @interface TokenInfoViewController : UIViewController
 
-- (instancetype)initWithAccount:(Account *)account token:(Token *)token;
+- (instancetype)initWithAccount:(Account *)account token:(VsysToken *)token;
 
 @end

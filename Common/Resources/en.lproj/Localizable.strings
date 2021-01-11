@@ -213,6 +213,7 @@
 // ---- Mnemonic Backup ----
 "menmonic.backup.title" = "Screenshots are not safe and your images may be used by other applications. Please use pen and paper to copy the following mnemonic words and save them properly. We will confirm on the next screen";
 "menmonic.backup.btn1.title" = "I have saved them orderly";
+"mnemonic.backup.btn.qrcode" = "Export mnemonics QR Code";
 
 // ---- Mnemonic Backup Check ----
 "mnemonic.backup.check.title" = "Click on the mnemonic words orderly to confirm.";
@@ -378,6 +379,8 @@
 "token.available.vsys" = "Available VSYS";
 "token.add.token" = "Add Token";
 "token.add.added" = "Added";
+"token.token.name.or.id.note" = "TOKEN NAME or ID";
+"token.input.token.name.or.id" = "Please input Token Name or ID";
 "token.token.id.note" = "TOKEN ID";
 "token.input.token.id" = "Input the token ID";
 "token.info" = "Token Info";
@@ -397,6 +400,7 @@
 "token.info.support.split.note" = "Support split/reverse-split token";
 "token.info.support.note" = "(Attention:cannot chagne after create)";
 "token.send.token" = "Send Token";
+"token.receive.token" = "Receive Token";
 "token.create.token" = "Create Token";
 "token.create.unity.desc" = "The minimum amount will be";
 "token.issue.token" = "Issue Token";

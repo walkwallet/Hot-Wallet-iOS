@@ -18,14 +18,14 @@
 #import "Transaction.h"
 #import "UITextView+Placeholder.h"
 #import "VColor.h"
-#import "Token.h"
+#import "VsysToken.h"
 
 @import SafariServices;
 
 @interface TransactionOperateViewController () <UITextViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) Account *account;
-@property (nonatomic, strong) Token * token;
+@property (nonatomic, strong) VsysToken * token;
 @property (nonatomic, assign) TransactionOperateType operateType;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -63,10 +63,10 @@
 @implementation TransactionOperateViewController
 
 - (instancetype)initWithAccount:(Account *)account operateType:(TransactionOperateType)operateType {
-    return [self initWithAccount:account token:[Token new] operateType:operateType];
+    return [self initWithAccount:account token:[VsysToken new] operateType:operateType];
 }
 
-- (instancetype)initWithAccount:(Account *)account token:(Token *)token operateType:(TransactionOperateType)operateType {
+- (instancetype)initWithAccount:(Account *)account token:(VsysToken *)token operateType:(TransactionOperateType)operateType {
     if (self = [super init]) {
         self.account = account;
         self.operateType = operateType;
@@ -297,6 +297,10 @@
         return;
     }
     if ([self.receiveAddressTextView.text isEqualToString:self.account.originAccount.address]) {
+        if (self.operateType == TransactionOperateTypeLease) {
+            [self alertWithTitle:VLocalize(@"tip.transaction.address.is.self") confirmText:nil];
+            return;
+        }
         [self alertWithTitle:VLocalize(@"tip.transaction.address.is.self") confirmText:nil handler:^{
             [self createTransaction];
         }];

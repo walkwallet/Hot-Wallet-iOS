@@ -10,7 +10,6 @@
 #import "UIViewController+Alert.h"
 #import "Language.h"
 #import "TokenMgr.h"
-#import "Token.h"
 #import "Account.h"
 #import "Contract.h"
 #import "ApiServer.h"
@@ -21,13 +20,13 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 @interface TokenInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *showData;
-@property (nonatomic, strong) Token *token;
+@property (nonatomic, strong) VsysToken *token;
 @property (nonatomic, strong) Account *account;
 @end
 
 @implementation TokenInfoViewController
 
-- (instancetype)initWithAccount:(Account *)account token:(Token *)token {
+- (instancetype)initWithAccount:(Account *)account token:(VsysToken *)token {
     if (self = [super init]) {
         self.account = account;
         self.token = token;

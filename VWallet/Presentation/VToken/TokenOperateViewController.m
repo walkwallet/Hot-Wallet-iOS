@@ -25,11 +25,9 @@
 #import "Transaction.h"
 #import "ApiServer.h"
 
-#import "Token.h"
-
 @interface TokenOperateViewController ()<UITextViewDelegate, UITextFieldDelegate>
 @property (nonatomic) NSInteger operateType;
-@property (nonatomic, strong) Token *token;
+@property (nonatomic, strong) VsysToken *token;
 @property (weak, nonatomic) IBOutlet VThemeTextField *inputTotal;
 @property (weak, nonatomic) IBOutlet VThemeTextView *inputDesc;
 @property (weak, nonatomic) IBOutlet UILabel *unityNoteLabel;
@@ -110,7 +108,7 @@
     return [self initWithAccount:account type:type token:nil];
 }
 
-- (instancetype)initWithAccount:(Account *)account type:(NSInteger)type token:(Token *)token {
+- (instancetype)initWithAccount:(Account *)account type:(NSInteger)type token:(VsysToken *)token {
     if (self = [super init]) {
         self.account = account;
         self.operateType = type;

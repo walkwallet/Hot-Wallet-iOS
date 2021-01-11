@@ -32,9 +32,7 @@ static NSInteger const TransactionPageSize = 100;
 
 @property (nonatomic, strong) NSArray<NSString *> *canceledTxIdArray;
 
-@property (nonatomic, strong) NSArray<Token *> *watchingTokenArray;
-
-@property (nonatomic, strong) NSArray<NSString *> *watchingIdArray;
+@property (nonatomic, strong) NSArray<VsysToken *> *watchingTokenArray;
 
 @property (nonatomic) DateRangeType dateTrangeType;
 
@@ -72,7 +70,6 @@ static NSInteger const TransactionPageSize = 100;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
     [self changeToThemeNavigationBar];
 }
 
@@ -96,25 +93,6 @@ static NSInteger const TransactionPageSize = 100;
 
 - (void)loadWatchingTokenInfo {
     self.watchingTokenArray = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
-    NSMutableArray<NSString *> *tmpArray = [NSMutableArray new];
-    for (Token *one in self.watchingTokenArray) {
-        [tmpArray addObject:one.contractId];
-        NSInteger index = [self.watchingTokenArray indexOfObject:one];
-        __weak typeof(self) weakSelf = self;
-        [ApiServer getTokenInfo:one.tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
-            [ApiServer getContractContent:VsysTokenId2ContractId(token.tokenId) callback:^(BOOL isSuc, ContractContent * _Nonnull contractContent) {
-                weakSelf.watchingTokenArray[index].unity = token.unity;
-                if (contractContent.textual && contractContent.textual.descriptors) {
-                    token.textualDescriptor = contractContent.textual.descriptors;
-                    NSString *funcJson = VsysDecodeContractTextrue(token.textualDescriptor);
-                    if ([funcJson containsString:@"split"]) {
-                        weakSelf.watchingTokenArray[index].splitable = YES;
-                    }
-                }
-            }];
-        }];
-    }
-    self.watchingIdArray = tmpArray;
 }
 
 - (void)loadTransaction:(NSInteger)page {
@@ -130,15 +108,25 @@ static NSInteger const TransactionPageSize = 100;
         }else {
             weakSelf.hasMore = YES;
         }
+
         if (weakSelf.listType == TransactionListTypeExecuteContract || weakSelf.listType == TransactionListTypeAll) {
+            NSArray<VsysToken *> *watchedList = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
+            NSMutableArray<NSString *> *watchedCertifiedList = [NSMutableArray new];
+            for (VsysToken *one in watchedList) {
+                if ([NSString isNilOrEmpty: one.name]) {
+                    continue;
+                }
+                [watchedCertifiedList addObject: VsysTokenId2ContractId(one.tokenId)];
+            }
+            
             for (Transaction *one in txArr) {
                 NSInteger index = [txArr indexOfObject:one];
                 if (one.transactionType == 9) {
-                    if ([weakSelf.watchingIdArray containsObject:one.originTransaction.contractId]) {
-                        Token *t  = [self getWatchingTokenInfo:one.originTransaction.contractId];
+                    if ([watchedCertifiedList containsObject:one.originTransaction.contractId]) {
+                        VsysToken *t  = [self getWatchingTokenInfo:one.originTransaction.contractId];
                         txArr[index].contractFuncName = [one getFunctionName:t.splitable];
                         if ([txArr[index].contractFuncName isEqualToString:VsysActionSend]) {
-                            Token *t = [TokenMgr.shareInstance getTokenByAddress:weakSelf.account.originAccount.address tokenId:VsysContractId2TokenId(one.originTransaction.contractId, 0)];
+                            VsysToken *t = [TokenMgr.shareInstance getTokenByAddress:weakSelf.account.originAccount.address tokenId:VsysContractId2TokenId(one.originTransaction.contractId, 0)];
                             VsysContract *contract = [VsysContract new];
                             [contract decodeSend:txArr[index].originTransaction.data];
                             txArr[index].originTransaction.recipient = contract.recipient;
@@ -150,30 +138,7 @@ static NSInteger const TransactionPageSize = 100;
                 }
             }
         }else if (weakSelf.listType == TransactionListTypeLease) {
-            NSArray<Transaction *> *leasingTxs = txArr;
-            [ApiServer transactionList:weakSelf.account.originAccount.address offset:(page - 1) * TransactionPageSize limit:TransactionPageSize type:TransactionListTypeCancelLease callback:^(BOOL isSuc, NSArray<Transaction *> * _Nonnull txArr) {
-                weakSelf.loading = NO;
-                NSMutableArray<NSString *> *tmpCancelIdList = [NSMutableArray new];
-                if (page > 1) {
-                    [tmpCancelIdList addObjectsFromArray:self.canceledTxIdArray];
-                }
-                for (Transaction *one in txArr) {
-                    [tmpCancelIdList addObject:one.originTransaction.txId];
-                }
-                self.canceledTxIdArray = tmpCancelIdList;
-                for (Transaction *one in leasingTxs) {
-                    NSInteger index = [leasingTxs indexOfObject:one];
-                    if ([tmpCancelIdList containsObject:one.originTransaction.txId]) {
-                        leasingTxs[index].canCancel = NO;
-                    }else {
-                        leasingTxs[index].canCancel = YES;
-                    }
-                }
-                weakSelf.transactionArray = leasingTxs;
-                weakSelf.showAllTransactionArray = leasingTxs;
-                [weakSelf setDateRangeType:weakSelf.dateTrangeType startTimestamp:weakSelf.startTimestamp endTimestamp:weakSelf.endTimestamp];
-                weakSelf.page = page;
-            }];
+            [self formatLeasingTxs:txArr page:page];
             return;
         }
         NSMutableArray<Transaction *> *tmpTxs = [NSMutableArray new];
@@ -186,6 +151,33 @@ static NSInteger const TransactionPageSize = 100;
         self.transactionArray = tmpTxs;
         self.showAllTransactionArray = tmpTxs;
         [weakSelf setDateRangeType:weakSelf.dateTrangeType startTimestamp:weakSelf.startTimestamp endTimestamp:weakSelf.endTimestamp];
+    }];
+}
+
+- (void)formatLeasingTxs:(NSArray<Transaction*> *)leasingTxs page:(NSInteger)page {
+    __weak typeof (self) weakSelf = self;
+    [ApiServer transactionList:weakSelf.account.originAccount.address offset:(page - 1) * TransactionPageSize limit:TransactionPageSize type:VsysTxTypeCancelLease callback:^(BOOL isSuc, NSArray<Transaction *> * _Nonnull txArr) {
+        weakSelf.loading = NO;
+        NSMutableArray<NSString *> *tmpCancelIdList = [NSMutableArray new];
+        if (page > 1) {
+            [tmpCancelIdList addObjectsFromArray:weakSelf.canceledTxIdArray];
+        }
+        for (Transaction *one in txArr) {
+            [tmpCancelIdList addObject:one.originTransaction.txId];
+        }
+        weakSelf.canceledTxIdArray = tmpCancelIdList;
+        for (Transaction *one in leasingTxs) {
+            NSInteger index = [leasingTxs indexOfObject:one];
+            if ([tmpCancelIdList containsObject:one.originTransaction.txId]) {
+                leasingTxs[index].canCancel = NO;
+            }else {
+                leasingTxs[index].canCancel = YES;
+            }
+        }
+        weakSelf.transactionArray = leasingTxs;
+        weakSelf.showAllTransactionArray = leasingTxs;
+        [weakSelf setDateRangeType:weakSelf.dateTrangeType startTimestamp:weakSelf.startTimestamp endTimestamp:weakSelf.endTimestamp];
+        weakSelf.page = page;
     }];
 }
 
@@ -294,8 +286,8 @@ static NSInteger const TransactionPageSize = 100;
     }
 }
 
-- (Token *) getWatchingTokenInfo:(NSString *)contractId {
-    for (Token *one in self.watchingTokenArray) {
+- (VsysToken *) getWatchingTokenInfo:(NSString *)contractId {
+    for (VsysToken *one in self.watchingTokenArray) {
         if ([one.contractId isEqualToString:contractId]) {
             return one;
         }

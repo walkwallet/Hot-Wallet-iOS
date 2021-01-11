@@ -116,8 +116,6 @@
                 }
                 if ([dict[@"proofs"] count]) {
                     t.senderAddress = dict[@"proofs"][0][@"address"];
-                }else {
-                    t.senderAddress = address;
                 }
                 if ([t.senderAddress isEqualToString:address]) {
                     t.direction = @"out";
@@ -196,9 +194,9 @@
     }];
 }
 
-+ (void)getTokenInfo:(NSString *)tokenId callback:(void (^)(BOOL isSuc, Token *token))callback {
++ (void)getTokenInfo:(NSString *)tokenId callback:(void (^)(BOOL isSuc, VsysToken *token))callback {
     [AppServer Get:VApi(([NSString stringWithFormat:ApiGetTokenInfo, tokenId])) params:@{} success:^(NSDictionary * _Nonnull response) {
-        Token *token = [Token new];
+        VsysToken *token = [VsysToken new];
         token.tokenId = response[@"tokenId"];
         token.contractId = response[@"contractId"];
         token.max = [response[@"max"] longLongValue];
@@ -257,9 +255,9 @@
     }];
 }
 
-+ (void)getAddressTokenBalance:(NSString *)address tokenId:(NSString *)tokenId callback:(void (^)(BOOL isSuc, Token *token))callback {
++ (void)getAddressTokenBalance:(NSString *)address tokenId:(NSString *)tokenId callback:(void (^)(BOOL isSuc, VsysToken *token))callback {
     [AppServer Get:VApi(([NSString stringWithFormat: ApiGetAddressTokenBalance, address, tokenId])) params:@{} success:^(NSDictionary * _Nonnull response) {
-        Token *token = [Token new];
+        VsysToken *token = [VsysToken new];
         token.tokenId = response[@"tokenId"];
         token.balance = [response[@"balance"] longLongValue];
         token.unity = [response[@"unity"] intValue];
@@ -269,7 +267,7 @@
     }];
 }
 
-+ (void)broadcastContractRegister:(Transaction *)tx  callback:(void (^)(BOOL isSuc, Token *token))callback {
++ (void)broadcastContractRegister:(Transaction *)tx  callback:(void (^)(BOOL isSuc, VsysToken *token))callback {
     NSDictionary *dict = @{
                            @"senderPublicKey": tx.ownerPublicKey ? : @"",
                            @"contract": VsysBase58EncodeToString(tx.originTransaction.contract),
@@ -281,7 +279,7 @@
                            @"signature": tx.signature ? : @""
                            };
     [AppServer Post:VApi(ApiPostContractRegister) params:dict success:^(NSDictionary * _Nonnull response) {
-        Token *token = [Token new];
+        VsysToken *token = [VsysToken new];
         token.contractId = response[@"contractId"] ? : @"";
         token.tokenId = VsysContractId2TokenId(token.contractId, 0);
         VsysContract *c = [VsysContract new];
@@ -325,7 +323,7 @@
     }];
 }
 
-+ (void)getTokenDetailFromExplorer:(NSString *)tokenId callback:(void (^)(BOOL, Token *))callback {
++ (void)getTokenDetailFromExplorer:(NSString *)tokenId callback:(void (^)(BOOL, VsysToken *))callback {
     [AppServer Post:[NSString stringWithFormat:@"%@%@", ServerConfig.ExplorerHost, ApiPostExplorerTokenDetail]
              params:@{
                  @"TokenId": tokenId,
@@ -333,7 +331,7 @@
             success:^(NSDictionary * _Nonnull response) {
         if ([response[@"data"] isKindOfClass:NSDictionary.class]) {
             NSDictionary *dict = response[@"data"];
-            Token *token = [Token new];
+            VsysToken *token = [VsysToken new];
             token.tokenId = dict[@"Id"];
             token.icon = dict[@"IconUrl"];
             token.name = dict[@"Name"];
@@ -347,14 +345,14 @@
     }];
 }
 
-+ (void)getCertifiedTokenList:(NSInteger)page callback:(void (^)(BOOL, NSArray<Token *> *))callback {
++ (void)getCertifiedTokenList:(NSInteger)page callback:(void (^)(BOOL, NSArray<VsysToken *> *))callback {
     [AppServer Post:[NSString stringWithFormat:@"%@%@", ServerConfig.ExplorerHost, ApiPostExplorerCertifiedList] params:@{@"current": @(page)} success:^(NSDictionary * _Nonnull response) {
-        NSMutableArray<Token *> *list = [NSMutableArray new];
+        NSMutableArray<VsysToken *> *list = [NSMutableArray new];
         if ([response[@"data"] isKindOfClass:NSDictionary.class]) {
             NSDictionary *dict = response[@"data"];
             if ([dict[@"list"] isKindOfClass:NSArray.class]) {
                 for (NSDictionary *one in dict[@"list"]) {
-                    Token *token = [Token new];
+                    VsysToken *token = [VsysToken new];
                     token.name = one[@"Name"];
                     token.tokenId = one[@"Id"];
                     token.icon = one[@"IconUrl"];

@@ -10,10 +10,12 @@
 #import "DateRangeType.h"
 @class Transaction;
 @class Account;
+@class VsysToken;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TransactionTableViewController : UITableViewController
+
 
 - (instancetype)initWithListType:(TransactionListType)transactionType transactionArray:(NSArray<Transaction *> *)transactionArray account:(Account *)account;
 

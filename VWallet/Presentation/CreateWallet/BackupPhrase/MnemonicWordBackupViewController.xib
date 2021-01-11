@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MnemonicWordBackupViewController">
             <connections>
+                <outlet property="backupMnemonicQR" destination="NxG-hs-Xjk" id="2Y1-G6-Clz"/>
                 <outlet property="mnemonicWordsLabel" destination="K90-n0-rEJ" id="sXb-5N-tNA"/>
                 <outlet property="nextBtn" destination="RcW-z9-HoT" id="Plq-56-CFM"/>
                 <outlet property="titleLabel" destination="yXe-fc-zsa" id="KkY-ty-Mek"/>
@@ -23,8 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D1c-sm-C98">
-                    <rect key="frame" x="0.0" y="20" width="375" height="559"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D1c-sm-C98">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="492"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K30-jq-Abm">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="223.5"/>
@@ -128,11 +127,30 @@
                         <action selector="nextBtnClick" destination="-1" eventType="touchUpInside" id="QNt-Rj-oE8"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxG-hs-Xjk" customClass="VThemeButton">
+                    <rect key="frame" x="20" y="531" width="335" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="9O1-39-VsO"/>
+                    </constraints>
+                    <state key="normal" title="导出助记词二维码"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="hollow" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="exportBtnClick:" destination="-1" eventType="touchUpInside" id="hTB-yw-Oql"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
-                <constraint firstItem="RcW-z9-HoT" firstAttribute="top" secondItem="D1c-sm-C98" secondAttribute="bottom" constant="20" id="DvH-CB-LaP"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="NxG-hs-Xjk" secondAttribute="trailing" constant="20" id="3nZ-fQ-NLE"/>
+                <constraint firstItem="NxG-hs-Xjk" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="Med-NN-7Rv"/>
+                <constraint firstItem="RcW-z9-HoT" firstAttribute="top" secondItem="NxG-hs-Xjk" secondAttribute="bottom" constant="20" id="R6m-AN-gLQ"/>
                 <constraint firstItem="RcW-z9-HoT" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="YLJ-IC-0KN"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="D1c-sm-C98" secondAttribute="trailing" id="f2E-X3-9z9"/>
+                <constraint firstItem="NxG-hs-Xjk" firstAttribute="top" secondItem="D1c-sm-C98" secondAttribute="bottom" constant="20" id="gie-3V-cpQ"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="RcW-z9-HoT" secondAttribute="bottom" constant="20" id="k5k-Rh-yYs"/>
                 <constraint firstItem="D1c-sm-C98" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="mHJ-Hp-NeD"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="RcW-z9-HoT" secondAttribute="trailing" constant="20" id="oBL-ZC-CSB"/>

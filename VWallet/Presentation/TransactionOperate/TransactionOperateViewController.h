@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 @class Account;
-@class Token;
+@class VsysToken;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, TransactionOperateType) {
 
 - (instancetype)initWithAccount:(Account *)account operateType:(TransactionOperateType)operateType;
 
-- (instancetype)initWithAccount:(Account *)account token:(Token *)token operateType:(TransactionOperateType)operateType;
+- (instancetype)initWithAccount:(Account *)account token:(VsysToken *)token operateType:(TransactionOperateType)operateType;
 
 @end
 

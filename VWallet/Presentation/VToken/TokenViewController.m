@@ -15,6 +15,7 @@
 #import "Language.h"
 #import "ApiServer.h"
 #import "AddTokenViewController.h"
+#import "ReceiveViewController.h"
 #import "TokenOperateViewController.h"
 #import "TokenInfoViewController.h"
 #import "UIViewController+Alert.h"
@@ -23,7 +24,6 @@
 #import "ServerConfig.h"
 
 #import "WalletMgr.h"
-#import "Token.h"
 #import "TokenMgr.h"
 
 #import "NSString+Decimal.h"
@@ -39,7 +39,7 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
 @property (nonatomic, strong) Account *account;
 @property (weak, nonatomic) IBOutlet TokenHeaderView *tokenHeaderView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray<Token *> *tokenList;
+@property (nonatomic, strong) NSArray<VsysToken *> *tokenList;
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addToken;
 @property (weak, nonatomic) IBOutlet UIButton *createToken;
@@ -80,7 +80,7 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSArray<Token*> *list = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
+    NSArray<VsysToken*> *list = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
     self.tokenList = list.copy;
     if(self.tokenList.count == 0) {
         [self.tableView ed_setupEmptyDataDisplay];
@@ -102,11 +102,11 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
 
 - (void)refreshTokenListInfo {
     __weak typeof (self) weakSelf = self;
-    for (Token *one in self.tokenList) {
-        [ApiServer getTokenInfo:one.tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
+    for (VsysToken *one in self.tokenList) {
+        [ApiServer getTokenInfo:one.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
             if (isSuc) {
-                Token *weakToken = token;
-                [ApiServer getAddressTokenBalance:weakSelf.account.originAccount.address tokenId:one.tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
+                VsysToken *weakToken = token;
+                [ApiServer getAddressTokenBalance:weakSelf.account.originAccount.address tokenId:one.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
                     NSInteger i = [weakSelf.tokenList indexOfObject:one];
                     weakSelf.tokenList[i].balance = token.balance;
                     weakSelf.tokenList[i].total = weakToken.total;
@@ -116,13 +116,24 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
             }
         }];
     }
-    for (Token *one in self.tokenList) {
-        [ApiServer getTokenDetailFromExplorer:one.tokenId callback:^(BOOL isSuc, Token * _Nonnull tokenDetail) {
+    for (VsysToken *one in self.tokenList) {
+        [ApiServer getTokenDetailFromExplorer:one.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull tokenDetail) {
             if (isSuc) {
                 NSInteger i = [weakSelf.tokenList indexOfObject:one];
                 weakSelf.tokenList[i].name = tokenDetail.name;
                 weakSelf.tokenList[i].icon = tokenDetail.icon;
                 [weakSelf.tableView reloadData];
+                [TokenMgr.shareInstance saveToStorage:weakSelf.account.originAccount.address list:weakSelf.tokenList];
+            }
+        }];
+        [ApiServer getContractInfo:one.contractId callback:^(BOOL isSuc, Contract * _Nonnull contract) {
+            if (isSuc) {
+                NSInteger i = [weakSelf.tokenList indexOfObject:one];
+                for (ContractInfoItem *item in contract.info) {
+                    if ([item.name isEqualToString:@"issuer"]) {
+                        weakSelf.tokenList[i].issuer = item.data;
+                    }
+                }
                 [TokenMgr.shareInstance saveToStorage:weakSelf.account.originAccount.address list:weakSelf.tokenList];
             }
         }];
@@ -168,50 +179,63 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
     if ([NSString isNilOrEmpty:alertTitle]) {
         alertTitle = nil;
     }
-    [self actionSheetWithTitle:alertTitle message:nil withActionDatas:@[VLocalize(@"token.send.token"), VLocalize(@"token.info"), VLocalize(@"token.issue.token"), VLocalize(@"token.burn.token"), VLocalize(@"token.hide.token")] handler:^(NSInteger index) {
-        if (index == 0) {
-            TransactionOperateViewController *vc = [[TransactionOperateViewController alloc] initWithAccount:weakSelf.account token:self.tokenList[indexPath.row] operateType:TransactionOperateTypeSendToken];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }else if (index == 1) {
-            TokenInfoViewController *vc = [[TokenInfoViewController alloc] initWithAccount:self.account token:self.tokenList[indexPath.row]];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }else if (index == 2) {
-            for(Account *one in WalletMgr.shareInstance.accounts) {
-                if ([weakSelf.tokenList[indexPath.row].issuer isEqualToString:one.originAccount.address]) {
-                    TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeIssue token:self.tokenList[indexPath.row]];
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                    return;
-                }
+    NSMutableArray<NSString *> *titles = [NSMutableArray new];
+    NSMutableArray *actions = [NSMutableArray new];
+    [titles addObject:VLocalize(@"token.send.token")];
+    [titles addObject:VLocalize(@"token.receive.token")];
+    [titles addObject:VLocalize(@"token.info")];
+    [actions addObject:^(){
+        TransactionOperateViewController *vc = [[TransactionOperateViewController alloc] initWithAccount:weakSelf.account token:self.tokenList[indexPath.row] operateType:TransactionOperateTypeSendToken];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    [actions addObject:^() {
+        ReceiveViewController *receiveVC = [[ReceiveViewController alloc] initWithAccount:weakSelf.account];
+        [weakSelf.navigationController pushViewController:receiveVC animated:YES];
+    }];
+    [actions addObject:^() {
+        TokenInfoViewController *vc = [[TokenInfoViewController alloc] initWithAccount:self.account token:self.tokenList[indexPath.row]];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    for(Account *one in WalletMgr.shareInstance.accounts) {
+        if ([weakSelf.tokenList[indexPath.row].issuer isEqualToString:one.originAccount.address]) {
+            [titles addObject:VLocalize(@"token.issue.token")];
+            [titles addObject:VLocalize(@"token.burn.token")];
+            [actions addObject:^() {
+                TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeIssue token:self.tokenList[indexPath.row]];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }];
+            [actions addObject:^() {
+                TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeBurn token:self.tokenList[indexPath.row]];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }];
+        }
+    }
+    [titles addObject:VLocalize(@"token.hide.token")];
+    [actions addObject:^() {
+        NSArray<VsysToken *> *list = [TokenMgr.shareInstance loadAddressWatchToken:weakSelf.account.originAccount.address];
+        NSMutableArray *newList = [[NSMutableArray alloc] init];
+        for (VsysToken *one in list) {
+            if ([one.tokenId isEqualToString:weakSelf.tokenList[indexPath.row].tokenId]) {
+                continue;
             }
-            [weakSelf remindWithMessage:VLocalize(@"error.contract.operate.permission.not.issuer")];
-        }else if (index == 3) {
-            for(Account *one in WalletMgr.shareInstance.accounts) {
-                if ([weakSelf.tokenList[indexPath.row].issuer isEqualToString:one.originAccount.address]) {
-                    TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeBurn token:weakSelf.tokenList[indexPath.row]];
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                    return;
-                }
-            }
-            [weakSelf remindWithMessage:VLocalize(@"error.contract.operate.permission.not.issuer")];
-        }else if (index == 4) {
-            NSArray<Token *> *list = [TokenMgr.shareInstance loadAddressWatchToken:weakSelf.account.originAccount.address];
-            NSMutableArray *newList = [[NSMutableArray alloc] init];
-            for (Token *one in list) {
-                if ([one.tokenId isEqualToString:weakSelf.tokenList[indexPath.row].tokenId]) {
-                    continue;
-                }
-                [newList addObject:one];
-            }
-            NSError *error = [TokenMgr.shareInstance saveToStorage:weakSelf.account.originAccount.address list:newList];
-            if (error != nil) {
-                [weakSelf alertWithTitle:[error localizedDescription] confirmText:VLocalize(@"close")];
-                return;
-            }
-            weakSelf.tokenList = newList.copy;
-            if (weakSelf.tokenList.count == 0) {
-                [weakSelf.tableView ed_setupEmptyDataDisplay];
-            }
-            [weakSelf.tableView reloadData];
+            [newList addObject:one];
+        }
+        NSError *error = [TokenMgr.shareInstance saveToStorage:weakSelf.account.originAccount.address list:newList];
+        if (error != nil) {
+            [weakSelf alertWithTitle:[error localizedDescription] confirmText:VLocalize(@"close")];
+            return;
+        }
+        weakSelf.tokenList = newList.copy;
+        if (weakSelf.tokenList.count == 0) {
+            [weakSelf.tableView ed_setupEmptyDataDisplay];
+        }
+        [weakSelf.tableView reloadData];
+    }];
+    
+    [self actionSheetWithTitle:alertTitle message:nil withActionDatas:titles handler:^(NSInteger index) {
+        if (actions.count > index) {
+            void (^action)(void) = [actions objectAtIndex:index];
+            action();
         }
     }];
 }

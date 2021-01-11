@@ -11,7 +11,6 @@
 #import "Language.h"
 #import "Account.h"
 #import "ApiServer.h"
-#import "Token.h"
 #import "Contract.h"
 #import "UIView+Loading.h"
 #import "UIViewController+Alert.h"
@@ -32,11 +31,14 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *errorLabelHeight;
 @property (nonatomic, strong) Account *account;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
-@property (nonatomic, strong) Token *token;
+@property (nonatomic, strong) VsysToken *token;
 @property (weak, nonatomic) IBOutlet VThemeButton *scanButton;
 @property (weak, nonatomic) IBOutlet VThemeButton *pastButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray<Token *> *certifiedList;
+
+@property (strong, nonatomic) NSArray<VsysToken *> *certifiedList;
+
+@property (strong, nonatomic) NSArray<NSString *> *certifiedNameList;
 @end
 
 @implementation AddTokenViewController
@@ -61,8 +63,8 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
     [self.scanButton setTitle:VLocalize(@"account.transaction.scan.qr") forState:UIControlStateNormal];
     self.doneButton.alpha = 0.5;
     [self.doneButton setTitle:VLocalize(@"add") forState:UIControlStateNormal];
-    self.tokenIdNoteLabel.text = VLocalize(@"token.token.id.note");
-    self.tokenIdTextFiled.placeholder = VLocalize(@"token.input.token.id");
+    self.tokenIdNoteLabel.text = VLocalize(@"token.token.name.or.id.note");
+    self.tokenIdTextFiled.placeholder = VLocalize(@"token.input.token.name.or.id");
     self.tokenIdTextFiled.delegate = self;
     self.errorLabelHeight.constant = 0;
     
@@ -74,48 +76,60 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
 }
 
 - (void)loadCertifiedTokenListFromCache {
-    NSArray<Token*> *watchedList = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
+    NSArray<VsysToken*> *watchedList = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
     NSMutableArray<NSString *> *watchedTokenIdList = [[NSMutableArray alloc] init];
-    for (Token *one in watchedList) {
+    for (VsysToken *one in watchedList) {
         [watchedTokenIdList addObject:one.tokenId];
     }
-    NSArray<Token *> *cacheCertifiedList = [TokenMgr.shareInstance getCertifiedTokenList];
-    for (Token *one in cacheCertifiedList) {
+    
+    NSArray<VsysToken *> *cacheCertifiedList = [TokenMgr.shareInstance getCertifiedTokenList];
+    for (VsysToken *one in cacheCertifiedList) {
         if ([watchedTokenIdList containsObject:one.tokenId]) {
             NSInteger index = [cacheCertifiedList indexOfObject:one];
             cacheCertifiedList[index].watched = YES;
         }
     }
     self.certifiedList = cacheCertifiedList;
+    NSMutableArray *array = [NSMutableArray new];
+    for (VsysToken *one in self.certifiedList) {
+        [array addObject:[one.name lowercaseString]];
+        [array addObject:[[[NSString stringWithFormat:@"%@ Token", one.name] lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    }
+    self.certifiedNameList = array;
     [self.tableView reloadData];
 }
 
 - (void)loadCertifiedTokenList {
-    NSArray<Token*> *watchedList = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
+    NSArray<VsysToken*> *watchedList = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
     NSMutableArray<NSString *> *watchedTokenIdList = [[NSMutableArray alloc] init];
-    for (Token *one in watchedList) {
+    for (VsysToken *one in watchedList) {
         [watchedTokenIdList addObject:one.tokenId];
     }
-    [ApiServer getCertifiedTokenList:1 callback:^(BOOL isSuc, NSArray<Token *> * _Nonnull tokenArr) {
-        NSMutableArray<Token *> *tokenList = [NSMutableArray new];
-        for (Token *one in tokenArr) {
+    __weak typeof (self) weakSelf = self;
+    [ApiServer getCertifiedTokenList:1 callback:^(BOOL isSuc, NSArray<VsysToken *> * _Nonnull tokenArr) {
+        NSMutableArray<VsysToken *> *tokenList = [NSMutableArray new];
+        for (VsysToken *one in tokenArr) {
             if ([watchedTokenIdList containsObject: one.tokenId]) {
                 one.watched = YES;
             }
             [tokenList addObject:one];
         }
-        self.certifiedList = tokenList;
+        weakSelf.certifiedList = tokenList;
+        NSMutableArray *array = [NSMutableArray new];
+        for (VsysToken *one in weakSelf.certifiedList) {
+            [array addObject:[one.name lowercaseString]];
+            [array addObject:[[[NSString stringWithFormat:@"%@ Token", one.name] lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        }
+        weakSelf.certifiedNameList = array;
         [TokenMgr.shareInstance saveCertifiedTokenList:tokenArr];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
+        [weakSelf.tableView reloadData];
     }];
 }
 
 - (IBAction)ClickPaste:(id)sender {
     self.tokenIdTextFiled.text = UIPasteboard.generalPasteboard.string;
     [self.tokenIdTextFiled updatePlaceholderState];
-    [self checkTokenId];
+    [self checkTokenInput];
 }
 
 - (IBAction)ClickQRCode:(id)sender {
@@ -129,8 +143,7 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
 }
 
 - (IBAction)ClickDone:(id)sender {
-    NSString *tokenId = self.tokenIdTextFiled.text;
-    [self addToken:tokenId back:YES];
+    [self addToken:self.token.tokenId];
 }
 
 - (void)loadContractTextualDescriptor:(NSString *)contractId {
@@ -145,14 +158,14 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
 - (void)scanQRcodeResult:(NSString *)qrCode {
     self.tokenIdTextFiled.text = qrCode;
     [self.tokenIdTextFiled updatePlaceholderState];
-    [self checkTokenId];
+    [self checkTokenInput];
 }
 
 #pragma mark - UITextView Delegate
 - (void)textViewDidChange:(UITextView *)textView {
     [textView updatePlaceholderState];
     if (textView == self.tokenIdTextFiled) {
-        [self checkTokenId];
+        [self checkTokenInput];
     }
 }
 
@@ -184,11 +197,12 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
     LoadingView *loadingView = [[LoadingView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:loadingView];
     [loadingView startLoadingWithColor:VColor.themeColor];
+    
     __weak typeof (self) weakSelf = self;
-    [ApiServer getTokenInfo:self.certifiedList[sender.tag].tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
+    [ApiServer getTokenInfo:self.certifiedList[sender.tag].tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
         if (isSuc) {
             weakSelf.token = token;
-            [self addToken:self.certifiedList[sender.tag].tokenId back:NO];
+            [self addToken:self.certifiedList[sender.tag].tokenId];
             [loadingView stopLoading];
             [loadingView removeFromSuperview];
         }else {
@@ -199,16 +213,17 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
     }];
 }
 
-- (void)addToken:(NSString *)tokenId back:(BOOL)back {
+- (void)addToken:(NSString *)tokenId {
     LoadingView *loadingView = [[LoadingView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:loadingView];
     [loadingView startLoadingWithColor:VColor.themeColor];
+    
     __weak typeof (self) weakSelf = self;
-    [ApiServer getAddressTokenBalance:self.account.originAccount.address tokenId:tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
+    [ApiServer getAddressTokenBalance:self.account.originAccount.address tokenId:tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
         if (isSuc) {
             if ([weakSelf.token.tokenId isEqualToString:token.tokenId]) {
-                NSArray<Token*> *oldList = [TokenMgr.shareInstance loadAddressWatchToken:weakSelf.account.originAccount.address];
-                for (Token *one in oldList) {
+                NSArray<VsysToken*> *oldList = [TokenMgr.shareInstance loadAddressWatchToken:weakSelf.account.originAccount.address];
+                for (VsysToken *one in oldList) {
                     if ([one.tokenId isEqualToString:weakSelf.token.tokenId]) {
                         [weakSelf alertWithTitle:VLocalize(@"error.token.exist")  confirmText:VLocalize(@"close")];
                         return;
@@ -218,9 +233,9 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
                     [loadingView stopLoading];
                     if (contractContent.textual && contractContent.textual.descriptors) {
                         weakSelf.token.textualDescriptor = contractContent.textual.descriptors;
-                        NSString *funcJson = VsysDecodeContractTextrue(weakSelf.token.textualDescriptor);
+                        NSString *funcJson = VsysDecodeContractTexture(weakSelf.token.textualDescriptor);
                         if ([funcJson containsString:@"split"]) {
-                            weakSelf.token.splitable = YES;
+                            weakSelf.token.splitable = true;
                         }
                         NSMutableArray *newList = [[NSMutableArray alloc] init];
                         [newList addObjectsFromArray:oldList];
@@ -230,10 +245,7 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
                         if (error != nil) {
                             [weakSelf alertWithTitle:[error localizedDescription] confirmText:VLocalize(@"close")];
                         }else {
-                            [weakSelf loadCertifiedTokenList];
-                            if (back) {
-                                [weakSelf.navigationController popViewControllerAnimated:YES];
-                            }
+                            [weakSelf.navigationController popViewControllerAnimated:YES];
                         }
                     }else {
                         [weakSelf alertWithTitle:@"" confirmText:VLocalize(@"")];
@@ -250,13 +262,13 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
     }];
 }
 
-- (void)checkTokenId {
+- (void)checkTokenInput {
     BOOL tokenValid = NO;
     NSString *tokenId = self.tokenIdTextFiled.text;
     if(tokenId.length > 38) {
         tokenValid = YES;
         __weak typeof (self) weakSelf = self;
-        [ApiServer getTokenInfo:tokenId callback:^(BOOL isSuc, Token * _Nonnull token) {
+        [ApiServer getTokenInfo:tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
             if (isSuc) {
                 weakSelf.token = token;
                 [weakSelf showError:@""];
@@ -265,7 +277,23 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
             }
         }];
     }else {
-        [self showError:VLocalize(@"token.operate.error.id.format")];
+        NSString *input = [[self.tokenIdTextFiled.text lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if ([self.certifiedNameList containsObject:input]) {
+            NSInteger index = [self.certifiedNameList indexOfObject:input];
+            if (self.certifiedList.count > index / 2) {
+                __weak typeof (self) weakSelf = self;
+                [ApiServer getTokenInfo:weakSelf.certifiedList[index/2].tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
+                    if (isSuc) {
+                        weakSelf.token = token;
+                        [weakSelf showError:@""];
+                    }else {
+                        [weakSelf showError:VLocalize(@"token.operate.error.id.not.exist")];
+                    }
+                }];
+            }
+        }else {
+            [self showError:VLocalize(@"token.operate.error.id.format")];
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-@class Token;
+@class VsysToken;
 
 @interface CertifiedTokenTableViewCell : UITableViewCell
 
@@ -9,6 +9,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 
-@property (nonatomic, strong) Token *token;
+@property (nonatomic, strong) VsysToken *token;
 
 @end

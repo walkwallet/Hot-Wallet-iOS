@@ -49,7 +49,7 @@
     self.view.backgroundColor = VColor.rootViewBgColor;
     
     UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ico_scan"] style:UIBarButtonItemStylePlain target:self action:@selector(clickScan)];
-//    self.navigationItem.rightBarButtonItem = anotherButton;
+    self.navigationItem.rightBarButtonItem = anotherButton;
     
     [self.nextBtn setTitle:VLocalize(@"next") forState:UIControlStateNormal];
 }
@@ -70,7 +70,23 @@
 }
 
 - (void)clickScan {
-    
+    __weak typeof(self) weakSelf = self;
+    [MediaManager checkCameraPermissionsWithCallVC:self result:^ {
+        QRScannerViewController *qrScannerVC = [[QRScannerViewController alloc] initWithQRRegexStr:nil noMatchTipText:nil result:^(NSString * _Nullable qrCode) {
+            if ([qrCode hasPrefix:@"{"]) {
+                NSError *error;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[qrCode dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+                if (error == nil) {
+                    weakSelf.textView.text = json[@"seed"];
+                    [weakSelf textViewDidChange:weakSelf.textView];
+                }
+            }else {
+                weakSelf.textView.text = qrCode;
+                [weakSelf textViewDidChange:weakSelf.textView];
+            }
+        }];
+        [weakSelf presentViewController:qrScannerVC animated:YES completion:nil];
+    }];
 }
 
 - (IBAction)scanBtnClick:(id)sender {
@@ -78,7 +94,6 @@
     [self.textView resignFirstResponder];
     [MediaManager checkCameraPermissionsWithCallVC:self result:^ {
         QRScannerViewController *qrScannerVC = [[QRScannerViewController alloc] initWithQRRegexStr:@"/#cold/export?seed=[^\\s]*" noMatchTipText:VLocalize(@"tip.qrcode.unsupported.types") result:^(NSString * _Nullable qrCode) {
-//            NSLog(@" - im - qrCode = %@", qrCode);
             NSArray *arr = [qrCode componentsSeparatedByString:@"/#cold/export?seed="];
             if (arr.count != 2) {
                 [weakSelf alertWithTitle:VLocalize(@"tip.qrcode.unsupported.types") confirmText:nil];

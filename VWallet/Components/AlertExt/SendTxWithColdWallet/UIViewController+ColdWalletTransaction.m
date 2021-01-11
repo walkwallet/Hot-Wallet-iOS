@@ -27,7 +27,6 @@
 #import "Transaction.h"
 #import "ApiServer.h"
 #import "UIView+Loading.h"
-#import "Token.h"
 #import "TokenMgr.h"
 
 @implementation UIViewController (ColdWalletTransaction)
@@ -88,7 +87,6 @@
 
 - (void)transactionReConfirmTx:(Transaction *)transaction account:(Account *)account signature:(NSString *)signature {
     __weak typeof(self) weakSelf = self;
-    
     AlertViewController *vc = [[AlertViewController alloc] initWithTitle:VLocalize(@"tip.transaction.review.title") confirmTitle:VLocalize(@"confirm") configureContent:^(UIViewController * _Nonnull vc, UIStackView * _Nonnull parentView) {
         
         TransactionDetailViewController *detailVC = [[TransactionDetailViewController alloc] initWithTransaction:transaction account:account];
@@ -104,7 +102,6 @@
         AlertViewController *alertVC = (AlertViewController *)vc;
         [alertVC.mainView startLoadingWithColor:VColor.themeColor];
         transaction.signature = signature;
-        transaction.originTransaction.attachment = VsysBase58Encode(transaction.originTransaction.attachment);
         if (transaction.originTransaction.txType == VsysTxTypePayment) {
             [ApiServer broadcastPayment:transaction callback:^(BOOL isSuc) {
                 [alertVC.mainView stopLoading];
@@ -133,7 +130,7 @@
                 }
             }];
         } else if (transaction.originTransaction.txType == VsysTxTypeContractRegister) {
-            [ApiServer broadcastContractRegister:transaction callback:^(BOOL isSuc, Token * _Nonnull token) {
+            [ApiServer broadcastContractRegister:transaction callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
                 [alertVC.mainView stopLoading];
                 if (isSuc) {
                     NSMutableArray *newList = [NSMutableArray new];

@@ -19,7 +19,7 @@
 #import "UIViewController+NavigationBar.h"
 #import "UIViewController+Alert.h"
 #import "TokenMgr.h"
-#import "Token.h"
+#import "VsysToken.h"
 
 static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
@@ -114,7 +114,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
         }
         [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : [self.transaction TypeDesc]}];
     }else if (oriTx.txType == VsysTxTypeContractExecute) {
-        Token *token = [TokenMgr.shareInstance getTokenByAddress:self.account.originAccount.address tokenId:VsysContractId2TokenId(oriTx.contractId, 0)];
+        VsysToken *token = [TokenMgr.shareInstance getTokenByAddress:self.account.originAccount.address tokenId:VsysContractId2TokenId(oriTx.contractId, 0)];
         NSString *funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, oriTx.funcIdx);
         VsysContract *c = [VsysContract new];
         if (![NSString isNilOrEmpty:self.transaction.status]) {

@@ -62,6 +62,7 @@
                 [topVC dismissViewControllerAnimated:YES completion:nil];
             }
         }];
+        pwdInputVC.modalPresentationStyle = UIModalPresentationFullScreen;
         [topVC presentViewController:pwdInputVC animated:YES completion:nil];
     }
 }

@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 @class Transaction;
-@class Token;
+@class VsysToken;
 
 NS_ASSUME_NONNULL_BEGIN
 

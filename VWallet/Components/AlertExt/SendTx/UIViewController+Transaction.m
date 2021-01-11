@@ -21,6 +21,7 @@
 #import "UIView+Loading.h"
 #import "VColor.h"
 #import "TokenMgr.h"
+#import "VsysToken.h"
 #import "UIViewController+Alert.h"
 
 @implementation UIViewController (Transaction)
@@ -65,7 +66,7 @@
                         }
                     }];
                 } else if (transaction.originTransaction.txType == VsysTxTypeContractRegister) {
-                    [ApiServer broadcastContractRegister:transaction callback:^(BOOL isSuc, Token * _Nonnull token) {
+                    [ApiServer broadcastContractRegister:transaction callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
                         [alertVC.mainView stopLoading];
                         if (isSuc) {
                             NSMutableArray *newList = [NSMutableArray new];
@@ -120,7 +121,7 @@
     } else if (tx.txType == VsysTxTypeContractRegister) {
         title = [NSString stringWithFormat:VLocalize(@"transaction.create.contract"), VsysContractId2TokenId(tx.contractId, 0)];
     } else if (tx.txType == VsysTxTypeContractExecute) {
-        Token *token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
+        VsysToken *token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
         VsysContract *c = [VsysContract new];
         NSString *funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
         if ([funcName isEqualToString:@"send"]) {
@@ -160,7 +161,7 @@
         [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[title rangeOfString:VsysContractId2TokenId(tx.contractId, 0)]];
         attrMessage = [[NSAttributedString alloc] initWithString:VLocalize(@"token.register.success.check.watch.list") attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13 weight:UIFontWeightLight]}];
     }else if (tx.txType == VsysTxTypeContractExecute) {
-        Token *token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
+        VsysToken *token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
         NSString *funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
         NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:tx.amount];
         NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLongLong:token.unity];

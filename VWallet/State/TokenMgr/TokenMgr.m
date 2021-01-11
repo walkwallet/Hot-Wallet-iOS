@@ -6,10 +6,11 @@
 //
 
 #import "TokenMgr.h"
+#import "VsysToken.h"
 
-static NSString *VKeyChainToken = @"WatchToken_%@";
+static NSString *VKeyChainToken = @"WatchingToken_%@";
 
-static NSString *VKeyCertifiedTokenList = @"CertifiedTokenList";
+static NSString *VKeyCertifiedTokenList = @"CertifiedToken";
 
 static TokenMgr *VTokenMgr = nil;
 
@@ -23,22 +24,20 @@ static TokenMgr *VTokenMgr = nil;
     return VTokenMgr;
 }
 
-- (NSArray<Token *> *)loadAddressWatchToken:(NSString *)address {
+- (NSArray<VsysToken *> *)loadAddressWatchToken:(NSString *)address {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:VKeyChainToken, address]];
-    NSArray<Token *> *watchTokenList = [NSKeyedUnarchiver unarchiveObjectWithData: data];
-    return watchTokenList;
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
 }
 
-- (NSError *)saveToStorage:(NSString *)address list:(NSArray<Token *> *)list {
+- (NSError *)saveToStorage:(NSString *)address list:(NSArray<VsysToken *> *)list {
+    self.tokenList = list;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:list];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:[NSString stringWithFormat:VKeyChainToken, address]];
     return nil;
 }
 
-- (Token *)getTokenByAddress:(NSString *)address tokenId:(NSString *)tokenId {
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:VKeyChainToken, address]];
-    NSArray<Token *> *watchTokenList = [NSKeyedUnarchiver unarchiveObjectWithData: data];
-    for (Token *one in watchTokenList) {
+- (VsysToken *)getTokenByAddress:(NSString *)address tokenId:(NSString *)tokenId {
+    for (VsysToken *one in self.tokenList) {
         if ([one.tokenId isEqualToString:tokenId]) {
             return one;
         }
@@ -46,13 +45,12 @@ static TokenMgr *VTokenMgr = nil;
     return nil;
 }
 
-- (NSArray<Token *> *)getCertifiedTokenList {
+- (NSArray<VsysToken *> *)getCertifiedTokenList {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:VKeyCertifiedTokenList];
-    NSArray<Token *> *certifiedTokenList = [NSKeyedUnarchiver unarchiveObjectWithData: data];
-    return certifiedTokenList;
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
 }
 
-- (NSError *)saveCertifiedTokenList:(NSArray<Token *> *) list {
+- (NSError *)saveCertifiedTokenList:(NSArray<VsysToken *> *) list {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:list];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:VKeyCertifiedTokenList];
     return nil;

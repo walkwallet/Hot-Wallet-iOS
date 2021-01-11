@@ -1,5 +1,4 @@
 #import "CertifiedTokenTableViewCell.h"
-#import "Token.h"
 #import "TokenMgr.h"
 #import "Language.h"
 #import "UIColor+Hex.h"
@@ -7,6 +6,7 @@
 #import "NSString+Decimal.h"
 #import <SDWebImage/SDWebImage.h>
 #import "ServerConfig.h"
+#import "VsysToken.h"
 
 @implementation CertifiedTokenTableViewCell
 
@@ -27,7 +27,7 @@
     [super setSelected:selected animated:animated];
 }
 
-- (void)setToken:(Token *)token {
+- (void)setToken:(VsysToken *)token {
     _token = token;
     if ([NSString isNilOrEmpty:token.icon]) {
         self.logoView.image = [UIImage imageNamed:@"ico_token_logo"];

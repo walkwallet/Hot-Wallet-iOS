@@ -49,6 +49,9 @@
 }
 
 + (NSDecimalNumber *)getAccurateDouble:(long long)value unity:(long long)unity {
+    if (unity == 0) {
+        unity = 1;
+    }
     return [[[NSDecimalNumber alloc] initWithLongLong:value] decimalNumberByDividingBy:[[NSDecimalNumber alloc] initWithLongLong:unity]];
 }
 

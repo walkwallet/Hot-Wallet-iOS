@@ -20,6 +20,7 @@
 #import "VColor.h"
 #import "VStoryboard.h"
 #import "AppState.h"
+#import <UserNotifications/UserNotifications.h>
 
 @interface DeviceLockTableViewController () <VTableViewCellDelegate>
 
@@ -33,6 +34,23 @@
     [super viewDidLoad];
     
     [self initView];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *_Nonnull settings){
+        switch (settings.authorizationStatus) {
+            case UNAuthorizationStatusNotDetermined:
+                break;
+            case UNAuthorizationStatusDenied:
+                break;
+            case UNAuthorizationStatusAuthorized:
+                break;
+            default:
+                break;
+        }
+    }];
 }
 
 - (void)initView {

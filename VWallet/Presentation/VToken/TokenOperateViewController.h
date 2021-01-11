@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 @class Account;
-@class Token;
+@class VsysToken;
 
 typedef NS_ENUM(NSInteger, TokenOperatePageType) {
     TokenOperatePageTypeCreate = 0,
@@ -21,6 +21,6 @@ typedef NS_ENUM(NSInteger, TokenOperatePageType) {
 
 - (instancetype)initWithAccount:(Account *)account type:(NSInteger)type;
 
-- (instancetype)initWithAccount:(Account *)account type:(NSInteger)type token:(Token *)token;
+- (instancetype)initWithAccount:(Account *)account type:(NSInteger)type token:(VsysToken *)token;
 
 @end

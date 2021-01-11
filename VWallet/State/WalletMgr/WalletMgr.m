@@ -64,6 +64,8 @@ static WalletMgr *VWalletMgr = nil;
         return error;
     }
     
+    [[NSUserDefaults standardUserDefaults] setObject:undecryptData forKey:VKeyChainAccount];
+    
     NSData *decryptedData = VsysAesDecrypt(self.securePassword, undecryptData, &error);
     if (error) {
         return error;
@@ -140,6 +142,8 @@ static WalletMgr *VWalletMgr = nil;
         return error;
     }
     
+    [[NSUserDefaults standardUserDefaults] setObject:self.salt forKey:VKeyChainAccountSalt];
+    
     self.securePassword = [self generatePassword:password salt:self.salt error:&error];
     if (error) {
         return error;
@@ -155,6 +159,9 @@ static WalletMgr *VWalletMgr = nil;
     if (!salt || [salt isEqualToString:@""]) {
         return;
     }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:salt forKey:VKeyChainAccountSalt];
+    
     self.salt = salt;
 }
 
@@ -169,14 +176,14 @@ static WalletMgr *VWalletMgr = nil;
     }
     
     NSDictionary *dict = @{
-                           @"seed": self.seed,
-                           @"accountSeeds": self.accountSeeds,
-                           @"nonce": @(self.nonce),
-                           @"api": @(VsysApi),
-                           @"protocol": VsysProtocol,
-                           @"network": self.network,
-                           @"monitorPublicKeys": monitorArr.copy,
-      };
+        @"seed": self.seed,
+        @"accountSeeds": self.accountSeeds,
+        @"nonce": @(self.nonce),
+        @"api": @(VsysApi),
+        @"protocol": VsysProtocol,
+        @"network": self.network,
+        @"monitorPublicKeys": monitorArr.copy,
+    };
     NSError *error;
     NSData *data;
     if (@available(iOS 11.0, *)) {
@@ -194,6 +201,8 @@ static WalletMgr *VWalletMgr = nil;
         NSLog(@"encrypt wallet data error: %@", error);
         return error;
     }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:encryptedData forKey:VKeyChainAccount];
     
     [SAMKeychain setPasswordData:encryptedData forService:VKeyChainService account:VKeyChainAccount error:&error];
 
