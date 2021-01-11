@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Wallet
+
+  All rights reserved.
+*/
+NSCameraUsageDescription = "Use the camera to scan QR Code";
+NSPhotoLibraryAddUsageDescription = "Store pictures";
+NSPhotoLibraryUsageDescription = "Select the pictures";
+NSFaceIDUsageDescription = "Protect your application";
+NSBluetoothPeripheralUsageDescription = "Use the bluetooth";
