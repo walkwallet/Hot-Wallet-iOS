@@ -70,7 +70,7 @@ static Language *VLanguage = nil;
         return LanguageTypeCN;
     }else if ([key isEqualToString:@"ko"]) {
         return LanguageTypeKO;
-    }else if ([key isEqualToString:@"zh-hant"]) {
+    }else if ([key isEqualToString:@"zh-Hant"]) {
         return LanguageTypeCNHant;
     }
     return LanguageTypeEN;

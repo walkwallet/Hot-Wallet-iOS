@@ -33,3 +33,10 @@ Pods/
 fastlane
 Gemfile
 Gemfile.lock
+.idea
+*__gen.go
+*__ignore.go
+*.swo
+~i_*
+ig_*
+zzzig_*
