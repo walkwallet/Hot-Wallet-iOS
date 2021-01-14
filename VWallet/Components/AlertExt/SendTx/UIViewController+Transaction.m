@@ -125,13 +125,17 @@
         VsysContract *c = [VsysContract new];
         NSString *funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
         if ([funcName isEqualToString:@"send"]) {
-            [c decodeSend: tx.data];
+            if([token isNFTToken]) {
+                [c decodeNFTSend:tx.data];
+            }else {
+                [c decodeSend:tx.data];
+            }
             tx.recipient = c.recipient;
             tx.amount = c.amount;
             NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:c.amount];
             NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLongLong:token.unity];
             NSString *amountStr = [NSString stringWithDecimal:[tokenAmount decimalNumberByDividingBy:unityDecimal] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
-            title = [NSString stringWithFormat:VLocalize(@"transaction.contract.execute"), amountStr, [NSString isNilOrEmpty:token.name] ? @"tokens" : token.name, c.recipient];
+            title = [NSString stringWithFormat:VLocalize(@"transaction.contract.execute"), amountStr, [NSString isNilOrEmpty:token.name] ? (c.amount > 1 ? @"tokens" : @"token") : token.name, c.recipient];
         }else if([funcName isEqualToString:@"issue"]) {
             [c decodeIssue: tx.data];
             tx.recipient = c.recipient;

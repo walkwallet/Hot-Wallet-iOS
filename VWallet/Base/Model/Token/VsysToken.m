@@ -48,4 +48,8 @@
     return self;
 }
 
+- (BOOL) isNFTToken {
+    return self.max == 1 && self.unity == 1 && !self.splitable;
+}
+
 @end

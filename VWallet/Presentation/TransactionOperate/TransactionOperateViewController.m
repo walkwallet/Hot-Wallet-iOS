@@ -330,7 +330,13 @@
             tx = VsysNewExecuteTransaction(self.token.contractId, VsysBase58EncodeToString([c buildSendData]), VsysGetFuncIndexFromDescriptor(self.token.textualDescriptor, @"send"), self.descTextView.text);
             tx.recipient = self.receiveAddressTextView.text;
             tx.amount = c.amount;
-            tx.data = [c buildSendData];
+            if([self.token isNFTToken]) {
+                c.tokenIdx = VsysTokenId2TokenIdx(self.token.tokenId);
+                tx.data = [c buildNFTSendData];
+                tx.funcIdx = 2;
+            }else {
+                tx.data = [c buildSendData];
+            }
         } break;
     }
     if (!tx) {
