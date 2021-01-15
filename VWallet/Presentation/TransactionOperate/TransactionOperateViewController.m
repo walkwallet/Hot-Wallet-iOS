@@ -21,6 +21,8 @@
 #import "VsysToken.h"
 #import "WalletMgr.h"
 #import "LeaseNode.h"
+#import "ApiServer.h"
+#import "NSString+Asterisk.h"
 
 @import SafariServices;
 
@@ -59,6 +61,8 @@
 @property (nonatomic, assign) CGFloat keyboardMinY;
 @property (nonatomic, assign) UIViewKeyframeAnimationOptions keyboardOptions;
 
+@property (nonatomic, strong) NSMutableArray<LeaseNode *> *nodes;
+
 @end
 
 @implementation TransactionOperateViewController
@@ -79,7 +83,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeNotifi:) name:@"nodeId" object:nil];
+    self.nodes = [NSMutableArray array];
+    [self fetchNodes];
     [self initView];
+    
+    if (self.operateType == TransactionOperateTypeLease) {
+        self.receiveAddressTextView.editable = NO;
+        [self.receiveAddressTextView resignFirstResponder];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickChooseNode)];
+        [self.receiveAddressTextView addGestureRecognizer:tap];
+    }
 }
 
 - (void)initView {
@@ -198,10 +211,12 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     [textView updatePlaceholderState];
-    if (textView == self.receiveAddressTextView && self.operateType == TransactionOperateTypeLease) {
-        textView.editable = NO;
-        [textView resignFirstResponder];
-        [self chooseRentalAddress];
+    
+}
+
+- (void)clickChooseNode{
+    if (self.operateType == TransactionOperateTypeLease) {
+        [self chooseRentalAddress:self.nodes];
     }
 }
 
@@ -426,7 +441,10 @@
 
 - (void)nodeNotifi:(NSNotification *)notification{
     LeaseNode *node = notification.userInfo[@"LeaseNode"];
-    self.receiveAddressTextView.editable = YES;
+    if (self.nodes.count <= 0) {
+        self.nodes = [notification.userInfo[@"nodeArr"] mutableCopy];
+    }
+    [self.receiveAddressTextView updatePlaceholderState];
     self.receiveAddressTextView.text = node.address;
     NSString *feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:VsysDefaultTxFee * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
     if([node isSubNode]) {
@@ -437,6 +455,25 @@
     self.transactionFeeLabel.attributedText = feeMas;
     
     
+}
+
+- (void)fetchNodes {
+    __weak typeof (self) weakSelf = self;
+    [ApiServer getLeaseNodeList:^(BOOL isSuc, NSArray<LeaseNode *> * _Nonnull nodeList) {
+        if(isSuc) {
+           
+            for (LeaseNode *superNode in nodeList) {
+                if(![superNode isSuperNode]) {
+                    continue;
+                }
+                [weakSelf.nodes addObject:superNode];
+                for (LeaseNode *subNode in superNode.subNodeList) {
+                    
+                    [weakSelf.nodes addObject:subNode];
+                }
+            }
+        }
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
