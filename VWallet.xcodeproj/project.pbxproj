@@ -191,7 +191,9 @@
 		A8C32BE7228985AD00E1CBB1 /* SuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */; };
 		A8C32BEB228AA89300E1CBB1 /* AddTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C32BE9228AA89300E1CBB1 /* AddTokenViewController.m */; };
 		A8C32BEC228AA89300E1CBB1 /* AddTokenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C32BEA228AA89300E1CBB1 /* AddTokenViewController.xib */; };
-		C37DCD8325B0352900318BF0 /* SuperNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C37DCD8225B0352900318BF0 /* SuperNode.m */; };
+		C3C34B9F25B1850B007A275B /* LeaseNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C34B9E25B1850B007A275B /* LeaseNode.m */; };
+		C3CF374725B18E050096A198 /* NodesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CF374525B18E050096A198 /* NodesViewController.m */; };
+		C3CF374825B18E050096A198 /* NodesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CF374625B18E050096A198 /* NodesViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -523,8 +525,11 @@
 		B99A01A40F53D8E0B803D481 /* Pods-VWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VWallet/Pods-VWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		C365346325AC48C100537A37 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C365346425AC48C100537A37 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		C37DCD8225B0352900318BF0 /* SuperNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuperNode.m; sourceTree = "<group>"; };
-		C37DCD8625B0353900318BF0 /* SuperNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuperNode.h; sourceTree = "<group>"; };
+		C3C34B9D25B1850B007A275B /* LeaseNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaseNode.h; sourceTree = "<group>"; };
+		C3C34B9E25B1850B007A275B /* LeaseNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaseNode.m; sourceTree = "<group>"; };
+		C3CF374425B18E050096A198 /* NodesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodesViewController.h; sourceTree = "<group>"; };
+		C3CF374525B18E050096A198 /* NodesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodesViewController.m; sourceTree = "<group>"; };
+		C3CF374625B18E050096A198 /* NodesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NodesViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -885,6 +890,7 @@
 		4041C02121CB711000B2AE05 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C3E07B6F25B171AB00D9A706 /* Nodes */,
 				A88B0FF42275C534008C1CE8 /* VToken */,
 				40477A2421E5D34B00EFF6E1 /* AccountList */,
 				402BBAEC21E5D326005F2794 /* AccountDetail */,
@@ -1491,7 +1497,7 @@
 		4041C11B21CB711000B2AE05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C37DCD8125B034F400318BF0 /* SuperNode */,
+				C3C34B9C25B1850B007A275B /* LeaseNode */,
 				A8261D362375438D00158A98 /* Token */,
 				A879425B228EC328009D10A8 /* Contract */,
 				4041C11C21CB711000B2AE05 /* Transaction */,
@@ -1931,13 +1937,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		C37DCD8125B034F400318BF0 /* SuperNode */ = {
+		C3C34B9C25B1850B007A275B /* LeaseNode */ = {
 			isa = PBXGroup;
 			children = (
-				C37DCD8225B0352900318BF0 /* SuperNode.m */,
-				C37DCD8625B0353900318BF0 /* SuperNode.h */,
+				C3C34B9D25B1850B007A275B /* LeaseNode.h */,
+				C3C34B9E25B1850B007A275B /* LeaseNode.m */,
 			);
-			path = SuperNode;
+			path = LeaseNode;
+			sourceTree = "<group>";
+		};
+		C3E07B6F25B171AB00D9A706 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				C3CF374425B18E050096A198 /* NodesViewController.h */,
+				C3CF374525B18E050096A198 /* NodesViewController.m */,
+				C3CF374625B18E050096A198 /* NodesViewController.xib */,
+			);
+			path = Nodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2034,6 +2050,7 @@
 				4041C1C221CB711100B2AE05 /* ReceiveSetAmountAlertController.xib in Resources */,
 				4041C1F321CB711100B2AE05 /* SwitchTableViewCell.xib in Resources */,
 				4041C17E21CB711000B2AE05 /* libscrypt.version in Resources */,
+				C3CF374825B18E050096A198 /* NodesViewController.xib in Resources */,
 				4041C1C021CB711100B2AE05 /* ReceiveViewController.xib in Resources */,
 				4041C1A321CB711000B2AE05 /* MnemonicWordBackupViewController.xib in Resources */,
 				402BBB1E21E5D326005F2794 /* DateRangePickerViewController.xib in Resources */,
@@ -2155,6 +2172,7 @@
 				A88B0FF72275C59F008C1CE8 /* TokenViewController.m in Sources */,
 				4041C21121CB711100B2AE05 /* UITextView+Placeholder.m in Sources */,
 				A8163B0722894882004A919A /* TokenOperateViewController.m in Sources */,
+				C3CF374725B18E050096A198 /* NodesViewController.m in Sources */,
 				4041C1B921CB711100B2AE05 /* ChooseNetworkViewController.m in Sources */,
 				A8794262228FB348009D10A8 /* TokenMgr.m in Sources */,
 				402BBB2021E5D326005F2794 /* DateRangeOptionTableViewCell.m in Sources */,
@@ -2196,7 +2214,6 @@
 				4041C20221CB711100B2AE05 /* PasswordInput.m in Sources */,
 				4041C21821CB711100B2AE05 /* Regex.m in Sources */,
 				4041C17F21CB711000B2AE05 /* crypto-scrypt-saltgen.c in Sources */,
-				C37DCD8325B0352900318BF0 /* SuperNode.m in Sources */,
 				4041C20121CB711100B2AE05 /* SectionItem.m in Sources */,
 				4041C18821CB711000B2AE05 /* AppState.m in Sources */,
 				4041C1C121CB711100B2AE05 /* ReceiveSetAmountAlertController.m in Sources */,
@@ -2213,6 +2230,7 @@
 				4041C1E121CB711100B2AE05 /* WalletPageViewController.m in Sources */,
 				4041C20021CB711100B2AE05 /* CellItem.m in Sources */,
 				4041C1A521CB711000B2AE05 /* MnemonicWordCheckViewController.m in Sources */,
+				C3C34B9F25B1850B007A275B /* LeaseNode.m in Sources */,
 				4041C20F21CB711100B2AE05 /* UIView+Loading.m in Sources */,
 				40477A3321E5D34B00EFF6E1 /* AddAccountTableViewCell.m in Sources */,
 				A882CF492386311600046DD5 /* AlertView.m in Sources */,

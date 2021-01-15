@@ -23,6 +23,7 @@
 #import "TokenMgr.h"
 #import "VsysToken.h"
 #import "UIViewController+Alert.h"
+#import "NodesViewController.h"
 
 @implementation UIViewController (Transaction)
 
@@ -104,11 +105,12 @@
     __weak typeof(self) weakSelf = self;
     
     AlertViewController *vc = [[AlertViewController alloc] initWithTitle:VLocalize(@"tip.transaction.node.title") confirmTitle:@"" configureContent:^(UIViewController * _Nonnull vc, UIStackView * _Nonnull parentView) {
-        TransactionDetailViewController *detailVC = [[TransactionDetailViewController alloc] initWithTransaction:transaction account:account];
-        [vc addChildViewController:detailVC];
-        [parentView addArrangedSubview:detailVC.view];
+        
+        NodesViewController *nodesVc = [[NodesViewController alloc] initWithNibName:@"NodesViewController" bundle:nil];
+        [vc addChildViewController:nodesVc];
+        [parentView addArrangedSubview:nodesVc.view];
         CGFloat maxHeight = CGRectGetHeight(UIScreen.mainScreen.bounds) * 0.8 - 104;
-        [detailVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        [nodesVc.view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(450 > maxHeight ? maxHeight : 450);
         }];
     } cancel:^(UIViewController * _Nonnull vc) {

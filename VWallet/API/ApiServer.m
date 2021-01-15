@@ -368,12 +368,12 @@
     }];
 }
 
-+ (void)getLeaseNodeList:(void (^)(NSArray<SuperNode *> *))callback {
++ (void)getLeaseNodeList:(void (^)(BOOL, NSArray<LeaseNode *> *))callback {
     [AppServer Get:RateApi(ApiGetRateLeaseNodeList) params:@{} success:^(NSDictionary * _Nonnull response) {
         NSMutableArray *list = @[].mutableCopy;
         if([response[@"data"] isKindOfClass:NSArray.class]) {
             for (NSDictionary *dict in response[@"data"]) {
-                SuperNode *superNode = [[SuperNode alloc] init];
+                LeaseNode *superNode = [[LeaseNode alloc] init];
                 superNode.address = dict[@"Address"];
                 if (![dict[@"LeaseInBalance"] isKindOfClass:[NSNull class]]) {
                     superNode.leaseInBalance = [dict[@"LeaseInBalance"] longLongValue];
@@ -420,16 +420,17 @@
                 if([dict[@"SubNode"] isKindOfClass:NSArray.class]) {
                     NSMutableArray *subNodeList = @[].mutableCopy;
                     for (NSDictionary *subNodeDict in dict[@"SubNode"]) {
-                        SubNode *node = [[SubNode alloc] init];
+                        LeaseNode *subNode = [[LeaseNode alloc] init];
                         if (![subNodeDict[@"id"] isKindOfClass:[NSNull class]]) {
-                            node.id = [subNodeDict[@"id"] intValue];
+                            subNode.id = [subNodeDict[@"id"] intValue];
                         }
-                        node.name = subNodeDict[@"name"];
-                        node.logo =subNodeDict[@"logo"] ;
-                        node.link = subNodeDict[@"link"];
-                        node.weight = subNodeDict[@"weight"];
+                        subNode.name = subNodeDict[@"name"];
+                        subNode.logo =subNodeDict[@"logo"] ;
+                        subNode.link = subNodeDict[@"link"];
+                        subNode.weight = subNodeDict[@"weight"];
+                        subNode.isSubNode = YES;
                         
-                        [subNodeList addObject:node];
+                        [subNodeList addObject:subNode];
                     }
                     superNode.subNodeList = subNodeList.copy;
                 }
@@ -438,9 +439,9 @@
             }
            
         }
-        callback(list.copy);
+        callback(YES, list.copy);
     } fail:^(id  _Nonnull info) {
-        callback(nil);
+        callback(NO, nil);
     }];
 }
 

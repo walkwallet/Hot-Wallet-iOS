@@ -11,7 +11,7 @@
 #import "Transaction.h"
 #import "Contract.h"
 #import "VsysToken.h"
-#import "SuperNode.h"
+#import "LeaseNode.h"
 
 @import Vsys;
 
@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)getCertifiedTokenList:(NSInteger)page callback: (void(^)(BOOL isSuc, NSArray<VsysToken *> *tokenArr))callback;
 
-+ (void)getLeaseNodeList:(void (^)(NSArray<SuperNode *> *))callback;
++ (void)getLeaseNodeList:(void (^)(BOOL isSuc, NSArray<LeaseNode *> *nodeList))callback;
 
 @end
 

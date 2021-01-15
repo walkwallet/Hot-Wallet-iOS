@@ -5,16 +5,11 @@
 //  Copyright © 2021 veetech. All rights reserved.
 //
 
-#import "SuperNode.h"
-
-
-@implementation SubNode
-@end
-
+#import "LeaseNode.h"
 
 @implementation TokenInfo
 @end
 
 
-@implementation SuperNode
+@implementation LeaseNode
 @end
