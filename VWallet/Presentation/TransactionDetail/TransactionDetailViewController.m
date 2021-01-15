@@ -65,92 +65,92 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
     
     NSMutableArray *showData = [NSMutableArray new];
     if (![NSString isNilOrEmpty:self.transaction.originTransaction.txId]) {
-        [showData addObject:@{@"title": VLocalize(@"transaction.detail.tx.id"), @"value": self.transaction.originTransaction.txId}];
+        [showData addObject:@{@"title": VLocalize(@"transaction.detail.tx.id"), @"value": self.transaction.originTransaction.txId, @"hiddenCopy":[NSNumber numberWithBool:NO]}];
     }
     if (oriTx.txType == VsysTxTypePayment) {
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.mine"), @"value" : self.transaction.ownerAddress?:@""}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.mine"), @"value" : self.transaction.ownerAddress?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         if ([oriTx.recipient isEqualToString: self.transaction.ownerAddress]) {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.sender"), @"value" : self.transaction.senderAddress?:@""}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.sender"), @"value" : self.transaction.senderAddress?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         } else {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.receive"), @"value" : oriTx.recipient?:@""}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.receive"), @"value" : oriTx.recipient?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         }
         if (self.transaction.originTransaction.txType != VsysTxTypeCancelLease || self.isDetailPage) {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : amountStr}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : amountStr, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
         }
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : [self.transaction TypeDesc]}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : [self.transaction TypeDesc], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
     }else if (oriTx.txType == VsysTxTypeLease) {
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.mine"), @"value" : self.transaction.ownerAddress?:@""}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.mine"), @"value" : self.transaction.ownerAddress?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         if ([oriTx.recipient isEqualToString: self.transaction.ownerAddress]) {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.lease.in.sender"), @"value" : self.transaction.senderAddress?:@""}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.lease.in.sender"), @"value" : self.transaction.senderAddress?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         } else {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.lease.out.receive"), @"value" : oriTx.recipient?:@""}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.lease.out.receive"), @"value" : oriTx.recipient?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         }
         if (self.transaction.originTransaction.txType != VsysTxTypeCancelLease || self.isDetailPage) {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : amountStr}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : amountStr, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
         }
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : [self.transaction TypeDesc]}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : [self.transaction TypeDesc], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
     }else if (oriTx.txType == VsysTxTypeCancelLease) {
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.mine"), @"value" : self.transaction.ownerAddress?:@""}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.mine"), @"value" : self.transaction.ownerAddress?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         if ([oriTx.recipient isEqualToString: self.transaction.ownerAddress]) {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.lease.in.sender"), @"value" : self.transaction.senderAddress?:@""}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.lease.in.sender"), @"value" : self.transaction.senderAddress?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         } else {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.lease.out.receive"), @"value" : oriTx.recipient?:@""}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.lease.out.receive"), @"value" : oriTx.recipient?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         }
         if (self.transaction.originTransaction.txType != VsysTxTypeCancelLease || self.isDetailPage) {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : amountStr}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : amountStr, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
         }
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : [self.transaction TypeDesc]}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : [self.transaction TypeDesc], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
     }else if (oriTx.txType == VsysTxTypeMining) {
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.mine"), @"value" : self.transaction.ownerAddress?:@""}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.mine"), @"value" : self.transaction.ownerAddress?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         if ([oriTx.recipient isEqualToString: self.transaction.ownerAddress]) {
             if (![NSString isNilOrEmpty:self.transaction.senderAddress]) {
-                [showData addObject:@{@"title" : VLocalize(@"transaction.detail.sender"), @"value" : self.transaction.senderAddress ? : @""}];
+                [showData addObject:@{@"title" : VLocalize(@"transaction.detail.sender"), @"value" : self.transaction.senderAddress ? : @"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
             }
         } else {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.receive"), @"value" : oriTx.recipient?:@""}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.receive"), @"value" : oriTx.recipient?:@"", @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         }
         if (self.transaction.originTransaction.txType != VsysTxTypeCancelLease || self.isDetailPage) {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : amountStr}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : amountStr, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
         }
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : [self.transaction TypeDesc]}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : [self.transaction TypeDesc], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
     }else if (oriTx.txType == VsysTxTypeContractExecute) {
         VsysToken *token = [TokenMgr.shareInstance getTokenByAddress:self.account.originAccount.address tokenId:VsysContractId2TokenId(oriTx.contractId, 0)];
         NSString *funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, oriTx.funcIdx);
         VsysContract *c = [VsysContract new];
         if (![NSString isNilOrEmpty:self.transaction.status]) {
-            [showData addObject:@{@"title": VLocalize(@"transaction.detail.status"), @"value": self.transaction.status}];
+            [showData addObject:@{@"title": VLocalize(@"transaction.detail.status"), @"value": self.transaction.status, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
         }
         if ([funcName isEqualToString:@"send"]) {
             [c decodeSend:oriTx.data];
-            [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0)}];
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.from"), @"value" : self.transaction.senderAddress}];
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.to"), @"value" : c.recipient}];
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.send.token")}];
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : [[NSString stringWithDecimal:[NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES] stringByAppendingString: [NSString stringWithFormat:@" %@", token.name]]}];
+            [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0), @"hiddenCopy":[NSNumber numberWithBool:NO]}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.from"), @"value" : self.transaction.senderAddress, @"hiddenCopy":[NSNumber numberWithBool:NO]}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.to"), @"value" : c.recipient, @"hiddenCopy":[NSNumber numberWithBool:NO]}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.send.token"), @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : [[NSString stringWithDecimal:[NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES] stringByAppendingString: [NSString stringWithFormat:@" %@", token.name]], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
         }else if ([funcName isEqualToString:@"issue"]) {
             [c decodeIssue:oriTx.data];
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.issue.token")}];
-            [showData addObject:@{@"title" : VLocalize(@"token.operate.note.issue"), @"value" : [NSString stringWithDecimal: [NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES]}];
-            [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0)}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.issue.token"), @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+            [showData addObject:@{@"title" : VLocalize(@"token.operate.note.issue"), @"value" : [NSString stringWithDecimal: [NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+            [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0), @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         }else if ([funcName isEqualToString:@"destroy"]) {
             [c decodeDestroy:oriTx.data];
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.burn.token")}];
-            [showData addObject:@{@"title":VLocalize(@"token.operate.note.burn"), @"value" : [NSString stringWithDecimal:[NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES]}];
-            [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0)}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.burn.token"), @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+            [showData addObject:@{@"title":VLocalize(@"token.operate.note.burn"), @"value" : [NSString stringWithDecimal:[NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+            [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0), @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         }else {
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : self.transaction.TypeDesc}];
-            [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0)}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : self.transaction.TypeDesc, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+            [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0), @"hiddenCopy":[NSNumber numberWithBool:NO]}];
         }
     }else if (oriTx.txType == VsysTxTypeContractRegister) {
         VsysContract *c = [VsysContract new];
         [c decodeRegister:oriTx.data];
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.create.token")}];
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.from"), @"value" : self.account.originAccount.address}];
-        [showData addObject:@{@"title": VLocalize(@"transaction.detail.desc"), @"value": oriTx.description}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.create.token"), @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.from"), @"value" : self.account.originAccount.address, @"hiddenCopy":[NSNumber numberWithBool:NO]}];
+        [showData addObject:@{@"title": VLocalize(@"transaction.detail.desc"), @"value": oriTx.description, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
     }
     
-    [showData addObject: @{@"title" : VLocalize(@"transaction.detail.fee"), @"value" : feeStr}];
-    [showData addObject: @{@"title" : VLocalize(@"transaction.detail.time"), @"value" : timeStr}];
+    [showData addObject: @{@"title" : VLocalize(@"transaction.detail.fee"), @"value" : feeStr, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+    [showData addObject: @{@"title" : VLocalize(@"transaction.detail.time"), @"value" : timeStr, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
     
     if (self.transaction.originTransaction.attachment) {
         NSString *str;
@@ -161,7 +161,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
         // sented transaction is base58 encode
             str = [[NSString alloc] initWithData:VsysBase58Decode(self.transaction.originTransaction.attachment) encoding:NSUTF8StringEncoding];
         }
-        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.desc"), @"value" :str}];
+        [showData addObject:@{@"title" : VLocalize(@"transaction.detail.desc"), @"value" :str, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
     }
 
     self.showData = showData.copy;
@@ -188,7 +188,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2) {
+    if (![self.showData[indexPath.row][@"hiddenCopy"] boolValue]) {
         UIPasteboard.generalPasteboard.string = self.showData[indexPath.row][@"value"];
         [self remindWithMessage:VLocalize(@"tip.copy.success")];
     }

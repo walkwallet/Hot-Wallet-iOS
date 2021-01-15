@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nfL-mq-0IY">
-                                <rect key="frame" x="0.0" y="20" width="375" height="563"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="583"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="pAL-zd-9K8" id="1Kt-Gy-c5k"/>
                                     <outlet property="delegate" destination="pAL-zd-9K8" id="fJe-pM-jEs"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugY-Yu-16z">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugY-Yu-16z">
                                 <rect key="frame" x="20" y="603" width="335" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="1H1-Qb-E3g"/>
@@ -51,6 +49,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="9JO-0B-aSk"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9JO-0B-aSk" firstAttribute="bottom" secondItem="ugY-Yu-16z" secondAttribute="bottom" constant="20" id="D28-cV-kb1"/>
@@ -61,7 +60,6 @@
                             <constraint firstItem="nfL-mq-0IY" firstAttribute="leading" secondItem="9JO-0B-aSk" secondAttribute="leading" id="xsL-vf-4eU"/>
                             <constraint firstItem="ugY-Yu-16z" firstAttribute="top" secondItem="nfL-mq-0IY" secondAttribute="bottom" constant="20" id="ysj-qp-hY2"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="9JO-0B-aSk"/>
                     </view>
                     <connections>
                         <outlet property="deleteBtn" destination="ugY-Yu-16z" id="T9A-q6-Bvz"/>
@@ -81,10 +79,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="HC8-2p-12U">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hb3-ea-hzA">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slU-SB-lSf">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="412"/>
@@ -213,8 +211,8 @@
                                                     <constraint firstItem="UVS-XD-7Wf" firstAttribute="top" secondItem="pal-4E-M5N" secondAttribute="bottom" constant="20" id="p7F-59-dvG"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RpL-1e-v7D" customClass="VThemeButton">
-                                                <rect key="frame" x="20" y="582" width="335" height="45"/>
+                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RpL-1e-v7D" customClass="VThemeButton">
+                                                <rect key="frame" x="20" y="602" width="335" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="Mxu-Ch-h0v"/>
                                                 </constraints>
@@ -252,6 +250,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="k4a-Ip-7G9"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="HC8-2p-12U" firstAttribute="top" secondItem="k4a-Ip-7G9" secondAttribute="top" id="9of-a9-H8e"/>
@@ -259,7 +258,6 @@
                             <constraint firstItem="k4a-Ip-7G9" firstAttribute="bottom" secondItem="HC8-2p-12U" secondAttribute="bottom" id="TjG-Qu-7S5"/>
                             <constraint firstItem="HC8-2p-12U" firstAttribute="leading" secondItem="k4a-Ip-7G9" secondAttribute="leading" id="zEq-Wy-Uji"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="k4a-Ip-7G9"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="rYw-Uf-ThV">
                         <barButtonItem key="rightBarButtonItem" image="ico_scan" id="LHN-F6-aiG">
@@ -283,6 +281,11 @@
             <point key="canvasLocation" x="61.600000000000001" y="-192.05397301349328"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="RpL-1e-v7D">
+            <size key="intrinsicContentSize" width="49" height="32"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ico_notice_big" width="64" height="64"/>
         <image name="ico_scan" width="20" height="20"/>

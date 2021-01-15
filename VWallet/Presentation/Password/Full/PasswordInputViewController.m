@@ -16,6 +16,7 @@
 #import "AppState.h"
 #import "VAlertViewController.h"
 #import "TouchIDTool.h"
+#import "UIViewController+Alert.h"
 
 @interface PasswordInputViewController ()
 
@@ -24,8 +25,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoImgViewTopLC;
 @property (weak, nonatomic) IBOutlet UILabel *pageTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pageSubtitleLabel;
+@property (weak, nonatomic) IBOutlet UIView *pwdBgView;
 
-@property (weak, nonatomic) IBOutlet UIView *inputView;
+//@property (weak, nonatomic) IBOutlet UIView *inputView;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
 @property (weak, nonatomic) IBOutlet UIButton *enterBtn;
 @property (weak, nonatomic) IBOutlet UIButton *touchIDBtn;
@@ -90,6 +92,7 @@
     WalletMgr.shareInstance.password = _pwdTextField.text;
     NSError *error = [WalletMgr.shareInstance loadWallet:_pwdTextField.text];
     if (!error) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:0] forKey:@"errorCount"];
         if (_resultBlock) {
             _resultBlock(YES);
         } else {
@@ -100,20 +103,38 @@
         if (_resultBlock) {
             _resultBlock(NO);
         }
-        VAlertViewController *pwdErrorAlert = [[VAlertViewController alloc] initWithTitle:VLocalize(@"tip.password.auth.err.title") secondTitle:nil contentView:nil cancelTitle:VLocalize(@"tip.password.auth.err.btn1.title") confirmTitle:VLocalize(@"tip.password.auth.err.btn2.title") cancel:^{
-            VAlertViewController *vc = [[VAlertViewController alloc] initWithTitle:VLocalize(@"tip.logout.title") secondTitle:VLocalize(@"tip.logout.detail") contentView:^(UIStackView * _Nonnull view) {
-                
-            } cancelTitle:VLocalize(@"cancel") confirmTitle:VLocalize(@"logout") cancel:^{
-                
+        
+        NSInteger errorCount = 1;
+        
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"errorCount"]) {
+            errorCount = [[[NSUserDefaults standardUserDefaults] objectForKey:@"errorCount"] integerValue];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:errorCount + 1] forKey:@"errorCount"];
+        }else{
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:errorCount] forKey:@"errorCount"];
+        }
+        
+        if (errorCount >= 5) {
+            VAlertViewController *pwdErrorAlert = [[VAlertViewController alloc] initWithTitle:VLocalize(@"tip.password.auth.err.title") secondTitle:nil contentView:nil cancelTitle:VLocalize(@"tip.password.auth.err.btn1.title") confirmTitle:VLocalize(@"tip.password.auth.err.btn2.title") cancel:^{
+                VAlertViewController *vc = [[VAlertViewController alloc] initWithTitle:VLocalize(@"tip.logout.title") secondTitle:VLocalize(@"tip.logout.detail") contentView:^(UIStackView * _Nonnull view) {
+
+                } cancelTitle:VLocalize(@"cancel") confirmTitle:VLocalize(@"logout") cancel:^{
+
+                } confirm:^{
+                    [WalletMgr.shareInstance logoutWallet];
+                    [WindowManager changeToRootViewController:VStoryboard.Generate.instantiateInitialViewController];
+                }];
+                [weakSelf presentViewController:vc animated:YES completion:nil];
             } confirm:^{
-                [WalletMgr.shareInstance logoutWallet];
-                [WindowManager changeToRootViewController:VStoryboard.Generate.instantiateInitialViewController];
+                [weakSelf.pwdTextField becomeFirstResponder];
             }];
-            [weakSelf presentViewController:vc animated:YES completion:nil];
-        } confirm:^{
-            [weakSelf.pwdTextField becomeFirstResponder];
-        }];
-        [self presentViewController:pwdErrorAlert animated:YES completion:nil];
+            [self presentViewController:pwdErrorAlert animated:YES completion:nil];
+        }else{
+            
+            [self alertWithTitle:VLocalize(@"tip.password.auth.err.title") message:nil confirmText:VLocalize(@"confirm") handler:^{
+                [weakSelf.pwdTextField becomeFirstResponder];
+            }];
+        }
+        
     }
 }
 
@@ -135,11 +156,11 @@
 #pragma mark - keyboard
 - (void)keyboardShow:(NSNotification *)notification {
     CGFloat keyboardMinY = CGRectGetMinY([notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue]);
-    CGFloat inputViewMaxY = CGRectGetMaxY([self.inputView convertRect:self.inputView.bounds toView:UIApplication.sharedApplication.keyWindow]);
+    CGFloat inputViewMaxY = CGRectGetMaxY([self.pwdBgView convertRect:self.pwdBgView.bounds toView:self.view]);
     // 100: distance between logo and top when keyboard hidden
     // 52: max distance between logo and top when keyboard show
     CGFloat offset = MAX((100 - 52), (inputViewMaxY + 20 - keyboardMinY));
-    
+
     NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     UIViewKeyframeAnimationOptions option = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] intValue];
     __weak typeof(self) weakSelf = self;
