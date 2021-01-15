@@ -423,6 +423,8 @@
 "token.operate.burn.amount" = "成功销毁";
 "token.transaction.register.success" = "创建 Token 成功";
 "token.transaction.send.success" = "执行合约成功";
+"token.operate.error.invalid.contract.type" = "无法添加Token，该合约不属于Token合约";
+"fail.add.token" = "添加Token失败";
 
 "supersede" = "取代";
 "issue" = "增发";

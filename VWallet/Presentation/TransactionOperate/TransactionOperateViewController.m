@@ -158,7 +158,11 @@
         }
         return !insufficientBalance;
     }else {
-        int64_t balance = self.account.availableBalance - VsysDefaultTxFee - self.amountTextField.text.doubleValue * VsysVSYS;
+        int64_t fee = VsysDefaultTxFee;
+        if (self.leaseNode && [self.leaseNode isSubNode]) {
+            fee += self.leaseNode.id;
+        }
+        int64_t balance = self.account.availableBalance - fee - self.amountTextField.text.doubleValue * VsysVSYS;
         BOOL insufficientBalance = balance < 0;
         if (insufficientBalance && self.insufficientBalanceLabelHeightLC.constant == 0) {
             self.insufficientBalanceLabelHeightLC.constant = 15;

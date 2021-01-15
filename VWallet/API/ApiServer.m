@@ -215,6 +215,7 @@
         Contract *contract = [Contract new];
         contract.contractId = response[@"contractId"];
         contract.transactionId = response[@"transactionId"];
+        contract.type = response[@"type"] ;
         contract.height = [response[@"height"] longLongValue];
         if ([response[@"info"] isKindOfClass:NSArray.class]) {
             NSMutableArray *list = @[].mutableCopy;

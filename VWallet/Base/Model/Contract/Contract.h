@@ -18,6 +18,7 @@
 @property (nonatomic, copy) NSString *transactionId;
 @property (nonatomic) int64_t height;
 @property (nonatomic, copy) NSArray<ContractInfoItem *> *info;
+@property (nonatomic, copy) NSString *type;
 @end
 
 @interface ContractContentTextual : NSObject

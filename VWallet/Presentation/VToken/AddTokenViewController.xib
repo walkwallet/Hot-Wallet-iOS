@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -98,7 +98,7 @@
                             <color key="textColor" red="0.96078431372549022" green="0.20784313725490194" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0N-wD-h0J" customClass="VThemeButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0N-wD-h0J" customClass="VThemeButton">
                             <rect key="frame" x="20" y="117.5" width="374" height="48"/>
                             <color key="backgroundColor" red="1" green="0.52941176469999995" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -142,6 +142,7 @@
                     <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="qX3-ee-Mlo" secondAttribute="trailing" id="Awj-k6-6Yc"/>
@@ -152,10 +153,23 @@
                 <constraint firstItem="T2g-kb-BTY" firstAttribute="top" secondItem="qX3-ee-Mlo" secondAttribute="bottom" constant="12" id="f2v-V2-ZCE"/>
                 <constraint firstItem="qX3-ee-Mlo" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="oAd-Xe-f3N"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="437.68115942028987" y="361.60714285714283"/>
         </view>
     </objects>
+    <designables>
+        <designable name="16C-qO-OPc">
+            <size key="intrinsicContentSize" width="86" height="15"/>
+        </designable>
+        <designable name="JAW-9h-bMU">
+            <size key="intrinsicContentSize" width="10" height="37.5"/>
+        </designable>
+        <designable name="RnO-3o-CfU">
+            <size key="intrinsicContentSize" width="71" height="14"/>
+        </designable>
+        <designable name="k0N-wD-h0J">
+            <size key="intrinsicContentSize" width="37" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ico_paste_small" width="12" height="12"/>
         <image name="ico_scan_small" width="12" height="12"/>

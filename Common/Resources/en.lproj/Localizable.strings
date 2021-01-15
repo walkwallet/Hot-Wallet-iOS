@@ -423,6 +423,8 @@
 "token.register.success.check.watch.list" = "You can check in your token watch list";
 "token.transaction.register.success" = "Create Token Success";
 "token.transaction.send.success" = "Execute Contract Success";
+"token.operate.error.invalid.contract.type" = "Unable to add Token, the contract does not belong to Token contract";
+"fail.add.token" = "Add Token failed";
 
 "supersede" = "Supersede";
 "issue" = "Issue";
