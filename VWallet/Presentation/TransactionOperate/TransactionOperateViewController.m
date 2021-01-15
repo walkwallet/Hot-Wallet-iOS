@@ -19,6 +19,7 @@
 #import "UITextView+Placeholder.h"
 #import "VColor.h"
 #import "VsysToken.h"
+#import "WalletMgr.h"
 
 @import SafariServices;
 
@@ -261,6 +262,12 @@
     NSString *address = dict[@"address"] ? : @"";
     NSInteger amount = dict[@"amount"] ? [dict[@"amount"] integerValue] : 0;
     NSString *invoice = dict[@"invoice"] ? : @"";
+    
+    if (![WalletMgr.shareInstance.network isEqualToString:VsysGetNetworkFromAddress(address)]) {
+        [self alertWithTitle:VLocalize(@"tip.monitor.address.add.network.err") confirmText:nil];
+        return ;
+    }
+    
     self.receiveAddressTextView.text = address;
     [self.receiveAddressTextView updatePlaceholderState];
     [self checkAddress];
