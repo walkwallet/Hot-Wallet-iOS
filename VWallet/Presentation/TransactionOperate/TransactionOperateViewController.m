@@ -20,6 +20,7 @@
 #import "VColor.h"
 #import "VsysToken.h"
 #import "WalletMgr.h"
+#import "LeaseNode.h"
 
 @import SafariServices;
 
@@ -78,6 +79,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeNotifi:) name:@"nodeId" object:nil];
     [self initView];
 }
 
@@ -207,7 +209,7 @@
         if (self.operateType == TransactionOperateTypeSendToken) {
             transaction.contractFuncName = VsysActionSend;
         }
-        [self chooseRentalAddress:transaction account:self.account];
+        [self chooseRentalAddress];
     }
 }
 
@@ -428,6 +430,12 @@
     [UIView animateKeyframesWithDuration:duration delay:0 options:option animations:^{
         weakSelf.scrollView.contentOffset = CGPointZero;
     } completion:nil];
+}
+
+- (void)nodeNotifi:(NSNotification *)notification{
+    LeaseNode *node = notification.userInfo[@"nodeID"];
+    self.receiveAddressTextView.editable = YES;
+    self.receiveAddressTextView.text = node.address;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

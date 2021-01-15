@@ -101,7 +101,7 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-- (void)chooseRentalAddress:(Transaction *)transaction account:(Account *)account {
+- (void)chooseRentalAddress{
     __weak typeof(self) weakSelf = self;
     
     AlertViewController *vc = [[AlertViewController alloc] initWithTitle:VLocalize(@"tip.transaction.node.title") confirmTitle:@"" configureContent:^(UIViewController * _Nonnull vc, UIStackView * _Nonnull parentView) {

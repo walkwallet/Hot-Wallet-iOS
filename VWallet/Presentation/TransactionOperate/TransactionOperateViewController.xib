@@ -447,6 +447,12 @@
         </view>
     </objects>
     <designables>
+        <designable name="5jo-T9-aT3">
+            <size key="intrinsicContentSize" width="10" height="37.5"/>
+        </designable>
+        <designable name="5od-Tr-whc">
+            <size key="intrinsicContentSize" width="10" height="37.5"/>
+        </designable>
         <designable name="7nz-LV-wqV">
             <size key="intrinsicContentSize" width="86" height="15"/>
         </designable>

@@ -34,8 +34,13 @@
 
 - (void)layoutSubviews{
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickId)];
-    [self.titleLabel addGestureRecognizer:tap];
-    self.titleLabel.userInteractionEnabled = true;
+    if ([VLocalize(@"transaction.detail.tx.id") isEqual:self.showInfo[@"title"]]) {
+        [self.titleLabel addGestureRecognizer:tap];
+        self.titleLabel.userInteractionEnabled = true;
+    }else{
+        self.titleLabel.userInteractionEnabled = false;
+    }
+    
 }
 
 - (void)clickId{
