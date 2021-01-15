@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NodesViewController : UIViewController
 
 @property (nonatomic,strong) void (^block)(void);
-
+- (instancetype)initWithNode:(NSArray *)nodeArr;
 @end
 
 NS_ASSUME_NONNULL_END
