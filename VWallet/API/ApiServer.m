@@ -394,7 +394,7 @@
                 superNode.capacity = dict[@"capacity"];
                 superNode.cycle = dict[@"cycle"];
                 superNode.url = dict[@"url"];
-                superNode.isSuperNode = dict[@"IsSuperNode"];
+                superNode.isSuperNode = [dict[@"IsSuperNode"] boolValue];
                 
                 if([dict[@"TokenData"] isKindOfClass:NSArray.class]) {
                     NSMutableArray *tokenInfoList = @[].mutableCopy;
