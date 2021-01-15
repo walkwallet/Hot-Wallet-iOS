@@ -60,6 +60,8 @@
 @property (nonatomic, assign) CGFloat keyboardMinY;
 @property (nonatomic, assign) UIViewKeyframeAnimationOptions keyboardOptions;
 
+@property (nonatomic, strong) LeaseNode *leaseNode;
+
 @end
 
 @implementation TransactionOperateViewController
@@ -327,7 +329,7 @@
             return;
         }
         [self alertWithTitle:VLocalize(@"tip.transaction.address.is.self") confirmText:nil handler:^{
-            [self createTransaction];
+            return;
         }];
         return;
     }
@@ -346,6 +348,9 @@
         case TransactionOperateTypeLease: {
             NSDecimalNumber *unity = [[NSDecimalNumber alloc] initWithLong:VsysVSYS];
             tx = VsysNewLeaseTransaction(self.receiveAddressTextView.text, [[amount decimalNumberByMultiplyingBy:unity] longLongValue]);
+            if(self.leaseNode && [self.leaseNode isSubNode]) {
+                tx.fee = VsysDefaultTxFee + self.leaseNode.id;
+            }
         } break;
         case TransactionOperateTypeSendToken: {
             NSDecimalNumber *unity = [[NSDecimalNumber alloc] initWithLongLong:self.token.unity];
@@ -434,17 +439,19 @@
 
 - (void)nodeNotifi:(NSNotification *)notification{
     LeaseNode *node = notification.userInfo[@"LeaseNode"];
+    self.leaseNode = node;
     self.receiveAddressTextView.editable = YES;
     self.receiveAddressTextView.text = node.address;
+    
     NSString *feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:VsysDefaultTxFee * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
-    if([node isSubNode]) {
+    if([self.leaseNode isSubNode]) {
         feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:(VsysDefaultTxFee+node.id) * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
     }
+    
     NSMutableAttributedString *feeMas = [[NSMutableAttributedString alloc] initWithString:[VLocalize(@"account.transaction.fee") stringByAppendingString:@" "]];
     [feeMas appendAttributedString:[[NSAttributedString alloc] initWithString:[feeStr stringByAppendingString:@" VSYS"] attributes:@{NSForegroundColorAttributeName : VColor.textSecondDeepenColor}]];
     self.transactionFeeLabel.attributedText = feeMas;
-    
-    
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
