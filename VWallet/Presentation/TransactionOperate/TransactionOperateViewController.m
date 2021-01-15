@@ -83,6 +83,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeNotifi:) name:@"nodeId" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeArrSetNotifi:) name:@"nodeArrSet" object:nil];
+    
     self.nodes = [NSMutableArray array];
     [self fetchNodes];
     [self initView];
@@ -441,9 +443,6 @@
 
 - (void)nodeNotifi:(NSNotification *)notification{
     LeaseNode *node = notification.userInfo[@"LeaseNode"];
-    if (self.nodes.count <= 0) {
-        self.nodes = [notification.userInfo[@"nodeArr"] mutableCopy];
-    }
     [self.receiveAddressTextView updatePlaceholderState];
     self.receiveAddressTextView.text = node.address;
     NSString *feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:VsysDefaultTxFee * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
@@ -453,8 +452,12 @@
     NSMutableAttributedString *feeMas = [[NSMutableAttributedString alloc] initWithString:[VLocalize(@"account.transaction.fee") stringByAppendingString:@" "]];
     [feeMas appendAttributedString:[[NSAttributedString alloc] initWithString:[feeStr stringByAppendingString:@" VSYS"] attributes:@{NSForegroundColorAttributeName : VColor.textSecondDeepenColor}]];
     self.transactionFeeLabel.attributedText = feeMas;
+    [self.receiveAddressTextView updatePlaceholderState];
     
-    
+}
+
+- (void)nodeArrSetNotifi:(NSNotification *)notification{
+    self.nodes = [notification.userInfo[@"nodeArr"] mutableCopy];
 }
 
 - (void)fetchNodes {

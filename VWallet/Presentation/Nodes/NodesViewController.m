@@ -75,7 +75,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
                         [weakSelf.nodes addObject:subNode];
                     }
                 }
-                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeArrSet" object:nil userInfo:@{@"nodeArr":self.nodes}];
                 weakSelf.showData = showData.copy;
                 [weakSelf.tableView reloadData];
             }
@@ -113,7 +113,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeId" object:nil userInfo:@{@"LeaseNode":self.nodes[indexPath.row],@"nodeArr":self.nodes}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeId" object:nil userInfo:@{@"LeaseNode":self.nodes[indexPath.row]}];
     if(self.block) {
         self.block();
     }
