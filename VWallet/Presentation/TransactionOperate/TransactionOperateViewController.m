@@ -425,9 +425,18 @@
 }
 
 - (void)nodeNotifi:(NSNotification *)notification{
-    LeaseNode *node = notification.userInfo[@"nodeID"];
+    LeaseNode *node = notification.userInfo[@"LeaseNode"];
     self.receiveAddressTextView.editable = YES;
     self.receiveAddressTextView.text = node.address;
+    NSString *feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:VsysDefaultTxFee * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
+    if([node isSubNode]) {
+        feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:(VsysDefaultTxFee+node.id) * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
+    }
+    NSMutableAttributedString *feeMas = [[NSMutableAttributedString alloc] initWithString:[VLocalize(@"account.transaction.fee") stringByAppendingString:@" "]];
+    [feeMas appendAttributedString:[[NSAttributedString alloc] initWithString:[feeStr stringByAppendingString:@" VSYS"] attributes:@{NSForegroundColorAttributeName : VColor.textSecondDeepenColor}]];
+    self.transactionFeeLabel.attributedText = feeMas;
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

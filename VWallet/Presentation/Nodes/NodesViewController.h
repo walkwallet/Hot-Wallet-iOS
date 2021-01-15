@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NodesViewController : UIViewController
 
+@property (nonatomic,strong) void (^block)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

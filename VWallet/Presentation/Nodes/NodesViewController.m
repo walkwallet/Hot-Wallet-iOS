@@ -18,6 +18,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 @interface NodesViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) NSMutableArray<LeaseNode *> *nodes;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *showData;
@@ -35,6 +36,11 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
     self.navigationItem.title = VLocalize(@"tip.transaction.node.title");
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
+    [self createData];
+}
+
+- (void)createData{
+    self.nodes = [NSMutableArray array];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,10 +57,11 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
                 if(![superNode isSuperNode]) {
                     continue;
                 }
-                
+                [weakSelf.nodes addObject:superNode];
                 [showData addObject:@{@"title" : [NSString stringWithFormat:@"%@ (%@)", superNode.name, [superNode.address explicitCount:12 maxAsteriskCount:6]], @"value" : @"SuperNode", @"hiddenCopy":[NSNumber numberWithBool:YES]}];
                 for (LeaseNode *subNode in superNode.subNodeList) {
                     [showData addObject:@{@"title" : [NSString stringWithFormat:@"%@ (%@)", superNode.name, [superNode.address explicitCount:12 maxAsteriskCount:6]], @"value" : [NSString stringWithFormat:@"SubNode: %@", subNode.name], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+                    [weakSelf.nodes addObject:subNode];
                 }
             }
             weakSelf.showData = showData.copy;
@@ -77,9 +84,11 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeId" object:nil userInfo:@{@"LeaseNode":self.showData[indexPath.row]}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeId" object:nil userInfo:@{@"LeaseNode":self.nodes[indexPath.row]}];
+    if(self.block) {
+        self.block();
+    }
 }
-
 
 @end
 
