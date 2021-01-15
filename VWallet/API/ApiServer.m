@@ -12,6 +12,7 @@
 #import "WalletMgr.h"
 
 #define VApi(path) [ServerConfig.ApiHost stringByAppendingString: path]
+#define RateApi(path) [ServerConfig.RateHost stringByAppendingString: path]
 
 @implementation ApiServer
 
@@ -364,6 +365,82 @@
         }
     } fail:^(id  _Nonnull info) {
         callback(NO, nil);
+    }];
+}
+
++ (void)getLeaseNodeList:(void (^)(NSArray<SuperNode *> *))callback {
+    [AppServer Get:RateApi(ApiGetRateLeaseNodeList) params:@{} success:^(NSDictionary * _Nonnull response) {
+        NSMutableArray *list = @[].mutableCopy;
+        if([response[@"data"] isKindOfClass:NSArray.class]) {
+            for (NSDictionary *dict in response[@"data"]) {
+                SuperNode *superNode = [[SuperNode alloc] init];
+                superNode.address = dict[@"Address"];
+                if (![dict[@"LeaseInBalance"] isKindOfClass:[NSNull class]]) {
+                    superNode.leaseInBalance = [dict[@"LeaseInBalance"] longLongValue];
+                }
+                if (![dict[@"DailyEfficiency"] isKindOfClass:[NSNull class]]) {
+                    superNode.dailyEfficiency = [dict[@"DailyEfficiency"] longLongValue];
+                }
+                if (![dict[@"MonthlyEfficiency"] isKindOfClass:[NSNull class]]) {
+                    superNode.dailyEfficiency = [dict[@"MonthlyEfficiency"] longLongValue];
+                }
+                if (![dict[@"fee"] isKindOfClass:[NSNull class]]) {
+                    superNode.fee = [dict[@"fee"] doubleValue];
+                }
+                superNode.logo = dict[@"logo"];
+                superNode.name = dict[@"name"];
+                superNode.voteAddress = dict[@"vote_address"];
+                superNode.location = dict[@"location"];
+                superNode.capacity = dict[@"capacity"];
+                superNode.cycle = dict[@"cycle"];
+                superNode.url = dict[@"url"];
+                superNode.isSuperNode = dict[@"IsSuperNode"];
+                
+                if([dict[@"TokenData"] isKindOfClass:NSArray.class]) {
+                    NSMutableArray *tokenInfoList = @[].mutableCopy;
+                    for (NSDictionary *tokenDict in dict[@"TokenData"]) {
+                        TokenInfo *tokenInfo = [[TokenInfo alloc] init];
+                        tokenInfo.name = tokenDict[@"name"];
+                        tokenInfo.logo = tokenDict[@"logo"];
+                        if (![tokenDict[@"mint_amount"] isKindOfClass:[NSNull class]]) {
+                            tokenInfo.mintAmount = [tokenDict[@"mint_amount"] longLongValue];
+                        }
+                        if (![tokenDict[@"mint_day"] isKindOfClass:[NSNull class]]) {
+                            tokenInfo.mintDay = [tokenDict[@"mint_day"] longLongValue];
+                        }
+                        tokenInfo.returnRate = tokenDict[@"return_rate"];
+                        tokenInfo.cycle = tokenDict[@"TokenCycle"];
+                        tokenInfo.fee = tokenDict[@"TokenFee"];
+                        
+                        [tokenInfoList addObject: tokenInfo];
+                    }
+                    superNode.tokenInfoList = tokenInfoList.copy;
+                }
+                
+                if([dict[@"SubNode"] isKindOfClass:NSArray.class]) {
+                    NSMutableArray *subNodeList = @[].mutableCopy;
+                    for (NSDictionary *subNodeDict in dict[@"SubNode"]) {
+                        SubNode *node = [[SubNode alloc] init];
+                        if (![subNodeDict[@"id"] isKindOfClass:[NSNull class]]) {
+                            node.id = [subNodeDict[@"id"] intValue];
+                        }
+                        node.name = subNodeDict[@"name"];
+                        node.logo =subNodeDict[@"logo"] ;
+                        node.link = subNodeDict[@"link"];
+                        node.weight = subNodeDict[@"weight"];
+                        
+                        [subNodeList addObject:node];
+                    }
+                    superNode.subNodeList = subNodeList.copy;
+                }
+                
+                [list addObject: superNode];
+            }
+           
+        }
+        callback(list.copy);
+    } fail:^(id  _Nonnull info) {
+        callback(nil);
     }];
 }
 

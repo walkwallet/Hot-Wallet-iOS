@@ -18,6 +18,9 @@ static NSString *const MainnetExplorerHost = @"https://explorer.v.systems";
 
 static NSString *const TestnetExplorerHost = @"https://testexplorer.v.systems";
 
+static NSString *const MainnetRateHost = @"https://vsysrate.com";
+
+static NSString *const TestnetRateHost = @"http://test-rate.virtualeconomytech.com";
 
 @implementation ServerConfig
 
@@ -34,6 +37,14 @@ static NSString *const TestnetExplorerHost = @"https://testexplorer.v.systems";
         return MainnetExplorerHost;
     }else {
         return TestnetExplorerHost;
+    }
+}
+
++ (NSString *)RateHost {
+    if ([WalletMgr.shareInstance.network isEqualToString:VsysNetworkMainnet]) {
+        return MainnetRateHost;
+    } else {
+        return TestnetRateHost;
     }
 }
 
