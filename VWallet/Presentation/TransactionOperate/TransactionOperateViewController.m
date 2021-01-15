@@ -201,7 +201,7 @@
     if (textView == self.receiveAddressTextView && self.operateType == TransactionOperateTypeLease) {
         textView.editable = NO;
         [textView resignFirstResponder];
-        [self chooseRentalAddress];
+        [self chooseRentalAddress:@[]];
     }
 }
 
