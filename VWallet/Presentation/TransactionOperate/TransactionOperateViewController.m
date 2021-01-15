@@ -31,7 +31,6 @@
 @property (nonatomic, assign) TransactionOperateType operateType;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (weak, nonatomic) IBOutlet UILabel *descLabel;
 @property (weak, nonatomic) IBOutlet UITextField *amountTextField;
 @property (weak, nonatomic) IBOutlet UILabel *availableBalanceLabel;
@@ -202,13 +201,6 @@
     if (textView == self.receiveAddressTextView && self.operateType == TransactionOperateTypeLease) {
         textView.editable = NO;
         [textView resignFirstResponder];
-        Transaction *transaction = [[Transaction alloc] init];
-        transaction.senderAddress = self.account.originAccount.address;
-        transaction.ownerAddress = self.account.originAccount.address;
-        transaction.ownerPublicKey = self.account.originAccount.publicKey;
-        if (self.operateType == TransactionOperateTypeSendToken) {
-            transaction.contractFuncName = VsysActionSend;
-        }
         [self chooseRentalAddress];
     }
 }
