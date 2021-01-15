@@ -98,6 +98,7 @@ static NSInteger const TransactionPageSize = 100;
 
 - (void)loadCertifiedTokenInfo {
     NSArray<VsysToken *> *watchedList = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
+    self.watchingTokenArray = watchedList;
     for (VsysToken *one in watchedList) {
         NSInteger index = [watchedList indexOfObject:one];
         __weak typeof(self) weakSelf = self;
