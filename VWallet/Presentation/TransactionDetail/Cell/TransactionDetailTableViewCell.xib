@@ -19,7 +19,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6d8-6y-9ed">
                         <rect key="frame" x="20" y="0.0" width="335" height="100"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9W-aR-Qna" customClass="VThemeLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dsa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9W-aR-Qna" customClass="VThemeLabel">
                                 <rect key="frame" x="0.0" y="14" width="335" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="tOh-Ks-5EV"/>
@@ -29,15 +29,20 @@
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="colorLevel">
-                                        <integer key="value" value="1"/>
+                                        <integer key="value" value="0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0W-MX-Sj4" customClass="VThemeLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can add 1-10 addresses at a time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0W-MX-Sj4" customClass="VThemeLabel">
                                 <rect key="frame" x="0.0" y="38" width="297" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="colorLevel">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Boi-Ls-K0t" customClass="VSeparatorLine">
                                 <rect key="frame" x="0.0" y="99" width="335" height="1"/>
@@ -84,14 +89,16 @@
                 <outlet property="titleLabel" destination="p9W-aR-Qna" id="BqD-rS-ZLR"/>
                 <outlet property="valueLabel" destination="f0W-MX-Sj4" id="M7X-Y3-3PT"/>
             </connections>
-            <point key="canvasLocation" x="138" y="154"/>
+            <point key="canvasLocation" x="136.80000000000001" y="153.82308845577214"/>
         </tableViewCell>
     </objects>
     <designables>
         <designable name="f0W-MX-Sj4">
-            <size key="intrinsicContentSize" width="6.5" height="17"/>
+            <size key="intrinsicContentSize" width="241" height="17"/>
         </designable>
-        <designable name="p9W-aR-Qna"/>
+        <designable name="p9W-aR-Qna">
+            <size key="intrinsicContentSize" width="23.5" height="17"/>
+        </designable>
     </designables>
     <resources>
         <image name="ico_copy_grey" width="24" height="24"/>

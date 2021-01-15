@@ -321,6 +321,9 @@
 "tip.password.auth.err.btn1.title" = "註銷錢包";
 "tip.password.auth.err.btn2.title" = "重新輸入";
 
+// ---- Transaction Node ----
+"tip.transaction.node.title" = "選擇節點";
+
 // ---- monitor address add ----
 "tip.monitor.address.add.title1" = "掃描二維碼";
 "tip.monitor.address.add.title2" = "填寫地址和公鑰";

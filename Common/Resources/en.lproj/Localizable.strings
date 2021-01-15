@@ -321,6 +321,9 @@
 "tip.password.auth.err.btn1.title" = "Logout Wallet";
 "tip.password.auth.err.btn2.title" = "ReInput";
 
+// ---- Transaction Node ----
+"tip.transaction.node.title" = "Choose Node";
+
 // ---- monitor address add ----
 "tip.monitor.address.add.title1" = "Scan QR code";
 "tip.monitor.address.add.title2" = "Address&Public key";

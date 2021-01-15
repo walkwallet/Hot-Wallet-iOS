@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +39,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hkt-Ri-2i6" customClass="VThemeButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hkt-Ri-2i6" customClass="VThemeButton">
                     <rect key="frame" x="20" y="599" width="335" height="48"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="0sI-RM-F3e"/>
@@ -59,7 +57,7 @@
                     </connections>
                 </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="8of-5F-NT6">
-                    <rect key="frame" x="0.0" y="20" width="375" height="571"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eel-ZE-kTB">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="460"/>
@@ -81,7 +79,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjZ-AQ-pDA" customClass="VThemeButton">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjZ-AQ-pDA" customClass="VThemeButton">
                                                     <rect key="frame" x="282" y="0.0" width="53" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <inset key="contentEdgeInsets" minX="14" minY="0.0" maxX="14" maxY="0.0"/>
@@ -121,7 +119,6 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="Ta4-p6-wY7"/>
                                             </constraints>
-                                            <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                                             <connections>
@@ -435,6 +432,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="8of-5F-NT6" secondAttribute="trailing" id="99A-RA-Lhw"/>
@@ -445,10 +443,47 @@
                 <constraint firstItem="Hkt-Ri-2i6" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="mhq-Fe-uLl"/>
                 <constraint firstItem="Hkt-Ri-2i6" firstAttribute="top" secondItem="8of-5F-NT6" secondAttribute="bottom" constant="8" id="rGD-Np-FrE"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="156" y="48.125937031484263"/>
         </view>
     </objects>
+    <designables>
+        <designable name="7nz-LV-wqV">
+            <size key="intrinsicContentSize" width="86" height="15"/>
+        </designable>
+        <designable name="86l-J9-cn7">
+            <size key="intrinsicContentSize" width="71" height="14"/>
+        </designable>
+        <designable name="Ghc-QE-BSQ">
+            <size key="intrinsicContentSize" width="71" height="14"/>
+        </designable>
+        <designable name="Hkt-Ri-2i6">
+            <size key="intrinsicContentSize" width="66" height="32"/>
+        </designable>
+        <designable name="MEu-De-Xph">
+            <size key="intrinsicContentSize" width="151.5" height="16"/>
+        </designable>
+        <designable name="Qp5-4i-qMB">
+            <size key="intrinsicContentSize" width="207.5" height="16"/>
+        </designable>
+        <designable name="Tvj-yQ-zJk">
+            <size key="intrinsicContentSize" width="97.5" height="18"/>
+        </designable>
+        <designable name="VEj-BW-etO">
+            <size key="intrinsicContentSize" width="82.5" height="49.5"/>
+        </designable>
+        <designable name="hvR-pA-wzn">
+            <size key="intrinsicContentSize" width="71" height="14"/>
+        </designable>
+        <designable name="iMv-xD-nP9">
+            <size key="intrinsicContentSize" width="65.5" height="18"/>
+        </designable>
+        <designable name="rjZ-AQ-pDA">
+            <size key="intrinsicContentSize" width="53" height="14"/>
+        </designable>
+        <designable name="tvd-xh-9x0">
+            <size key="intrinsicContentSize" width="20.5" height="18"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ico_paste_small" width="12" height="12"/>
         <image name="ico_scan_small" width="12" height="12"/>

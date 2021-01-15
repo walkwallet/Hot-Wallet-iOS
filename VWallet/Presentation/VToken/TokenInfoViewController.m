@@ -64,14 +64,14 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 - (void)refereshTable {
     NSArray *showData = @[
-                                 @{@"title":VLocalize(@"token.info.id.token"), @"value":[self handleStringValue:self.token.tokenId]},
-                                 @{@"title":VLocalize(@"token.info.id.contract"), @"value":[self handleStringValue:self.token.contractId]},
-                                 @{@"title":VLocalize(@"token.info.issuer"), @"value":[self handleStringValue:self.token.issuer]},
-                                 @{@"title":VLocalize(@"token.info.maker"), @"value":[self handleStringValue:self.token.maker]},
-                                 @{@"title":VLocalize(@"token.info.supply.max"), @"value":[NSString stringWithDecimal:[NSString getAccurateDouble:self.token.max unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity] minFractionDigits:2 trimTrailing:YES]},
-                                 @{@"title":VLocalize(@"token.info.supply.current"), @"value":[NSString stringWithDecimal:[NSString getAccurateDouble:self.token.total unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity] minFractionDigits:2 trimTrailing:YES]},
-                                 @{@"title":VLocalize(@"token.info.unity"), @"value":[NSString stringWithFormat:@"%lld", self.token.unity]},
-                                 @{@"title":VLocalize(@"token.info.description"), @"value":[self handleStringValue:self.token.desc]},
+                                 @{@"title":VLocalize(@"token.info.id.token"), @"value":[self handleStringValue:self.token.tokenId], @"hiddenCopy":[NSNumber numberWithBool:NO]},
+                                 @{@"title":VLocalize(@"token.info.id.contract"), @"value":[self handleStringValue:self.token.contractId], @"hiddenCopy":[NSNumber numberWithBool:NO]},
+                                 @{@"title":VLocalize(@"token.info.issuer"), @"value":[self handleStringValue:self.token.issuer], @"hiddenCopy":[NSNumber numberWithBool:NO]},
+                                 @{@"title":VLocalize(@"token.info.maker"), @"value":[self handleStringValue:self.token.maker], @"hiddenCopy":[NSNumber numberWithBool:NO]},
+                                 @{@"title":VLocalize(@"token.info.supply.max"), @"value":[NSString stringWithDecimal:[NSString getAccurateDouble:self.token.max unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity] minFractionDigits:2 trimTrailing:YES], @"hiddenCopy":[NSNumber numberWithBool:YES]},
+                                 @{@"title":VLocalize(@"token.info.supply.current"), @"value":[NSString stringWithDecimal:[NSString getAccurateDouble:self.token.total unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity] minFractionDigits:2 trimTrailing:YES], @"hiddenCopy":[NSNumber numberWithBool:YES]},
+                                 @{@"title":VLocalize(@"token.info.unity"), @"value":[NSString stringWithFormat:@"%lld", self.token.unity], @"hiddenCopy":[NSNumber numberWithBool:YES]},
+                                 @{@"title":VLocalize(@"token.info.description"), @"value":[self handleStringValue:self.token.desc], @"hiddenCopy":[NSNumber numberWithBool:YES]},
                                  ];
     self.showData = showData.copy;
     [self.tableView reloadData];
@@ -90,7 +90,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2) {
+    if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3) {
         UIPasteboard.generalPasteboard.string = self.showData[indexPath.row][@"value"];
         [self remindWithMessage:VLocalize(@"tip.copy.success")];
     }

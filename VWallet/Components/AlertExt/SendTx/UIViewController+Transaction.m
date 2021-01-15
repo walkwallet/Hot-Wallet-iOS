@@ -100,6 +100,26 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
+- (void)chooseRentalAddress:(Transaction *)transaction account:(Account *)account {
+    __weak typeof(self) weakSelf = self;
+    
+    AlertViewController *vc = [[AlertViewController alloc] initWithTitle:VLocalize(@"tip.transaction.node.title") confirmTitle:@"" configureContent:^(UIViewController * _Nonnull vc, UIStackView * _Nonnull parentView) {
+        TransactionDetailViewController *detailVC = [[TransactionDetailViewController alloc] initWithTransaction:transaction account:account];
+        [vc addChildViewController:detailVC];
+        [parentView addArrangedSubview:detailVC.view];
+        CGFloat maxHeight = CGRectGetHeight(UIScreen.mainScreen.bounds) * 0.8 - 104;
+        [detailVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(450 > maxHeight ? maxHeight : 450);
+        }];
+    } cancel:^(UIViewController * _Nonnull vc) {
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    } confirm:^(UIViewController * _Nonnull vc) {
+        
+    } back:NO];
+    AlertNavController *nav = [[AlertNavController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
 - (void)showSuccessTx: (Transaction *)transaction {
     __weak typeof(self) weakSelf = self;
     VsysTransaction *tx = transaction.originTransaction;

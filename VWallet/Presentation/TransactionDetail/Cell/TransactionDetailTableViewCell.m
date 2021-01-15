@@ -26,7 +26,7 @@
     if ([VLocalize(@"transaction.detail.tx.id") isEqual:showInfo[@"title"]]) {
         _titleLabel.textColor = [UIColor colorWithHex:0x5E5CB7];
     }else{
-        _titleLabel.textColor = [UIColor colorWithHex:0x36363D];
+        _titleLabel.textColor = [UIColor colorWithHex:0x939399];
     }
     _valueLabel.text = showInfo[@"value"];
     _tagCopyImageView.hidden = [showInfo[@"hiddenCopy"] boolValue];

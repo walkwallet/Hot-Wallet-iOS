@@ -321,6 +321,9 @@
 "tip.password.auth.err.btn1.title"  = "로그아웃";
 "tip.password.auth.err.btn2.title"  = "다시 입력";
 
+// ---- Transaction Node ----
+"tip.transaction.node.title" = "노드 선택";
+
 // ---- monitor address add ----
 "tip.monitor.address.add.title1"  = "QR 코드 인식";
 "tip.monitor.address.add.title2"  = "주소 &#038; 퍼블릭 키";

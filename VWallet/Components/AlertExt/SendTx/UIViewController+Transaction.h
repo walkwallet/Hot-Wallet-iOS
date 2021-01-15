@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIViewController (Transaction)
 
 - (void)beginTransactionConfirmWithTransaction:(Transaction *)transaction account:(Account *)account;
-
+- (void)chooseRentalAddress:(Transaction *)transaction account:(Account *)account;
 @end
 
 NS_ASSUME_NONNULL_END

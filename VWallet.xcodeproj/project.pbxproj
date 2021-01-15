@@ -525,7 +525,6 @@
 		C365346425AC48C100537A37 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C37DCD8225B0352900318BF0 /* SuperNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuperNode.m; sourceTree = "<group>"; };
 		C37DCD8625B0353900318BF0 /* SuperNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuperNode.h; sourceTree = "<group>"; };
-		C9E160475A58216B5DC517DD /* Pods-VeeWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeeWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-VeeWallet/Pods-VeeWallet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -533,8 +532,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAAC8FCA25AFEA5400505382 /* libPods-VWallet.a in Frameworks */,
-				EAAC8FCB25AFEA8900505382 /* Vsys.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1848,7 +1845,6 @@
 		5F7E044322B7A51633DBDE8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EAAC8FC925AFEA5400505382 /* libPods-VWallet.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1977,6 +1973,7 @@
 				TargetAttributes = {
 					4023E12321AE1FAF00E18D5D = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1210;
 					};
 				};
 			};
@@ -2433,6 +2430,7 @@
 			baseConfigurationReference = B99A01A40F53D8E0B803D481 /* Pods-VWallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
@@ -2466,6 +2464,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = systems.vsys.wallet.hot.toguw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2475,6 +2475,7 @@
 			baseConfigurationReference = 20398EE6FDC06B493FA9EE1F /* Pods-VWallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
@@ -2496,6 +2497,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = systems.vsys.wallet.hot.toguw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
