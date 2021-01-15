@@ -18,20 +18,13 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 @interface NodesViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) NSArray<LeaseNode *> *nodes;
+@property (nonatomic, strong) NSMutableArray<LeaseNode *> *nodes;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *showData;
 @end
 
 @implementation NodesViewController
-
-- (instancetype)initWithNode:(NSArray *)nodeArr {
-    if (self = [super init]) {
-        self.nodes = nodeArr;
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,21 +49,25 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 }
 
 - (void)fetchNodes {
-
-    NSMutableArray *showData = [NSMutableArray new];
-    for (LeaseNode *superNode in self.nodes) {
-        if(![superNode isSuperNode]) {
-            continue;
-        }
-        [showData addObject:@{@"title" : [NSString stringWithFormat:@"%@ (%@)", superNode.name, [superNode.address explicitCount:12 maxAsteriskCount:6]], @"value" : @"SuperNode", @"hiddenCopy":[NSNumber numberWithBool:YES]}];
-        
-        for (LeaseNode *subNode in superNode.subNodeList) {
-            
-            [showData addObject:@{@"title" : [NSString stringWithFormat:@"%@ (%@)", superNode.name, [superNode.address explicitCount:12 maxAsteriskCount:6]], @"value" : [NSString stringWithFormat:@"SubNode: %@", subNode.name], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+    __weak typeof (self) weakSelf = self;
+    [ApiServer getLeaseNodeList:^(BOOL isSuc, NSArray<LeaseNode *> * _Nonnull nodeList) {
+        if(isSuc) {
+            NSMutableArray *showData = [NSMutableArray new];
+            for (LeaseNode *superNode in nodeList) {
+                if(![superNode isSuperNode]) {
+                    continue;
+                }
+                [weakSelf.nodes addObject:superNode];
+                [showData addObject:@{@"title" : [NSString stringWithFormat:@"%@ (%@)", superNode.name, [superNode.address explicitCount:12 maxAsteriskCount:6]], @"value" : @"SuperNode", @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+                for (LeaseNode *subNode in superNode.subNodeList) {
+                    [showData addObject:@{@"title" : [NSString stringWithFormat:@"%@ (%@)", superNode.name, [superNode.address explicitCount:12 maxAsteriskCount:6]], @"value" : [NSString stringWithFormat:@"SubNode: %@", subNode.name], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+                    [weakSelf.nodes addObject:subNode];
+                }
             }
+            weakSelf.showData = showData.copy;
+            [weakSelf.tableView reloadData];
         }
-    self.showData = showData.copy;
-    [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - UITableView DataSource
@@ -87,7 +84,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeId" object:nil userInfo:@{@"nodeIndex":[NSNumber numberWithInteger:indexPath.row]}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"nodeId" object:nil userInfo:@{@"LeaseNode":self.nodes[indexPath.row]}];
     if(self.block) {
         self.block();
     }
