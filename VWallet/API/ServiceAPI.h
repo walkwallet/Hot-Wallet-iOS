@@ -166,4 +166,6 @@ static NSString *const ApiPostExplorerTokenDetail = @"/api/getTokenDetail";
 
 static NSString *const ApiPostExplorerCertifiedList = @"/api/getTokenList";
 
+static NSString *const ApiGetRateLeaseNodeList = @"/api/superNodesDetail";
+
 #endif /* ServiceAPI_h */

@@ -28,4 +28,6 @@
 @property (nonatomic) BOOL splitable;
 @property (nonatomic) BOOL watched;
 
+- (BOOL) isNFTToken;
+
 @end

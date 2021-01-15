@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)ExplorerHost;
 
++ (NSString *)RateHost;
+
 @end
 
 NS_ASSUME_NONNULL_END

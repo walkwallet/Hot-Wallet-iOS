@@ -77,10 +77,12 @@
 
 - (NSData* _Nullable)buildDestroyData;
 - (NSData* _Nullable)buildIssueData;
+- (NSData* _Nullable)buildNFTSendData;
 - (NSData* _Nullable)buildRegisterData;
 - (NSData* _Nullable)buildSendData;
 - (void)decodeDestroy:(NSData* _Nullable)data;
 - (void)decodeIssue:(NSData* _Nullable)data;
+- (void)decodeNFTSend:(NSData* _Nullable)data;
 - (void)decodeRegister:(NSData* _Nullable)data;
 - (void)decodeSend:(NSData* _Nullable)data;
 - (void)decodeTexture;
@@ -397,6 +399,8 @@ FOUNDATION_EXPORT NSString* _Nonnull VsysGenerateSeed(void);
 
 FOUNDATION_EXPORT VsysAccount* _Nullable VsysGetAccountFromPrivateKey(NSString* _Nullable privateKey, NSString* _Nullable network);
 
+FOUNDATION_EXPORT NSString* _Nonnull VsysGetAddressNetwork(NSString* _Nullable address);
+
 FOUNDATION_EXPORT long VsysGetAttachmentLength(NSString* _Nullable in_);
 
 FOUNDATION_EXPORT VsysQRCodeContentItem* _Nullable VsysGetContentItem(NSString* _Nullable in_);
@@ -458,6 +462,8 @@ FOUNDATION_EXPORT NSData* _Nullable VsysSign(NSData* _Nullable secretKey, NSData
 FOUNDATION_EXPORT NSData* _Nullable VsysSignMessage(NSData* _Nullable secretKey, NSData* _Nullable msg, NSData* _Nullable opt_random);
 
 FOUNDATION_EXPORT NSString* _Nonnull VsysTokenId2ContractId(NSString* _Nullable tokenId);
+
+FOUNDATION_EXPORT int32_t VsysTokenId2TokenIdx(NSString* _Nullable tokenId);
 
 FOUNDATION_EXPORT BOOL VsysValidateAddress(NSString* _Nullable address);
 

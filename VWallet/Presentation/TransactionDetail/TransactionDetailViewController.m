@@ -121,7 +121,11 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
             [showData addObject:@{@"title": VLocalize(@"transaction.detail.status"), @"value": self.transaction.status, @"hiddenCopy":[NSNumber numberWithBool:YES]}];
         }
         if ([funcName isEqualToString:@"send"]) {
-            [c decodeSend:oriTx.data];
+            if([token isNFTToken]) {
+                [c decodeNFTSend:oriTx.data];
+            }else {
+                [c decodeSend:oriTx.data];
+            }
             [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0), @"hiddenCopy":[NSNumber numberWithBool:NO]}];
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.from"), @"value" : self.transaction.senderAddress, @"hiddenCopy":[NSNumber numberWithBool:NO]}];
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.to"), @"value" : c.recipient, @"hiddenCopy":[NSNumber numberWithBool:NO]}];
@@ -132,6 +136,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.issue.token"), @"hiddenCopy":[NSNumber numberWithBool:YES]}];
             [showData addObject:@{@"title" : VLocalize(@"token.operate.note.issue"), @"value" : [NSString stringWithDecimal: [NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
             [showData addObject:@{@"title" : VLocalize(@"token.info.id.token"), @"value" : VsysContractId2TokenId(oriTx.contractId, 0), @"hiddenCopy":[NSNumber numberWithBool:NO]}];
+
         }else if ([funcName isEqualToString:@"destroy"]) {
             [c decodeDestroy:oriTx.data];
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.burn.token"), @"hiddenCopy":[NSNumber numberWithBool:YES]}];
