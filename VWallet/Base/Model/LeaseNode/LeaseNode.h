@@ -21,7 +21,6 @@
 
 @interface LeaseNode : NSObject
 // Common
-@property (nonatomic) NSString *name;
 @property (nonatomic) NSString *logo;
 
 // SuperNode
@@ -35,6 +34,7 @@
 @property (nonatomic) NSString *capacity;
 @property (nonatomic) NSString *cycle;
 @property (nonatomic) NSString *url;
+@property (nonatomic) NSString *superNodeName;
 @property (nonatomic) BOOL isSuperNode;
 @property (nonatomic, copy) NSArray<TokenInfo *> *tokenInfoList;
 @property (nonatomic, copy) NSArray<LeaseNode *> *subNodeList;
@@ -44,6 +44,7 @@
 @property (nonatomic) NSString *link;
 @property (nonatomic) NSString *weight;
 @property (nonatomic) BOOL isSubNode;
+@property (nonatomic) NSString *subNodeName;
 
 @end
 

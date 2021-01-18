@@ -235,6 +235,7 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
                         if ([contract.type isEqualToString:@"TokenContract"] || [contract.type  isEqualToString:@"TokenContractWithSplit"] || [contract.type isEqualToString:@"NonFungibleContract"]) {
                             [ApiServer getContractContent:contractId callback:^(BOOL isSuc, ContractContent * _Nonnull contractContent) {
                                 [loadingView stopLoading];
+                                [loadingView removeFromSuperview];
                                 if (contractContent.textual && contractContent.textual.descriptors) {
                                     weakSelf.token.textualDescriptor = contractContent.textual.descriptors;
                                     NSString *funcJson = VsysDecodeContractTexture(weakSelf.token.textualDescriptor);
@@ -257,19 +258,23 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
                             }];
                         } else {
                             [loadingView stopLoading];
+                            [loadingView removeFromSuperview];
                             [weakSelf alertWithTitle:VLocalize(@"token.operate.error.invalid.contract.type") confirmText:VLocalize(@"close")];
                         }
                     } else {
                         [loadingView stopLoading];
+                        [loadingView removeFromSuperview];
                         [weakSelf alertWithTitle:VLocalize(@"") confirmText:VLocalize(@"close")];
                     }
                 }];
             }else {
                 [loadingView stopLoading];
+                [loadingView removeFromSuperview];
                 [weakSelf alertWithTitle:VLocalize(@"") confirmText:VLocalize(@"close")];
             }
         }else {
             [loadingView stopLoading];
+            [loadingView removeFromSuperview];
             [weakSelf alertWithTitle:VLocalize(@"fail.add.token") confirmText:VLocalize(@"close")];
         }
     }];

@@ -389,7 +389,7 @@
                     superNode.fee = [dict[@"fee"] doubleValue];
                 }
                 superNode.logo = dict[@"logo"];
-                superNode.name = dict[@"name"];
+                superNode.superNodeName = dict[@"name"];
                 superNode.voteAddress = dict[@"vote_address"];
                 superNode.location = dict[@"location"];
                 superNode.capacity = dict[@"capacity"];
@@ -425,7 +425,7 @@
                         if (![subNodeDict[@"id"] isKindOfClass:[NSNull class]]) {
                             subNode.id = [subNodeDict[@"id"] intValue];
                         }
-                        subNode.name = subNodeDict[@"name"];
+                        subNode.subNodeName = subNodeDict[@"name"];
                         subNode.logo =subNodeDict[@"logo"] ;
                         subNode.link = subNodeDict[@"link"];
                         subNode.weight = subNodeDict[@"weight"];

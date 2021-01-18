@@ -107,6 +107,9 @@
     AlertViewController *vc = [[AlertViewController alloc] initWithTitle:VLocalize(@"tip.transaction.node.title") confirmTitle:@"" configureContent:^(UIViewController * _Nonnull vc, UIStackView * _Nonnull parentView) {
         
         NodesViewController *nodesVc = [[NodesViewController alloc] initWithNode:dataArr];
+        nodesVc.block = ^{
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        };
         [vc addChildViewController:nodesVc];
         [parentView addArrangedSubview:nodesVc.view];
         CGFloat maxHeight = CGRectGetHeight(UIScreen.mainScreen.bounds) * 0.8 - 104;

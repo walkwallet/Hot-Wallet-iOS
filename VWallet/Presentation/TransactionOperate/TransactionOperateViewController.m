@@ -21,6 +21,8 @@
 #import "VsysToken.h"
 #import "WalletMgr.h"
 #import "LeaseNode.h"
+#import "ApiServer.h"
+#import "NSString+Asterisk.h"
 
 @import SafariServices;
 
@@ -60,6 +62,7 @@
 @property (nonatomic, assign) UIViewKeyframeAnimationOptions keyboardOptions;
 
 @property (nonatomic, strong) LeaseNode *leaseNode;
+@property (nonatomic, strong) NSMutableArray<LeaseNode *> *nodes;
 
 @end
 
@@ -81,7 +84,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeNotifi:) name:@"nodeId" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeArrSetNotifi:) name:@"nodeArrSet" object:nil];
+    
+    self.nodes = [NSMutableArray array];
+    [self fetchNodes];
     [self initView];
+    
+    if (self.operateType == TransactionOperateTypeLease) {
+        self.receiveAddressTextView.editable = NO;
+        [self.receiveAddressTextView resignFirstResponder];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickChooseNode)];
+        [self.receiveAddressTextView addGestureRecognizer:tap];
+    }
 }
 
 - (void)initView {
@@ -204,10 +218,12 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     [textView updatePlaceholderState];
-    if (textView == self.receiveAddressTextView && self.operateType == TransactionOperateTypeLease) {
-        textView.editable = NO;
-        [textView resignFirstResponder];
-        [self chooseRentalAddress:@[]];
+    
+}
+
+- (void)clickChooseNode{
+    if (self.operateType == TransactionOperateTypeLease) {
+        [self chooseRentalAddress:self.nodes];
     }
 }
 
@@ -226,7 +242,11 @@
     if (self.operateType == TransactionOperateTypeSendToken) {
         self.amountTextField.text = [NSString stringWithDecimal:[NSString getAccurateDouble:self.token.balance unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity] minFractionDigits:2 trimTrailing:YES];
     }else {
-        int64_t max = self.account.availableBalance - VsysDefaultTxFee;
+        int64_t fee = VsysDefaultTxFee;
+        if (self.leaseNode && [self.leaseNode isSubNode]) {
+            fee += self.leaseNode.id;
+        }
+        int64_t max = self.account.availableBalance - fee;
         if (max < 0) max = 0;
         self.amountTextField.text = [NSString stringWithDecimal:[NSString getAccurateDouble:max unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
     }
@@ -436,18 +456,42 @@
 - (void)nodeNotifi:(NSNotification *)notification{
     LeaseNode *node = notification.userInfo[@"LeaseNode"];
     self.leaseNode = node;
-    self.receiveAddressTextView.editable = YES;
     self.receiveAddressTextView.text = node.address;
+    [self.receiveAddressTextView updatePlaceholderState];
     
     NSString *feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:VsysDefaultTxFee * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
     if([self.leaseNode isSubNode]) {
-        feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:(VsysDefaultTxFee+node.id) * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
+        feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithString:[NSString stringWithFormat:@"%.8f", (VsysDefaultTxFee+node.id) * 1.0 / VsysVSYS]] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
     }
     
     NSMutableAttributedString *feeMas = [[NSMutableAttributedString alloc] initWithString:[VLocalize(@"account.transaction.fee") stringByAppendingString:@" "]];
     [feeMas appendAttributedString:[[NSAttributedString alloc] initWithString:[feeStr stringByAppendingString:@" VSYS"] attributes:@{NSForegroundColorAttributeName : VColor.textSecondDeepenColor}]];
     self.transactionFeeLabel.attributedText = feeMas;
+    
+}
 
+- (void)nodeArrSetNotifi:(NSNotification *)notification{
+    self.nodes = [notification.userInfo[@"nodeArr"] mutableCopy];
+}
+
+- (void)fetchNodes {
+    __weak typeof (self) weakSelf = self;
+    [self.nodes removeAllObjects];
+    [ApiServer getLeaseNodeList:^(BOOL isSuc, NSArray<LeaseNode *> * _Nonnull nodeList) {
+        if(isSuc) {
+            for (LeaseNode *superNode in nodeList) {
+                if(![superNode isSuperNode]) {
+                    continue;
+                }
+                [weakSelf.nodes addObject:superNode];
+                for (LeaseNode *subNode in superNode.subNodeList) {
+                    subNode.superNodeName = superNode.superNodeName;
+                    subNode.address = superNode.address;
+                    [weakSelf.nodes addObject:subNode];
+                }
+            }
+        }
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
