@@ -48,6 +48,7 @@
 "nav.title.transaction.detail"  = "트랜잭션 세부사항";
 "nav.title.date.filter"  = "날짜 필터";
 "nav.title.set.amount"  = "수량 설정";
+"nav.title.message.sign" = "메시지 서명";
 
 // ---- tabbar page title ----
 "tabbar.title.0"  = "지갑";
@@ -266,6 +267,7 @@
 "action.address.detail"  = "세부 주소";
 "action.address.copy"  = "주소 복사";
 "action.address.records" = "기록";
+"action.address.message.sign" = "메시지 서명";
 
 // tip prefix with "tip.xx.xx"
 // ---- logout ----
@@ -449,3 +451,10 @@
 "error.token.exist" = "이미 토큰이 추가되었습니다!";
 
 "decs.token.split.note" = "경고: 스플릿/리버스-스플릿은 유틸리티 토큰 스플릿 프로토콜과 호환이 될 수 있도록 거래소의 지원이 필요한 토큰의 실험적인 기능입니다. 스플릿 기능이 들어간 토큰의 정확한 사용을 위해 토큰 발행자와 지원 거래소간의 정밀심사(기업실사)가 요구됩니다. 토큰 발행자는 프로토콜 및 스플릿/리버스-스플릿 기능의 정확한 사용법을 준수해야 합니다. 토큰 발행자는 토큰의 스플릿/리버스-스플릿 기능의 사용과 연관된 피해 및 손해에 대한 변호, 면책 및 배상에 대한 동의를 해야합니다.(위의 내용은  영문원본을 참조하여 번역했으며  , 영문 원본과 차이가 있을 경우 영문원본을 기준으로 한다)";
+
+// ---- message sign ----
+"message.sign.input.title"= "서명 내용";
+"message.sign.input.placeholder"= "내용 입력";
+"message.sign.btn.text"= "서명";
+"message.sign.error.msg.invalid"= "서명 실패, 영숫자, 공백 및 일부 특수 문자 만 지원";
+"message.sign.error.msg.empty"= "서명 내용은 비워 둘 수 없습니다";

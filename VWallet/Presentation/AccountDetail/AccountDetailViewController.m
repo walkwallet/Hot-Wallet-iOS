@@ -30,6 +30,7 @@
 #import "NSString+Decimal.h"
 #import "TransactionRecordsPageViewController.h"
 #import "TokenMgr.h"
+#import "MessageSignViewController.h"
 
 static NSString *const CellIdentifier = @"TransactionTableViewCell";
 static NSInteger const TransactionPageSize = 100;
@@ -306,7 +307,7 @@ static NSInteger const TransactionPageSize = 100;
 
 - (IBAction)moreOperateBtnClick {
     __weak typeof(self) weakSelf = self;
-    [self actionSheetWithSelectedIndex:-1 withActionDatas:@[VLocalize(@"action.address.detail"), VLocalize(@"action.address.copy"), VLocalize(@"action.address.records")] handler:^(NSInteger index) {
+    [self actionSheetWithSelectedIndex:-1 withActionDatas:@[VLocalize(@"action.address.detail"), VLocalize(@"action.address.copy"), VLocalize(@"action.address.records"), VLocalize(@"action.address.message.sign")] handler:^(NSInteger index) {
         if (index == 0) {
             AddressDetailViewController *addressDetailsVC = [VStoryboard.Address instantiateViewControllerWithIdentifier:@"AddressDetailViewController"];
             [addressDetailsVC updateAccout:self.account];
@@ -318,6 +319,9 @@ static NSInteger const TransactionPageSize = 100;
         } else if (index == 2) {
             TransactionRecordsPageViewController *transactionRecordsPageVC = [[TransactionRecordsPageViewController alloc] initWithAccount:self.account transationArray:self.transactionArray];
             [self.navigationController pushViewController:transactionRecordsPageVC animated:YES];
+        } else if (index == 3) {
+            MessageSignViewController *messageSignVc = [[MessageSignViewController alloc] initWithAccount:self.account];
+            [self.navigationController pushViewController:messageSignVc animated:YES];
         }
     }];
 }

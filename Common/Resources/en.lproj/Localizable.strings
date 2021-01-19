@@ -48,6 +48,7 @@
 "nav.title.transaction.detail" = "Transaction Detail";
 "nav.title.date.filter" = "Filter by date";
 "nav.title.set.amount" = "Set Amount";
+"nav.title.message.sign" = "Sign Message";
 
 // ---- tabbar page title ----
 "tabbar.title.0" = "Wallet";
@@ -266,6 +267,7 @@
 "action.address.detail" = "Address Detail";
 "action.address.copy" = "Copy the Address";
 "action.address.records" = "Records";
+"action.address.message.sign" = "Sign Message";
 
 // tip prefix with "tip.xx.xx"
 // ---- logout ----
@@ -449,3 +451,10 @@
 "error.token.exist" = "Token already added!";
 
 "decs.token.split.note" = "WARNING: Split/Reverse-Split is an experimental token feature requiring exchange support compatible with Unity Token Split Protocol. The proper use of token with split functionality requires due diligence of both the token issuer and the supporting exchanges. Token issuer shall agree to abide by the protocol and convention of proper use of the split/reverse-split functionality. Token issuer shall agree to defend, hold harmless, and indemnify V Systems Limited for damage and loss involving the use of split/reverse-split functionality of the token.";
+
+// ---- message sign ----
+"message.sign.input.title" = "Sign Content";
+"message.sign.input.placeholder" = "Input Message";
+"message.sign.btn.text" = "Sign";
+"message.sign.error.msg.invalid" = "Sign failed, only support alphanumeric, space, and some special characters.";
+"message.sign.error.msg.empty" = "Can not sign empty message";

@@ -48,6 +48,7 @@
 "nav.title.transaction.detail" = "交易详情";
 "nav.title.date.filter" = "日期筛选";
 "nav.title.set.amount" = "设置接收数量";
+"nav.title.message.sign" = "消息签名";
 
 // ---- tabbar page title ----
 "tabbar.title.0" = "钱包";
@@ -266,6 +267,7 @@
 "action.address.detail" = "地址管理";
 "action.address.copy" = "拷贝地址";
 "action.address.records" = "交易历史";
+"action.address.message.sign" = "消息签名";
 
 // tip prefix with "tip.xx.xx"
 // ---- logout ----
@@ -449,3 +451,11 @@
 "error.token.exist" = "已添加的 Token";
 
 "decs.token.split.note" = "警告：拆股/合股代币是测试中的代币功能，此功能需要交易所支持UNITY拆股协议。正确使用具有此功能的代币需要代币发行方和交易所提供相应服务及技术支持。代币发行方应同意遵守及正确使用拆股/合股代币功能的协议和市场规范。如果因不正确使用拆股/合股代币功能涉及到损害和损失，代币发行方同意对V Systems Limited进行辩护，免责及承担涉及的损失赔偿。（此文由英文翻译，如与英文翻译有出入，以英文为准）";
+
+
+// ---- message sign ----
+"message.sign.input.title" = "签名内容";
+"message.sign.input.placeholder" = "输入内容";
+"message.sign.btn.text" = "签名";
+"message.sign.error.msg.invalid" = "签名失败，仅支持字母数字，空格和某些特殊字符";
+"message.sign.error.msg.empty" = "签名内容不能为空";
