@@ -12,6 +12,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:self.tokenId forKey:@"tokenId"];
     [aCoder encodeObject:self.contractId forKey:@"contractId"];
+    [aCoder encodeObject:self.contractType forKey:@"contractType"];
     [aCoder encodeInt64:self.balance forKey:@"balance"];
     [aCoder encodeInt64:self.max forKey:@"max"];
     [aCoder encodeInt64:self.total forKey:@"total"];
@@ -31,6 +32,7 @@
     if (self = [super init]) {
         self.tokenId = [aDecoder decodeObjectForKey:@"tokenId"];
         self.contractId = [aDecoder decodeObjectForKey:@"contractId"];
+        self.contractType = [aDecoder decodeObjectForKey:@"contractType"];
         self.balance = [aDecoder decodeInt64ForKey:@"balance"];
         self.max = [aDecoder decodeInt64ForKey:@"max"];
         self.total = [aDecoder decodeInt64ForKey:@"total"];
@@ -49,7 +51,7 @@
 }
 
 - (BOOL) isNFTToken {
-    return self.max == 1 && self.unity == 1 && !self.splitable;
+    return [self.contractType isEqualToString:@"NonFungibleContract"];
 }
 
 @end

@@ -11,6 +11,7 @@
 
 @property (nonatomic, copy) NSString *tokenId;
 @property (nonatomic, copy) NSString *contractId;
+@property (nonatomic, copy) NSString *contractType;
 @property (nonatomic) int64_t balance;
 @property (nonatomic) int64_t max;
 @property (nonatomic) int64_t total;

@@ -236,6 +236,7 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
                             [ApiServer getContractContent:contractId callback:^(BOOL isSuc, ContractContent * _Nonnull contractContent) {
                                 [loadingView stopLoading];
                                 [loadingView removeFromSuperview];
+                                weakSelf.token.contractType = contract.type;
                                 if (contractContent.textual && contractContent.textual.descriptors) {
                                     weakSelf.token.textualDescriptor = contractContent.textual.descriptors;
                                     NSString *funcJson = VsysDecodeContractTexture(weakSelf.token.textualDescriptor);
