@@ -64,6 +64,7 @@
 - (nonnull instancetype)init;
 @property (nonatomic) NSString* _Nonnull contractId;
 @property (nonatomic) NSData* _Nullable contract;
+@property (nonatomic) NSString* _Nonnull type;
 @property (nonatomic) int64_t max;
 @property (nonatomic) int64_t unity;
 @property (nonatomic) NSString* _Nonnull tokenDescription;
@@ -404,6 +405,11 @@ FOUNDATION_EXPORT NSString* _Nonnull VsysGetAddressNetwork(NSString* _Nullable a
 FOUNDATION_EXPORT long VsysGetAttachmentLength(NSString* _Nullable in_);
 
 FOUNDATION_EXPORT VsysQRCodeContentItem* _Nullable VsysGetContentItem(NSString* _Nullable in_);
+
+/**
+ * DbKey: 用来获取Lock Contract & Payment Channel 对应地址下的token余额
+ */
+FOUNDATION_EXPORT NSString* _Nonnull VsysGetContractBalanceDbKey(NSString* _Nullable address);
 
 /**
  * funcName 小写, eg: issue

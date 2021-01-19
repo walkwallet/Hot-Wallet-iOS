@@ -77,6 +77,7 @@
 
 - (NSData* _Nullable)buildDestroyData;
 - (NSData* _Nullable)buildIssueData;
+- (NSData* _Nullable)buildNFTSendData;
 - (NSData* _Nullable)buildRegisterData;
 - (NSData* _Nullable)buildSendData;
 - (void)decodeDestroy:(NSData* _Nullable)data;
@@ -369,8 +370,6 @@ FOUNDATION_EXPORT NSData* _Nullable VsysBase58Encode(NSData* _Nullable data);
 FOUNDATION_EXPORT NSString* _Nonnull VsysBase58EncodeString(NSString* _Nullable in_);
 
 FOUNDATION_EXPORT NSString* _Nonnull VsysBase58EncodeToString(NSData* _Nullable data);
-
-FOUNDATION_EXPORT NSData* _Nullable VsysBuildNFTSendData(NSString* _Nullable recipient, int32_t tokenIdx);
 
 /**
  * tokenIndex fixed = 0
