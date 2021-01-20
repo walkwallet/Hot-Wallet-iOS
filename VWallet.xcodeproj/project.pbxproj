@@ -178,7 +178,6 @@
 		A879425E228EC333009D10A8 /* Contract.m in Sources */ = {isa = PBXBuildFile; fileRef = A879425D228EC333009D10A8 /* Contract.m */; };
 		A8794262228FB348009D10A8 /* TokenMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = A8794261228FB348009D10A8 /* TokenMgr.m */; };
 		A882CF492386311600046DD5 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A882CF482386311600046DD5 /* AlertView.m */; };
-		A882CF4C2386333100046DD5 /* UIView+Efficiency.m in Sources */ = {isa = PBXBuildFile; fileRef = A882CF4B2386333100046DD5 /* UIView+Efficiency.m */; };
 		A882CF4F238633A900046DD5 /* AlertDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A882CF4E238633A900046DD5 /* AlertDialog.m */; };
 		A88B0FF72275C59F008C1CE8 /* TokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B0FF62275C59F008C1CE8 /* TokenViewController.m */; };
 		A88B0FFD2276A760008C1CE8 /* TokenHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A88B0FFC2276A760008C1CE8 /* TokenHeaderView.m */; };
@@ -504,8 +503,6 @@
 		A8794261228FB348009D10A8 /* TokenMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenMgr.m; sourceTree = "<group>"; };
 		A882CF472386311600046DD5 /* AlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		A882CF482386311600046DD5 /* AlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
-		A882CF4A2386333100046DD5 /* UIView+Efficiency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Efficiency.h"; sourceTree = "<group>"; };
-		A882CF4B2386333100046DD5 /* UIView+Efficiency.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Efficiency.m"; sourceTree = "<group>"; };
 		A882CF4D238633A900046DD5 /* AlertDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertDialog.h; sourceTree = "<group>"; };
 		A882CF4E238633A900046DD5 /* AlertDialog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertDialog.m; sourceTree = "<group>"; };
 		A88B0FF52275C59F008C1CE8 /* TokenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenViewController.h; sourceTree = "<group>"; };
@@ -798,8 +795,6 @@
 			children = (
 				4041BFF921CB711000B2AE05 /* Alert */,
 				4041C00D21CB711000B2AE05 /* AlertExt */,
-				A882CF4A2386333100046DD5 /* UIView+Efficiency.h */,
-				A882CF4B2386333100046DD5 /* UIView+Efficiency.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -2267,7 +2262,6 @@
 				4041C1A221CB711000B2AE05 /* ResultParameter.m in Sources */,
 				4041C20D21CB711100B2AE05 /* UIColor+Hex.m in Sources */,
 				4041C1ED21CB711100B2AE05 /* VNavigationController.m in Sources */,
-				A882CF4C2386333100046DD5 /* UIView+Efficiency.m in Sources */,
 				A879425E228EC333009D10A8 /* Contract.m in Sources */,
 				4041C1E121CB711100B2AE05 /* WalletPageViewController.m in Sources */,
 				4041C20021CB711100B2AE05 /* CellItem.m in Sources */,
