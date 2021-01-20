@@ -72,21 +72,26 @@
 @property (nonatomic) int32_t tokenIdx;
 @property (nonatomic) NSString* _Nonnull recipient;
 @property (nonatomic) NSString* _Nonnull senderPublicKey;
+@property (nonatomic) NSString* _Nonnull senderAddr;
 // skipped field Contract.Textual with unsupported type: Vsyslib.Textual
 
 // skipped field Contract.Functions with unsupported type: []Vsyslib.Func
 
+- (NSData* _Nullable)buildDepositData;
 - (NSData* _Nullable)buildDestroyData;
 - (NSData* _Nullable)buildIssueData;
 - (NSData* _Nullable)buildNFTSendData;
 - (NSData* _Nullable)buildRegisterData;
 - (NSData* _Nullable)buildSendData;
+- (NSData* _Nullable)buildWithdrawData;
+- (void)decodeDeposit:(NSData* _Nullable)data;
 - (void)decodeDestroy:(NSData* _Nullable)data;
 - (void)decodeIssue:(NSData* _Nullable)data;
 - (void)decodeNFTSend:(NSData* _Nullable)data;
 - (void)decodeRegister:(NSData* _Nullable)data;
 - (void)decodeSend:(NSData* _Nullable)data;
 - (void)decodeTexture;
+- (void)decodeWithdraw:(NSData* _Nullable)data;
 @end
 
 @interface VsysDataEncoder : NSObject <goSeqRefInterface> {

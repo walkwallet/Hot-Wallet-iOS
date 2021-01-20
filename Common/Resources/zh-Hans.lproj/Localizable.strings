@@ -459,3 +459,21 @@
 "message.sign.btn.text" = "签名";
 "message.sign.error.msg.invalid" = "签名失败，仅支持字母数字，空格和某些特殊字符";
 "message.sign.error.msg.empty" = "签名内容不能为空";
+
+
+// ---- deposit && withdraw ----
+"action.address.deposit" = "抵押";
+"action.address.withdraw" = "提现";
+"nav.title.contract.token.deposit" = "抵押";
+"nav.title.contract.token.withdraw" = "提现";
+"contract.id.text" = "合约";
+"contract.id.input.placeholder" = "Payment channel合约或Lock合约";
+"contract.btn.next" = "下一步";
+"contract.btn.deposit" = "抵押";
+"contract.btn.withdraw" = "提现";
+"contract.error.invalid" = "无效的合约地址";
+"contract.error.type.invalid" = "无效的合约类型";
+"contract.error.query.failed" = "查询合约信息失败";
+"contract.error.not.exist" = "合约不存在";
+
+

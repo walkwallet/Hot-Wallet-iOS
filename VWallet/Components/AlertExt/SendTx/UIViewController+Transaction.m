@@ -28,10 +28,14 @@
 @implementation UIViewController (Transaction)
 
 - (void)beginTransactionConfirmWithTransaction:(Transaction *)transaction account:(Account *)account {
+    [self beginTransactionConfirmWithTransaction:transaction account:account token:nil];
+}
+
+- (void)beginTransactionConfirmWithTransaction:(Transaction *)transaction account:(Account *)account token:(VsysToken *)token {
     __weak typeof(self) weakSelf = self;
     
     AlertViewController *vc = [[AlertViewController alloc] initWithTitle:VLocalize(@"tip.transaction.review.title") confirmTitle:VLocalize(@"confirm") configureContent:^(UIViewController * _Nonnull vc, UIStackView * _Nonnull parentView) {
-        TransactionDetailViewController *detailVC = [[TransactionDetailViewController alloc] initWithTransaction:transaction account:account];
+        TransactionDetailViewController *detailVC = [[TransactionDetailViewController alloc] initWithTransaction:transaction account:account token:token];
         [vc addChildViewController:detailVC];
         [parentView addArrangedSubview:detailVC.view];
         CGFloat maxHeight = CGRectGetHeight(UIScreen.mainScreen.bounds) * 0.8 - 104;
@@ -86,7 +90,7 @@
                     [ApiServer broadcastContractExecute:transaction callback:^(BOOL isSuc) {
                         [alertVC.mainView stopLoading];
                         if (isSuc) {
-                            [weakSelf showSuccessTx:transaction];
+                            [weakSelf showSuccessTx:transaction token:token];
                         }else {
                             [weakSelf remindWithMessage:VLocalize(@"error.contract.send.failed")];
                         }
@@ -125,7 +129,7 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-- (void)showSuccessTx: (Transaction *)transaction {
+- (void)showSuccessTx: (Transaction *)transaction token: (VsysToken *) token {
     __weak typeof(self) weakSelf = self;
     VsysTransaction *tx = transaction.originTransaction;
     NSDecimalNumber *amountDecimal = [[NSDecimalNumber alloc] initWithLongLong:tx.amount];
@@ -146,9 +150,14 @@
     } else if (tx.txType == VsysTxTypeContractRegister) {
         title = [NSString stringWithFormat:VLocalize(@"transaction.create.contract"), VsysContractId2TokenId(tx.contractId, 0)];
     } else if (tx.txType == VsysTxTypeContractExecute) {
-        VsysToken *token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
+        NSString *funcName = transaction.contractFuncName;
+        if(!token) {
+            token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
+            funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
+        }
+        
         VsysContract *c = [VsysContract new];
-        NSString *funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
+       
         if ([funcName isEqualToString:@"send"]) {
             if([token isNFTToken]) {
                 [c decodeNFTSend:tx.data];
@@ -190,8 +199,11 @@
         [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[title rangeOfString:VsysContractId2TokenId(tx.contractId, 0)]];
         attrMessage = [[NSAttributedString alloc] initWithString:VLocalize(@"token.register.success.check.watch.list") attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13 weight:UIFontWeightLight]}];
     }else if (tx.txType == VsysTxTypeContractExecute) {
-        VsysToken *token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
-        NSString *funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
+        NSString *funcName = transaction.contractFuncName;
+        if(!token) {
+            token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
+            funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
+        }
         NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:tx.amount];
         NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLongLong:token.unity];
         NSString *amountStr = [NSString stringWithDecimal:[tokenAmount decimalNumberByDividingBy:unityDecimal] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
@@ -216,6 +228,10 @@
     }];
     resultVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:resultVC animated:YES completion:nil];
+}
+
+- (void)showSuccessTx: (Transaction *)transaction {
+    [self showSuccessTx:transaction token:nil];
 }
 
 - (void)transactionPasswordAuth:(void(^)(BOOL result))callback {

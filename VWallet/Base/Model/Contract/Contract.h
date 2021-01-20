@@ -35,4 +35,12 @@
 @property (nonatomic) int64_t height;
 @end
 
+@interface ContractData : NSObject
+@property (nonatomic, copy) NSString *contractId;
+@property (nonatomic, copy) NSString *key;
+@property (nonatomic, copy) NSString *dbName;
+@property (nonatomic) int64_t height;
+@property (nonatomic) int64_t value;
+@end
+
 

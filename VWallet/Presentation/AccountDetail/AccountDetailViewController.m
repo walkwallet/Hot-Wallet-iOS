@@ -31,6 +31,7 @@
 #import "TransactionRecordsPageViewController.h"
 #import "TokenMgr.h"
 #import "MessageSignViewController.h"
+#import "DepositWithdrawViewController.h"
 
 static NSString *const CellIdentifier = @"TransactionTableViewCell";
 static NSInteger const TransactionPageSize = 100;
@@ -307,7 +308,7 @@ static NSInteger const TransactionPageSize = 100;
 
 - (IBAction)moreOperateBtnClick {
     __weak typeof(self) weakSelf = self;
-    [self actionSheetWithSelectedIndex:-1 withActionDatas:@[VLocalize(@"action.address.detail"), VLocalize(@"action.address.copy"), VLocalize(@"action.address.records"), VLocalize(@"action.address.message.sign")] handler:^(NSInteger index) {
+    [self actionSheetWithSelectedIndex:-1 withActionDatas:@[VLocalize(@"action.address.detail"), VLocalize(@"action.address.copy"), VLocalize(@"action.address.records"), VLocalize(@"action.address.message.sign"), VLocalize(@"action.address.deposit"), VLocalize(@"action.address.withdraw")] handler:^(NSInteger index) {
         if (index == 0) {
             AddressDetailViewController *addressDetailsVC = [VStoryboard.Address instantiateViewControllerWithIdentifier:@"AddressDetailViewController"];
             [addressDetailsVC updateAccout:self.account];
@@ -322,6 +323,12 @@ static NSInteger const TransactionPageSize = 100;
         } else if (index == 3) {
             MessageSignViewController *messageSignVc = [[MessageSignViewController alloc] initWithAccount:self.account];
             [self.navigationController pushViewController:messageSignVc animated:YES];
+        } else if (index == 4) {
+            DepositWithdrawViewController *depositVc = [[DepositWithdrawViewController alloc] initWithAccount:self.account operateType:TransactionOperateTypeDeposit];
+            [self.navigationController pushViewController:depositVc animated:YES];
+        } else if (index == 5) {
+            DepositWithdrawViewController *withdrawVc = [[DepositWithdrawViewController alloc] initWithAccount:self.account operateType:TransactionOperateTypeWithdraw];
+            [self.navigationController pushViewController:withdrawVc animated:YES];
         }
     }];
 }

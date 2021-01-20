@@ -51,6 +51,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)getLeaseNodeList:(void (^)(BOOL isSuc, NSArray<LeaseNode *> *nodeList))callback;
 
++ (void)getContractData:(NSString *)contractId dbKey:(NSString *)dbKey callback:(void (^)(BOOL isSuc, ContractData *contractData))callback;
+
 @end
 
 NS_ASSUME_NONNULL_END

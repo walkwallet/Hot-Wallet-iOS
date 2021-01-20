@@ -64,6 +64,7 @@
 - (nonnull instancetype)init;
 @property (nonatomic) NSString* _Nonnull contractId;
 @property (nonatomic) NSData* _Nullable contract;
+@property (nonatomic) NSString* _Nonnull type;
 @property (nonatomic) int64_t max;
 @property (nonatomic) int64_t unity;
 @property (nonatomic) NSString* _Nonnull tokenDescription;
@@ -75,17 +76,21 @@
 
 // skipped field Contract.Functions with unsupported type: []Vsyslib.Func
 
+- (NSData* _Nullable)buildDepositData;
 - (NSData* _Nullable)buildDestroyData;
 - (NSData* _Nullable)buildIssueData;
 - (NSData* _Nullable)buildNFTSendData;
 - (NSData* _Nullable)buildRegisterData;
 - (NSData* _Nullable)buildSendData;
+- (NSData* _Nullable)buildWithdrawData;
+- (void)decodeDeposit:(NSData* _Nullable)data;
 - (void)decodeDestroy:(NSData* _Nullable)data;
 - (void)decodeIssue:(NSData* _Nullable)data;
 - (void)decodeNFTSend:(NSData* _Nullable)data;
 - (void)decodeRegister:(NSData* _Nullable)data;
 - (void)decodeSend:(NSData* _Nullable)data;
 - (void)decodeTexture;
+- (void)decodeWithdraw:(NSData* _Nullable)data;
 @end
 
 @interface VsysDataEncoder : NSObject <goSeqRefInterface> {
@@ -404,6 +409,11 @@ FOUNDATION_EXPORT NSString* _Nonnull VsysGetAddressNetwork(NSString* _Nullable a
 FOUNDATION_EXPORT long VsysGetAttachmentLength(NSString* _Nullable in_);
 
 FOUNDATION_EXPORT VsysQRCodeContentItem* _Nullable VsysGetContentItem(NSString* _Nullable in_);
+
+/**
+ * DbKey: 用来获取Lock Contract & Payment Channel 对应地址下的token余额
+ */
+FOUNDATION_EXPORT NSString* _Nonnull VsysGetContractBalanceDbKey(NSString* _Nullable address);
 
 /**
  * funcName 小写, eg: issue

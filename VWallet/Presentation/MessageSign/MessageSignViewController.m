@@ -52,6 +52,7 @@
     [self.view addSubview:self.scrollView];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
+        make.width.equalTo(self.view);
     }];
     self.scrollView.contentInset = UIEdgeInsetsMake(16, 0, 50, 0);
     
@@ -61,26 +62,30 @@
         make.top.bottom.equalTo(self.scrollView);
         make.left.equalTo(self.view).offset(16);
         make.right.equalTo(self.view).offset(-16);
-        make.height.equalTo(@400);
+        make.width.equalTo(self.scrollView);
     }];
     
     UILabel *inputTitleLbl = [[UILabel alloc] init];
     [contentView addSubview:inputTitleLbl];
     [inputTitleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView);
         make.left.equalTo(contentView);
+        make.height.equalTo(@22);
     }];
     inputTitleLbl.text = VLocalize(@"message.sign.input.title");
+    inputTitleLbl.font = [UIFont systemFontOfSize:16.0];
     
     self.inputTv = [[VThemeTextView alloc] init];
     [contentView addSubview:self.inputTv];
     [self.inputTv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(inputTitleLbl.mas_bottom).offset(5);
-        make.left.right.equalTo(contentView);
-        make.height.equalTo(@30);
+        make.top.equalTo(inputTitleLbl.mas_bottom).offset(4);
+        make.left.equalTo(contentView).offset(-5);
+        make.right.equalTo(contentView);
+        make.height.greaterThanOrEqualTo(@39);
     }];
-    self.inputTv.textContainerInset = UIEdgeInsetsMake(10,0, 0, 0);
-    self.inputTv.placeholder = VLocalize(@"message.sign.input.placeholder");
-    self.inputTv.font = [UIFont systemFontOfSize:18];
+    self.inputTv.font = [UIFont systemFontOfSize:18.0];
+    self.inputTv.backgroundColor = [UIColor clearColor];
+    self.inputTv.returnKeyType = UIReturnKeyDone;
     self.inputTv.delegate = self;
     
     VSeparatorLine *sepLine = [[VSeparatorLine alloc] init];
@@ -88,9 +93,9 @@
     [sepLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@1);
         make.left.right.equalTo(self.inputTv);
-        make.top.equalTo(self.inputTv.mas_bottom).offset(5);
+        make.top.equalTo(self.inputTv.mas_bottom).offset(8);
     }];
-    
+
     UIButton *signBtn = [[UIButton alloc] init];
     [contentView addSubview:signBtn];
     [signBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -107,18 +112,18 @@
     signBtn.layer.cornerRadius = 10.0;
     signBtn.layer.borderWidth = 1.0;
     signBtn.layer.borderColor = VColor.themeColor.CGColor;
-    
+
     self.resultLbl = [[VThemeLabel alloc] init];
     [contentView addSubview:self.resultLbl];
     [self.resultLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(contentView).offset(-64);
-        make.top.equalTo(signBtn.mas_bottom).offset(16);
+        make.top.equalTo(signBtn.mas_bottom).offset(32);
     }];
-    self.resultLbl.font = [UIFont systemFontOfSize:14];
+    self.resultLbl.font = [UIFont systemFontOfSize:18.0];
     self.resultLbl.numberOfLines = 0;
     self.resultLbl.hidden = YES;
-    
-    
+
+
     UIView *imgWrap = [[UIView alloc] init];
     [contentView addSubview:imgWrap];
     [imgWrap mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -129,8 +134,7 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCopy)];
     [imgWrap addGestureRecognizer:tapGesture];
     imgWrap.userInteractionEnabled = YES;
-    
-    
+
     self.imageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico_copy_grey"]];
     [imgWrap addSubview:self.imageV];
     [self.imageV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -139,6 +143,10 @@
         make.right.equalTo(imgWrap);
     }];
     self.imageV.hidden = YES;
+    
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.resultLbl);
+    }];
 }
  
 - (void) viewWillAppear:(BOOL)animated {
@@ -160,8 +168,10 @@
    
     self.resultLbl.hidden = self.resultLbl.text.length <= 0;
     self.imageV.hidden = self.resultLbl.isHidden;
-    
-    [self updateContentViewHeight ];
+}
+
+-(void) viewDidLayoutSubviews {
+    self.inputTv.placeholder = VLocalize(@"message.sign.input.placeholder");
 }
 
 - (void) clickCopy {
@@ -171,20 +181,11 @@
     }
 }
 
-- (void) updateContentViewHeight {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        UIView *contentView = [[self.scrollView subviews] firstObject];
-        [contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(self.resultLbl.frame.origin.y + self.resultLbl.frame.size.height);
-        }];
-    });
-    
-}
 
 - (void) textViewDidChange:(UITextView *)textView {
+    [self.inputTv updatePlaceholderState];
     [textView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(textView.contentSize.height);
-        [self updateContentViewHeight];
     }];
 }
 

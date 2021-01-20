@@ -458,3 +458,19 @@
 "message.sign.btn.text"= "서명";
 "message.sign.error.msg.invalid"= "서명 실패, 영숫자, 공백 및 일부 특수 문자 만 지원";
 "message.sign.error.msg.empty"= "서명 내용은 비워 둘 수 없습니다";
+
+
+// ---- 입금 및 출금 ----
+"action.address.deposit"= "입금";
+"action.address.withdraw"= "철회";
+"nav.title.contract.token.deposit"= "서약";
+"nav.title.contract.token.withdraw"= "철회";
+"contract.id.text"= "계약";
+"contract.id.input.placeholder"= "Payment channel contract or Lock contract";
+"contract.btn.next"= "다음";
+"contract.btn.deposit"= "입금";
+"contract.btn.withdraw"= "철회";
+"contract.error.invalid"= "잘못된 계약 주소";
+"contract.error.type.invalid"= "잘못된 계약 유형";
+"contract.error.query.failed"= "계약 정보 조회 실패";
+"contract.error.not.exist"= "계약이 존재하지 않습니다";

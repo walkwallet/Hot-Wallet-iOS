@@ -168,4 +168,14 @@ static NSString *const ApiPostExplorerCertifiedList = @"/api/getTokenList";
 
 static NSString *const ApiGetRateLeaseNodeList = @"/api/superNodesDetail";
 
+
+//{
+//  contractId: 'CEtQjqMzMWyjxJ5TckhbFU5b9JFCWWV1HBK',
+//  key: '1GqnoqdMmy332MnDKN5Bn8t89EC2gh1Faqzyt',
+//  height: 15412713,
+//  dbName: 'contractNumInfo',
+//  value: 60000000
+//}
+static NSString *const ApiGetContractData = @"/contract/data/%@/%@";
+
 #endif /* ServiceAPI_h */

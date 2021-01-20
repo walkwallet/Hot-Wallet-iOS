@@ -191,10 +191,12 @@
 		A8C32BE7228985AD00E1CBB1 /* SuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C32BE5228985AD00E1CBB1 /* SuccessViewController.xib */; };
 		A8C32BEB228AA89300E1CBB1 /* AddTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C32BE9228AA89300E1CBB1 /* AddTokenViewController.m */; };
 		A8C32BEC228AA89300E1CBB1 /* AddTokenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C32BEA228AA89300E1CBB1 /* AddTokenViewController.xib */; };
+		C370AA9525B6F47200DF6E7E /* UIView+Efficiency.m in Sources */ = {isa = PBXBuildFile; fileRef = C370AA9425B6F47200DF6E7E /* UIView+Efficiency.m */; };
 		C3C34B9F25B1850B007A275B /* LeaseNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C34B9E25B1850B007A275B /* LeaseNode.m */; };
 		C3CF374725B18E050096A198 /* NodesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CF374525B18E050096A198 /* NodesViewController.m */; };
 		C3CF374825B18E050096A198 /* NodesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CF374625B18E050096A198 /* NodesViewController.xib */; };
 		C3CF375A25B5617A0096A198 /* MessageSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CF375925B5617A0096A198 /* MessageSignViewController.m */; };
+		C3CF376D25B6C2CB0096A198 /* DepositWithdrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CF376B25B6C2CB0096A198 /* DepositWithdrawViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -526,6 +528,8 @@
 		B99A01A40F53D8E0B803D481 /* Pods-VWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VWallet/Pods-VWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		C365346325AC48C100537A37 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C365346425AC48C100537A37 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C370AA9325B6F47200DF6E7E /* UIView+Efficiency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Efficiency.h"; sourceTree = "<group>"; };
+		C370AA9425B6F47200DF6E7E /* UIView+Efficiency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Efficiency.m"; sourceTree = "<group>"; };
 		C3C34B9D25B1850B007A275B /* LeaseNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaseNode.h; sourceTree = "<group>"; };
 		C3C34B9E25B1850B007A275B /* LeaseNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaseNode.m; sourceTree = "<group>"; };
 		C3CF374425B18E050096A198 /* NodesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodesViewController.h; sourceTree = "<group>"; };
@@ -533,6 +537,8 @@
 		C3CF374625B18E050096A198 /* NodesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NodesViewController.xib; sourceTree = "<group>"; };
 		C3CF375825B5617A0096A198 /* MessageSignViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageSignViewController.h; sourceTree = "<group>"; };
 		C3CF375925B5617A0096A198 /* MessageSignViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageSignViewController.m; sourceTree = "<group>"; };
+		C3CF376A25B6C2CB0096A198 /* DepositWithdrawViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DepositWithdrawViewController.h; sourceTree = "<group>"; };
+		C3CF376B25B6C2CB0096A198 /* DepositWithdrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DepositWithdrawViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1189,6 +1195,7 @@
 		4041C08521CB711000B2AE05 /* TransactionOperate */ = {
 			isa = PBXGroup;
 			children = (
+				C3CF376925B6C29C0096A198 /* DepositWithdraw */,
 				4041C08621CB711000B2AE05 /* TransactionOperateViewController.h */,
 				4041C08721CB711000B2AE05 /* TransactionOperateViewController.m */,
 				4041C08821CB711000B2AE05 /* TransactionOperateViewController.xib */,
@@ -1685,6 +1692,7 @@
 		4041C14C21CB711000B2AE05 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
+				C370AA9725B6F49400DF6E7E /* Efficiency */,
 				4041C14D21CB711000B2AE05 /* Loading */,
 				4041C15321CB711000B2AE05 /* IB */,
 			);
@@ -1941,6 +1949,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C370AA9725B6F49400DF6E7E /* Efficiency */ = {
+			isa = PBXGroup;
+			children = (
+				C370AA9325B6F47200DF6E7E /* UIView+Efficiency.h */,
+				C370AA9425B6F47200DF6E7E /* UIView+Efficiency.m */,
+			);
+			path = Efficiency;
+			sourceTree = "<group>";
+		};
 		C3C34B9C25B1850B007A275B /* LeaseNode */ = {
 			isa = PBXGroup;
 			children = (
@@ -1957,6 +1974,15 @@
 				C3CF375925B5617A0096A198 /* MessageSignViewController.m */,
 			);
 			path = MessageSign;
+			sourceTree = "<group>";
+		};
+		C3CF376925B6C29C0096A198 /* DepositWithdraw */ = {
+			isa = PBXGroup;
+			children = (
+				C3CF376A25B6C2CB0096A198 /* DepositWithdrawViewController.h */,
+				C3CF376B25B6C2CB0096A198 /* DepositWithdrawViewController.m */,
+			);
+			path = DepositWithdraw;
 			sourceTree = "<group>";
 		};
 		C3E07B6F25B171AB00D9A706 /* Nodes */ = {
@@ -2188,6 +2214,7 @@
 				C3CF374725B18E050096A198 /* NodesViewController.m in Sources */,
 				4041C1B921CB711100B2AE05 /* ChooseNetworkViewController.m in Sources */,
 				A8794262228FB348009D10A8 /* TokenMgr.m in Sources */,
+				C370AA9525B6F47200DF6E7E /* UIView+Efficiency.m in Sources */,
 				402BBB2021E5D326005F2794 /* DateRangeOptionTableViewCell.m in Sources */,
 				4041C19B21CB711000B2AE05 /* PasswordAuthAlertViewController.m in Sources */,
 				4041C1F921CB711100B2AE05 /* VSeparatorLine.m in Sources */,
@@ -2236,6 +2263,7 @@
 				A8C32BEB228AA89300E1CBB1 /* AddTokenViewController.m in Sources */,
 				4041C20B21CB711100B2AE05 /* UIScrollView+EmptyData.m in Sources */,
 				4041C1E721CB711100B2AE05 /* QRScannerViewController.m in Sources */,
+				C3CF376D25B6C2CB0096A198 /* DepositWithdrawViewController.m in Sources */,
 				4041C1A221CB711000B2AE05 /* ResultParameter.m in Sources */,
 				4041C20D21CB711100B2AE05 /* UIColor+Hex.m in Sources */,
 				4041C1ED21CB711100B2AE05 /* VNavigationController.m in Sources */,

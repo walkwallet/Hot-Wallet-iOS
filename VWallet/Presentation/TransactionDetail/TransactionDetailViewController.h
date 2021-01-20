@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 @class Account;
 @class Transaction;
+@class VsysToken;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isDetailPage;
 
 - (instancetype)initWithTransaction:(Transaction *)transaction account:(Account *)account;
+
+- (instancetype)initWithTransaction:(Transaction *)transaction account:(Account *)account token:(VsysToken *)token;
 
 @end
 

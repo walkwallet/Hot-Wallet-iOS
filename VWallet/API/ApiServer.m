@@ -446,4 +446,18 @@
     }];
 }
 
++ (void)getContractData:(NSString *)contractId dbKey:(NSString *)dbKey callback:(void (^)(BOOL, ContractData *))callback {
+    [AppServer Get:VApi(([NSString stringWithFormat: ApiGetContractData, contractId, dbKey])) params:@{} success:^(NSDictionary * _Nonnull response) {
+        ContractData *data = [ContractData new];
+        data.contractId = response[@"contractId:"];
+        data.key = response[@"key"];
+        data.height = [response[@"height"] longLongValue];
+        data.dbName = response[@"dbName"];
+        data.value = [response[@"value"] longLongValue];
+        callback(YES, data);
+    } fail:^(id  _Nonnull info) {
+        callback(NO, nil);
+    }];
+}
+
 @end

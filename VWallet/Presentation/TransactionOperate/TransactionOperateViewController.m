@@ -383,7 +383,16 @@
             }else {
                 tx.data = [c buildSendData];
             }
-        } break;
+        }
+            break;
+        case TransactionOperateTypeDeposit: {
+            
+        }
+            break;
+        case TransactionOperateTypeWithdraw: {
+            
+        }
+            break;
     }
     if (!tx) {
         return;

@@ -18,3 +18,7 @@
 
 @implementation ContractInfoItem
 @end
+
+@implementation ContractData
+@end
+

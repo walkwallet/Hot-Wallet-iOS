@@ -459,3 +459,20 @@
 "message.sign.btn.text" ="簽名";
 "message.sign.error.msg.invalid" ="簽名失敗，僅支持字母數字，空格和某些特殊字符";
 "message.sign.error.msg.empty" = "簽名內容不能為空";
+
+
+// ---- deposit && withdraw ----
+"action.address.deposit" = "抵押";
+"action.address.withdraw" = "提現";
+"nav.title.contract.token.deposit" = "抵押";
+"nav.title.contract.token.withdraw" = "提現";
+"contract.id.text" = "合約";
+"contract.id.input.placeholder" = "Payment channel合約或Lock合約";
+"contract.btn.next" = "下壹步";
+"contract.btn.deposit" = "抵押";
+"contract.btn.withdraw" = "提現";
+"contract.error.invalid" = "無效的合約地址";
+"contract.error.type.invalid" = "無效的合約類型";
+"contract.error.query.failed" = "查詢合約信息失敗";
+"contract.error.not.exist" = "合約不存在";
+

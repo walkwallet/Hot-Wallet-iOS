@@ -15,6 +15,8 @@ typedef NS_ENUM(NSInteger, TransactionOperateType) {
     TransactionOperateTypeSend = 0,
     TransactionOperateTypeLease,
     TransactionOperateTypeSendToken,
+    TransactionOperateTypeDeposit,
+    TransactionOperateTypeWithdraw,
 };
 
 @interface TransactionOperateViewController : UIViewController
