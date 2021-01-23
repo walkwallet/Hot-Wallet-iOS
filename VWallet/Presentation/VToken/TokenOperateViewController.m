@@ -135,6 +135,7 @@
         self.unityWrapView.hidden = YES;
         self.checkBoxWrapView.hidden = YES;
         self.feeWrapViewTop.constant = -(self.feeWrapView.frame.origin.y - self.descWrapView.frame.origin.y);
+        self.labelAvailabelBalance.text = [NSString stringWithDecimal:[NSString getAccurateDouble:self.token.balance unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity]  minFractionDigits:2 trimTrailing:YES];
         [self.view layoutIfNeeded];
     }else if (self.operateType == TokenOperatePageTypeBurn) {
         self.labelFee.text = [NSString stringWithFormat:@"%@ VSYS", [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:VsysDefaultContractExecuteFee * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES]];
@@ -145,6 +146,8 @@
         self.checkBoxWrapView.hidden = YES;
         self.tokenDescWrapView.hidden = YES;
         self.feeWrapViewTop.constant = -(self.feeWrapView.frame.origin.y - self.descWrapView.frame.origin.y);
+        self.labelAvailabelBalance.text = [NSString stringWithDecimal:[NSString getAccurateDouble:self.token.balance unity:self.token.unity] maxFractionDigits:[NSString getDecimal:self.token.unity]  minFractionDigits:2 trimTrailing:YES];
+        [self.view layoutIfNeeded];
     }
     [self.buttonContinue setTitle:VLocalize(@"continue") forState:UIControlStateNormal];
     self.transactionFeeNoteLabel.text = [NSString stringWithFormat:@"%@：", VLocalize(@"account.transaction.fee")];

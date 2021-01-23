@@ -107,10 +107,13 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
             if (isSuc) {
                 VsysToken *weakToken = token;
                 [ApiServer getAddressTokenBalance:weakSelf.account.originAccount.address tokenId:one.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
-                    NSInteger i = [weakSelf.tokenList indexOfObject:one];
-                    weakSelf.tokenList[i].balance = token.balance;
-                    weakSelf.tokenList[i].total = weakToken.total;
-                    [weakSelf.tableView reloadData];
+                    if(isSuc && [weakSelf.tokenList containsObject:one]) {
+                        NSInteger i = [weakSelf.tokenList indexOfObject:one];
+                        weakSelf.tokenList[i].balance = token.balance;
+                        weakSelf.tokenList[i].total = weakToken.total;
+                        [weakSelf.tableView reloadData];
+                    }
+                   
                     [TokenMgr.shareInstance saveToStorage:weakSelf.account.originAccount.address list:weakSelf.tokenList];
                 }];
             }
@@ -118,7 +121,7 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
     }
     for (VsysToken *one in self.tokenList) {
         [ApiServer getTokenDetailFromExplorer:one.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull tokenDetail) {
-            if (isSuc && weakSelf.tokenList.count > 0) {
+            if (isSuc && [weakSelf.tokenList containsObject:one]) {
                 NSInteger i = [weakSelf.tokenList indexOfObject:one];
                 weakSelf.tokenList[i].name = tokenDetail.name;
                 weakSelf.tokenList[i].icon = tokenDetail.icon;
@@ -127,7 +130,7 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
             }
         }];
         [ApiServer getContractInfo:one.contractId callback:^(BOOL isSuc, Contract * _Nonnull contract) {
-            if (isSuc && weakSelf.tokenList.count > 0) {
+            if (isSuc && [weakSelf.tokenList containsObject:one]) {
                 NSInteger i = [weakSelf.tokenList indexOfObject:one];
                 for (ContractInfoItem *item in contract.info) {
                     if ([item.name isEqualToString:@"issuer"]) {
