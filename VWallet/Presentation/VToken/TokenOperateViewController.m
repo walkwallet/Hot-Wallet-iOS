@@ -318,7 +318,7 @@
     switch (self.account.accountType) {
         case AccountTypeWallet: {
             transaction.signature = [self.account.originAccount signDataBase58:VsysBase58EncodeToString(tx.buildTxData)];
-            [self beginTransactionConfirmWithTransaction:transaction account:self.account];
+            [self beginTransactionConfirmWithTransaction:transaction account:self.account token:self.token];
         } break;
         case AccountTypeMonitor: {
             [self coldWalletSendTransactionWithTransation:transaction account:self.account];
@@ -332,6 +332,7 @@
     c.amount = amount * self.token.unity;
     VsysTransaction *tx = VsysNewExecuteTransaction(self.token.contractId, VsysBase58EncodeToString([c buildIssueData]), VsysGetFuncIndexFromDescriptor(self.token.textualDescriptor, @"issue"), @"");
     tx.amount = amount * self.token.unity;
+    tx.tokenIdx = VsysTokenId2TokenIdx(self.token.tokenId);
     if (!tx) {
         return;
     }
@@ -344,7 +345,7 @@
     switch (self.account.accountType) {
         case AccountTypeWallet: {
             transaction.signature = [self.account.originAccount signData:tx.buildTxData];
-            [self beginTransactionConfirmWithTransaction:transaction account:self.account];
+            [self beginTransactionConfirmWithTransaction:transaction account:self.account token:self.token];
         }break;
         case AccountTypeMonitor: {
             [self coldWalletSendTransactionWithTransation:transaction account:self.account];
@@ -358,6 +359,7 @@
     c.amount = amount * self.token.unity;
     VsysTransaction *tx = VsysNewExecuteTransaction(self.token.contractId, VsysBase58EncodeToString([c buildDestroyData]), VsysGetFuncIndexFromDescriptor(self.token.textualDescriptor, @"destroy"), @"");
     tx.amount = amount * self.token.unity;
+    tx.tokenIdx = VsysTokenId2TokenIdx(self.token.tokenId);
     if (!tx) {
         return;
     }
@@ -370,7 +372,7 @@
     switch (self.account.accountType) {
         case AccountTypeWallet: {
             transaction.signature = [self.account.originAccount signData:tx.buildTxData];
-            [self beginTransactionConfirmWithTransaction:transaction account:self.account];
+            [self beginTransactionConfirmWithTransaction:transaction account:self.account token: self.token];
         }break;
         case AccountTypeMonitor: {
             [self coldWalletSendTransactionWithTransation:transaction account:self.account];

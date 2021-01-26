@@ -144,9 +144,6 @@ static NSInteger const TransactionPageSize = 100;
         NSArray<VsysToken *> *watchedList = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
         NSMutableArray<NSString *> *watchedCertifiedList = [NSMutableArray new];
         for (VsysToken *one in watchedList) {
-            if ([NSString isNilOrEmpty: one.name]) {
-                continue;
-            }
             [watchedCertifiedList addObject: VsysTokenId2ContractId(one.tokenId)];
         }
         
@@ -165,15 +162,21 @@ static NSInteger const TransactionPageSize = 100;
             if (one.transactionType == 9) {
                 if ([watchedCertifiedList containsObject:one.originTransaction.contractId]) {
                     VsysToken *t  = [self getWatchingTokenInfo:one.originTransaction.contractId];
-                    one.contractFuncName = [one getFunctionName:t.splitable];
+                    one.contractFuncName = [one getFunctionName:t];
                     if ([one.contractFuncName isEqualToString:VsysActionSend]) {
                         VsysContract *contract = [VsysContract new];
-                        [contract decodeSend:one.originTransaction.data];
+                        if([t isNFTToken]) {
+                            [contract decodeNFTSend:one.originTransaction.data];
+                            one.contractFuncName = VsysActionSend;
+                        }else {
+                            [contract decodeSend:one.originTransaction.data];
+                        }
                         one.originTransaction.recipient = contract.recipient;
                         one.symbol = t.name;
                         one.unity = t.unity;
                         one.originTransaction.amount = contract.amount;
                     }
+                    one.originTransaction.tokenIdx = VsysTokenId2TokenIdx(t.tokenId);
                 }
             }
             [txs addObject:one];

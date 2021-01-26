@@ -12,7 +12,7 @@
 
 static NSString *const MainnetHost = @"https://wallet.v.systems/api";
 
-static NSString *const TestnetHost = @"http://test-node.v.systems:9924";
+static NSString *const TestnetHost = @"https://test.v.systems/api";
 
 static NSString *const MainnetExplorerHost = @"https://explorer.v.systems";
 

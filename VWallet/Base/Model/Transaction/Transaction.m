@@ -7,6 +7,7 @@
 
 #import "Transaction.h"
 #import "NSString+Decimal.h"
+#import "VsysToken.h"
 
 @implementation Transaction
 
@@ -62,48 +63,69 @@
     return _transactionType;
 }
 
-- (NSString *)getFunctionName:(BOOL)split {
-    if (split) {
+- (NSString *)getFunctionName:(VsysToken *) token {
+    if([token isNFTToken]) {
         switch (_originTransaction.funcIdx) {
             case 0:
                 return VsysActionSupersede;
             case 1:
                 return VsysActionIssue;
             case 2:
-                return VsysActionDestroy;
-            case 3:
-                return VsysActionSplit;
-            case 4:
                 return VsysActionSend;
-            case 5:
+            case 3:
                 return VsysActionTransfer;
-            case 6:
+            case 4:
                 return VsysActionDeposit;
-            case 7:
+            case 5:
                 return VsysActionWithdraw;
             default:
                 return @"transaction.list.type.9";
         }
-    }else {
-       switch (_originTransaction.funcIdx) {
-            case 0:
-                return VsysActionSupersede;
-            case 1:
-                return VsysActionIssue;
-            case 2:
-                return VsysActionDestroy;
-            case 3:
-                return VsysActionSend;
-            case 4:
-                return VsysActionTransfer;
-            case 5:
-                return VsysActionDeposit;
-            case 6:
-                return VsysActionWithdraw;
-            default:
-                return @"transaction.list.type.9";
+    } else {
+        if (token.splitable) {
+            switch (_originTransaction.funcIdx) {
+                case 0:
+                    return VsysActionSupersede;
+                case 1:
+                    return VsysActionIssue;
+                case 2:
+                    return VsysActionDestroy;
+                case 3:
+                    return VsysActionSplit;
+                case 4:
+                    return VsysActionSend;
+                case 5:
+                    return VsysActionTransfer;
+                case 6:
+                    return VsysActionDeposit;
+                case 7:
+                    return VsysActionWithdraw;
+                default:
+                    return @"transaction.list.type.9";
+            }
+        }else {
+           switch (_originTransaction.funcIdx) {
+                case 0:
+                    return VsysActionSupersede;
+                case 1:
+                    return VsysActionIssue;
+                case 2:
+                    return VsysActionDestroy;
+                case 3:
+                    return VsysActionSend;
+                case 4:
+                    return VsysActionTransfer;
+                case 5:
+                    return VsysActionDeposit;
+                case 6:
+                    return VsysActionWithdraw;
+                default:
+                    return @"transaction.list.type.9";
+            }
         }
     }
+
+    
 }
 
 @end

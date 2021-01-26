@@ -102,7 +102,7 @@
                         amountStr = [@"+" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]];
                         targetAddress = [_transaction.senderAddress explicitCount:12 maxAsteriskCount:6];
                     }
-                    amountStr = [amountStr stringByAppendingString:[NSString stringWithFormat:@" %@", _transaction.symbol]];
+                    amountStr = [amountStr stringByAppendingString:[NSString stringWithFormat:@" %@", [NSString isNilOrEmpty: _transaction.symbol] ? @"": _transaction.symbol]];
                 }
                 typeDesc = VLocalize(_transaction.contractFuncName);
             }

@@ -34,9 +34,15 @@
         [self.TokenName setText:token.name];
     }
     NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:token.balance];
-    NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLongLong:token.unity];
-    NSString *balanceStr = [NSString stringWithDecimal:[tokenAmount decimalNumberByDividingBy:unityDecimal] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
-    [self.TokenBalance setText:balanceStr];
+    if(token.unity > 0) {
+        NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLongLong:token.unity];
+        NSString *balanceStr = [NSString stringWithDecimal:[tokenAmount decimalNumberByDividingBy:unityDecimal] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
+        [self.TokenBalance setText:balanceStr];
+    } else {
+        [self.TokenBalance setText:@"0"];
+    }
+    
+    
     if ([NSString isNilOrEmpty:token.icon]) {
         self.TokenLogo.image = [UIImage imageNamed:@"ico_token_logo"];
     }else {

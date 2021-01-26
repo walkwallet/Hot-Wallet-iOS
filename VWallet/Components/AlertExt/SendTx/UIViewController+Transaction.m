@@ -148,11 +148,11 @@
         NSString *amountStr = [NSString stringWithDecimal:[amountDecimal decimalNumberByDividingBy:unityDecimal] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES];
         title = [NSString stringWithFormat:VLocalize(@"transaction.cancel.lease.success.title"), amountStr, tx.recipient];
     } else if (tx.txType == VsysTxTypeContractRegister) {
-        title = [NSString stringWithFormat:VLocalize(@"transaction.create.contract"), VsysContractId2TokenId(tx.contractId, 0)];
+        title = [NSString stringWithFormat:VLocalize(@"transaction.create.contract"), VsysContractId2TokenId(tx.contractId, tx.tokenIdx)];
     } else if (tx.txType == VsysTxTypeContractExecute) {
         NSString *funcName = transaction.contractFuncName;
         if(!token) {
-            token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
+            token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, tx.tokenIdx)];
             funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
         }
         
@@ -196,12 +196,12 @@
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:title attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]}];
     NSAttributedString *attrMessage = [[NSAttributedString alloc] initWithString:VLocalize(@"transaction.success.detail") attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13 weight:UIFontWeightLight]}];
     if (tx.txType == VsysTxTypeContractRegister) {
-        [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[title rangeOfString:VsysContractId2TokenId(tx.contractId, 0)]];
+        [attrTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[title rangeOfString:VsysContractId2TokenId(tx.contractId, tx.tokenIdx)]];
         attrMessage = [[NSAttributedString alloc] initWithString:VLocalize(@"token.register.success.check.watch.list") attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13 weight:UIFontWeightLight]}];
     }else if (tx.txType == VsysTxTypeContractExecute) {
         NSString *funcName = transaction.contractFuncName;
         if(!token) {
-            token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, 0)];
+            token = [TokenMgr.shareInstance getTokenByAddress:transaction.senderAddress tokenId:VsysContractId2TokenId(tx.contractId, tx.tokenIdx)];
             funcName = VsysGetFuncNameFromDescriptor(token.textualDescriptor, transaction.originTransaction.funcIdx);
         }
         NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:tx.amount];

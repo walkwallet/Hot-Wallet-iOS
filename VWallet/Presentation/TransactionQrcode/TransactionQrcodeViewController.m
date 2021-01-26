@@ -105,7 +105,7 @@
         dict[@"contractId"] = self.transaction.originTransaction.contractId;
         dict[@"functionId"] = @(self.transaction.originTransaction.funcIdx);
         dict[@"function"] = VsysBase58EncodeToString(self.transaction.originTransaction.data);
-        VsysToken *token = [TokenMgr.shareInstance getTokenByAddress:self.transaction.senderAddress tokenId:VsysContractId2TokenId(self.transaction.originTransaction.contractId, 0)];
+        VsysToken *token = [TokenMgr.shareInstance getTokenByAddress:self.transaction.senderAddress tokenId:VsysContractId2TokenId(self.transaction.originTransaction.contractId, self.transaction.originTransaction.tokenIdx)];
         if ([self.transaction.contractFuncName isEqualToString:VsysActionSend]) {
             dict[@"functionExplain"] = [NSString stringWithFormat:VLocalize(@"scan.qrcode.function.explain.send"), [NSString stringWithDecimal:[NSString getAccurateDouble:self.transaction.originTransaction.amount unity:token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES], [NSString isNilOrEmpty:token.name] ? @"tokens" : token.name, self.transaction.originTransaction.recipient];
         }else if ([self.transaction.contractFuncName isEqualToString:VsysActionIssue]) {

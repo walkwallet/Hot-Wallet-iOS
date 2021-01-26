@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 @import Vsys;
+@class VsysToken;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -52,7 +53,7 @@ static int64_t const VTimestampMultiple = 1000000000;
 
 @property (nonatomic, assign) int64_t unity;
 
-- (NSString *)getFunctionName:(BOOL)split;
+- (NSString *)getFunctionName:(VsysToken *)token;
 
 @end
 

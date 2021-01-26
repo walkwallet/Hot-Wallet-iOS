@@ -272,39 +272,63 @@
         }else {
             [loadingView stopLoading];
             [loadingView removeFromSuperview];
-            [weakSelf remindWithMessage:VLocalize(@"contract.error.not.exist")];
+            [weakSelf remindWithMessage:VLocalize(@"contract.error.query.failed")];
             callback(NO);
         }
     }];
 }
 
+- (void) loadContractContent:(NSString *)contractId token: (VsysToken *)token callback:(void (^)(BOOL isSuc))callback {
+    [ApiServer getContractContent:contractId callback:^(BOOL isSuc, ContractContent * _Nonnull contractContent) {
+        if (contractContent.textual && contractContent.textual.descriptors) {
+            token.textualDescriptor = contractContent.textual.descriptors;
+            NSString *funcJson = VsysDecodeContractTexture(token.textualDescriptor);
+            if ([funcJson containsString:@"split"]) {
+                token.splitable = true;
+            }
+        }
+        callback(isSuc);
+    }];
+}
+
 - (void) getAvailableBalance:(void (^)(BOOL isSuc, NSString *balance))callback {
     __weak typeof (self) weakSelf = self;
+    NSString *paymentOrLockContractId = weakSelf.contractTv.text;
+    NSString *tokenContractId = VsysTokenId2ContractId(weakSelf.token.tokenId);
     switch (weakSelf.operateType) {
         case TransactionOperateTypeDeposit:
         {
             [ApiServer getAddressTokenBalance:weakSelf.account.originAccount.address tokenId:weakSelf.token.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
                 weakSelf.token = token;
-                NSString *available = @"0.00";
                 if(isSuc) {
-                    available = [NSString stringWithDecimal:[NSString getAccurateDouble:token.balance unity: token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
+                    [weakSelf loadContractContent:tokenContractId token:weakSelf.token callback:^(BOOL isSuc) {
+                        NSString * available = [NSString stringWithDecimal:[NSString getAccurateDouble:token.balance unity: token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
+                        callback(isSuc, available);
+                    }];
+                   
+                } else {
+                    callback(NO, @"0.00");
                 }
-                callback(isSuc, available);
             }];
         }
             break;
         case TransactionOperateTypeWithdraw:
         {
-            [ApiServer getContractData:weakSelf.contractTv.text dbKey:VsysGetContractBalanceDbKey(weakSelf.account.originAccount.address) callback:^(BOOL isSuc, ContractData * _Nonnull contractData) {
+            [ApiServer getContractData:paymentOrLockContractId dbKey:VsysGetContractBalanceDbKey(weakSelf.account.originAccount.address) callback:^(BOOL isSuc, ContractData * _Nonnull contractData) {
                 if(isSuc) {
                     [ApiServer getTokenInfo:weakSelf.token.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
-                        NSString *available = @"0.00";
                         if(isSuc) {
                             weakSelf.token = token;
                             weakSelf.token.balance = contractData.value;
-                            available = [NSString stringWithDecimal:[NSString getAccurateDouble:contractData.value unity: token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
+                            
+                            [weakSelf loadContractContent:tokenContractId token:weakSelf.token callback:^(BOOL isSuc) {
+                                NSString *available = [NSString stringWithDecimal:[NSString getAccurateDouble:contractData.value unity: token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
+                                callback(isSuc, available);
+                            }];
+                            
+                        } else {
+                            callback(NO, @"0.00");
                         }
-                        callback(isSuc, available);
                     }];
                 } else {
                     callback(NO, @"0.00");
@@ -365,7 +389,7 @@
             c.senderAddr = self.account.originAccount.address;
             c.contractId = self.contractTv.text;
             c.amount = [[amount decimalNumberByMultiplyingBy:unity] longLongValue];
-            tx = VsysNewExecuteTransaction(VsysTokenId2ContractId(self.token.tokenId), VsysBase58EncodeToString([c buildDepositData]), 5, @"");
+            tx = VsysNewExecuteTransaction(VsysTokenId2ContractId(self.token.tokenId), VsysBase58EncodeToString([c buildDepositData]), VsysGetFuncIndexFromDescriptor(self.token.textualDescriptor, @"deposit"), @"");
             
         } break;
         case TransactionOperateTypeWithdraw: {
@@ -374,7 +398,7 @@
             c.recipient = self.account.originAccount.address;
             c.contractId = self.contractTv.text;
             c.amount = [[amount decimalNumberByMultiplyingBy:unity] longLongValue];
-            tx = VsysNewExecuteTransaction(VsysTokenId2ContractId(self.token.tokenId), VsysBase58EncodeToString([c buildWithdrawData]), 7, @"");
+            tx = VsysNewExecuteTransaction(VsysTokenId2ContractId(self.token.tokenId), VsysBase58EncodeToString([c buildWithdrawData]),  VsysGetFuncIndexFromDescriptor(self.token.textualDescriptor, @"withdraw"), @"");
         } break;
         default:
             break;
@@ -382,6 +406,8 @@
     if (!tx) {
         return;
     }
+    tx.tokenIdx = VsysTokenId2TokenIdx(self.token.tokenId);
+    
     Transaction *transaction = [[Transaction alloc] init];
     transaction.originTransaction = tx;
     if(self.operateType == TransactionOperateTypeDeposit) {

@@ -113,9 +113,6 @@ static NSInteger const TransactionPageSize = 100;
             NSArray<VsysToken *> *watchedList = [TokenMgr.shareInstance loadAddressWatchToken:self.account.originAccount.address];
             NSMutableArray<NSString *> *watchedCertifiedList = [NSMutableArray new];
             for (VsysToken *one in watchedList) {
-                if ([NSString isNilOrEmpty: one.name]) {
-                    continue;
-                }
                 [watchedCertifiedList addObject: VsysTokenId2ContractId(one.tokenId)];
             }
             
@@ -124,16 +121,21 @@ static NSInteger const TransactionPageSize = 100;
                 if (one.transactionType == 9) {
                     if ([watchedCertifiedList containsObject:one.originTransaction.contractId]) {
                         VsysToken *t  = [self getWatchingTokenInfo:one.originTransaction.contractId];
-                        txArr[index].contractFuncName = [one getFunctionName:t.splitable];
+                        txArr[index].contractFuncName = [one getFunctionName:t];
                         if ([txArr[index].contractFuncName isEqualToString:VsysActionSend]) {
-                            VsysToken *t = [TokenMgr.shareInstance getTokenByAddress:weakSelf.account.originAccount.address tokenId:VsysContractId2TokenId(one.originTransaction.contractId, 0)];
+                            VsysToken *t = [TokenMgr.shareInstance getTokenByAddress:weakSelf.account.originAccount.address tokenId:VsysContractId2TokenId(one.originTransaction.contractId, one.originTransaction.tokenIdx)];
                             VsysContract *contract = [VsysContract new];
-                            [contract decodeSend:txArr[index].originTransaction.data];
+                            if([t isNFTToken]) {
+                                [contract decodeNFTSend:one.originTransaction.data];
+                            }else {
+                                [contract decodeSend:one.originTransaction.data];
+                            }
                             txArr[index].originTransaction.recipient = contract.recipient;
                             txArr[index].symbol = t.name;
                             txArr[index].unity = t.unity;
                             txArr[index].originTransaction.amount = contract.amount;
                         }
+                        txArr[index].originTransaction.tokenIdx = VsysTokenId2TokenIdx(t.tokenId);
                     }
                 }
             }

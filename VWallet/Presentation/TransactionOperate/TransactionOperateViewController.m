@@ -376,6 +376,7 @@
             tx = VsysNewExecuteTransaction(self.token.contractId, VsysBase58EncodeToString([c buildSendData]), VsysGetFuncIndexFromDescriptor(self.token.textualDescriptor, @"send"), self.descTextView.text);
             tx.recipient = self.receiveAddressTextView.text;
             tx.amount = c.amount;
+           
             if([self.token isNFTToken]) {
                 c.tokenIdx = VsysTokenId2TokenIdx(self.token.tokenId);
                 tx.data = [c buildNFTSendData];
@@ -383,6 +384,7 @@
             }else {
                 tx.data = [c buildSendData];
             }
+            tx.tokenIdx = c.tokenIdx;
         }
             break;
         case TransactionOperateTypeDeposit: {
@@ -408,7 +410,7 @@
     switch (self.account.accountType) {
         case AccountTypeWallet: {
             transaction.signature = [self.account.originAccount signData:tx.buildTxData];
-            [self beginTransactionConfirmWithTransaction:transaction account:self.account];
+            [self beginTransactionConfirmWithTransaction:transaction account:self.account token: self.token];
         } break;
         case AccountTypeMonitor: {
             [self coldWalletSendTransactionWithTransation:transaction account:self.account];
