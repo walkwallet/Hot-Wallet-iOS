@@ -200,7 +200,7 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
     for(Account *one in WalletMgr.shareInstance.accounts) {
-        if ([weakSelf.tokenList[indexPath.row].issuer isEqualToString:one.originAccount.address]) {
+        if (![weakSelf.tokenList[indexPath.row] isNFTToken] &&[weakSelf.tokenList[indexPath.row].issuer isEqualToString:one.originAccount.address]) {
             [titles addObject:VLocalize(@"token.issue.token")];
             [titles addObject:VLocalize(@"token.burn.token")];
             [actions addObject:^() {

@@ -72,6 +72,7 @@
 @property (nonatomic) int32_t tokenIdx;
 @property (nonatomic) NSString* _Nonnull recipient;
 @property (nonatomic) NSString* _Nonnull senderPublicKey;
+@property (nonatomic) NSString* _Nonnull senderAddr;
 // skipped field Contract.Textual with unsupported type: Vsyslib.Textual
 
 // skipped field Contract.Functions with unsupported type: []Vsyslib.Func

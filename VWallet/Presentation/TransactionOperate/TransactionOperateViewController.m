@@ -159,6 +159,11 @@
     [feeMas appendAttributedString:[[NSAttributedString alloc] initWithString:[feeStr stringByAppendingString:@" VSYS"] attributes:@{NSForegroundColorAttributeName : VColor.textSecondDeepenColor}]];
     self.transactionFeeLabel.attributedText = feeMas;
     [self.continueBtn setTitle:VLocalize(@"continue") forState:UIControlStateNormal];
+    if([self.token isNFTToken]) {
+        self.amountTextField.text = @"1";
+        self.amountTextField.userInteractionEnabled = NO;
+        self.maxBtn.userInteractionEnabled = NO;
+    }
     if (![self checkAmount]) {}
 }
 

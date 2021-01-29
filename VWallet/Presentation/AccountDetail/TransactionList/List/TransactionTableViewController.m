@@ -121,9 +121,17 @@ static NSInteger const TransactionPageSize = 100;
                 if (one.transactionType == 9) {
                     if ([watchedCertifiedList containsObject:one.originTransaction.contractId]) {
                         VsysToken *t  = [self getWatchingTokenInfo:one.originTransaction.contractId];
+                        if(!t) {
+                            continue;
+                        }
+                        txArr[index].symbol = t.name;
+                        txArr[index].unity = t.unity;
                         txArr[index].contractFuncName = [one getFunctionName:t];
+                        int32_t tokenIdx = VsysTokenId2TokenIdx(t.tokenId);
+                        txArr[index].originTransaction.tokenIdx = tokenIdx;
+                        
                         if ([txArr[index].contractFuncName isEqualToString:VsysActionSend]) {
-                            VsysToken *t = [TokenMgr.shareInstance getTokenByAddress:weakSelf.account.originAccount.address tokenId:VsysContractId2TokenId(one.originTransaction.contractId, one.originTransaction.tokenIdx)];
+                            VsysToken *t = [TokenMgr.shareInstance getTokenByAddress:weakSelf.account.originAccount.address tokenId:VsysContractId2TokenId(one.originTransaction.contractId, tokenIdx)];
                             VsysContract *contract = [VsysContract new];
                             if([t isNFTToken]) {
                                 [contract decodeNFTSend:one.originTransaction.data];
@@ -131,11 +139,19 @@ static NSInteger const TransactionPageSize = 100;
                                 [contract decodeSend:one.originTransaction.data];
                             }
                             txArr[index].originTransaction.recipient = contract.recipient;
-                            txArr[index].symbol = t.name;
-                            txArr[index].unity = t.unity;
+                            txArr[index].originTransaction.amount = contract.amount;
+                        } else if([txArr[index].contractFuncName isEqualToString:VsysActionDeposit]) {
+                            VsysContract *contract = [VsysContract new];
+                            [contract decodeDeposit:one.originTransaction.data];
+                            txArr[index].originTransaction.recipient = contract.contractId;
+                            txArr[index].originTransaction.amount = contract.amount;
+                        } else if([txArr[index].contractFuncName isEqualToString:VsysActionWithdraw]) {
+                            VsysContract *contract = [VsysContract new];
+                            [contract decodeWithdraw:one.originTransaction.data];
+                            txArr[index].senderAddress = contract.contractId;
                             txArr[index].originTransaction.amount = contract.amount;
                         }
-                        txArr[index].originTransaction.tokenIdx = VsysTokenId2TokenIdx(t.tokenId);
+                        
                     }
                 }
             }

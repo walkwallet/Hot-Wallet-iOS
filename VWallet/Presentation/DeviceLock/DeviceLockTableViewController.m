@@ -182,9 +182,23 @@
     }
     
     if ([item.identifier isEqualToString:@"auto_lock"]) {
-        NSInteger index = AppState.shareInstance.autoLockTime == 5 ? 0 : 1;
-        [self actionSheetWithSelectedIndex:index withActionDatas:@[@"5 min", @"10 min"] handler:^(NSInteger index) {
-            AppState.shareInstance.autoLockTime = index == 0 ? 5 : 10;
+    
+        NSInteger index;
+        if(AppState.shareInstance.autoLockTime == 5) {
+            index = 0;
+        } else if(AppState.shareInstance.autoLockTime == 10) {
+            index = 1;
+        } else {
+            index = 2;
+        }
+        [self actionSheetWithSelectedIndex:index withActionDatas:@[@"5 min", @"10 min", VLocalize(@"close")] handler:^(NSInteger index) {
+            if(index == 0) {
+                AppState.shareInstance.autoLockTime = 5;
+            } else if (index == 1){
+                AppState.shareInstance.autoLockTime = 10;
+            } else {
+                AppState.shareInstance.autoLockTime = -1;
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self initContentData];
                 [self.tableView reloadData];

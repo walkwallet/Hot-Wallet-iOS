@@ -6,6 +6,7 @@
 //
 
 #import "AppState.h"
+#import "Language.h"
 
 static NSString *VLockEnableKey = @"VLockEnableKey";
 static NSString *VAutoBackupEnableKey = @"VAutoBackupEnableKey";
@@ -120,6 +121,6 @@ static AppState *VAppState;
     } else if (self.autoLockTime == 10) {
         return @"10 min";
     }
-    return @"";
+    return VLocalize(@"close");
 }
 @end

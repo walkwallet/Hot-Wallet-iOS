@@ -145,7 +145,7 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.from"), @"value" : self.transaction.senderAddress, @"hiddenCopy":[NSNumber numberWithBool:NO]}];
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.to"), @"value" : c.recipient, @"hiddenCopy":[NSNumber numberWithBool:NO]}];
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.send.token"), @"hiddenCopy":[NSNumber numberWithBool:YES]}];
-            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : [[NSString stringWithDecimal:[NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES] stringByAppendingString: [NSString stringWithFormat:@" %@", token.name]], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
+            [showData addObject:@{@"title" : VLocalize(@"transaction.detail.amount"), @"value" : [[NSString stringWithDecimal:[NSString getAccurateDouble:c.amount unity:token.unity] maxFractionDigits:8 minFractionDigits:2 trimTrailing:YES] stringByAppendingString: [NSString stringWithFormat:@" %@", [NSString isNilOrEmpty:token.name] ? @"" : token.name]], @"hiddenCopy":[NSNumber numberWithBool:YES]}];
         }else if ([funcName isEqualToString:@"issue"]) {
             [c decodeIssue:oriTx.data];
             [showData addObject:@{@"title" : VLocalize(@"transaction.detail.type"), @"value" : VLocalize(@"token.issue.token"), @"hiddenCopy":[NSNumber numberWithBool:YES]}];

@@ -233,8 +233,30 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
                 [ApiServer getContractInfo:contractId callback:^(BOOL isSuc, Contract * _Nonnull contract) {
                     if(isSuc) {
                         if ([contract.type isEqualToString:@"TokenContract"] || [contract.type  isEqualToString:@"TokenContractWithSplit"] || [contract.type isEqualToString:@"NonFungibleContract"]) {
-                           
-                            
+                            [ApiServer getContractContent:contractId callback:^(BOOL isSuc, ContractContent * _Nonnull contractContent) {
+                                [loadingView stopLoading];
+                                [loadingView removeFromSuperview];
+                                weakSelf.token.contractType = contract.type;
+                                if (contractContent.textual && contractContent.textual.descriptors) {
+                                    weakSelf.token.textualDescriptor = contractContent.textual.descriptors;
+                                    NSString *funcJson = VsysDecodeContractTexture(weakSelf.token.textualDescriptor);
+                                    if ([funcJson containsString:@"split"]) {
+                                        weakSelf.token.splitable = true;
+                                    }
+                                    NSMutableArray *newList = [[NSMutableArray alloc] init];
+                                    [newList addObjectsFromArray:oldList];
+                                    weakSelf.token.balance = token.balance;
+                                    [newList addObject:weakSelf.token];
+                                    NSError *error = [TokenMgr.shareInstance saveToStorage:weakSelf.account.originAccount.address list:newList];
+                                    if (error != nil) {
+                                        [weakSelf alertWithTitle:[error localizedDescription] confirmText:VLocalize(@"close")];
+                                    }else {
+                                        [weakSelf.navigationController popViewControllerAnimated:YES];
+                                    }
+                                }else {
+                                    [weakSelf alertWithTitle:@"" confirmText:VLocalize(@"")];
+                                }
+                            }];
                         } else {
                             [loadingView stopLoading];
                             [loadingView removeFromSuperview];

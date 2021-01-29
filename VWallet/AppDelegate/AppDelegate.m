@@ -52,7 +52,7 @@
 }
 
 - (void)auth {
-    if (AppState.shareInstance.hasWallet) {
+    if (AppState.shareInstance.hasWallet && AppState.shareInstance.autoLockTime > 0) {
         UIViewController *topVC = WindowManager.topViewControllerDismissAlert;
         if ([topVC isKindOfClass:PasswordInputViewController.class]) {
             return;
@@ -77,7 +77,9 @@
 
 - (void)sendEvent:(UIEvent *)event {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(update) object:nil];
-    [self performSelector:@selector(update) withObject:nil afterDelay:AppState.shareInstance.autoLockTime == 10 ? 600 : 300];
+    if(AppState.shareInstance.autoLockTime > 0) {
+        [self performSelector:@selector(update) withObject:nil afterDelay:AppState.shareInstance.autoLockTime == 10 ? 600 : 300];
+    }
     [super sendEvent:event];
 }
 
