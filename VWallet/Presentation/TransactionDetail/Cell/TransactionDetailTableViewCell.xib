@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -67,7 +67,7 @@
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_copy_grey" translatesAutoresizingMaskIntoConstraints="NO" id="uBq-1q-lvU">
-                        <rect key="frame" x="349" y="53" width="18" height="18"/>
+                        <rect key="frame" x="345" y="51" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="uBq-1q-lvU" secondAttribute="height" multiplier="1:1" id="xXt-bN-y0q"/>
                         </constraints>
@@ -78,7 +78,7 @@
                     <constraint firstAttribute="trailing" secondItem="uBq-1q-lvU" secondAttribute="trailing" constant="8" id="5KC-Jm-r1M"/>
                     <constraint firstAttribute="trailing" secondItem="6d8-6y-9ed" secondAttribute="trailing" constant="20" id="78Q-8j-Dhl"/>
                     <constraint firstItem="6d8-6y-9ed" firstAttribute="leading" secondItem="3EQ-zy-STL" secondAttribute="leading" constant="20" id="EU0-wE-8Gy"/>
-                    <constraint firstItem="uBq-1q-lvU" firstAttribute="width" secondItem="3EQ-zy-STL" secondAttribute="width" multiplier="18:375" id="c70-6X-goG"/>
+                    <constraint firstItem="uBq-1q-lvU" firstAttribute="width" secondItem="3EQ-zy-STL" secondAttribute="width" multiplier="22:375" id="c70-6X-goG"/>
                     <constraint firstItem="6d8-6y-9ed" firstAttribute="top" secondItem="3EQ-zy-STL" secondAttribute="top" id="rDP-sh-drY"/>
                     <constraint firstAttribute="bottom" secondItem="6d8-6y-9ed" secondAttribute="bottom" id="ssK-dN-ESg"/>
                 </constraints>
