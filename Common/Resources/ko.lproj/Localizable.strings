@@ -22,6 +22,7 @@
 "isee"  = "내용을 이해했습니다.";
 "notagree" = "동의하지 않음";
 "agree" = "동의";
+"never" = "종료";
 
 // view text by module vi: "settings.title" "xx.xx.xx.xx.title"
 

@@ -121,6 +121,6 @@ static AppState *VAppState;
     } else if (self.autoLockTime == 10) {
         return @"10 min";
     }
-    return VLocalize(@"close");
+    return VLocalize(@"never");
 }
 @end

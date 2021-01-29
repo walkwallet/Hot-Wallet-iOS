@@ -22,6 +22,7 @@
 "isee" = "I got it";
 "notagree" = "I do not agree";
 "agree" = "I agree";
+"never" = "Never";
 
 // view text by module vi: "settings.title" "xx.xx.xx.xx.title"
 

@@ -22,6 +22,7 @@
 "isee" = "知道了";
 "notagree" = "不同意";
 "agree" = "同意";
+"never" = "關閉";
 
 // view text by module vi: "settings.title" "xx.xx.xx.xx.title"
 

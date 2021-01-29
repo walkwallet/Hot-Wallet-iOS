@@ -23,22 +23,31 @@
 - (void)setShowInfo:(NSDictionary *)showInfo {
     _showInfo = showInfo;
     _titleLabel.text = showInfo[@"title"];
-    if ([VLocalize(@"transaction.detail.tx.id") isEqual:showInfo[@"title"]]) {
-        _titleLabel.textColor = [UIColor colorWithHex:0x5E5CB7];
-    }else{
-        _titleLabel.textColor = [UIColor colorWithHex:0x939399];
-    }
     _valueLabel.text = showInfo[@"value"];
+    if ([VLocalize(@"transaction.detail.tx.id") isEqual:showInfo[@"title"]]) {
+        _valueLabel.textColor = [UIColor colorWithHex:0x5E5CB7];
+    }else{
+        _valueLabel.textColor = [UIColor colorWithHex:0x939399];
+    }
+    
     _tagCopyImageView.hidden = [showInfo[@"hiddenCopy"] boolValue];
 }
 
 - (void)layoutSubviews{
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickId)];
     if ([VLocalize(@"transaction.detail.tx.id") isEqual:self.showInfo[@"title"]]) {
-        [self.titleLabel addGestureRecognizer:tap];
-        self.titleLabel.userInteractionEnabled = true;
+        [self.valueLabel addGestureRecognizer:tap];
+        self.valueLabel.userInteractionEnabled = true;
     }else{
-        self.titleLabel.userInteractionEnabled = false;
+        self.valueLabel.userInteractionEnabled = false;
+    }
+    
+    if (![self.showInfo[@"hiddenCopy"] boolValue]) {
+        UITapGestureRecognizer *copyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCopy)];
+        [self.tagCopyImageView addGestureRecognizer:copyTap];
+        self.tagCopyImageView.userInteractionEnabled = true;
+    }else{
+        self.tagCopyImageView.userInteractionEnabled = false;
     }
     
 }
@@ -47,10 +56,11 @@
     NSString *urlStr = [@"https://explorer.v.systems/transactions/" stringByAppendingString:self.showInfo[@"value"]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:^(BOOL success) {
     }];
-   
-    
-    
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http:www.baidu.com"]];
+}
+
+- (void)clickCopy {
+    UIPasteboard.generalPasteboard.string = self.showInfo[@"value"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"clickCopy" object:nil userInfo:nil];
 }
 
 @end

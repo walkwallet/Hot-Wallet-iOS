@@ -191,7 +191,7 @@
         } else {
             index = 2;
         }
-        [self actionSheetWithSelectedIndex:index withActionDatas:@[@"5 min", @"10 min", VLocalize(@"close")] handler:^(NSInteger index) {
+        [self actionSheetWithSelectedIndex:index withActionDatas:@[@"5 min", @"10 min", VLocalize(@"never")] handler:^(NSInteger index) {
             if(index == 0) {
                 AppState.shareInstance.autoLockTime = 5;
             } else if (index == 1){

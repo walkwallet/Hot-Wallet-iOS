@@ -57,6 +57,8 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellClickCopy) name:@"clickCopy" object:nil];
 }
 
 - (void)initView {
@@ -222,10 +224,6 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (![self.showData[indexPath.row][@"hiddenCopy"] boolValue]) {
-        UIPasteboard.generalPasteboard.string = self.showData[indexPath.row][@"value"];
-        [self remindWithMessage:VLocalize(@"tip.copy.success")];
-    }
 }
 
 - (IBAction)cancelBtnClick {
@@ -244,6 +242,10 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
     } else {
         [self coldWalletSendTransactionWithTransation:transaction account:self.account];
     }
+}
+
+-(void) cellClickCopy {
+    [self remindWithMessage:VLocalize(@"tip.copy.success")];
 }
 
 @end
