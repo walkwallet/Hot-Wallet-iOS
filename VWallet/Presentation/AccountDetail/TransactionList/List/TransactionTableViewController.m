@@ -119,25 +119,29 @@ static NSInteger const TransactionPageSize = 100;
             for (Transaction *one in txArr) {
                 NSInteger index = [txArr indexOfObject:one];
                 if (one.transactionType == 9) {
-                    if ([watchedCertifiedList containsObject:one.originTransaction.contractId]) {
+                    BOOL isSystemToken = [VsysToken isSystemToken:VsysContractId2TokenId(one.originTransaction.contractId, one.originTransaction.tokenIdx)];
+                    if (isSystemToken || [watchedCertifiedList containsObject:one.originTransaction.contractId]) {
                         VsysToken *t  = [self getWatchingTokenInfo:one.originTransaction.contractId];
-                        if(!t) {
+                        if(isSystemToken){
+                            t = [VsysToken new];
+                            t.unity = VsysVSYS;
+                            t.name = @"VSYS";
+                            t.tokenId = VsysContractId2TokenId(one.originTransaction.contractId, one.originTransaction.tokenIdx);
+                        } else if(!t) {
                             continue;
                         }
                         txArr[index].symbol = t.name;
                         txArr[index].unity = t.unity;
                         txArr[index].contractFuncName = [one getFunctionName:t];
-                        int32_t tokenIdx = VsysTokenId2TokenIdx(t.tokenId);
-                        txArr[index].originTransaction.tokenIdx = tokenIdx;
                         
                         if ([txArr[index].contractFuncName isEqualToString:VsysActionSend]) {
-                            VsysToken *t = [TokenMgr.shareInstance getTokenByAddress:weakSelf.account.originAccount.address tokenId:VsysContractId2TokenId(one.originTransaction.contractId, tokenIdx)];
                             VsysContract *contract = [VsysContract new];
                             if([t isNFTToken]) {
                                 [contract decodeNFTSend:one.originTransaction.data];
                             }else {
                                 [contract decodeSend:one.originTransaction.data];
                             }
+                            txArr[index].originTransaction.tokenIdx = contract.tokenIdx;
                             txArr[index].originTransaction.recipient = contract.recipient;
                             txArr[index].originTransaction.amount = contract.amount;
                         } else if([txArr[index].contractFuncName isEqualToString:VsysActionDeposit]) {

@@ -376,6 +376,13 @@
 "const.transaction.type.lease.out.cancel" = "取消租出";
 "const.transaction.type.contract.register" = "注册合约";
 "const.transaction.type.contract.execute" = "执行合约";
+"const.transaction.type.contract.send.token" = "发送 Token";
+"const.transaction.type.contract.receive.token" = "接收 Token";
+"const.transaction.type.contract.deposit.token" = "抵押 Token";
+"const.transaction.type.contract.withdraw.token" = "提现 Token";
+"const.transaction.type.contract.deposit.vsys" = "抵押 VSYS";
+"const.transaction.type.contract.withdraw.vsys" = "提现 VSYS";
+
 
 // ---- network ----
 "const.network.mainnet" = "正式网络";

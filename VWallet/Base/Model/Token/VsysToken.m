@@ -6,6 +6,7 @@
 //
 
 #import "VsysToken.h"
+#import "WalletMgr.h"
 
 @implementation VsysToken
 
@@ -52,6 +53,24 @@
 
 - (BOOL) isNFTToken {
     return [self.contractType isEqualToString:@"NonFungibleContract"];
+}
+
++ (BOOL) isSystemToken:(NSString *) tokenId {
+    BOOL isMainnetSystemToken = [WalletMgr.shareInstance.network isEqualToString:VsysNetworkMainnet] && [tokenId isEqualToString:@"TWatCreEv7ayv6iAfLgke6ppVV33kDjFqSJn8yicf"];
+    BOOL isTestNetSystemToken = [WalletMgr.shareInstance.network isEqualToString:VsysNetworkTestnet] && [tokenId isEqualToString:@"TWuKDNU1SAheHR99s1MbGZLPh1KophEmKk1eeU3mW"];
+    return isMainnetSystemToken || isTestNetSystemToken;
+}
+
++ (VsysToken *) getSystemToken {
+    VsysToken *token = [VsysToken new];
+    if([WalletMgr.shareInstance.network isEqualToString:VsysNetworkMainnet]) {
+        token.tokenId = @"TWatCreEv7ayv6iAfLgke6ppVV33kDjFqSJn8yicf";
+    } else {
+        token.tokenId = @"TWuKDNU1SAheHR99s1MbGZLPh1KophEmKk1eeU3mW";
+    }
+    token.unity = VsysVSYS;
+    token.name = @"VSYS";
+    return token;
 }
 
 @end

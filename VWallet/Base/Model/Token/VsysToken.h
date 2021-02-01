@@ -30,5 +30,7 @@
 @property (nonatomic) BOOL watched;
 
 - (BOOL) isNFTToken;
++ (BOOL) isSystemToken:(NSString *) tokenId;
++ (VsysToken *) getSystemToken;
 
 @end

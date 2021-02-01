@@ -376,6 +376,12 @@
 "const.transaction.type.lease.out.cancel"  = "리스 취소";
 "const.transaction.type.contract.register" = "계약 생성";
 "const.transaction.type.contract.execute" = "계약 체결";
+"const.transaction.type.contract.send.token"= "토큰 보내기";
+"const.transaction.type.contract.receive.token"= "토큰 받기";
+"const.transaction.type.contract.deposit.token"= "서약 토큰";
+"const.transaction.type.contract.withdraw.token"= "토큰 출금";
+"const.transaction.type.contract.deposit.vsys"= "VSYS 서약";
+"const.transaction.type.contract.withdraw.vsys"= "VSYS 철회";
 
 // ---- network ----
 "const.network.mainnet"  = "메인넷";

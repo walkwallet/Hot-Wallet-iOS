@@ -160,13 +160,20 @@ static NSInteger const TransactionPageSize = 100;
                 }
             }
             if (one.transactionType == 9) {
-                if ([watchedCertifiedList containsObject:one.originTransaction.contractId]) {
+                BOOL isSystemToken = [VsysToken isSystemToken:VsysContractId2TokenId(one.originTransaction.contractId, one.originTransaction.tokenIdx)];
+                if (isSystemToken || [watchedCertifiedList containsObject:one.originTransaction.contractId]) {
                     VsysToken *t  = [self getWatchingTokenInfo:one.originTransaction.contractId];
-                    if(!t) {
+                    if(isSystemToken){
+                        t = [VsysToken new];
+                        t.unity = VsysVSYS;
+                        t.name = @"VSYS";
+                        t.tokenId = VsysContractId2TokenId(one.originTransaction.contractId, one.originTransaction.tokenIdx);
+                    } else if(!t) {
                         continue;
                     }
                     one.symbol = t.name;
                     one.unity = t.unity;
+               
                     one.contractFuncName = [one getFunctionName:t];
                     if ([one.contractFuncName isEqualToString:VsysActionSend]) {
                         VsysContract *contract = [VsysContract new];
@@ -176,6 +183,7 @@ static NSInteger const TransactionPageSize = 100;
                         }else {
                             [contract decodeSend:one.originTransaction.data];
                         }
+                        one.originTransaction.tokenIdx = contract.tokenIdx;
                         one.originTransaction.recipient = contract.recipient;
                         one.originTransaction.amount = contract.amount;
                     }else if([one.contractFuncName isEqualToString:VsysActionDeposit]) {
@@ -189,7 +197,6 @@ static NSInteger const TransactionPageSize = 100;
                         one.senderAddress = contract.contractId;
                         one.originTransaction.amount = contract.amount;
                     }
-                    one.originTransaction.tokenIdx = VsysTokenId2TokenIdx(t.tokenId);
                 }
             }
             [txs addObject:one];

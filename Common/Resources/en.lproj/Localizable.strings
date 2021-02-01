@@ -376,6 +376,12 @@
 "const.transaction.type.lease.out.cancel" = "Canceled Leased out";
 "const.transaction.type.contract.register" = "Register Contract";
 "const.transaction.type.contract.execute" = "Execute Contract";
+"const.transaction.type.contract.send.token" = "Send Token";
+"const.transaction.type.contract.receive.token" = "Receive Token";
+"const.transaction.type.contract.deposit.token" = "Deposit Token";
+"const.transaction.type.contract.withdraw.token" = "Withdraw Token";
+"const.transaction.type.contract.deposit.vsys" = "Deposit VSYS";
+"const.transaction.type.contract.withdraw.vsys" = "Withdraw VSYS";
 
 // ---- network ----
 "const.network.mainnet" = "Mainnet";

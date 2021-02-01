@@ -11,6 +11,8 @@
 #import "NSString+Asterisk.h"
 #import "NSDate+FormatString.h"
 #import "Transaction+Extension.h"
+#import "WalletMgr.h"
+#import "VsysToken.h"
 @import Vsys;
 
 @interface TransactionTableViewCell ()
@@ -86,29 +88,26 @@
             self.typeImgView.image = [UIImage imageNamed:@"ico_contract_register_success"];
         }
     }else if (_transaction.originTransaction.txType == VsysTxTypeContractExecute) {
+        
         if (![@"Success" isEqualToString:_transaction.status]) {
             self.typeImgView.image = [UIImage imageNamed:@"ico_contract_fail"];
         }else {
-            typeDesc = VLocalize(_transaction.contractFuncName);
-            if([NSString isNilOrEmpty:typeDesc]) {
-                typeDesc = VLocalize(@"transaction.list.type.9");
-            }
-            if ([NSString isNilOrEmpty:_transaction.contractFuncName]) {
-                self.typeImgView.image = [UIImage imageNamed:@"ico_contract_success"];
-            }else {
-                
+            self.typeImgView.image = [UIImage imageNamed:@"ico_contract_success"];
+            amountStr = [@"-" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.fee unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES]];
+            if(_transaction.unity > 0) {
                 if ([_transaction.contractFuncName isEqualToString:VsysActionSend]) {
                     if ([_transaction.direction isEqualToString:@"out"]) {
+                        typeDesc = VLocalize(@"const.transaction.type.contract.send.token");
                         self.typeImgView.image = [UIImage imageNamed:@"ico_transaction_type_1"];
-                        amountStr = _transaction.unity > 0 ? [@"-" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]] : @"";
+                        amountStr = [@"-" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]];
                         
                         targetAddress = [_transaction.originTransaction.recipient explicitCount:12 maxAsteriskCount:6];
-                    }else {
-                        self.typeImgView.image = [UIImage imageNamed:@"ico_transaction_type_2"];
-                        amountStr = _transaction.unity > 0 ? [@"+" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]] : @"";
                         
+                    }else {
+                        typeDesc = VLocalize(@"const.transaction.type.contract.receive.token");
+                        self.typeImgView.image = [UIImage imageNamed:@"ico_transaction_type_2"];
+                        amountStr =  [@"+" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]];
                         targetAddress = [_transaction.senderAddress explicitCount:12 maxAsteriskCount:6];
-                        typeDesc = VLocalize(@"const.transaction.type.receive");
                     }
                     amountStr = [amountStr stringByAppendingString:[NSString stringWithFormat:@" %@", [NSString isNilOrEmpty: _transaction.symbol] ? @"": _transaction.symbol]];
                     
@@ -117,17 +116,29 @@
                     }
                     
                 } else if([_transaction.contractFuncName isEqualToString:VsysActionWithdraw]) {
+                    if([VsysToken isSystemToken:VsysContractId2TokenId(transaction.originTransaction.contractId, transaction.originTransaction.tokenIdx)]) {
+                        typeDesc = VLocalize(@"const.transaction.type.contract.withdraw.vsys");
+                    } else {
+                        typeDesc = VLocalize(@"const.transaction.type.contract.withdraw.token");
+                    }
+                    
                     self.typeImgView.image = [UIImage imageNamed:@"ico_transaction_type_2"];
-                    amountStr = _transaction.unity > 0 ? [@"+" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]] : @"";
+                    amountStr = [@"+" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]];
                     targetAddress = [_transaction.senderAddress explicitCount:12 maxAsteriskCount:6];
                 } else if ([_transaction.contractFuncName isEqualToString:VsysActionDeposit]) {
+                    if([VsysToken isSystemToken:VsysContractId2TokenId(transaction.originTransaction.contractId, transaction.originTransaction.tokenIdx)]) {
+                        typeDesc = VLocalize(@"const.transaction.type.contract.deposit.vsys");
+                    } else {
+                        typeDesc = VLocalize(@"const.transaction.type.contract.deposit.token");
+                    }
+                    
                     self.typeImgView.image = [UIImage imageNamed:@"ico_transaction_type_1"];
-                    amountStr = _transaction.unity > 0 ? [@"-" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]] : @"";
+                    amountStr = [@"-" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]];
                     targetAddress = [_transaction.originTransaction.recipient explicitCount:12 maxAsteriskCount:6];
-                } else {
-                    self.typeImgView.image = [UIImage imageNamed:@"ico_contract_success"];
                 }
+                
             }
+            
         }
     }else {
         self.typeImgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"ico_transaction_type_%d", _transaction.transactionType]];

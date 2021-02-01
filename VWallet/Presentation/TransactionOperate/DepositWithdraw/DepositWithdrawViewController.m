@@ -28,6 +28,7 @@
 #import "UIViewController+Transaction.h"
 #import "VThemeLabel.h"
 #import "Regex.h"
+#import "WalletMgr.h"
 
 @interface DepositWithdrawViewController () <UITextViewDelegate>
 
@@ -39,6 +40,7 @@
 @property (nonatomic, strong) UILabel *contractLbl;
 @property (nonatomic, strong) UILabel *amountLbl;
 @property (nonatomic, strong) VThemeLabel *balanceLbl;
+@property (nonatomic, strong) VThemeLabel *feeLbl;
 @property (nonatomic, strong) VSeparatorLine *contractSepLine;
 @property (nonatomic, strong) VSeparatorLine *amountSepLine;
 @property (nonatomic, strong) UITextView *contractTv;
@@ -48,6 +50,9 @@
 @property (nonatomic, strong) VThemeButton *maxBtn;
 @property (nonatomic, strong) UIButton *nextBtn;
 @property (nonatomic, strong) UIButton *continueBtn;
+
+
+@property (nonatomic) BOOL isSystemToken;
 
 
 @end
@@ -171,7 +176,19 @@
     self.amountSepLine.hidden = YES;
     [contentView addSubview:self.amountSepLine];
     
-    self.continueBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.amountSepLine.bottom + 16, contentView.width, 48)];
+    
+    self.feeLbl = [[VThemeLabel alloc] initWithFrame:CGRectMake(0, self.amountSepLine.bottom + 12, contentView.width, 16)];
+    NSString *feeStr = [NSString stringWithDecimal:[[NSDecimalNumber alloc] initWithDouble:VsysDefaultContractExecuteFee * 1.0 / VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES];
+    self.feeLbl.font = [UIFont systemFontOfSize:13.0];
+    self.feeLbl.colorLevel = 1;
+    NSMutableAttributedString *feeMas = [[NSMutableAttributedString alloc] initWithString:[VLocalize(@"account.transaction.fee") stringByAppendingString:@" "]];
+    [feeMas appendAttributedString:[[NSAttributedString alloc] initWithString:[feeStr stringByAppendingString:@" VSYS"] attributes:@{NSForegroundColorAttributeName : VColor.textSecondDeepenColor}]];
+    self.feeLbl.attributedText = feeMas;
+    self.feeLbl.hidden = YES;
+    [contentView addSubview:self.feeLbl];
+    
+    
+    self.continueBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.feeLbl.bottom + 16, contentView.width, 48)];
     self.continueBtn.layer.cornerRadius = 6;
     self.continueBtn.layer.masksToBounds = YES;
     self.continueBtn.layer.backgroundColor = [[VColor themeColor] CGColor];
@@ -198,7 +215,8 @@
     self.maxBtn.top = self.amountLbl.top;
     self.amountTv.top = self.amountLbl.bottom + 10;
     self.amountSepLine.top = self.amountTv.bottom + 8;
-    self.continueBtn.top = self.amountSepLine.bottom + 16;
+    self.feeLbl.top = self.amountSepLine.bottom + 12;
+    self.continueBtn.top = self.feeLbl.bottom + 16;
     self.scrollView.contentSize = CGSizeMake(0, self.continueBtn.bottom + 64);
 }
 
@@ -227,6 +245,7 @@
     self.maxBtn.hidden = NO;
     self.amountTv.hidden = NO;
     self.amountSepLine.hidden = NO;
+    self.feeLbl.hidden = NO;
     self.continueBtn.hidden = NO;
 }
 
@@ -245,12 +264,15 @@
                         break;
                     }
                 }
+                weakSelf.isSystemToken = [VsysToken isSystemToken:weakSelf.token.tokenId];
+
                 if(![NSString isNilOrEmpty: weakSelf.token.tokenId]) {
-                    [weakSelf getAvailableBalance:^(BOOL isSuc, NSString *balance) {
+                    [weakSelf getAvailableBalance:^(BOOL isSuc) {
                         [loadingView stopLoading];
                         [loadingView removeFromSuperview];
                         if(isSuc) {
-                            self.balanceLbl.text = [VLocalize(@"account.transaction.available.balance") stringByAppendingString: [NSString stringWithFormat:@" %@", balance]];
+                            NSString *balanceStr = [NSString stringWithDecimal:[NSString getAccurateDouble:weakSelf.token.balance unity:weakSelf.token.unity] maxFractionDigits:[NSString getDecimal:weakSelf.token.unity] minFractionDigits:2 trimTrailing:YES];
+                            self.balanceLbl.text = [VLocalize(@"account.transaction.available.balance") stringByAppendingString: [NSString stringWithFormat:@" %@", balanceStr]];
                         } else {
                             [weakSelf remindWithMessage:VLocalize(@"contract.error.query.failed")];
                         }
@@ -291,54 +313,71 @@
     }];
 }
 
-- (void) getAvailableBalance:(void (^)(BOOL isSuc, NSString *balance))callback {
+- (void) getAvailableBalance:(void (^)(BOOL isSuc))callback {
     __weak typeof (self) weakSelf = self;
     NSString *paymentOrLockContractId = weakSelf.contractTv.text;
     NSString *tokenContractId = VsysTokenId2ContractId(weakSelf.token.tokenId);
+    
     switch (weakSelf.operateType) {
         case TransactionOperateTypeDeposit:
         {
-            [ApiServer getAddressTokenBalance:weakSelf.account.originAccount.address tokenId:weakSelf.token.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
-                weakSelf.token = token;
-                if(isSuc) {
+            if (self.isSystemToken) {
+                self.token.unity = VsysVSYS;
+                self.token.balance = self.account.availableBalance;
+                [weakSelf loadContractContent:tokenContractId token:weakSelf.token callback:^(BOOL isSuc) {
+                    callback(isSuc);
+                }];
+                
+            } else {
+                [ApiServer getAddressTokenBalance:weakSelf.account.originAccount.address tokenId:weakSelf.token.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
+                    if(!isSuc) {
+                        callback(NO);
+                        return;
+                    }
+                    weakSelf.token = token;
                     [weakSelf loadContractContent:tokenContractId token:weakSelf.token callback:^(BOOL isSuc) {
-                        NSString * available = [NSString stringWithDecimal:[NSString getAccurateDouble:token.balance unity: token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
-                        callback(isSuc, available);
+                        weakSelf.token.balance = token.balance;
+                        callback(isSuc);
                     }];
-                   
-                } else {
-                    callback(NO, @"0.00");
-                }
-            }];
+                }];
+            }
+            
         }
             break;
         case TransactionOperateTypeWithdraw:
         {
             [ApiServer getContractData:paymentOrLockContractId dbKey:VsysGetContractBalanceDbKey(weakSelf.account.originAccount.address) callback:^(BOOL isSuc, ContractData * _Nonnull contractData) {
-                if(isSuc) {
-                    [ApiServer getTokenInfo:weakSelf.token.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
-                        if(isSuc) {
-                            weakSelf.token = token;
-                            weakSelf.token.balance = contractData.value;
-                            
-                            [weakSelf loadContractContent:tokenContractId token:weakSelf.token callback:^(BOOL isSuc) {
-                                NSString *available = [NSString stringWithDecimal:[NSString getAccurateDouble:contractData.value unity: token.unity] maxFractionDigits:[NSString getDecimal:token.unity] minFractionDigits:2 trimTrailing:YES];
-                                callback(isSuc, available);
-                            }];
-                            
-                        } else {
-                            callback(NO, @"0.00");
-                        }
-                    }];
-                } else {
-                    callback(NO, @"0.00");
+                if(!isSuc) {
+                    callback(NO);
+                    return;
                 }
+                weakSelf.token.balance = contractData.value;
+                [weakSelf loadContractContent:tokenContractId token:weakSelf.token callback:^(BOOL isSuc) {
+                    if(!isSuc) {
+                        callback(NO);
+                        return;
+                    }
+                    if([weakSelf isSystemToken]) {
+                        weakSelf.token.unity = VsysVSYS;
+                        callback(YES);
+                    } else {
+                        [ApiServer getTokenInfo:weakSelf.token.tokenId callback:^(BOOL isSuc, VsysToken * _Nonnull token) {
+                            if(!isSuc) {
+                                callback(NO);
+                                return;
+                            }
+                            weakSelf.token.unity = token.unity;
+                            callback(YES);
+                        }];
+                    }
+                    
+                }];
             }];
         }
             
             break;
         default:
-            callback(NO, @"0.00");
+            callback(NO);
             break;
     }
 }
@@ -352,8 +391,8 @@
         return;
     }
     
-    if (self.amountTv.text.doubleValue * self.token.unity > self.token.balance) {
-        [self alertWithTitle:VLocalize(@"tip.transaction.insufficient.token.balance") confirmText:nil];
+    if(self.account.availableBalance < VsysDefaultContractExecuteFee) {
+        [self alertWithTitle:VLocalize(@"tip.transaction.insufficient.balance") confirmText:nil];
         return;
     }
     
@@ -362,8 +401,9 @@
         return;
     }
     
-    if(self.account.availableBalance < VsysDefaultContractExecuteFee) {
-        [self alertWithTitle:VLocalize(@"tip.transaction.insufficient.balance") confirmText:nil];
+    int64_t fee = (self.isSystemToken && self.operateType == TransactionOperateTypeDeposit) ? VsysDefaultContractExecuteFee : 0;
+    if (self.amountTv.text.doubleValue * self.token.unity + fee > self.token.balance) {
+        [self alertWithTitle:VLocalize(@"tip.transaction.insufficient.token.balance") confirmText:nil];
         return;
     }
     
@@ -427,14 +467,18 @@
 
 
 - (void) maxBtnClick {
-    NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:self.token.balance];
+    int64_t fee = (self.isSystemToken && self.operateType == TransactionOperateTypeDeposit) ? VsysDefaultContractExecuteFee : 0;
+    NSDecimalNumber *tokenAmount = [[NSDecimalNumber alloc] initWithLongLong:self.token.balance - fee];
     NSDecimalNumber *unityDecimal = [[NSDecimalNumber alloc] initWithLongLong:self.token.unity];
+    
     self.amountTv.text = [NSString stringWithDecimal:[tokenAmount decimalNumberByDividingBy:unityDecimal] maxFractionDigits:[NSString getDecimal:self.token.unity] minFractionDigits:2 trimTrailing:YES];
 }
 
 - (void) pasteBtnClick {
-    self.contractTv.text = UIPasteboard.generalPasteboard.string;
-    [self textViewDidChange:self.contractTv];
+    if(![NSString isNilOrEmpty:UIPasteboard.generalPasteboard.string]) {
+        self.contractTv.text = UIPasteboard.generalPasteboard.string;
+        [self textViewDidChange:self.contractTv];
+    }
 }
 
 - (void) scanQRBtnClick {
