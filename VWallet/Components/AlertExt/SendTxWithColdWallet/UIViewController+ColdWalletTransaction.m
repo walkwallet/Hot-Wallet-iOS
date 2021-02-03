@@ -177,7 +177,7 @@
     } else if (tx.txType == VsysTxTypeContractRegister) {
         title = VLocalize(@"token.transaction.register.success");
     } else if (tx.txType == VsysTxTypeContractExecute) {
-        title = @"执行合约成功";
+        title = VLocalize(@"token.transaction.send.success");
     } else {
         return;
     }

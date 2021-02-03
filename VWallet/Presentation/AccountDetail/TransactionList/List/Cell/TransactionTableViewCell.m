@@ -13,6 +13,7 @@
 #import "Transaction+Extension.h"
 #import "WalletMgr.h"
 #import "VsysToken.h"
+#import "TokenMgr.h"
 @import Vsys;
 
 @interface TransactionTableViewCell ()
@@ -89,6 +90,9 @@
         }
     }else if (_transaction.originTransaction.txType == VsysTxTypeContractExecute) {
         
+        NSString *tokenId = VsysContractId2TokenId(transaction.originTransaction.contractId, transaction.originTransaction.tokenIdx);
+        VsysToken *token = [[TokenMgr shareInstance] getTokenByAddress:nil tokenId:tokenId];
+        
         if (![@"Success" isEqualToString:_transaction.status]) {
             self.typeImgView.image = [UIImage imageNamed:@"ico_contract_fail"];
         }else {
@@ -108,11 +112,6 @@
                         self.typeImgView.image = [UIImage imageNamed:@"ico_transaction_type_2"];
                         amountStr =  [@"+" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]];
                         targetAddress = [_transaction.senderAddress explicitCount:12 maxAsteriskCount:6];
-                    }
-                    amountStr = [amountStr stringByAppendingString:[NSString stringWithFormat:@" %@", [NSString isNilOrEmpty: _transaction.symbol] ? @"": _transaction.symbol]];
-                    
-                    if(_transaction.originTransaction.amount == 0) {
-                        amountStr = [@"-" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.fee unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES]];
                     }
                     
                 } else if([_transaction.contractFuncName isEqualToString:VsysActionWithdraw]) {
@@ -136,7 +135,17 @@
                     amountStr = [@"-" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.amount unity:_transaction.unity] maxFractionDigits:9 minFractionDigits:2 trimTrailing:YES]];
                     targetAddress = [_transaction.originTransaction.recipient explicitCount:12 maxAsteriskCount:6];
                 }
-                
+                    NSString *symbol = @"";
+                    if(![NSString isNilOrEmpty:_transaction.symbol]) {
+                        symbol = _transaction.symbol;
+                    } else if ([token isNFTToken]) {
+                        symbol = @"NFT";
+                    }
+                    
+                amountStr = [amountStr stringByAppendingString:[NSString stringWithFormat:@" %@", symbol]];
+                if(_transaction.originTransaction.amount == 0) {
+                    amountStr = [@"-" stringByAppendingString:[NSString stringWithDecimal:[NSString getAccurateDouble:_transaction.originTransaction.fee unity:VsysVSYS] maxFractionDigits:8 minFractionDigits:0 trimTrailing:YES]];
+                }
             }
             
         }

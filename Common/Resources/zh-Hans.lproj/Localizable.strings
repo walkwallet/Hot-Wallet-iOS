@@ -378,10 +378,10 @@
 "const.transaction.type.contract.execute" = "执行合约";
 "const.transaction.type.contract.send.token" = "发送 Token";
 "const.transaction.type.contract.receive.token" = "接收 Token";
-"const.transaction.type.contract.deposit.token" = "抵押 Token";
-"const.transaction.type.contract.withdraw.token" = "提现 Token";
-"const.transaction.type.contract.deposit.vsys" = "抵押 VSYS";
-"const.transaction.type.contract.withdraw.vsys" = "提现 VSYS";
+"const.transaction.type.contract.deposit.token" = "充值 Token";
+"const.transaction.type.contract.withdraw.token" = "提取 Token";
+"const.transaction.type.contract.deposit.vsys" = "充值 VSYS";
+"const.transaction.type.contract.withdraw.vsys" = "提取 VSYS";
 
 
 // ---- network ----
@@ -470,15 +470,15 @@
 
 
 // ---- deposit && withdraw ----
-"action.address.deposit" = "抵押";
-"action.address.withdraw" = "提现";
-"nav.title.contract.token.deposit" = "抵押";
-"nav.title.contract.token.withdraw" = "提现";
+"action.address.deposit" = "向合约充值";
+"action.address.withdraw" = "从合约提款";
+"nav.title.contract.token.deposit" = "合约充值";
+"nav.title.contract.token.withdraw" = "合约提款";
 "contract.id.text" = "合约";
 "contract.id.input.placeholder" = "Payment channel合约或Lock合约";
 "contract.btn.next" = "下一步";
-"contract.btn.deposit" = "抵押";
-"contract.btn.withdraw" = "提现";
+"contract.btn.deposit" = "充值";
+"contract.btn.withdraw" = "提取";
 "contract.error.invalid" = "无效的合约地址";
 "contract.error.type.invalid" = "无效的合约类型";
 "contract.error.query.failed" = "查询合约信息失败";

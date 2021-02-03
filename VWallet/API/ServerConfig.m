@@ -20,7 +20,7 @@ static NSString *const TestnetExplorerHost = @"https://testexplorer.v.systems";
 
 static NSString *const MainnetRateHost = @"https://vsysrate.com";
 
-static NSString *const TestnetRateHost = @"http://test-rate.virtualeconomytech.com";
+static NSString *const TestnetRateHost = @"https://test.vsysrate.com";
 
 @implementation ServerConfig
 

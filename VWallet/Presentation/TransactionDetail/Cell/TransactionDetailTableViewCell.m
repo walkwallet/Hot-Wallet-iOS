@@ -9,6 +9,7 @@
 #import "Language.h"
 #import "UIColor+Hex.h"
 #import "VColor.h"
+#import "ServerConfig.h"
 
 @interface TransactionDetailTableViewCell ()
 
@@ -53,7 +54,8 @@
 }
 
 - (void)clickId{
-    NSString *urlStr = [@"https://explorer.v.systems/transactions/" stringByAppendingString:self.showInfo[@"value"]];
+    
+    NSString *urlStr = [ServerConfig.ExplorerHost stringByAppendingFormat:@"/transactions/%@", self.showInfo[@"value"]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:^(BOOL success) {
     }];
 }

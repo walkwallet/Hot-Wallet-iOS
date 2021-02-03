@@ -468,10 +468,10 @@
 
 
 // ---- deposit && withdraw ----
-"action.address.deposit" = "Deposit";
-"action.address.withdraw" = "Withdraw";
-"nav.title.contract.token.deposit" = "Deposit";
-"nav.title.contract.token.withdraw" = "Withdraw";
+"action.address.deposit" = "Deposit To Contract";
+"action.address.withdraw" = "Withdraw From Contract";
+"nav.title.contract.token.deposit" = "Deposit To Contract";
+"nav.title.contract.token.withdraw" = "Withdraw From Contract";
 "contract.id.text" = "Contract";
 "contract.id.input.placeholder" = "Payment channel contract or Lock contract";
 "contract.btn.next" = "Next";

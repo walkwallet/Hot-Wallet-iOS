@@ -199,7 +199,8 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
         TokenInfoViewController *vc = [[TokenInfoViewController alloc] initWithAccount:self.account token:self.tokenList[indexPath.row]];
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
-    for(Account *one in WalletMgr.shareInstance.accounts) {
+    for(Account *one in [WalletMgr.shareInstance.accounts arrayByAddingObjectsFromArray:WalletMgr.shareInstance.monitorAccounts]) {
+        NSLog(@"weakSelf.tokenList[indexPath.row].issuer: %@ ", weakSelf.tokenList[indexPath.row].issuer);
         if (![weakSelf.tokenList[indexPath.row] isNFTToken] &&[weakSelf.tokenList[indexPath.row].issuer isEqualToString:one.originAccount.address]) {
             [titles addObject:VLocalize(@"token.issue.token")];
             [titles addObject:VLocalize(@"token.burn.token")];
@@ -211,6 +212,7 @@ static NSString *const CellIdentifier = @"TokenTableViewCell";
                 TokenOperateViewController *vc = [[TokenOperateViewController alloc] initWithAccount:weakSelf.account type:TokenOperatePageTypeBurn token:self.tokenList[indexPath.row]];
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             }];
+            break;
         }
     }
     [titles addObject:VLocalize(@"token.hide.token")];
