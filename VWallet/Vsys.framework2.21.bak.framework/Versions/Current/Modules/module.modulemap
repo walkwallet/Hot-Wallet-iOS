@@ -1,0 +1,8 @@
+framework module "Vsys" {
+	header "ref.h"
+    header "Vsys.objc.h"
+    header "Universe.objc.h"
+    header "Vsys.h"
+
+    export *
+}

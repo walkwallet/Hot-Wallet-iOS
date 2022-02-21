@@ -169,12 +169,14 @@
 		40477A3221E5D34B00EFF6E1 /* AddAccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40477A2D21E5D34B00EFF6E1 /* AddAccountTableViewCell.xib */; };
 		40477A3321E5D34B00EFF6E1 /* AddAccountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40477A2E21E5D34B00EFF6E1 /* AddAccountTableViewCell.m */; };
 		40477A3521E5D36200EFF6E1 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40477A3421E5D36200EFF6E1 /* Wallet.storyboard */; };
+		69BCFAA1D26DCA8DDCB2A9D3 /* libPods-VWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 582B43E94A0DBF01172F7920 /* libPods-VWallet.a */; };
 		A805EEF0228AB927003FFAFD /* TokenInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A805EEEE228AB927003FFAFD /* TokenInfoViewController.m */; };
 		A805EEF1228AB927003FFAFD /* TokenInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A805EEEF228AB927003FFAFD /* TokenInfoViewController.xib */; };
 		A8163B032289206B004A919A /* TokenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8163B022289206B004A919A /* TokenViewController.xib */; };
 		A8163B0722894882004A919A /* TokenOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8163B0522894882004A919A /* TokenOperateViewController.m */; };
 		A8163B0822894882004A919A /* TokenOperateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8163B0622894882004A919A /* TokenOperateViewController.xib */; };
 		A8261D392375438D00158A98 /* VsysToken.m in Sources */ = {isa = PBXBuildFile; fileRef = A8261D372375438D00158A98 /* VsysToken.m */; };
+		A841BE6E27C3B2D9006B2FD3 /* Vsys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A841BE6D27C3B2D9006B2FD3 /* Vsys.framework */; };
 		A879425E228EC333009D10A8 /* Contract.m in Sources */ = {isa = PBXBuildFile; fileRef = A879425D228EC333009D10A8 /* Contract.m */; };
 		A8794262228FB348009D10A8 /* TokenMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = A8794261228FB348009D10A8 /* TokenMgr.m */; };
 		A882CF492386311600046DD5 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A882CF482386311600046DD5 /* AlertView.m */; };
@@ -196,7 +198,6 @@
 		C3CF374825B18E050096A198 /* NodesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CF374625B18E050096A198 /* NodesViewController.xib */; };
 		C3CF375A25B5617A0096A198 /* MessageSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CF375925B5617A0096A198 /* MessageSignViewController.m */; };
 		C3CF376D25B6C2CB0096A198 /* DepositWithdrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CF376B25B6C2CB0096A198 /* DepositWithdrawViewController.m */; };
-		C3EB595825BE567700AE82CD /* Vsys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8794231228EAB56009D10A8 /* Vsys.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -486,6 +487,7 @@
 		40477A2E21E5D34B00EFF6E1 /* AddAccountTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountTableViewCell.m; sourceTree = "<group>"; };
 		40477A3421E5D36200EFF6E1 /* Wallet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
 		4098EA6C21BFAC9100FE4426 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		582B43E94A0DBF01172F7920 /* libPods-VWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A801A83722AE317100AF4296 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A801A83822AE317200AF4296 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A805EEED228AB927003FFAFD /* TokenInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenInfoViewController.h; sourceTree = "<group>"; };
@@ -497,7 +499,7 @@
 		A8163B0622894882004A919A /* TokenOperateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenOperateViewController.xib; sourceTree = "<group>"; };
 		A8261D372375438D00158A98 /* VsysToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VsysToken.m; sourceTree = "<group>"; };
 		A8261D382375438D00158A98 /* VsysToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VsysToken.h; sourceTree = "<group>"; };
-		A8794231228EAB56009D10A8 /* Vsys.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vsys.framework; sourceTree = "<group>"; };
+		A841BE6D27C3B2D9006B2FD3 /* Vsys.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vsys.framework; sourceTree = "<group>"; };
 		A879425C228EC333009D10A8 /* Contract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Contract.h; sourceTree = "<group>"; };
 		A879425D228EC333009D10A8 /* Contract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Contract.m; sourceTree = "<group>"; };
 		A8794260228FB348009D10A8 /* TokenMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenMgr.h; sourceTree = "<group>"; };
@@ -544,7 +546,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3EB595825BE567700AE82CD /* Vsys.framework in Frameworks */,
+				69BCFAA1D26DCA8DDCB2A9D3 /* libPods-VWallet.a in Frameworks */,
+				A841BE6E27C3B2D9006B2FD3 /* Vsys.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,7 +755,6 @@
 		4041BFF021CB711000B2AE05 /* VWallet */ = {
 			isa = PBXGroup;
 			children = (
-				A8794231228EAB56009D10A8 /* Vsys.framework */,
 				4041BFF121CB711000B2AE05 /* State */,
 				4041BFF821CB711000B2AE05 /* Components */,
 				4041C01421CB711000B2AE05 /* main.m */,
@@ -857,8 +859,8 @@
 		4041C00E21CB711000B2AE05 /* SendTxWithColdWallet */ = {
 			isa = PBXGroup;
 			children = (
-				4041C00F21CB711000B2AE05 /* UIViewController+ColdWalletTransaction.m */,
 				4041C01021CB711000B2AE05 /* UIViewController+ColdWalletTransaction.h */,
+				4041C00F21CB711000B2AE05 /* UIViewController+ColdWalletTransaction.m */,
 			);
 			path = SendTxWithColdWallet;
 			sourceTree = "<group>";
@@ -1860,6 +1862,8 @@
 		5F7E044322B7A51633DBDE8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A841BE6D27C3B2D9006B2FD3 /* Vsys.framework */,
+				582B43E94A0DBF01172F7920 /* libPods-VWallet.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1999,6 +2003,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4023E13A21AE1FB100E18D5D /* Build configuration list for PBXNativeTarget "VWallet" */;
 			buildPhases = (
+				A841BE6827C38DDC006B2FD3 /* ShellScript */,
 				A0B7546AF8C3EDFFCD5FB6C7 /* [CP] Check Pods Manifest.lock */,
 				4023E12021AE1FAF00E18D5D /* Sources */,
 				4023E12121AE1FAF00E18D5D /* Frameworks */,
@@ -2152,6 +2157,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A841BE6827C38DDC006B2FD3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "app_version=`git rev-list --all |wc -l`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $app_version\" $PRODUCT_SETTINGS_PATH\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2491,7 +2513,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 58;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = WXK7UF23NY;
 				ENABLE_BITCODE = NO;
@@ -2518,7 +2540,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/SAMKeychain\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
 				);
-				MARKETING_VERSION = 1.1.01;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = systems.vsys.wallet.hot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2536,7 +2558,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_TEAM = WXK7UF23NY;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_simulator__NATIVE_ARCH_64_BIT_x86_64=arm64 arm64e armv7 armv7s armv6 armv8 EXCLUDED_ARCHS=$(inherited) $(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT))";
@@ -2551,7 +2573,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.01;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = systems.vsys.wallet.hot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
