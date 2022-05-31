@@ -232,7 +232,7 @@ static NSString *const CellIdentifier = @"CertifiedTokenTableViewCell";
                 NSString *contractId = VsysTokenId2ContractId(weakSelf.token.tokenId);
                 [ApiServer getContractInfo:contractId callback:^(BOOL isSuc, Contract * _Nonnull contract) {
                     if(isSuc) {
-                        if ([contract.type isEqualToString:@"TokenContract"] || [contract.type  isEqualToString:@"TokenContractWithSplit"] || [contract.type isEqualToString:@"NonFungibleContract"]) {
+                        if ([contract.type isEqualToString:@"TokenContract"] || [contract.type  isEqualToString:@"TokenContractWithSplit"] || [contract.type isEqualToString:@"NonFungibleContract"] || [contract.type isEqualToString:@"TokenContractWithWhitelist"] || [contract.type isEqualToString:@"TokenContractWithBlacklist"]) {
                             [ApiServer getContractContent:contractId callback:^(BOOL isSuc, ContractContent * _Nonnull contractContent) {
                                 [loadingView stopLoading];
                                 [loadingView removeFromSuperview];
