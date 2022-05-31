@@ -59,7 +59,6 @@ static NSString *const CellIdentifier = @"TransactionDetailTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellClickCopy) name:@"clickCopy" object:nil];
 }
 

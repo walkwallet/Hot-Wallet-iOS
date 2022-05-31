@@ -67,7 +67,7 @@ static NSString *const AddCellIdentifier = @"AddAccountTableViewCell";
 }
 
 - (void)initView {
-    self.tableView.contentInset = UIEdgeInsetsMake(8, 0, 8, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(44, 0, 8, 0);
     self.tableView.rowHeight = 149;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:AddressCellIdentifier bundle:nil] forCellReuseIdentifier:AddressCellIdentifier];

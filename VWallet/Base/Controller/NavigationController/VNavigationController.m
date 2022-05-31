@@ -62,7 +62,19 @@
     self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : VColor.textColor};
     self.navigationBar.tintColor = VColor.navigationTintColor;
     self.navigationBar.backgroundColor = UIColor.whiteColor;
+    self.navigationController.navigationBar.barTintColor = UIColor.whiteColor;
     [self.navigationBar setBackgroundImage:[UIImage imageWithColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
+    if (@available(iOS 15, *)){
+        UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+        appearance.titleTextAttributes = @{NSForegroundColorAttributeName : VColor.textColor};
+        appearance.backgroundColor = UIColor.whiteColor;
+        appearance.backgroundImage =  [UIImage imageWithColor:UIColor.whiteColor];
+        appearance.shadowImage = [UIImage imageWithColor:UIColor.whiteColor];
+        appearance.backgroundColor = UIColor.whiteColor;
+        appearance.backgroundImage = [UIImage imageWithColor:UIColor.whiteColor];
+        [UINavigationBar appearance].standardAppearance = appearance;
+        [UINavigationBar appearance].scrollEdgeAppearance = appearance;
+    }
 }
 
 - (void)changeToGrayNavigationBar {
@@ -79,6 +91,15 @@
     self.navigationBar.tintColor = UIColor.whiteColor;
     self.navigationBar.backgroundColor = VColor.themeColor;
     [self.navigationBar setBackgroundImage:[UIImage imageWithColor:VColor.themeColor] forBarMetrics:UIBarMetricsDefault];
+    if (@available(iOS 15, *)){
+        UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+        appearance.titleTextAttributes = @{NSForegroundColorAttributeName : UIColor.whiteColor};
+        appearance.backgroundColor = VColor.themeColor;
+        appearance.backgroundImage = [UIImage imageWithColor:UIColor.clearColor];
+        appearance.shadowImage = [UIImage imageWithColor:UIColor.clearColor];
+        [UINavigationBar appearance].standardAppearance = appearance;
+        [UINavigationBar appearance].scrollEdgeAppearance = appearance;
+    }
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {

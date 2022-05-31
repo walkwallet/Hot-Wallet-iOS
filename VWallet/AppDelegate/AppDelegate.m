@@ -24,6 +24,7 @@
     [self enableAutoDismissKeyboard];
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
     
+    self.window.backgroundColor = UIColor.whiteColor;
     if (AppState.shareInstance.hasWallet) {
         self.window.rootViewController = VStoryboard.Password.instantiateInitialViewController;
     } else {

@@ -232,22 +232,17 @@ static NSInteger const TransactionPageSize = 100;
     gradientLayer.startPoint = CGPointMake(0, 0);
     gradientLayer.endPoint = CGPointMake(1, 0);
     gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(UIScreen.mainScreen.bounds), 44 + CGRectGetHeight(UIApplication.sharedApplication.statusBarFrame));
-//    NSString *prevPageTitle;
     switch (self.account.accountType) {
         case AccountTypeWallet: {
             gradientLayer.colors = @[(__bridge id)VColor.lightOrangeColor.CGColor, (__bridge id)VColor.mediumOrangeColor.CGColor];
-//            prevPageTitle = VLocalize(@"nav.title.wallet");
         } break;
         case AccountTypeMonitor: {
             gradientLayer.colors = @[(__bridge id)VColor.lightBlueColor.CGColor, (__bridge id)VColor.mediumBlueColor.CGColor];
-//            prevPageTitle = VLocalize(@"nav.title.monitor");
         } break;
     }
     [self.naviBar.layer insertSublayer:gradientLayer atIndex:0];
     
     [self.backBtn setTitle:[self.account.originAccount.address explicitCount:12 maxAsteriskCount:6] forState:UIControlStateNormal];
-    
-//    [self.backBtn setTitle:prevPageTitle?:@"" forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -264,7 +259,7 @@ static NSInteger const TransactionPageSize = 100;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 #pragma mark - UITableView DataSource
